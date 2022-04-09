@@ -1,6 +1,7 @@
 package at.aau.se2.tickettoride.dataStructures;
 
 import android.graphics.Color;
+import android.graphics.Point;
 
 /**
  * RailroadLine-class represents a single connection between two Destination-Objects
@@ -63,5 +64,17 @@ public class RailroadLine {
     public void setOwner(Player owner) throws IllegalStateException {
         if (this.owner != null) throw new IllegalStateException("Line already owned by " + owner.getName());
         this.owner = owner;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof RailroadLine) ) return false;
+        RailroadLine other = (RailroadLine) obj;
+        if ((this.destination1.getName().equals(other.destination1.getName()) &&
+                this.destination2.getName().equals(other.destination2.getName())) ||
+                (this.destination1.getName().equals(other.destination2.getName()) &&
+                        this.destination2.getName().equals(other.destination1.getName())))
+            return true;
+        return false;
     }
 }
