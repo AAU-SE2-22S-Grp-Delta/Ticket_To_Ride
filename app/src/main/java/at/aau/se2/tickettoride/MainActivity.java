@@ -6,7 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import at.aau.se2.tickettoride.activities.DeskDestinationActivity;
+import at.aau.se2.tickettoride.activities.PlayerDestinationActivity;
 import at.aau.se2.tickettoride.activities.GameActivity;
+import at.aau.se2.tickettoride.activities.MapActivity;
+import at.aau.se2.tickettoride.activities.PlayerTrainActivity;
+import at.aau.se2.tickettoride.activities.DeskTrainActivity;
 import at.aau.se2.tickettoride.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +24,31 @@ public class MainActivity extends AppCompatActivity {
 
         binding.button.setOnClickListener(v -> {
             Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        });
+
+        binding.button1.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        });
+
+        binding.button2.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PlayerDestinationActivity.class);
+            startActivity(intent);
+        });
+
+        binding.button3.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PlayerTrainActivity.class);
+            startActivity(intent);
+        });
+
+        binding.button4.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DeskDestinationActivity.class);
+            startActivity(intent);
+        });
+
+        binding.button5.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DeskTrainActivity.class);
             startActivity(intent);
         });
     }

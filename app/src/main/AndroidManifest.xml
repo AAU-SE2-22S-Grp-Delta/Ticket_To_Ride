@@ -10,10 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TicketToRide">
         <activity
-            android:name=".activities.GameActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -22,6 +18,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.GameActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.DeskDestinationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DeskTrainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PlayerDestinationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PlayerTrainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
