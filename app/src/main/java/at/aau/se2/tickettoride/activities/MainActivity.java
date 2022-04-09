@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride;
+package at.aau.se2.tickettoride.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
