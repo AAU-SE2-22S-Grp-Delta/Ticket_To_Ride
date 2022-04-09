@@ -1,17 +1,11 @@
 package at.aau.se2.tickettoride.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import at.aau.se2.tickettoride.activities.DeskDestinationActivity;
-import at.aau.se2.tickettoride.activities.PlayerDestinationActivity;
-import at.aau.se2.tickettoride.activities.GameActivity;
-import at.aau.se2.tickettoride.activities.MapActivity;
-import at.aau.se2.tickettoride.activities.PlayerTrainActivity;
-import at.aau.se2.tickettoride.activities.DeskTrainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import at.aau.se2.tickettoride.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
