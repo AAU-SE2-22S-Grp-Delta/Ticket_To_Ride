@@ -2,6 +2,9 @@ package at.aau.se2.tickettoride.dataStructures;
 
 import android.graphics.Color;
 
+/**
+ * RailroadLine-class represents a single connection between two Destination-Objects
+ */
 public class RailroadLine {
     //TODO exception-handling
     private Destination destination1;
@@ -10,6 +13,13 @@ public class RailroadLine {
     private final int distance;
     private Player owner;
 
+    /**
+     * Creates a single RailroadLine to connect two distinct destinations
+     * @param destination1
+     * @param destination2
+     * @param color to build the line train cards of this color will be needed
+     * @param distance to build the line that many train cards will be needed
+     */
     public RailroadLine(Destination destination1, Destination destination2, Color color, int distance) {
         configureConnection(destination1, destination2);
         this.color = color;

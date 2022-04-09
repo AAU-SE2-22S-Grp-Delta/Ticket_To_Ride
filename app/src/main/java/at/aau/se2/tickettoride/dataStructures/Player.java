@@ -1,5 +1,8 @@
 package at.aau.se2.tickettoride.dataStructures;
 
+import android.graphics.Color;
+
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,14 +16,19 @@ public class Player {
 
     private int id;
     private String name;
+    private Color color;
+    private int numStones;
+    private boolean isInGame;
 
     /**
      * Creates a player-object gives it a id and marks the name as used
      * @param name a unique name
      */
-    public Player(String name) {
-        this.id = playerId++;
+    public Player(String name, int id, Color color) {
+        this.id = id;
         setName(name);
+        this.color = color;
+        this.isInGame = false;
     }
 
     public static int getPlayerId() {
@@ -35,6 +43,8 @@ public class Player {
         return name;
     }
 
+
+
     public void setName(String name) {
         if (name == null) throw new IllegalArgumentException("name is null");
         if (name.length() == 0) throw new IllegalArgumentException("name.length is 0");
@@ -42,5 +52,12 @@ public class Player {
         names.remove(this.name);
         names.add(name);
         this.name = name;
+    }
+
+    public void enterGame() {
+        //TODO assign Game / GameModel or something
+        if (isInGame) throw new IllegalStateException("Player is already playing");
+        isInGame = true;
+        this.numStones = 45;
     }
 }
