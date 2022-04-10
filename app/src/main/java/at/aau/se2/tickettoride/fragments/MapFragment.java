@@ -2,6 +2,7 @@ package at.aau.se2.tickettoride.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements View.OnTouchListener {
     private FragmentMapBinding binding;
 
     public static MapFragment newInstance() {
@@ -22,12 +23,27 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMapBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        View view = binding.getRoot(); //the root is this view
+        view.setOnTouchListener(this);
+        return view;
     }
+
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    /**
+     * prints the motion event to a textbox to visualize what is happening
+     */
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        String message = "";
+        message += motionEvent.toString() + ", x: " + motionEvent.getX() + ", y: " + motionEvent.getY();
+        binding.message.setText(message);
+        return true;
     }
 }
