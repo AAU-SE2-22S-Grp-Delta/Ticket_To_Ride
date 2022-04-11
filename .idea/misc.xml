@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/drawable/ic_launcher_background.xml" value="0.327" />
         <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/activity_map.xml" value="0.35104166666666664" />
-        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.21578947368421053" />
+        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.21" />
       </map>
     </option>
   </component>
