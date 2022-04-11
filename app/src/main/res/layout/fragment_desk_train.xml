@@ -9,7 +9,7 @@
     tools:context="..TrainFragment">
 
     <ImageView
-        android:id="@+id/imageViewBlueTrain"
+        android:id="@+id/imageViewTrain"
         android:layout_width="104dp"
         android:layout_height="92dp"
         android:layout_marginStart="154dp"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Ticket To Ride</string>
+    <string name="cancel">Abbruch</string>
+    <string name="accept">Bestätigen</string>
 </resources>

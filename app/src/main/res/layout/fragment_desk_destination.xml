@@ -6,4 +6,17 @@
     android:id="@+id/desk_destination"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="..DeskDestinationFragment"/>
+    tools:context="..DeskDestinationFragment">
+
+    <ImageView
+        android:id="@+id/imageViewDestination"
+        android:layout_width="104dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="154dp"
+        android:src="@drawable/ic_destination"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
