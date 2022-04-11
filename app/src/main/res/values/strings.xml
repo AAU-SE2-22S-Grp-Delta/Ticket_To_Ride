@@ -2,4 +2,9 @@
     <string name="app_name">Ticket To Ride</string>
     <string name="cancel">Abbruch</string>
     <string name="accept">Bestätigen</string>
+    <string-array name="destinations">
+        <item name="1">Ziel 1</item>
+        <item name="2">Ziel 2</item>
+        <item name="3">Ziel 3</item>
+    </string-array>
 </resources>

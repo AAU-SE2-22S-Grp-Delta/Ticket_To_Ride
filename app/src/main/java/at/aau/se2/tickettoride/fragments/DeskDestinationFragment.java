@@ -34,6 +34,7 @@ public class DeskDestinationFragment extends Fragment {
         binding.imageViewDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Dialog Destination Cards
                 DialogFragment destinationDialog = new DestinationDialogFragment();
                 destinationDialog.show(getFragmentManager(), "destinationDialog");
             }
