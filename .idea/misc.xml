@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2005" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_desk_destination.xml" value="0.25" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_desk_train.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_game.xml" value="0.1546875" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_map.xml" value="0.1546875" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_player_destination.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_player_train.xml" value="0.25" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.25" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_player_destination.xml" value="0.25" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_player_train.xml" value="0.25" />
+        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2005" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
