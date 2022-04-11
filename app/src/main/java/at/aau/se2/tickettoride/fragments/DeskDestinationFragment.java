@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import at.aau.se2.tickettoride.databinding.FragmentDeskDestinationBinding;
-
+//Fragemnt Stapel Zielkarten
 public class DeskDestinationFragment extends Fragment {
     private FragmentDeskDestinationBinding binding;
 
@@ -21,6 +21,7 @@ public class DeskDestinationFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //Instead of findViewById
         binding = FragmentDeskDestinationBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
