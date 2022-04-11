@@ -28,6 +28,7 @@ public class DeskDestinationFragment extends Fragment {
         //Instead of findViewById
         binding = FragmentDeskDestinationBinding.inflate(inflater, container, false);
 
+        //TODO DELETE COMMENT
         //Zielkarte ziehen:
         // Der Spieler zieht drei Zielkarten vom Stapel. Er muss mindestens eine davon behalten,
         // kann aber auch zwei oder alle drei an sich nehmen. Eventuell zurückgegebene Karten werden unter den Stapel der Zielkarten gelegt.
