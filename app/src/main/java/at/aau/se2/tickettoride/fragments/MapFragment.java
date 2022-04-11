@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
 
-public class MapFragment extends Fragment implements View.OnTouchListener {
+public class MapFragment extends Fragment {
     private FragmentMapBinding binding;
 
     public static MapFragment newInstance() {
@@ -24,7 +24,7 @@ public class MapFragment extends Fragment implements View.OnTouchListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View view = binding.getRoot(); //the root is this view
-        view.setOnTouchListener(this);
+//        view.setOnTouchListener(this);
         return view;
     }
 
@@ -36,14 +36,14 @@ public class MapFragment extends Fragment implements View.OnTouchListener {
         binding = null;
     }
 
-    @Override
-    /**
-     * prints the motion event to a textbox to visualize what is happening
-     */
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        String message = "";
-        message += motionEvent.toString() + ", x: " + motionEvent.getX() + ", y: " + motionEvent.getY();
-        binding.message.setText(message);
-        return true;
-    }
+//    @Override
+//    /**
+//     * prints the motion event to a textbox to visualize what is happening
+//     */
+//    public boolean onTouch(View view, MotionEvent motionEvent) {
+//        String message = "";
+//        message += motionEvent.toString() + ", x: " + motionEvent.getX() + ", y: " + motionEvent.getY();
+//        binding.message.setText(message);
+//        return true;
+//    }
 }
