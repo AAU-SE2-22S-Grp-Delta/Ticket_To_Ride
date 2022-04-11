@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import at.aau.se2.tickettoride.databinding.FragmentDeskTrainBinding;
-import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
 import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 
 //Fragment Stapel und offene Zugkarten
