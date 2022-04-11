@@ -12,6 +12,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import at.aau.se2.tickettoride.databinding.FragmentDeskDestinationBinding;
+import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
+
 //Fragemnt Stapel Zielkarten
 public class DeskDestinationFragment extends Fragment {
     private FragmentDeskDestinationBinding binding;
@@ -32,7 +34,8 @@ public class DeskDestinationFragment extends Fragment {
         binding.imageViewDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                DialogFragment destinationDialog = new DestinationDialogFragment();
+                destinationDialog.show(getFragmentManager(), "destinationDialog");
             }
         });
         return binding.getRoot();
