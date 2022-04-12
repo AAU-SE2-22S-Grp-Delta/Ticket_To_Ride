@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".fragments.MapFragment">
 
-    <FrameLayout
+    <AbsoluteLayout
         android:id="@+id/map_panel"
         android:layout_width="3840px"
         android:layout_height="2160px"
@@ -47,10 +47,10 @@
             android:id="@+id/button_downside"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3585px"
-            android:layout_marginTop="2034px"
+            android:layout_x="3585px"
+            android:layout_y="2034px"
             android:text="Downer" />
-    </FrameLayout>
+    </AbsoluteLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
