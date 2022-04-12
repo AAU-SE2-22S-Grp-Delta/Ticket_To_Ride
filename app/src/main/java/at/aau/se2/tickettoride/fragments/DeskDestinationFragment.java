@@ -17,7 +17,7 @@ import at.aau.se2.tickettoride.databinding.FragmentDeskDestinationBinding;
 import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
 
 //Fragemnt Stapel Zielkarten
-public class DeskDestinationFragment extends Fragment implements DestinationDialogFragment.DestinationDialogListener {
+public class DeskDestinationFragment extends Fragment {
     private FragmentDeskDestinationBinding binding;
 
     public static DeskDestinationFragment newInstance() {
@@ -51,10 +51,4 @@ public class DeskDestinationFragment extends Fragment implements DestinationDial
         binding = null;
     }
 
-    @Override
-    public void onDialogPositiveClick(ArrayList<String> selected) {
-        for (int i = 0; i < selected.size(); i++) {
-            Log.i("CHOICES", selected.get(i));
-        }
-    }
 }

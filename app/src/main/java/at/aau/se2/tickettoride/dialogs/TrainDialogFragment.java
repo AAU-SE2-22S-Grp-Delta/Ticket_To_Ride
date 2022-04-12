@@ -19,6 +19,12 @@ import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.enums.Colors;
 
 public class TrainDialogFragment extends DialogFragment {
+
+    public interface NoticeDialogListener{
+        public void onDialogPositiveClick(Colors color);
+    }
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

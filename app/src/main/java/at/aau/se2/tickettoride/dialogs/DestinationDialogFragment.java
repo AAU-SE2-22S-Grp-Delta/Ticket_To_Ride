@@ -17,12 +17,11 @@ import java.util.ArrayList;
 import at.aau.se2.tickettoride.R;
 
 public class DestinationDialogFragment extends DialogFragment {
-
-    DestinationDialogListener listener;
-
     public interface DestinationDialogListener {
         void onDialogPositiveClick(ArrayList<String> selected);
     }
+
+    DestinationDialogListener listener;
 
     @Override
     public void onAttach(Context context) {
