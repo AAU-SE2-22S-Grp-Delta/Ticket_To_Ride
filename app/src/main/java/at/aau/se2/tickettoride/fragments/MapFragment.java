@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +37,11 @@ public class MapFragment extends Fragment {
 
         binding.mapPanel.setOnTouchListener(new MapOnTouchListener());
 
-//        view.setOnTouchListener(this);
+        //How to add buttons at runtime
+        Button button = new Button(binding.mapPanel.getContext());
+        button.setText("Added at runtime!");
+        button.setLayoutParams(new AbsoluteLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 500,500));
+        binding.mapPanel.addView(button);
 
         binding.buttonAbove.setOnClickListener(new View.OnClickListener() {
             @Override
