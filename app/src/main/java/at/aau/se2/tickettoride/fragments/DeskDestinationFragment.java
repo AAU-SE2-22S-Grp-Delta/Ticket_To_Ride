@@ -11,11 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
 import at.aau.se2.tickettoride.databinding.FragmentDeskDestinationBinding;
 import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
 
 //Fragemnt Stapel Zielkarten
-public class DeskDestinationFragment extends Fragment {
+public class DeskDestinationFragment extends Fragment implements DestinationDialogFragment.DestinationDialogListener {
     private FragmentDeskDestinationBinding binding;
 
     public static DeskDestinationFragment newInstance() {
@@ -37,7 +39,7 @@ public class DeskDestinationFragment extends Fragment {
             public void onClick(View view) {
                 //Dialog Destination Cards
                 DialogFragment destinationDialog = new DestinationDialogFragment();
-                destinationDialog.show(getFragmentManager(), "destinationDialog");
+                destinationDialog.show(getActivity().getSupportFragmentManager(), "destinationDialog");
             }
         });
         return binding.getRoot();
@@ -49,4 +51,10 @@ public class DeskDestinationFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void onDialogPositiveClick(ArrayList<String> selected) {
+        for (int i = 0; i < selected.size(); i++) {
+            Log.i("CHOICES", selected.get(i));
+        }
+    }
 }
