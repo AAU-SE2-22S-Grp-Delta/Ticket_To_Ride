@@ -27,6 +27,7 @@ public class DeskDestinationActivity extends AppCompatActivity implements Destin
     //Get Choices
     @Override
     public void onDialogPositiveClick(ArrayList<String> selected) {
+        //TODO Send Choices to Hand
         for (int i = 0; i < selected.size(); i++) {
             Log.i("CHOICES", selected.get(i));
         }

@@ -2,6 +2,7 @@ package at.aau.se2.tickettoride.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,10 +21,21 @@ import at.aau.se2.tickettoride.enums.Colors;
 
 public class TrainDialogFragment extends DialogFragment {
 
-    public interface NoticeDialogListener{
+    public interface TrainDialogListener{
         public void onDialogPositiveClick(Colors color);
     }
 
+    TrainDialogListener listener;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (TrainDialogListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(getActivity().toString() + " must implement DestinationDialogListener");
+        }
+    }
 
     @NonNull
     @Override
@@ -81,8 +93,7 @@ public class TrainDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        //TODO Send color to hand
-                        Log.i("COLOR", color.name());
+                        listener.onDialogPositiveClick(color);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
