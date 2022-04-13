@@ -10,20 +10,20 @@
 
     <HorizontalScrollView
         android:id="@+id/scrollViewTrainCards"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:id="@+id/linearLayoutTrainCards"
-            android:layout_width="600dp"
-            android:layout_height="300dp"
-            android:layout_marginTop="50dp"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"></LinearLayout>
     </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
