@@ -4,13 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
+
+import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
 
 public class PlayerTrainFragment extends Fragment {
@@ -31,23 +37,15 @@ public class PlayerTrainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LinearLayout layout = new LinearLayout(view.getContext());
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        layout.setLayoutParams(layoutParams);
-
-        for(int i=1;i<5;i++)
+        /*for(int i=1;i<5;i++)
         {
-            ImageView imageView = new ImageView(view.getContext());
+            ImageView imageView = new ImageView(getActivity());
             imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(80,60));
             imageView.setMaxHeight(20);
             imageView.setMaxWidth(20);
 
             layout.addView(imageView);
-        }
+        }*/
     }
 
     @Override
