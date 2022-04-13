@@ -41,27 +41,34 @@ public class MapFragment extends Fragment {
         Button button = new Button(binding.mapPanel.getContext());
         button.setText("Added at runtime!");
         button.setLayoutParams(new AbsoluteLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 500, 500));
+        button.setOnClickListener(view1 -> {
+            binding.mapPanel.setScrollX(-0);
+            binding.mapPanel.setScrollY(-0);
+            Log.d("mapPanel.scrollingPos", "scrollX=" + binding.mapPanel.getScrollX() + ", scrollY=" + binding.mapPanel.getScrollY());
+        });
         binding.mapPanel.addView(button);
 
         binding.buttonAbove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int widthMapFragment = binding.map.getWidth();
-                int heightMapFragment = binding.map.getHeight();
-                int widthMap = binding.mapPanel.getWidth();
-                int heightMap = binding.mapPanel.getHeight();
-                Log.d("onTouch.minScale", "widthMapFragment=" + widthMapFragment + ", heightMapFragment=" + heightMapFragment + ", widthMap=" + widthMap + ", heightMap=" + heightMap);
+//                int width = binding.mapPanel.getWidth();
+//                int height = binding.mapPanel.getHeight();
+//                int widthFragment = binding.map.getWidth();
+//                int heightFragment = binding.map.getHeight();
+//
+//                binding.mapPanel.scrollTo((width - widthFragment) / 2, (height - heightFragment) / 2);
+//                Log.d("scroll.pos", "" + binding.mapPanel.getScrollX() + ", " + binding.mapPanel.getScrollY());
+                binding.mapPanel.scrollBy(100,0);
+                Log.d("mapPanel.scrollingPos", "scrollX=" + binding.mapPanel.getScrollX() + ", scrollY=" + binding.mapPanel.getScrollY());
             }
         });
 
         binding.buttonDownside.setOnClickListener(view1 -> {
-            binding.mapPanel.setScaleX(binding.mapPanel.getScaleX() - .2f);
-            binding.mapPanel.setScaleY(binding.mapPanel.getScaleY() - .2f);
-            Log.d("buttonPos", "x=" + binding.buttonDownside.getX() + ", y=" + binding.buttonDownside.getY());
-            Log.d("buttonSize", "x=" + binding.buttonDownside.getWidth() + ", y=" + binding.buttonDownside.getHeight());
-            Log.d("mapPanelPos", "x=" + binding.mapPanel.getX() + ", y=" + binding.mapPanel.getY());
-            Log.d("mapPanelSize", "x=" + binding.mapPanel.getWidth() + ", y=" + binding.mapPanel.getHeight());
-            View mapPanel = binding.mapPanel;
+//            int width = binding.mapPanel.getWidth();
+//            int height = binding.mapPanel.getHeight();
+//            int widthFragment = binding.map.getWidth();
+//            int heightFragment = binding.map.getHeight();
+            binding.mapPanel.scrollTo(0, 0);
         });
 
         return view;
@@ -78,10 +85,11 @@ public class MapFragment extends Fragment {
         //Attributes for scrolling
         private float mx, my, curX, curY;
         private boolean scrollingStarted = false;
+        private int scrollBoundX, scrollBoundY;
 
         //Attributes for zooming
         private float zoomLength0, zoomLength;
-        private float scale = 1f, minScale = -1, maxScale=2; //TODO: what is a good max scale?
+        private float scale = 1f, minScale = -1, maxScale = 2; //TODO: what is a good max scale?
         private boolean zoomingStarted = false;
 
 
@@ -106,7 +114,18 @@ public class MapFragment extends Fragment {
                     switch (motionEvent.getAction()) {
                         case MotionEvent.ACTION_MOVE:
                             if (scrollingStarted) {
-                                binding.mapPanel.scrollBy(dx, dy);
+                                View mapPanel = binding.mapPanel;
+                                if (mapPanel.getScrollX() + dx < -scrollBoundX)
+                                    mapPanel.setScrollX(-scrollBoundX);
+                                else if (mapPanel.getScrollX() + dx > scrollBoundX)
+                                    mapPanel.setScrollX(scrollBoundX);
+                                else mapPanel.scrollBy(dx, 0);
+                                if (mapPanel.getScrollY() + dy < -scrollBoundY)
+                                    mapPanel.setScrollY(-scrollBoundY);
+                                else if (mapPanel.getScrollY() + dy > scrollBoundY)
+                                    mapPanel.setScrollY(scrollBoundY);
+                                else mapPanel.scrollBy(0, dy);
+//                                mapPanel.scrollBy(dx, dy);
                             } else {
                                 scrollingStarted = true;
                             }
@@ -115,7 +134,7 @@ public class MapFragment extends Fragment {
                             break;
                         case MotionEvent.ACTION_UP:
                             scrollingStarted = false;
-//                            Log.d("mapPanel.scrollingPos", "scrollX=" + binding.mapPanel.getScrollX() + ", scrollY=" + binding.mapPanel.getScrollY());
+                            Log.d("mapPanel.scrollingPos", "scrollX=" + binding.mapPanel.getScrollX() + ", scrollY=" + binding.mapPanel.getScrollY());
                             break;
                     }
 
@@ -152,6 +171,7 @@ public class MapFragment extends Fragment {
                             if (scale > maxScale) scale = maxScale;
                             binding.mapPanel.setScaleX(scale);
                             binding.mapPanel.setScaleY(scale);
+                            calculateScrollBounds();
                             Log.d("onTouchListener.zoom", "stop zooming, scale=" + scale);
                             break;
                     }
@@ -178,9 +198,24 @@ public class MapFragment extends Fragment {
             Log.d("onTouch.minScale", "minScale=" + minScale);
         }
 
+        private void calculateScrollBounds() {
+            int width = binding.mapPanel.getWidth();
+            int height = binding.mapPanel.getHeight();
+            int widthFragment = binding.map.getWidth();
+            int heightFragment = binding.map.getHeight();
+            Log.d("scroll.messurement", width + ", " + height + ", " + widthFragment + ", " + heightFragment);
+
+            scrollBoundX = (int) (Math.sqrt(width*scale)/2 - widthFragment/2);
+            scrollBoundY = (int) ((height * scale) / 2 - heightFragment / 2);
+            if (scrollBoundX < 0) scrollBoundX = 0;
+            if (scrollBoundY < 0) scrollBoundY = 0;
+            Log.d("scroll.bounds@1f", "scale=" + scale + ", bounds: " + scrollBoundX + ", " + scrollBoundY);
+        }
+
         @Override
         public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
             calculateMinScale();
+            calculateScrollBounds();
         }
     }
 }
