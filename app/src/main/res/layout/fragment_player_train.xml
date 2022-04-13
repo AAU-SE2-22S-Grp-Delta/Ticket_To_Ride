@@ -6,16 +6,15 @@
     android:id="@+id/heldTrainCards"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".fragments.PlayerTrainFragment">
+    android:orientation="horizontal">
 
-    <ListView
-        android:id="@+id/listViewTrainCards"
-        android:layout_width="567dp"
-        android:layout_height="278dp"
+    <LinearLayout
+        android:id="@+id/linearLayoutTrainCards"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

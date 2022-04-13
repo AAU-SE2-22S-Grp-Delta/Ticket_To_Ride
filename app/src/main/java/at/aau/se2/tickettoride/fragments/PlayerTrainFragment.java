@@ -1,26 +1,23 @@
 package at.aau.se2.tickettoride.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
-import java.util.List;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
 
 public class PlayerTrainFragment extends Fragment {
     private FragmentPlayerTrainBinding binding;
+    private LinearLayout linearLayout;
 
     public static PlayerTrainFragment newInstance() {
         return new PlayerTrainFragment();
@@ -37,15 +34,24 @@ public class PlayerTrainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*for(int i=1;i<5;i++)
-        {
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(80,60));
-            imageView.setMaxHeight(20);
-            imageView.setMaxWidth(20);
+        linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutTrainCards);
 
-            layout.addView(imageView);
-        }*/
+        for(int i=1;i<=5;i++)
+        {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.setMargins(10,20,10,20);
+
+            ImageView imageView = new ImageView(linearLayout.getContext());
+            imageView.setLayoutParams(layoutParams);
+            imageView.getLayoutParams().height = 600;
+            imageView.getLayoutParams().width = 300;
+            imageView.setBackgroundColor(Color.RED);
+
+            linearLayout.addView(imageView);
+        }
     }
 
     @Override
