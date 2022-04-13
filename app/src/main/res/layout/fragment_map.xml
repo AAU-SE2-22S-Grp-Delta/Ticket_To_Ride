@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".fragments.MapFragment">
 
+
     <AbsoluteLayout
         android:id="@+id/map_panel"
         android:layout_width="3840px"
@@ -26,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/test_pic" />
+            android:src="@drawable/map" />
 
         <Button
             android:id="@+id/button_above"
@@ -50,6 +51,130 @@
             android:layout_x="3585px"
             android:layout_y="2034px"
             android:text="Downer" />
+
+        <Button
+            android:id="@+id/dest1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="121dp"
+            android:layout_y="73dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/dest2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="80dp"
+            android:layout_y="268dp"
+            android:background="@drawable/destination"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/dest3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="89dp"
+            android:layout_y="477dp"
+            android:background="@drawable/destination"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/dest4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="365dp"
+            android:layout_y="517dp"
+            android:background="@drawable/destination"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/dest5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="425dp"
+            android:layout_y="102dp"
+            android:background="@drawable/destination"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/dest6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="598dp"
+            android:layout_y="660dp"
+            android:background="@drawable/destination"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/dest7"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="562dp"
+            android:layout_y="342dp"
+            android:background="@drawable/destination"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/dest8"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="815dp"
+            android:layout_y="135dp"
+            android:background="@drawable/destination"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/dest9"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="928dp"
+            android:layout_y="344dp"
+            android:background="@drawable/destination"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/dest10"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="1237dp"
+            android:layout_y="562dp"
+            android:background="@drawable/destination"
+            android:text="10" />
+
+
+        <Button
+            android:id="@+id/dest11"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="786dp"
+            android:layout_y="540dp"
+            android:background="@drawable/destination"
+            android:text="11" />
+
+
+        <Button
+            android:id="@+id/dest12"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="1221dp"
+            android:layout_y="134dp"
+            android:background="@drawable/destination"
+            android:text="12" />
+
+        <ImageView
+            android:id="@+id/drawView"
+            android:layout_width="3840px"
+            android:layout_height="2160px"
+            android:layout_x="0dp"
+            android:layout_y="0dp"
+            android:src="@drawable/map"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </AbsoluteLayout>
 
 

@@ -1,8 +1,8 @@
 package at.aau.se2.tickettoride.dataStructures;
 
 import android.graphics.Point;
+import android.widget.Button;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,18 +14,22 @@ public class Destination {
     //TODO exception-handling
 
     private static Set<String> names = new HashSet<>();
-
+    private Button button;
     private String name;
-    private Point coordinate;
 
     /**
      * Creates a Destination Object and marks the name as used
      * @param name a unique name
-     * @param coordinate a point on the map
+     * @param button a button on the map, representing the location and its coordinates
      */
-    public Destination(String name, Point coordinate) {
+    public Destination(String name, Button button) {
+        this.button = button;
         setName(name);
-        setCoordinate(coordinate);
+    }
+
+    public Button getButton()
+    {
+        return button;
     }
 
     public String getName() {
@@ -41,15 +45,14 @@ public class Destination {
         this.name = name;
     }
 
-    public Point getCoordinate() {
-        return coordinate;
+    public float getX()
+    {
+        return this.button.getX() + (float) this.button.getWidth()/2;
     }
 
-    public void setCoordinate(Point coordinate) {
-        //TODO what are the max coordinates?
-        if (coordinate == null) throw new IllegalArgumentException("coordinate is null");
-        if (coordinate.x < 0) throw new IllegalArgumentException("coordinate.x < 0");
-        if (coordinate.y < 0) throw new IllegalArgumentException("coordinate.y < 0");
-        this.coordinate = coordinate;
+    public float getY()
+    {
+        return this.button.getY() + (float) this.button.getHeight()/2;
     }
+
 }
