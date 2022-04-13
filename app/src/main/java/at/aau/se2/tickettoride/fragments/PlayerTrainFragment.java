@@ -36,7 +36,7 @@ public class PlayerTrainFragment extends Fragment {
 
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutTrainCards);
 
-        for(int i=1;i<=5;i++)
+        for(int i=1;i<=10;i++)
         {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
