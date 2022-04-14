@@ -9,8 +9,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapView"
         android:name="at.aau.se2.tickettoride.fragments.MapFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         app:layout_constraintBottom_toTopOf="@id/playerDestinationView"
         app:layout_constraintEnd_toStartOf="@id/deskTrainView"
         app:layout_constraintStart_toStartOf="parent"
