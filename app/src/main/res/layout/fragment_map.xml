@@ -147,11 +147,10 @@
             android:id="@+id/dest11"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_x="786dp"
-            android:layout_y="540dp"
+            android:layout_x="857dp"
+            android:layout_y="701dp"
             android:background="@drawable/destination"
             android:text="11" />
-
 
         <Button
             android:id="@+id/dest12"

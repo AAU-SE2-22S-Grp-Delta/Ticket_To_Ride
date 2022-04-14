@@ -99,6 +99,25 @@ public class RailroadLine {
 
         //set owner
 
-        //remove cards
+        //remove cards and pieces
+
+    }
+
+    public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView, Player player)
+    {
+        //check if there is already a road built
+        if(owner != null)
+            throw new IllegalStateException("Track already owned");
+        //check if player has enough cards of given color to build
+
+        //build road
+        paint.setColor(player.getPlayerColor());
+        canvas.drawLine(this.destination1.getX(), this.destination1.getY(), this.destination2.getX(), this.destination2.getY(), paint);
+        imageView.setImageBitmap(bm);
+
+        //set owner
+
+        //remove cards and pieces
+
     }
 }

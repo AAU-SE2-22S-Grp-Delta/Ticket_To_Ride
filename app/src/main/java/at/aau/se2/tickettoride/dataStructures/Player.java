@@ -16,7 +16,7 @@ public class Player {
 
     private int id;
     private String name;
-    private Color color;
+    private int playerColor;
     private int numStones;
     private boolean isInGame;
 
@@ -24,10 +24,10 @@ public class Player {
      * Creates a player-object gives it a id and marks the name as used
      * @param name a unique name
      */
-    public Player(String name, int id, Color color) {
+    public Player(String name, int id, int color) {
         this.id = id;
         setName(name);
-        this.color = color;
+        this.playerColor = color;
         this.isInGame = false;
     }
 
@@ -59,5 +59,10 @@ public class Player {
         if (isInGame) throw new IllegalStateException("Player is already playing");
         isInGame = true;
         this.numStones = 45;
+    }
+
+    public int getPlayerColor()
+    {
+        return playerColor;
     }
 }

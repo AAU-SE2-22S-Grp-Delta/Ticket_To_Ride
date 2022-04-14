@@ -1,12 +1,16 @@
 package at.aau.se2.tickettoride.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +31,7 @@ import java.util.ArrayList;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dataStructures.Destination;
+import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
 
@@ -51,6 +56,9 @@ public class MapFragment extends Fragment
         binding.mapPanel.setScaleX(1.f);
         binding.mapPanel.setScaleY(1.f);
         binding.mapPanel.setOnTouchListener(new MapOnTouchListener());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
 
         Destination dest1 = new Destination("dest1", binding.dest1);
         Destination dest2 = new Destination("dest2", binding.dest2);
@@ -121,6 +129,8 @@ public class MapFragment extends Fragment
         railroads.add(r21);
         railroads.add(r22);
 
+        Player player1 = new Player("player one", 1, Color.RED);
+
         Destination[] destinations = {dest1, dest2, dest3, dest4, dest5, dest6, dest7, dest8, dest9, dest10, dest11, dest12};
 
         for (Destination d : destinations)
@@ -133,8 +143,25 @@ public class MapFragment extends Fragment
                         RailroadLine rl = new RailroadLine(firstDest, d);
                         if (railroads.contains(rl))
                         {
-                            railroads.get(railroads.indexOf(rl)).buildRoad(canvas, paint, bm, binding.drawView);
-                            firstDest = null;
+                            RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
+                            paint.setXfermode(null);
+                            currentRoad.buildRoad(canvas, paint, bm, binding.drawView);
+                            builder.setTitle("Build Road");
+                            builder.setMessage("Do you wish to build the railroad from " + currentRoad.getDestination1().getName() + " to " + currentRoad.getDestination2().getName()
+                                    + " with a cost of: " + currentRoad.getDistance() + "?");
+                            builder.setPositiveButton("Confirm", (dialogInterface, i) -> {
+
+                                currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player1);
+                                firstDest = null;
+                            });
+                            builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
+                                paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+                                currentRoad.buildRoad(canvas, paint, bm, binding.drawView);
+                                firstDest = null;
+                            });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         } else
                         {
                             Log.d("Error", "not a valid road");
