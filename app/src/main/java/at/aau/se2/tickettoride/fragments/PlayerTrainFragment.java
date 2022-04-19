@@ -36,6 +36,7 @@ public class PlayerTrainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //für Testzwecke
         ArrayList<Integer> test = new ArrayList<>();
         test.add(Color.RED);
         test.add(Color.BLUE);
