@@ -2,6 +2,7 @@ package at.aau.se2.tickettoride.dataStructures;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class Player {
     private int playerColor;
     private int numStones;
     private boolean isInGame;
+
 
     /**
      * Creates a player-object gives it a id and marks the name as used

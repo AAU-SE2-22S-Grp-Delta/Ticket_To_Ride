@@ -84,7 +84,7 @@ public class MapOnTouchListener implements View.OnTouchListener, View.OnLayoutCh
                             zoomingStarted = true;
                         }
                         break;
-                    case MotionEvent.ACTION_POINTER_UP:
+                    case MotionEvent.ACTION_UP:
                         zoomingStarted = false;
                         scale *= zoomLength / zoomLength0;
                         if (scale < minScale) scale = minScale;
