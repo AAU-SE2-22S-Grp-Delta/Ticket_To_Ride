@@ -26,6 +26,9 @@
             android:name=".activities.DeskDestinationActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.DeskOpenTrainActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DeskTrainActivity"
             android:exported="false" />
         <activity
