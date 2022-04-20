@@ -23,6 +23,15 @@ import at.aau.se2.tickettoride.databinding.FragmentPlayerDestinationBinding;
 public class PlayerDestinationFragment extends Fragment implements View.OnClickListener {
     private FragmentPlayerDestinationBinding binding;
 
+    ArrayList<DestinationCard> cardsList = new ArrayList<>();
+
+    DestinationCard calSal = new DestinationCard("Calgary","Salt Lake City",7, R.drawable.calgary_saltlakecity);
+    DestinationCard kanHou = new DestinationCard("Kansas City","Houston",5,R.drawable.kansascity_houston);
+    DestinationCard losChi = new DestinationCard("Los Angeles","Houston", 16,R.drawable.losangeles_chicago);
+    DestinationCard newAtl = new DestinationCard("New York","Atlanta", 6,R.drawable.newyork_atlanta);
+    DestinationCard porPho = new DestinationCard("Portland","Phoenix",11,R.drawable.portland_phoenix);
+    DestinationCard seaNew = new DestinationCard("Seattle","New York", 22,R.drawable.seattle_newyork);
+
     public static PlayerDestinationFragment newInstance() {
         return new PlayerDestinationFragment();
     }
@@ -32,50 +41,44 @@ public class PlayerDestinationFragment extends Fragment implements View.OnClickL
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPlayerDestinationBinding.inflate(inflater, container, false);
 
-        ArrayList<DestinationCard> randomCards = new ArrayList<>();
-
-        DestinationCard calSal = new DestinationCard("Calgary","Salt Lake City",7, R.drawable.calgary_saltlakecity);
-        DestinationCard kanHou = new DestinationCard("Kansas City","Houston",5,R.drawable.kansascity_houston);
-        DestinationCard losChi = new DestinationCard("Los Angeles","Houston", 16,R.drawable.losangeles_chicago);
-        DestinationCard newAtl = new DestinationCard("New York","Atlanta", 6,R.drawable.newyork_atlanta);
-        DestinationCard porPho = new DestinationCard("Portland","Phoenix",11,R.drawable.portland_phoenix);
-        DestinationCard seaNew = new DestinationCard("Seattle","New York", 22,R.drawable.seattle_newyork);
-
-        randomCards.add(calSal);
-        randomCards.add(kanHou);
-        randomCards.add(losChi);
-        randomCards.add(newAtl);
-        randomCards.add(porPho);
-        randomCards.add(seaNew);
-
+        cardsList.add(calSal);
+        cardsList.add(kanHou);
+        cardsList.add(losChi);
+        cardsList.add(newAtl);
+        cardsList.add(porPho);
+        cardsList.add(seaNew);
 
         Random randomCard1 = new Random();
-        int card1 = randomCard1.nextInt(randomCards.size());
-        binding.imageView.setImageResource(randomCards.get(card1).getImage());
+        int card1 = randomCard1.nextInt(cardsList.size());
+        binding.imageView.setImageResource(cardsList.get(card1).getImage());
+        binding.imageView.setTag(cardsList.get(card1));
 
         Random randomCard2 = new Random();
-        int card2 = randomCard2.nextInt(randomCards.size());
+        int card2 = randomCard2.nextInt(cardsList.size());
         while (card1 == card2) {
             randomCard2 = new Random();
-            card2 = randomCard2.nextInt(randomCards.size());
+            card2 = randomCard2.nextInt(cardsList.size());
         }
-        binding.imageView2.setImageResource(randomCards.get(card2).getImage());
+        binding.imageView2.setImageResource(cardsList.get(card2).getImage());
+        binding.imageView2.setTag(cardsList.get(card2));
 
         Random randomCard3 = new Random();
-        int card3 = randomCard3.nextInt(randomCards.size());
+        int card3 = randomCard3.nextInt(cardsList.size());
         while (card1 == card3 || card2 == card3) {
             randomCard3 = new Random();
-            card3 = randomCard3.nextInt(randomCards.size());
+            card3 = randomCard3.nextInt(cardsList.size());
         }
-        binding.imageView3.setImageResource(randomCards.get(card3).getImage());
+        binding.imageView3.setImageResource(cardsList.get(card3).getImage());
+        binding.imageView3.setTag(cardsList.get(card3));
 
         Random randomCard4 = new Random();
-        int card4 = randomCard4.nextInt(randomCards.size());
+        int card4 = randomCard4.nextInt(cardsList.size());
         while (card1 == card4 || card2 == card4 || card3 == card4) {
             randomCard4 = new Random();
-            card4 = randomCard4.nextInt(randomCards.size());
+            card4 = randomCard4.nextInt(cardsList.size());
         }
-        binding.imageView4.setImageResource(randomCards.get(card4).getImage());
+        binding.imageView4.setImageResource(cardsList.get(card4).getImage());
+        binding.imageView4.setTag(cardsList.get(card4));
 
         binding.button6.setOnClickListener(this);
         binding.imageView.setOnClickListener(this);
@@ -124,58 +127,61 @@ public class PlayerDestinationFragment extends Fragment implements View.OnClickL
         }
         if (view.getId() == binding.button6.getId()) {
 
-            ArrayList<ImageView> cards = new ArrayList<>();
+            ArrayList<DestinationCard> cards = new ArrayList<>();
 
             if (((ColorDrawable) binding.imageView.getBackground()).getColor() == Color.GREEN) {
-                cards.add(binding.imageView);
+                cards.add((DestinationCard) binding.imageView.getTag());
             }
             if (((ColorDrawable) binding.imageView3.getBackground()).getColor() == Color.GREEN) {
-                cards.add(binding.imageView3);
+                cards.add((DestinationCard) binding.imageView3.getTag());
             }
             if (((ColorDrawable) binding.imageView2.getBackground()).getColor() == Color.GREEN) {
-                cards.add(binding.imageView2);
+                cards.add((DestinationCard) binding.imageView2.getTag());
             }
             if (((ColorDrawable) binding.imageView4.getBackground()).getColor() == Color.GREEN) {
-                cards.add(binding.imageView4);
+                cards.add((DestinationCard) binding.imageView4.getTag());
             }
 
-            ArrayList<Drawable> roadCards = new ArrayList<>();
-            if (cards.size() == 2) {
-                Drawable roadCard1 = cards.get(0).getDrawable();
-                Drawable roadCard2 = cards.get(1).getDrawable();
+            ArrayList<DestinationCard> roadCards = new ArrayList<>();
 
-                binding.imageView.setImageDrawable(roadCard1);
-                binding.imageView3.setImageDrawable(roadCard2);
+            if (cards.size() == 2) {
+                DestinationCard roadCard1 = cards.get(0);
+                DestinationCard roadCard2 = cards.get(1);
+
+                binding.imageView.setImageResource(roadCard1.getImage());
+                binding.imageView3.setImageResource(roadCard2.getImage());
                 binding.imageView2.setVisibility(View.GONE);
                 binding.imageView4.setVisibility(View.GONE);
                 binding.button6.setVisibility(View.GONE);
 
                 roadCards.add(roadCard1);
                 roadCards.add(roadCard2);
-            } else if (cards.size() == 3) {
-                Drawable roadCard1 = cards.get(0).getDrawable();
-                Drawable roadCard2 = cards.get(1).getDrawable();
-                Drawable roadCard3 = cards.get(2).getDrawable();
+            }
+            else if (cards.size() == 3) {
+                DestinationCard roadCard1 = cards.get(0);
+                DestinationCard roadCard2 = cards.get(1);
+                DestinationCard roadCard3 = cards.get(2);
 
-                binding.imageView.setImageDrawable(roadCard1);
-                binding.imageView3.setImageDrawable(roadCard2);
-                binding.imageView2.setImageDrawable(roadCard3);
+                binding.imageView.setImageResource(roadCard1.getImage());
+                binding.imageView3.setImageResource(roadCard2.getImage());
+                binding.imageView2.setImageResource(roadCard3.getImage());
                 binding.imageView4.setVisibility(View.GONE);
                 binding.button6.setVisibility(View.GONE);
 
                 roadCards.add(roadCard1);
                 roadCards.add(roadCard2);
                 roadCards.add(roadCard3);
-            } else if (cards.size() == 4) {
-                Drawable roadCard1 = cards.get(0).getDrawable();
-                Drawable roadCard2 = cards.get(1).getDrawable();
-                Drawable roadCard3 = cards.get(2).getDrawable();
-                Drawable roadCard4 = cards.get(3).getDrawable();
+            }
+            else if (cards.size() == 4) {
+                DestinationCard roadCard1 = cards.get(0);
+                DestinationCard roadCard2 = cards.get(1);
+                DestinationCard roadCard3 = cards.get(2);
+                DestinationCard roadCard4 = cards.get(3);
 
-                binding.imageView.setImageDrawable(roadCard1);
-                binding.imageView3.setImageDrawable(roadCard2);
-                binding.imageView2.setImageDrawable(roadCard3);
-                binding.imageView4.setImageDrawable(roadCard4);
+                binding.imageView.setImageResource(roadCard1.getImage());
+                binding.imageView3.setImageResource(roadCard2.getImage());
+                binding.imageView2.setImageResource(roadCard3.getImage());
+                binding.imageView4.setImageResource(roadCard4.getImage());
                 binding.button6.setVisibility(View.GONE);
 
                 roadCards.add(roadCard1);
@@ -183,8 +189,6 @@ public class PlayerDestinationFragment extends Fragment implements View.OnClickL
                 roadCards.add(roadCard3);
                 roadCards.add(roadCard4);
             }
-
-
         }
     }
 }
