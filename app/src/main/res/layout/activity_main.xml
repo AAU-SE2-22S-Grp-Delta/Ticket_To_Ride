@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Desk Dest."
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button7"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/button5"
         app:layout_constraintTop_toBottomOf="@id/button1" />
@@ -62,8 +62,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Desk Train"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button7"
         app:layout_constraintLeft_toRightOf="@id/button4"
+        app:layout_constraintRight_toRightOf="@id/button6"
+        app:layout_constraintTop_toBottomOf="@id/button1" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desk O. Train"
+        app:layout_constraintBottom_toTopOf="@id/button7"
+        app:layout_constraintLeft_toRightOf="@id/button5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button1" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Draw Dest."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

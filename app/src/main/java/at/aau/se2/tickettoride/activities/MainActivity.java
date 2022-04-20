@@ -45,5 +45,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, DeskTrainActivity.class);
             startActivity(intent);
         });
+
+        binding.button6.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DeskOpenTrainActivity.class);
+            startActivity(intent);
+        });
+
+        binding.button7.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
+            startActivity(intent);
+        });
     }
 }
