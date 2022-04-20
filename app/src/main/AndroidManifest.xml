@@ -29,6 +29,9 @@
             android:name=".activities.DeskTrainActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.DrawDestinationCardsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.MapActivity"
             android:exported="false" />
         <activity
