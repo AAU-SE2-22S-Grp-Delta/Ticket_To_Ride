@@ -1,6 +1,7 @@
 package at.aau.se2.tickettoride.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,5 +18,10 @@ public class MapActivity extends AppCompatActivity {
                     .replace(R.id.container, MapFragment.newInstance())
                     .commitNow();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 }

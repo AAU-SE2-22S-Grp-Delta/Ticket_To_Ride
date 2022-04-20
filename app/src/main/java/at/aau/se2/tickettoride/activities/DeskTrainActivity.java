@@ -3,11 +3,14 @@ package at.aau.se2.tickettoride.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import at.aau.se2.tickettoride.R;
+import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
+import at.aau.se2.tickettoride.enums.Colors;
 import at.aau.se2.tickettoride.fragments.DeskTrainFragment;
 
-public class DeskTrainActivity extends AppCompatActivity {
+public class DeskTrainActivity extends AppCompatActivity implements TrainDialogFragment.TrainDialogListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,5 +20,11 @@ public class DeskTrainActivity extends AppCompatActivity {
                     .replace(R.id.container, DeskTrainFragment.newInstance())
                     .commitNow();
         }
+    }
+
+    @Override
+    public void onDialogPositiveClick(Colors color) {
+        //TODO Send Color to Hand
+        Log.i("COLOR", color.name());
     }
 }
