@@ -1,5 +1,6 @@
 package at.aau.se2.tickettoride.eventListeners;
 
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -28,7 +29,8 @@ public class MapOnTouchListener implements View.OnTouchListener, View.OnLayoutCh
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-
+//        Log.d("onTouchEvent", motionEvent.getAction() + ", pointer count" + motionEvent.getPointerCount());
+//        MotionEvent.UP
         switch (motionEvent.getPointerCount()) {
             case 1: { //occurs when there is one finger on the screen
                 curX = motionEvent.getX();
@@ -39,16 +41,7 @@ public class MapOnTouchListener implements View.OnTouchListener, View.OnLayoutCh
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_MOVE:
                         if (scrollingStarted) {
-                            if (window.getScrollX() + dx < -scrollBoundX)
-                                window.setScrollX(-scrollBoundX);
-                            else if (window.getScrollX() + dx > scrollBoundX)
-                                window.setScrollX(scrollBoundX);
-                            else window.scrollBy(dx, 0);
-                            if (window.getScrollY() + dy < -scrollBoundY)
-                                window.setScrollY(-scrollBoundY);
-                            else if (window.getScrollY() + dy > scrollBoundY)
-                                window.setScrollY(scrollBoundY);
-                            else window.scrollBy(0, dy);
+                            scrollWindow(dx, dy);
                         } else {
                             scrollingStarted = true;
                         }
@@ -73,25 +66,18 @@ public class MapOnTouchListener implements View.OnTouchListener, View.OnLayoutCh
                     case MotionEvent.ACTION_MOVE:
                         if (zoomingStarted) {
                             zoomLength = (float) Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
-
-                            float tempScale = scale * zoomLength / zoomLength0;
-                            if (tempScale < minScale) tempScale = minScale;
-                            if (tempScale > maxScale) tempScale = maxScale;
-                            target.setScaleX(tempScale);
-                            target.setScaleY(tempScale);
+                            scaleTarget(calculateScale(zoomLength, zoomLength0), true);
                         } else {
                             zoomLength0 = (float) Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
                             zoomingStarted = true;
                         }
                         break;
+                    case MotionEvent.ACTION_POINTER_UP:
                     case MotionEvent.ACTION_UP:
                         zoomingStarted = false;
-                        scale *= zoomLength / zoomLength0;
-                        if (scale < minScale) scale = minScale;
-                        if (scale > maxScale) scale = maxScale;
-                        target.setScaleX(scale);
-                        target.setScaleY(scale);
-                        calculateScrollBounds();
+                        scrollingStarted = false;
+                        scale = calculateScale(zoomLength, zoomLength0);
+                        scaleTarget(scale, true);
                         break;
                 }
             }
@@ -112,24 +98,70 @@ public class MapOnTouchListener implements View.OnTouchListener, View.OnLayoutCh
         float minScaleY = (float) heightWindow / heightTarget;
 
         this.minScale = Math.min(minScaleX, minScaleY);
+
     }
 
-    private void calculateScrollBounds() {
+    private void calculateScrollBounds(float scale) {
+        Log.d("onTouchEvent_bounds", "calculating bounds...");
         int widthTarget = target.getWidth();
         int heightTarget = target.getHeight();
         int widthWindow = window.getWidth();
         int heightWindow = window.getHeight();
 
         scrollBoundX = (int) (widthTarget * scale) / 2 - widthWindow / 2;
-        scrollBoundY = (int) ((heightTarget * scale) / 2 - heightWindow / 2);
+        scrollBoundY = (int) (heightTarget * scale) / 2 - heightWindow / 2;
         if (scrollBoundX < 0) scrollBoundX = 0;
         if (scrollBoundY < 0) scrollBoundY = 0;
+    }
+
+    private float calculateScale(float zoomLength, float zoomLength0) {
+        float scale = this.scale * zoomLength / zoomLength0;
+        if (scale < minScale) scale = minScale;
+        if (scale > maxScale) scale = maxScale;
+        return scale;
+    }
+
+    private void scaleTarget(float scale, boolean smooth) {
+        float scrollScaleFactor = scale / target.getScaleX();
+        if (smooth) {
+            if (scrollScaleFactor < 0.95f) {
+                scrollScaleFactor = 0.95f;
+                scale = target.getScaleX() * scrollScaleFactor;
+            } else if (scrollScaleFactor > 1.05f) {
+                scrollScaleFactor = 1.05f;
+                scale = target.getScaleX() * scrollScaleFactor;
+            }
+        }
+        calculateScrollBounds(scale);
+
+        target.setScaleX(scale);
+        target.setScaleY(scale);
+        window.setScrollX((int) (window.getScrollX() * scrollScaleFactor));
+        window.setScrollY((int) (window.getScrollY() * scrollScaleFactor));
+        Log.d("pivot", "relScrollX: " + window.getScrollX() + ", relScrollY: " + window.getScrollY());
+        scrollWindow(0, 0);
+        Log.d("pivot", "ScrollX: " + window.getScrollX() + ", ScrollY: " + window.getScrollY());
+    }
+
+    private void scrollWindow(int dx, int dy) {
+        if (window.getScrollX() + dx < -scrollBoundX)
+            window.setScrollX(-scrollBoundX);
+        else if (window.getScrollX() + dx > scrollBoundX)
+            window.setScrollX(scrollBoundX);
+        else window.scrollBy(dx, 0);
+        if (window.getScrollY() + dy < -scrollBoundY)
+            window.setScrollY(-scrollBoundY);
+        else if (window.getScrollY() + dy > scrollBoundY)
+            window.setScrollY(scrollBoundY);
+        else window.scrollBy(0, dy);
     }
 
     @Override
     //this has to be attached to the widow-fragment, than it is called when the window size changes
     public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
         calculateMinScale();
-        calculateScrollBounds();
+        calculateScrollBounds(minScale);
+        this.scale = minScale;
+        scaleTarget(minScale, false);
     }
 }
