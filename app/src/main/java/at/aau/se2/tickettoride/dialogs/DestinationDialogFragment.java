@@ -15,23 +15,10 @@ import androidx.fragment.app.DialogFragment;
 import java.util.ArrayList;
 
 import at.aau.se2.tickettoride.R;
+import at.aau.se2.tickettoride.models.GameModel;
 
 public class DestinationDialogFragment extends DialogFragment {
-    public interface DestinationDialogListener {
-        void onDialogPositiveClick(ArrayList<String> selected);
-    }
-
-    DestinationDialogListener listener;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            listener = (DestinationDialogListener) context;
-        }catch (ClassCastException e){
-            throw new ClassCastException(getActivity().toString() + " must implement DestinationDialogListener");
-        }
-    }
+    GameModel gameModel = GameModel.getInstance();
 
     @NonNull
     @Override
@@ -39,8 +26,9 @@ public class DestinationDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
 
-        ArrayList<String> selectedItems = new ArrayList();
+        ArrayList<Integer> selectedItems = new ArrayList();
 
+        //TODO Get the cards from GameModel
         //Set Dialog
         builder.setView(inflater.inflate(R.layout.dialog_destination_cards, null))
                 .setTitle("Wähle eine Karte")
@@ -50,16 +38,19 @@ public class DestinationDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
                         if(isChecked){
-                            selectedItems.add(Integer.toString(i+1));
-                        }else if(selectedItems.contains(Integer.toString(i+1))){
-                            selectedItems.remove(Integer.toString(i+1));
+                            selectedItems.add(i);
+                        }else if(selectedItems.contains(i)){
+                            selectedItems.remove(i);
                         }
                     }
                 })
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        listener.onDialogPositiveClick(selectedItems);
+                        gameModel.setPlayerDestinationCards(selectedItems);
+                        for (int i = 0; i < gameModel.getPlayerDestinationCards().size(); i++) {
+                            Log.i("RESULT", gameModel.getPlayerDestinationCards().get(i).toString());
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -11,7 +11,7 @@ import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
 import at.aau.se2.tickettoride.fragments.DeskDestinationFragment;
 
-public class DeskDestinationActivity extends AppCompatActivity implements DestinationDialogFragment.DestinationDialogListener {
+public class DeskDestinationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +21,6 @@ public class DeskDestinationActivity extends AppCompatActivity implements Destin
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, DeskDestinationFragment.newInstance())
                     .commitNow();
-        }
-    }
-
-    //Get Choices
-    @Override
-    public void onDialogPositiveClick(ArrayList<String> selected) {
-        //TODO Send Choices to Hand
-        for (int i = 0; i < selected.size(); i++) {
-            Log.i("CHOICES", selected.get(i));
         }
     }
 }

@@ -22,6 +22,7 @@ public class DeskTrainActivity extends AppCompatActivity implements TrainDialogF
         }
     }
 
+    //Get Color
     @Override
     public void onDialogPositiveClick(Colors color) {
         //TODO Send Color to Hand
