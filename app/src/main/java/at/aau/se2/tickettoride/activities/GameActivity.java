@@ -91,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
 
     @NonNull
     private Integer[] getNumCards(List<Integer> cards, int count) {
-        Integer[] numCards = new Integer[5];
+        Integer[] numCards = new Integer[count];
         for (int i = 0; i < count; i++) {
             Integer card = cards.remove(0);
             numCards[i] = card;
