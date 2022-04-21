@@ -4,14 +4,21 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
+import at.aau.se2.tickettoride.fragments.MapFragment;
+import at.aau.se2.tickettoride.fragments.MissionCardFragment;
+import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class GameActivity extends AppCompatActivity {
@@ -23,6 +30,15 @@ public class GameActivity extends AppCompatActivity {
         ActivityGameBinding binding = ActivityGameBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        builder.setView(R.layout.fragment_player_destination);
+
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+
+        binding.missionsBtn.setOnClickListener(view1 -> {
+            dialog.show();
+        });
 
         startGame();
     }

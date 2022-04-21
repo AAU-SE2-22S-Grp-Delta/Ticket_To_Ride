@@ -45,6 +45,7 @@
             android:layout_weight="75"/>
 
         <Button
+            android:id="@+id/missions_btn"
             android:text="Missions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
