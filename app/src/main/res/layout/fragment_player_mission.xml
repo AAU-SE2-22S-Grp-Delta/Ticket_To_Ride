@@ -5,7 +5,7 @@
     android:id="@+id/destination"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PlayerDestinationFragment">
+    tools:context=".fragments.PlayerMissionFragment">
 
     <HorizontalScrollView
         android:id="@+id/scrollViewTrackCards"

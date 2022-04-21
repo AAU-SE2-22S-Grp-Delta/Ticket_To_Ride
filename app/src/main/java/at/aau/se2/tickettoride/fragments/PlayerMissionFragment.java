@@ -14,20 +14,20 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.databinding.FragmentPlayerDestinationBinding;
+import at.aau.se2.tickettoride.databinding.FragmentPlayerMissionBinding;
 
-public class PlayerDestinationFragment extends Fragment {
-    private FragmentPlayerDestinationBinding binding;
+public class PlayerMissionFragment extends Fragment {
+    private FragmentPlayerMissionBinding binding;
     private LinearLayout linearLayout;
 
-    public static PlayerDestinationFragment newInstance() {
-        return new PlayerDestinationFragment();
+    public static PlayerMissionFragment newInstance() {
+        return new PlayerMissionFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentPlayerDestinationBinding.inflate(inflater, container, false);
+        binding = FragmentPlayerMissionBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
