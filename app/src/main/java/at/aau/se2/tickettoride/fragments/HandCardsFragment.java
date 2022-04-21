@@ -56,8 +56,8 @@ public class HandCardsFragment extends Fragment {
 
             ImageView imageView = new ImageView(linearLayout.getContext());
             imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 600;
-            imageView.getLayoutParams().width = 350;
+//            imageView.getLayoutParams().height = 600;
+//            imageView.getLayoutParams().width = 350;
             switch (heldTrainCards.get(i)) {
                 case 0:
                     imageView.setImageResource(R.drawable.ic_train_black);
