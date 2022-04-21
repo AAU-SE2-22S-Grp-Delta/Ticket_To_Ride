@@ -24,6 +24,7 @@ public class DestinationDialogFragment extends DialogFragment {
     ArrayList<Integer> selectedItems = new ArrayList<Integer>();
     //TODO Get the cards from GameModel
     private ArrayList<Integer> cardsToChoice = new ArrayList<Integer>();
+    String[] destinations = new String[3];
 
     @NonNull
     @Override
@@ -36,7 +37,7 @@ public class DestinationDialogFragment extends DialogFragment {
         //Set Dialog
         builder.setView(inflater.inflate(R.layout.dialog_destination_cards, null))
                 .setTitle("Wähle eine Karte")
-                .setMultiChoiceItems(R.array.destinations, null, new DialogInterface.OnMultiChoiceClickListener() {
+                .setMultiChoiceItems(destinations, null, new DialogInterface.OnMultiChoiceClickListener() {
                     //Add Selected Items to List of Choices
                     //TODO Find a way to get the values of the array
                     @Override
@@ -74,7 +75,8 @@ public class DestinationDialogFragment extends DialogFragment {
         for (int i = 0; i < 3; i++) {
             int number = gameModel.getDeskDestinationCards().get(i);
             cardsToChoice.add(number);
-            Log.i("DATA", Integer.toString(number));
+            //Log.i("DATA", Integer.toString(number));
+            destinations[i] = "Ziel " + number;
         }
     }
 }
