@@ -21,6 +21,7 @@ import at.aau.se2.tickettoride.enums.Colors;
 
 public class TrainDialogFragment extends DialogFragment {
 
+    //TODO Delete Listener
     public interface TrainDialogListener{
         public void onDialogPositiveClick(Colors color);
     }
@@ -47,6 +48,7 @@ public class TrainDialogFragment extends DialogFragment {
         LinearLayout layout = new LinearLayout(getActivity());
         ImageView imageView = new ImageView(getActivity());
         //Generate Random color
+        //TODO Change to match Game Structure
         Random random = new Random();
         int randomNumber = random.nextInt(7);
         switch (randomNumber){
@@ -91,6 +93,7 @@ public class TrainDialogFragment extends DialogFragment {
         builder.setView(layout)
                 .setTitle("Deine neue Waagonkarte")
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+                    //TODO Delete Listener
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
                         listener.onDialogPositiveClick(color);

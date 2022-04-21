@@ -7,18 +7,23 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class DestinationDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
+    ArrayList<Integer> selectedItems = new ArrayList<Integer>();
+    //TODO Get the cards from GameModel
+    private ArrayList<Integer> cardsToChoice = new ArrayList<Integer>();
 
     @NonNull
     @Override
@@ -26,9 +31,8 @@ public class DestinationDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
 
-        ArrayList<Integer> selectedItems = new ArrayList();
+        getChoices();
 
-        //TODO Get the cards from GameModel
         //Set Dialog
         builder.setView(inflater.inflate(R.layout.dialog_destination_cards, null))
                 .setTitle("Wähle eine Karte")
@@ -60,5 +64,17 @@ public class DestinationDialogFragment extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    private void getChoices(){
+        //TODO Delete it after the function is in the game.
+        //Predefine List
+        gameModel.setDeskDestinationCards(new ArrayList<Integer>(Arrays.asList(4,7,9)));
+
+        for (int i = 0; i < 3; i++) {
+            int number = gameModel.getDeskDestinationCards().get(i);
+            cardsToChoice.add(number);
+            Log.i("DATA", Integer.toString(number));
+        }
     }
 }
