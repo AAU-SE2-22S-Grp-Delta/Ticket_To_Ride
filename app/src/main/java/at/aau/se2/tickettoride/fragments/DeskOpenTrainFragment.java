@@ -1,5 +1,7 @@
 package at.aau.se2.tickettoride.fragments;
 
+import static at.aau.se2.tickettoride.ResourceHelper.getTrainResource;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import at.aau.se2.tickettoride.databinding.FragmentDeskOpenTrainBinding;
-import at.aau.se2.tickettoride.enums.TrainCards;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class DeskOpenTrainFragment extends Fragment {
@@ -21,11 +22,17 @@ public class DeskOpenTrainFragment extends Fragment {
         return new DeskOpenTrainFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        gameModel = GameModel.getInstance();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDeskOpenTrainBinding.inflate(inflater, container, false);
-        gameModel = GameModel.getInstance();
         return binding.getRoot();
     }
 
@@ -49,19 +56,19 @@ public class DeskOpenTrainFragment extends Fragment {
             if (card != null) {
                 switch (i) {
                     case 0:
-                        binding.card1.setText(TrainCards.valueOf(card).toString());
+                        binding.card1.setImageResource(getTrainResource(card));
                         break;
                     case 1:
-                        binding.card2.setText(TrainCards.valueOf(card).toString());
+                        binding.card2.setImageResource(getTrainResource(card));
                         break;
                     case 2:
-                        binding.card3.setText(TrainCards.valueOf(card).toString());
+                        binding.card3.setImageResource(getTrainResource(card));
                         break;
                     case 3:
-                        binding.card4.setText(TrainCards.valueOf(card).toString());
+                        binding.card4.setImageResource(getTrainResource(card));
                         break;
                     case 4:
-                        binding.card5.setText(TrainCards.valueOf(card).toString());
+                        binding.card5.setImageResource(getTrainResource(card));
                         break;
                 }
             }

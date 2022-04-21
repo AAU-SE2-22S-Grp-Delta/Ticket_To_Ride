@@ -27,8 +27,8 @@ public enum TrainCards {
         }
     }
 
-    public static TrainCards valueOf(int pageType) {
-        return (TrainCards) map.get(pageType);
+    public static TrainCards valueOf(int card) {
+        return (TrainCards) map.get(card);
     }
 
     public int getValue() {
