@@ -44,6 +44,12 @@ public class PlayerTrainFragment extends Fragment {
         heldTrainCards.add(1);
         heldTrainCards.add(3);
         heldTrainCards.add(4);
+        heldTrainCards.add(6);
+        heldTrainCards.add(5);
+        heldTrainCards.add(1);
+        heldTrainCards.add(1);
+        heldTrainCards.add(5);
+        heldTrainCards.add(7);
 
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutTrainCards);
 
@@ -53,12 +59,12 @@ public class PlayerTrainFragment extends Fragment {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(20,30,20,30);
+            layoutParams.setMargins(5,10,5,10);
 
             ImageView imageView = new ImageView(linearLayout.getContext());
             imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 600;
-            imageView.getLayoutParams().width = 350;
+            imageView.getLayoutParams().height = 80;
+            imageView.getLayoutParams().width = 80;
             switch (heldTrainCards.get(i)) {
                 case 0:
                     imageView.setImageResource(R.drawable.ic_train_black);
