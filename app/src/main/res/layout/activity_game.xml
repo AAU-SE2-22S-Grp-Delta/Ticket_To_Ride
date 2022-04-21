@@ -26,6 +26,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/cardsContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -39,8 +40,16 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/handCards"
             android:name="at.aau.se2.tickettoride.fragments.PlayerTrainFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="75"/>
+
+        <Button
+            android:text="Missions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            />
 
     </LinearLayout>
 
