@@ -2,12 +2,10 @@ package at.aau.se2.tickettoride.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,8 +20,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class DestinationDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
     ArrayList<Integer> selectedItems = new ArrayList<Integer>();
-    //TODO Get the cards from GameModel
-    private ArrayList<Integer> cardsToChoice = new ArrayList<Integer>();
+    private ArrayList<Integer> cardsToChoose = new ArrayList<Integer>();
     String[] destinations = new String[3];
 
     @NonNull
@@ -39,13 +36,12 @@ public class DestinationDialogFragment extends DialogFragment {
                 .setTitle("Wähle eine Karte")
                 .setMultiChoiceItems(destinations, null, new DialogInterface.OnMultiChoiceClickListener() {
                     //Add Selected Items to List of Choices
-                    //TODO Find a way to get the values of the array
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
                         if(isChecked){
-                            selectedItems.add(i);
-                        }else if(selectedItems.contains(i)){
-                            selectedItems.remove(i);
+                            selectedItems.add(cardsToChoose.get(i));
+                        }else if(selectedItems.contains(cardsToChoose.get(i))){
+                            selectedItems.remove(cardsToChoose.get(i));
                         }
                     }
                 })
@@ -74,8 +70,7 @@ public class DestinationDialogFragment extends DialogFragment {
 
         for (int i = 0; i < 3; i++) {
             int number = gameModel.getDeskDestinationCards().get(i);
-            cardsToChoice.add(number);
-            //Log.i("DATA", Integer.toString(number));
+            cardsToChoose.add(number);
             destinations[i] = "Ziel " + number;
         }
     }
