@@ -22,6 +22,7 @@ public class DeskTrainActivity extends AppCompatActivity implements TrainDialogF
         }
     }
 
+    //TODO Delete Listener
     //Get Color
     @Override
     public void onDialogPositiveClick(Colors color) {

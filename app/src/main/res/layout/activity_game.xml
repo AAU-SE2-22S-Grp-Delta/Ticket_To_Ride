@@ -9,10 +9,10 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapView"
         android:name="at.aau.se2.tickettoride.fragments.MapFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/playerDestinationView"
-        app:layout_constraintEnd_toStartOf="@id/deskTrainView"
+        app:layout_constraintEnd_toStartOf="@id/deskDestinationView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,26 +21,46 @@
         android:name="at.aau.se2.tickettoride.fragments.DeskDestinationFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/deskTrainView"
+        app:layout_constraintBottom_toTopOf="@id/deskOpenTrainView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/mapView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/deskOpenTrainView"
+        android:name="at.aau.se2.tickettoride.fragments.DeskOpenTrainFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/deskTrainView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/deskDestinationView" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/deskTrainView"
         android:name="at.aau.se2.tickettoride.fragments.DeskTrainFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/drawDestinationCards"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/deskOpenTrainView" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/drawDestinationCards"
+        android:name="at.aau.se2.tickettoride.fragments.DrawDestinationCardsFragment"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/mapView"
-        app:layout_constraintTop_toBottomOf="@+id/deskDestinationView" />
+        app:layout_constraintTop_toBottomOf="@+id/deskTrainView" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerDestinationView"
         android:name="at.aau.se2.tickettoride.fragments.PlayerDestinationFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/playerTrainView"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,10 +69,10 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerTrainView"
         android:name="at.aau.se2.tickettoride.fragments.PlayerTrainFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deskTrainView"
         app:layout_constraintStart_toEndOf="@+id/playerDestinationView"
         app:layout_constraintTop_toBottomOf="@id/mapView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
