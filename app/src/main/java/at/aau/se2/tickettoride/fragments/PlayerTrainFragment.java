@@ -17,10 +17,12 @@ import java.util.List;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
+import at.aau.se2.tickettoride.models.GameModel;
 
 public class PlayerTrainFragment extends Fragment {
     private FragmentPlayerTrainBinding binding;
     private LinearLayout linearLayout;
+    private GameModel gameModel;
 
     public static PlayerTrainFragment newInstance() {
         return new PlayerTrainFragment();
@@ -51,7 +53,7 @@ public class PlayerTrainFragment extends Fragment {
         heldTrainCards.add(5);
         heldTrainCards.add(7);
 
-        linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutTrainCards);
+        linearLayout = view.findViewById(R.id.linearLayoutTrainCards);
 
         for(int i=0;i<=heldTrainCards.size()-1;i++)
         {
