@@ -1,6 +1,7 @@
 package at.aau.se2.tickettoride.fragments;
 
-import android.graphics.Color;
+import static at.aau.se2.tickettoride.ResourceHelper.getTrainResource;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,13 @@ public class PlayerTrainFragment extends Fragment {
         return new PlayerTrainFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        gameModel = GameModel.getInstance();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,23 +47,20 @@ public class PlayerTrainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //List<Integer> heldTrainCards = gameModel.getPlayerTrainCards();
+        List<Integer> heldTrainCards = gameModel.getPlayerTrainCards();
 
-        // für Testzwecke
+        /* für Testzwecke
         List<Integer> heldTrainCards = new ArrayList<>();
+        heldTrainCards.add(9);
         heldTrainCards.add(1);
-        heldTrainCards.add(3);
         heldTrainCards.add(4);
-        heldTrainCards.add(6);
-        heldTrainCards.add(5);
-        heldTrainCards.add(1);
-        heldTrainCards.add(1);
         heldTrainCards.add(5);
         heldTrainCards.add(7);
+        */
 
         linearLayout = view.findViewById(R.id.linearLayoutTrainCards);
 
-        for(int i=0;i<=heldTrainCards.size()-1;i++)
+        for(Integer card : heldTrainCards)
         {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -65,34 +70,10 @@ public class PlayerTrainFragment extends Fragment {
 
             ImageView imageView = new ImageView(linearLayout.getContext());
             imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 80;
-            imageView.getLayoutParams().width = 80;
-            switch (heldTrainCards.get(i)) {
-                case 0:
-                    imageView.setImageResource(R.drawable.ic_train_black);
-                    break;
-                case 1:
-                    imageView.setImageResource(R.drawable.ic_train_blue);
-                    break;
-                case 2:
-                    imageView.setImageResource(R.drawable.ic_train_green);
-                    break;
-                case 3:
-                    imageView.setImageResource(R.drawable.ic_train_orange);
-                    break;
-                case 4:
-                    imageView.setImageResource(R.drawable.ic_train_purpur);
-                    break;
-                case 5:
-                    imageView.setImageResource(R.drawable.ic_train_red);
-                    break;
-                case 6:
-                    imageView.setImageResource(R.drawable.ic_train_white);
-                    break;
-                case 7:
-                    imageView.setImageResource(R.drawable.ic_train_yellow);
-                    break;
-            }
+            imageView.getLayoutParams().height = 160;
+            imageView.getLayoutParams().width = 160;
+            imageView.setImageResource(getTrainResource(card));
+
             linearLayout.addView(imageView);
         }
     }

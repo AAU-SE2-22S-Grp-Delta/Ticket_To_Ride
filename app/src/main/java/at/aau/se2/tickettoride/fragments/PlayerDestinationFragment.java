@@ -54,13 +54,12 @@ public class PlayerDestinationFragment extends Fragment {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(20,30,20,30);
-
+            layoutParams.setMargins(5,10,5,10);
 
             ImageView imageView = new ImageView(linearLayout.getContext());
             imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 600;
-            imageView.getLayoutParams().width = 350;
+            imageView.getLayoutParams().height = 160;
+            imageView.getLayoutParams().width = 250;
 
             switch (heldDestinationCards.get(i)) {
                 case 1:
