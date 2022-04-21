@@ -39,7 +39,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/handCards"
-            android:name="at.aau.se2.tickettoride.fragments.PlayerTrainFragment"
+            android:name="at.aau.se2.tickettoride.fragments.HandCardsFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="75"/>
@@ -66,22 +66,22 @@
 
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/drawDeckMissions"
-            android:name="at.aau.se2.tickettoride.fragments.DeskDestinationFragment"
+            android:id="@+id/deckMissions"
+            android:name="at.aau.se2.tickettoride.fragments.DeckMissionsFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="20" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/openCardsDraw"
-            android:name="at.aau.se2.tickettoride.fragments.DeskOpenTrainFragment"
+            android:id="@+id/openCards"
+            android:name="at.aau.se2.tickettoride.fragments.OpenCardsFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="60" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/drawDeckCards"
-            android:name="at.aau.se2.tickettoride.fragments.DeskTrainFragment"
+            android:id="@+id/deckCards"
+            android:name="at.aau.se2.tickettoride.fragments.DeckCardsFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="20" />

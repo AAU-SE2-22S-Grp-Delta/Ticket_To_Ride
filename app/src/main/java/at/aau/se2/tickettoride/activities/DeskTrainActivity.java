@@ -8,7 +8,7 @@ import android.util.Log;
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 import at.aau.se2.tickettoride.enums.Colors;
-import at.aau.se2.tickettoride.fragments.DeskTrainFragment;
+import at.aau.se2.tickettoride.fragments.DeckCardsFragment;
 
 public class DeskTrainActivity extends AppCompatActivity implements TrainDialogFragment.TrainDialogListener {
     @Override
@@ -17,7 +17,7 @@ public class DeskTrainActivity extends AppCompatActivity implements TrainDialogF
         setContentView(R.layout.activity_desk_train);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, DeskTrainFragment.newInstance())
+                    .replace(R.id.container, DeckCardsFragment.newInstance())
                     .commitNow();
         }
     }

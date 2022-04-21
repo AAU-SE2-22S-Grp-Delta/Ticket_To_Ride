@@ -1,13 +1,13 @@
 package at.aau.se2.tickettoride.fragments;
 
-public class DestinationCard {
+public class MissionCardFragment {
 
     private String destination1;
     private String destination2;
     private int points;
     private int image;
 
-    public DestinationCard(String destination1, String destination2, int points, int image) {
+    public MissionCardFragment(String destination1, String destination2, int points, int image) {
         this.destination1 = destination1;
         this.destination2 = destination2;
         this.points = points;

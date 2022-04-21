@@ -20,14 +20,14 @@ import at.aau.se2.tickettoride.databinding.FragmentDrawDestinationCardsBinding;
 public class DrawDestinationCardsFragment extends Fragment implements View.OnClickListener {
     private FragmentDrawDestinationCardsBinding binding;
 
-    ArrayList<DestinationCard> cardsList = new ArrayList<>();
+    ArrayList<MissionCardFragment> cardsList = new ArrayList<>();
 
-    DestinationCard calSal = new DestinationCard("Calgary","Salt Lake City",7, R.drawable.calgary_saltlakecity);
-    DestinationCard kanHou = new DestinationCard("Kansas City","Houston",5,R.drawable.kansascity_houston);
-    DestinationCard losChi = new DestinationCard("Los Angeles","Houston", 16,R.drawable.losangeles_chicago);
-    DestinationCard newAtl = new DestinationCard("New York","Atlanta", 6,R.drawable.newyork_atlanta);
-    DestinationCard porPho = new DestinationCard("Portland","Phoenix",11,R.drawable.portland_phoenix);
-    DestinationCard seaNew = new DestinationCard("Seattle","New York", 22,R.drawable.seattle_newyork);
+    MissionCardFragment calSal = new MissionCardFragment("Calgary","Salt Lake City",7, R.drawable.calgary_saltlakecity);
+    MissionCardFragment kanHou = new MissionCardFragment("Kansas City","Houston",5,R.drawable.kansascity_houston);
+    MissionCardFragment losChi = new MissionCardFragment("Los Angeles","Houston", 16,R.drawable.losangeles_chicago);
+    MissionCardFragment newAtl = new MissionCardFragment("New York","Atlanta", 6,R.drawable.newyork_atlanta);
+    MissionCardFragment porPho = new MissionCardFragment("Portland","Phoenix",11,R.drawable.portland_phoenix);
+    MissionCardFragment seaNew = new MissionCardFragment("Seattle","New York", 22,R.drawable.seattle_newyork);
 
     public static DrawDestinationCardsFragment newInstance() {
         return new DrawDestinationCardsFragment();
@@ -124,26 +124,26 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
         }
         if (view.getId() == binding.button6.getId()) {
 
-            ArrayList<DestinationCard> cards = new ArrayList<>();
+            ArrayList<MissionCardFragment> cards = new ArrayList<>();
 
             if (((ColorDrawable) binding.imageView.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView.getTag());
+                cards.add((MissionCardFragment) binding.imageView.getTag());
             }
             if (((ColorDrawable) binding.imageView3.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView3.getTag());
+                cards.add((MissionCardFragment) binding.imageView3.getTag());
             }
             if (((ColorDrawable) binding.imageView2.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView2.getTag());
+                cards.add((MissionCardFragment) binding.imageView2.getTag());
             }
             if (((ColorDrawable) binding.imageView4.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView4.getTag());
+                cards.add((MissionCardFragment) binding.imageView4.getTag());
             }
 
-            ArrayList<DestinationCard> roadCards = new ArrayList<>();
+            ArrayList<MissionCardFragment> roadCards = new ArrayList<>();
 
             if (cards.size() == 2) {
-                DestinationCard roadCard1 = cards.get(0);
-                DestinationCard roadCard2 = cards.get(1);
+                MissionCardFragment roadCard1 = cards.get(0);
+                MissionCardFragment roadCard2 = cards.get(1);
 
                 binding.imageView.setImageResource(roadCard1.getImage());
                 binding.imageView3.setImageResource(roadCard2.getImage());
@@ -155,9 +155,9 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 roadCards.add(roadCard2);
             }
             else if (cards.size() == 3) {
-                DestinationCard roadCard1 = cards.get(0);
-                DestinationCard roadCard2 = cards.get(1);
-                DestinationCard roadCard3 = cards.get(2);
+                MissionCardFragment roadCard1 = cards.get(0);
+                MissionCardFragment roadCard2 = cards.get(1);
+                MissionCardFragment roadCard3 = cards.get(2);
 
                 binding.imageView.setImageResource(roadCard1.getImage());
                 binding.imageView3.setImageResource(roadCard2.getImage());
@@ -170,10 +170,10 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 roadCards.add(roadCard3);
             }
             else if (cards.size() == 4) {
-                DestinationCard roadCard1 = cards.get(0);
-                DestinationCard roadCard2 = cards.get(1);
-                DestinationCard roadCard3 = cards.get(2);
-                DestinationCard roadCard4 = cards.get(3);
+                MissionCardFragment roadCard1 = cards.get(0);
+                MissionCardFragment roadCard2 = cards.get(1);
+                MissionCardFragment roadCard3 = cards.get(2);
+                MissionCardFragment roadCard4 = cards.get(3);
 
                 binding.imageView.setImageResource(roadCard1.getImage());
                 binding.imageView3.setImageResource(roadCard2.getImage());

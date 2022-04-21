@@ -14,11 +14,11 @@ import at.aau.se2.tickettoride.databinding.FragmentDeskTrainBinding;
 import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 
 //Fragment Stapel und offene Zugkarten
-public class DeskTrainFragment extends Fragment {
+public class DeckCardsFragment extends Fragment {
     private FragmentDeskTrainBinding binding;
 
-    public static DeskTrainFragment newInstance() {
-        return new DeskTrainFragment();
+    public static DeckCardsFragment newInstance() {
+        return new DeckCardsFragment();
     }
 
     @Nullable

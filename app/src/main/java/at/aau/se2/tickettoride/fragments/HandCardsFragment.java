@@ -1,6 +1,5 @@
 package at.aau.se2.tickettoride.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
+import at.aau.se2.tickettoride.databinding.FragmentHandCardsBinding;
 
-public class PlayerTrainFragment extends Fragment {
-    private FragmentPlayerTrainBinding binding;
+public class HandCardsFragment extends Fragment {
+    private FragmentHandCardsBinding binding;
     private LinearLayout linearLayout;
 
-    public static PlayerTrainFragment newInstance() {
-        return new PlayerTrainFragment();
+    public static HandCardsFragment newInstance() {
+        return new HandCardsFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentPlayerTrainBinding.inflate(inflater, container, false);
+        binding = FragmentHandCardsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

@@ -6,7 +6,7 @@
     android:id="@+id/desk_destination"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.DeskDestinationFragment">
+    tools:context=".fragments.DeckMissionsFragment">
 
     <ImageView
         android:id="@+id/imageViewDestination"

@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import at.aau.se2.tickettoride.databinding.FragmentDeskOpenTrainBinding;
 
-public class DeskOpenTrainFragment extends Fragment {
+public class OpenCardsFragment extends Fragment {
     private FragmentDeskOpenTrainBinding binding;
 
-    public static DeskOpenTrainFragment newInstance() {
-        return new DeskOpenTrainFragment();
+    public static OpenCardsFragment newInstance() {
+        return new OpenCardsFragment();
     }
 
     @Nullable

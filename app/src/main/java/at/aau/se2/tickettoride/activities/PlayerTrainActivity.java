@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.fragments.PlayerTrainFragment;
+import at.aau.se2.tickettoride.fragments.HandCardsFragment;
 
 public class PlayerTrainActivity extends AppCompatActivity {
     @Override
@@ -14,7 +14,7 @@ public class PlayerTrainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player_train);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, PlayerTrainFragment.newInstance())
+                    .replace(R.id.container, HandCardsFragment.newInstance())
                     .commitNow();
         }
     }

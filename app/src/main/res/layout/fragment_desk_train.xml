@@ -6,7 +6,7 @@
     android:id="@+id/train"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.DeskTrainFragment">
+    tools:context=".fragments.DeckCardsFragment">
 
     <ImageView
         android:id="@+id/imageViewTrain"

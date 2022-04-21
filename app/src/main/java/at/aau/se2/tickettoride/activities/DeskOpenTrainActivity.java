@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.fragments.DeskOpenTrainFragment;
+import at.aau.se2.tickettoride.fragments.OpenCardsFragment;
 
 public class DeskOpenTrainActivity extends AppCompatActivity {
     @Override
@@ -14,7 +14,7 @@ public class DeskOpenTrainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_desk_open_train);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, DeskOpenTrainFragment.newInstance())
+                    .replace(R.id.container, OpenCardsFragment.newInstance())
                     .commitNow();
         }
     }
