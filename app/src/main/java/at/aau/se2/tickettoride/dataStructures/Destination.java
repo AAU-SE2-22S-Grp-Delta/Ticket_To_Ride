@@ -39,9 +39,9 @@ public class Destination {
     public void setName(String name) {
         if (name == null) throw new IllegalArgumentException("name is null");
         if (name.length() == 0) throw new IllegalArgumentException("name.length is 0");
-        if (names.contains(name)) throw new IllegalArgumentException("name " + name + "is already used!");
-        names.remove(this.name);
-        names.add(name);
+//        if (names.contains(name)) throw new IllegalArgumentException("name " + name + "is already used!");
+//        names.remove(this.name);
+//        names.add(name);
         this.name = name;
     }
 
