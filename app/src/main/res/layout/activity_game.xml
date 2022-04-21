@@ -6,73 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".activities.GameActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mapView"
-        android:name="at.aau.se2.tickettoride.fragments.MapFragment"
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/playerDestinationView"
-        app:layout_constraintEnd_toStartOf="@id/deskDestinationView"
+    <LinearLayout
+        android:id="@+id/mapContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/cardsContainer"
+        app:layout_constraintEnd_toStartOf="@id/drawContainer"
+        app:layout_constraintHorizontal_weight="80"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="85">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/deskDestinationView"
-        android:name="at.aau.se2.tickettoride.fragments.DeskDestinationFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/deskOpenTrainView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mapView"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mapView"
+            android:name="at.aau.se2.tickettoride.fragments.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/deskOpenTrainView"
-        android:name="at.aau.se2.tickettoride.fragments.DeskOpenTrainFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/deskTrainView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mapView"
-        app:layout_constraintTop_toBottomOf="@+id/deskDestinationView" />
+    </LinearLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/deskTrainView"
-        android:name="at.aau.se2.tickettoride.fragments.DeskTrainFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/drawDestinationCards"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mapView"
-        app:layout_constraintTop_toBottomOf="@+id/deskOpenTrainView" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/drawDestinationCards"
-        android:name="at.aau.se2.tickettoride.fragments.DrawDestinationCardsFragment"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/cardsContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mapView"
-        app:layout_constraintTop_toBottomOf="@+id/deskTrainView" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/playerDestinationView"
-        android:name="at.aau.se2.tickettoride.fragments.PlayerDestinationFragment"
-        android:layout_width="200dp"
-        android:layout_height="96dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/playerTrainView"
+        app:layout_constraintEnd_toStartOf="@id/drawContainer"
+        app:layout_constraintHorizontal_weight="80"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapView" />
+        app:layout_constraintTop_toBottomOf="@id/mapContainer"
+        app:layout_constraintVertical_weight="15">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/playerTrainView"
-        android:name="at.aau.se2.tickettoride.fragments.PlayerTrainFragment"
-        android:layout_width="200dp"
-        android:layout_height="96dp"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/handCards"
+            android:name="at.aau.se2.tickettoride.fragments.PlayerTrainFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/deskTrainView"
-        app:layout_constraintStart_toEndOf="@+id/playerDestinationView"
-        app:layout_constraintTop_toBottomOf="@id/mapView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="20"
+        app:layout_constraintStart_toEndOf="@id/mapContainer"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/drawDeckMissions"
+            android:name="at.aau.se2.tickettoride.fragments.DeskDestinationFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/openCardsDraw"
+            android:name="at.aau.se2.tickettoride.fragments.DeskOpenTrainFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="60" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/drawDeckCards"
+            android:name="at.aau.se2.tickettoride.fragments.DeskTrainFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20" />
+    </LinearLayout>
+
+
+    <!--    <androidx.fragment.app.FragmentContainerView-->
+    <!--        android:id="@+id/drawDestinationCards"-->
+    <!--        android:name="at.aau.se2.tickettoride.fragments.DrawDestinationCardsFragment"-->
+    <!--        android:layout_width="96dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/drawDeckCards" />-->
+
+    <!--    <androidx.fragment.app.FragmentContainerView-->
+    <!--        android:id="@+id/missionsView"-->
+    <!--        android:name="at.aau.se2.tickettoride.fragments.PlayerDestinationFragment"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="96dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/handCards"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
