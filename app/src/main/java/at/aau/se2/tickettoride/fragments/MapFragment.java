@@ -174,27 +174,6 @@ public class MapFragment extends Fragment
                 }
             });
         }
-        binding.buttonAbove.setOnClickListener(view1 ->
-
-        {
-            binding.mapPanel.setScaleX(binding.mapPanel.getScaleX() + .2f);
-            binding.mapPanel.setScaleY(binding.mapPanel.getScaleY() + .2f);
-            Log.d("buttonPos", "x=" + binding.buttonAbove.getX() + ", y=" + binding.buttonAbove.getY());
-            Log.d("mapPanelPos", "x=" + binding.mapPanel.getX() + ", y=" + binding.mapPanel.getY());
-            Log.d("mapPanelSize", "x=" + binding.mapPanel.getWidth() + ", y=" + binding.mapPanel.getHeight());
-        });
-
-        binding.buttonDownside.setOnClickListener(view1 ->
-
-        {
-            binding.mapPanel.setScaleX(binding.mapPanel.getScaleX() - .2f);
-            binding.mapPanel.setScaleY(binding.mapPanel.getScaleY() - .2f);
-            Log.d("buttonPos", "x=" + binding.buttonDownside.getX() + ", y=" + binding.buttonDownside.getY());
-            Log.d("buttonSize", "x=" + binding.buttonDownside.getWidth() + ", y=" + binding.buttonDownside.getHeight());
-            Log.d("mapPanelPos", "x=" + binding.mapPanel.getX() + ", y=" + binding.mapPanel.getY());
-            Log.d("mapPanelSize", "x=" + binding.mapPanel.getWidth() + ", y=" + binding.mapPanel.getHeight());
-            View mapPanel = binding.mapPanel;
-        });
 
         return view;
     }
