@@ -20,7 +20,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class DestinationDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
     ArrayList<Integer> selectedItems = new ArrayList<Integer>();
-    private ArrayList<Integer> cardsToChoose = new ArrayList<Integer>();
+    private final ArrayList<Integer> cardsToChoose = new ArrayList<Integer>();
     String[] destinations = new String[3];
 
     @NonNull
@@ -64,10 +64,6 @@ public class DestinationDialogFragment extends DialogFragment {
     }
 
     private void getChoices(){
-        //TODO Delete it after the function is in the game.
-        //Predefine List
-        gameModel.setDeskDestinationCards(new ArrayList<Integer>(Arrays.asList(4,7,9)));
-
         for (int i = 0; i < 3; i++) {
             int number = gameModel.getDeskDestinationCards().get(i);
             cardsToChoose.add(number);

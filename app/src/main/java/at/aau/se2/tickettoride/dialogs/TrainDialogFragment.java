@@ -2,7 +2,6 @@ package at.aau.se2.tickettoride.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.enums.Colors;
 import at.aau.se2.tickettoride.models.GameModel;
 import at.aau.se2.tickettoride.ResourceHelper;
 
@@ -37,7 +35,6 @@ public class TrainDialogFragment extends DialogFragment {
         LinearLayout layout = new LinearLayout(getActivity());
         ImageView imageView = new ImageView(getActivity());
         //Generate Random color
-        //TODO Change to match Game Structure (with ResourceHelper)
         //TODO Delete it after it is in game.
         gameModel.setDeskClosedTrainCards(new ArrayList<Integer>(Arrays.asList(3, 5, 6)));
         gameModel.setPlayerTrainCards(new ArrayList<Integer>(Arrays.asList(2, 4)));
@@ -52,10 +49,8 @@ public class TrainDialogFragment extends DialogFragment {
         builder.setView(layout)
                 .setTitle("Deine neue Waagonkarte")
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
-                    //TODO Delete Listener
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        //listener.onDialogPositiveClick(color);
                         gameModel.getPlayerTrainCards().add(cardNr);
                         Log.i("RESULT", Integer.toString(cardNr));
                     }
