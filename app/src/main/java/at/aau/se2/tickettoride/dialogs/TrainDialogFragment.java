@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -25,23 +26,6 @@ public class TrainDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
     int cardNr;
 
-    //TODO Delete Listener
-    public interface TrainDialogListener{
-        public void onDialogPositiveClick(Colors color);
-    }
-
-    TrainDialogListener listener;
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            listener = (TrainDialogListener) context;
-        }catch (ClassCastException e){
-            throw new ClassCastException(getActivity().toString() + " must implement DestinationDialogListener");
-        }
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -55,7 +39,8 @@ public class TrainDialogFragment extends DialogFragment {
         //Generate Random color
         //TODO Change to match Game Structure (with ResourceHelper)
         //TODO Delete it after it is in game.
-        gameModel.setDeskClosedTrainCards(new ArrayList<Integer>(Arrays.asList(3,5,6)));
+        gameModel.setDeskClosedTrainCards(new ArrayList<Integer>(Arrays.asList(3, 5, 6)));
+        gameModel.setPlayerTrainCards(new ArrayList<Integer>(Arrays.asList(2, 4)));
         cardNr = gameModel.getNextClosedTrainCard();
 
         imageView.setImageResource(ResourceHelper.getTrainResource(cardNr));
@@ -71,6 +56,8 @@ public class TrainDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
                         //listener.onDialogPositiveClick(color);
+                        gameModel.getPlayerTrainCards().add(cardNr);
+                        Log.i("RESULT", Integer.toString(cardNr));
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

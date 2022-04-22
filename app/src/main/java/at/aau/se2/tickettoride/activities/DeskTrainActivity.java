@@ -10,7 +10,7 @@ import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 import at.aau.se2.tickettoride.enums.Colors;
 import at.aau.se2.tickettoride.fragments.DeskTrainFragment;
 
-public class DeskTrainActivity extends AppCompatActivity implements TrainDialogFragment.TrainDialogListener {
+public class DeskTrainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +20,5 @@ public class DeskTrainActivity extends AppCompatActivity implements TrainDialogF
                     .replace(R.id.container, DeskTrainFragment.newInstance())
                     .commitNow();
         }
-    }
-
-    //TODO Delete Listener
-    //Get Color
-    @Override
-    public void onDialogPositiveClick(Colors color) {
-        //TODO Send Color to Hand
-        Log.i("COLOR", color.name());
     }
 }
