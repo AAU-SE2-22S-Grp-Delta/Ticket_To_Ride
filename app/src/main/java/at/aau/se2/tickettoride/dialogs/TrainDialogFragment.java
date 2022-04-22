@@ -35,9 +35,6 @@ public class TrainDialogFragment extends DialogFragment {
         LinearLayout layout = new LinearLayout(getActivity());
         ImageView imageView = new ImageView(getActivity());
         //Generate Random color
-        //TODO Delete it after it is in game.
-        //gameModel.setDeskClosedTrainCards(new ArrayList<Integer>(Arrays.asList(3, 5, 6)));
-        //gameModel.setPlayerTrainCards(new ArrayList<Integer>(Arrays.asList(2, 4)));
         cardNr = gameModel.getNextClosedTrainCard();
 
         imageView.setImageResource(ResourceHelper.getTrainResource(cardNr));
@@ -51,7 +48,9 @@ public class TrainDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        gameModel.getPlayerTrainCards().add(cardNr);
+                        ArrayList<Integer> newPlayerTrainCards = new ArrayList<>(gameModel.getPlayerTrainCards());
+                        newPlayerTrainCards.add(cardNr);
+                        gameModel.setPlayerTrainCards(newPlayerTrainCards);
                         Log.i("RESULT", Integer.toString(cardNr));
                     }
                 })
