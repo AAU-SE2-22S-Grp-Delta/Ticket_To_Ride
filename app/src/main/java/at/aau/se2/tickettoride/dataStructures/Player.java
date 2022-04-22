@@ -12,10 +12,9 @@ import java.util.Set;
  */
 public class Player {
     //TODO exception-handling
-    private static int playerId;
     private static Set<String> names = new HashSet<>();
 
-    private int id;
+    private int id = 0;
     private String name;
     private int playerColor;
     private int numStones;
@@ -26,15 +25,11 @@ public class Player {
      * Creates a player-object gives it a id and marks the name as used
      * @param name a unique name
      */
-    public Player(String name, int id, int color) {
-        this.id = id;
+    public Player(String name, int color) {
+        this.id = id++;
         setName(name);
         this.playerColor = color;
         this.isInGame = false;
-    }
-
-    public static int getPlayerId() {
-        return playerId;
     }
 
     public int getId() {
@@ -47,10 +42,12 @@ public class Player {
 
 
 
+    //TODO change unique name check
     public void setName(String name) {
         if (name == null) throw new IllegalArgumentException("name is null");
         if (name.length() == 0) throw new IllegalArgumentException("name.length is 0");
         if (names.contains(name)) throw new IllegalArgumentException("name " + name + "is already used!");
+        System.out.println(names);
         names.remove(this.name);
         names.add(name);
         this.name = name;
