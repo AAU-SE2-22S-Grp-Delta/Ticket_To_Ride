@@ -39,6 +39,9 @@ public class MapFragment extends Fragment
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
+
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         binding = FragmentMapBinding.inflate(inflater, container, false);
@@ -190,96 +193,3 @@ public class MapFragment extends Fragment
         //for later, cleaner code
     }
 }
-
-//    private class MapOnTouchListener implements View.OnTouchListener
-//    {
-//        private float mx, my, curX, curY;
-//        private float zoomLength0, zoomLength;
-//        float scale = 1f;
-//        int smoothScale = 0;
-//        private boolean scrollingStarted = false, zoomingStarted = false;
-//
-//        @Override
-//        public boolean onTouch(View view, MotionEvent motionEvent)
-//        {
-////            Log.d("onTouchListener.Action", "" + motionEvent.getAction());
-//            //0=Action_Down, 1=Action_UP, 2=Action_Move, 6=ActionPointer_UP, 261=2ndPointerUp?
-//
-//
-////            Log.d("onTouchListener", "curX:" + curX);
-////            Log.d("onTouchListener", "curY:" + curX);
-////            Log.d("onTouchListener", "mx:" + mx);
-////            Log.d("onTouchListener", "my:" + my);
-//
-//            switch (motionEvent.getPointerCount())
-//            {
-//                case 1:
-//                {
-//                    curX = motionEvent.getX();
-//                    curY = motionEvent.getY();
-//                    int dx = (int) (mx - curX);
-//                    int dy = (int) (my - curY);
-//
-//                    switch (motionEvent.getAction())
-//                    {
-//                        case MotionEvent.ACTION_MOVE:
-//                            if (scrollingStarted)
-//                            {
-//                                binding.mapPanel.scrollBy(dx, dy);
-//                            } else
-//                            {
-//                                scrollingStarted = true;
-//                            }
-//                            mx = curX;
-//                            my = curY;
-//                            break;
-//                        case MotionEvent.ACTION_UP:
-//                            scrollingStarted = false;
-////                            Log.d("mapPanel.scrollingPos", "scrollX=" + binding.mapPanel.getScrollX() + ", scrollY=" + binding.mapPanel.getScrollY());
-//                            break;
-//                    }
-//                }
-//                break;
-//                case 2:
-//                {
-//                    Log.d("onTouchListener.Action", "" + motionEvent.getAction());
-//                    float x0 = motionEvent.getX(0);
-//                    float y0 = motionEvent.getY(0);
-//                    float x1 = motionEvent.getX(1);
-//                    float y1 = motionEvent.getY(1);
-//
-//                    switch (motionEvent.getAction())
-//                    {
-//                        case MotionEvent.ACTION_MOVE:
-//                            if (zoomingStarted)
-//                            {
-//                                zoomLength = (float) Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
-//                                Log.d("onTouchListener.zoom", "zoomFactor=" + zoomLength / zoomLength0 + ", l0=" + zoomLength0 + ", l1=" + zoomLength);
-//                                smoothScale++;
-////                                if (smoothScale == 1) {
-//                                float tempScale = scale * zoomLength / zoomLength0;
-//                                binding.mapPanel.setScaleX(tempScale);
-//                                binding.mapPanel.setScaleY(tempScale);
-////                                    smoothScale = 0;
-////                                }
-//                            } else
-//                            {
-//                                zoomLength0 = (float) Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
-//                                zoomingStarted = true;
-//                            }
-//                            break;
-//                        case MotionEvent.ACTION_POINTER_UP:
-//                            zoomingStarted = false;
-//                            scale *= zoomLength / zoomLength0;
-//                            binding.mapPanel.setScaleX(scale);
-//                            binding.mapPanel.setScaleY(scale);
-//                            Log.d("onTouchListener.zoom", "stop zooming, scale=" + scale);
-//                            break;
-//                    }
-//                }
-//                break;
-//            }
-//            return true;
-//        }
-//    }
-//}

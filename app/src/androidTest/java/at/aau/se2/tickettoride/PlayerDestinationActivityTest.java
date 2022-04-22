@@ -3,6 +3,7 @@ package at.aau.se2.tickettoride;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
@@ -14,4 +15,10 @@ public class PlayerDestinationActivityTest
 {
     @Rule
     public ActivityScenarioRule<PlayerDestinationActivity> mapActivityRule = new ActivityScenarioRule<>(PlayerDestinationActivity.class);
+
+    @Test
+    public void defaultTest()
+    {
+
+    }
 }
