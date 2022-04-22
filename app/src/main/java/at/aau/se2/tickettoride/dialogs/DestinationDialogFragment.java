@@ -48,10 +48,13 @@ public class DestinationDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        gameModel.setPlayerDestinationCards(selectedItems);
-                        for (int i = 0; i < gameModel.getPlayerDestinationCards().size(); i++) {
-                            Log.i("RESULT", gameModel.getPlayerDestinationCards().get(i).toString());
+                        ArrayList <Integer> newPlayerDestinationCards = new ArrayList<>(gameModel.getPlayerDestinationCards());
+                        for (int i = 0; i < selectedItems.size(); i++) {
+                            newPlayerDestinationCards.add(selectedItems.get(i));
+                            gameModel.getDeskDestinationCards().remove(selectedItems.get(i));
+                            Log.i("RESULT", selectedItems.get(i).toString());
                         }
+                        gameModel.setPlayerDestinationCards(newPlayerDestinationCards);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

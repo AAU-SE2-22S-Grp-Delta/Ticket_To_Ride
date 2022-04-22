@@ -36,8 +36,8 @@ public class TrainDialogFragment extends DialogFragment {
         ImageView imageView = new ImageView(getActivity());
         //Generate Random color
         //TODO Delete it after it is in game.
-        gameModel.setDeskClosedTrainCards(new ArrayList<Integer>(Arrays.asList(3, 5, 6)));
-        gameModel.setPlayerTrainCards(new ArrayList<Integer>(Arrays.asList(2, 4)));
+        //gameModel.setDeskClosedTrainCards(new ArrayList<Integer>(Arrays.asList(3, 5, 6)));
+        //gameModel.setPlayerTrainCards(new ArrayList<Integer>(Arrays.asList(2, 4)));
         cardNr = gameModel.getNextClosedTrainCard();
 
         imageView.setImageResource(ResourceHelper.getTrainResource(cardNr));
