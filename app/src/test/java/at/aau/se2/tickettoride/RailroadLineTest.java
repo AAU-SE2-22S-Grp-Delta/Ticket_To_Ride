@@ -1,7 +1,10 @@
 package at.aau.se2.tickettoride;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import android.graphics.Color;
 import android.widget.Button;
@@ -29,8 +32,8 @@ public class RailroadLineTest
     {
         dest1 = new Destination("testdest1", new Button(null));
         dest2 = new Destination("testdest2", new Button(null));
-        dest1 = new Destination("testdest3", new Button(null));
-        dest2 = new Destination("testdest4", new Button(null));
+        dest3 = new Destination("testdest3", new Button(null));
+        dest4 = new Destination("testdest4", new Button(null));
         r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
         player1 = new Player("testplayer1", Color.GREEN);
         player2 = new Player("testplayer2", Color.RED);
@@ -56,7 +59,7 @@ public class RailroadLineTest
     }
 
     @Test
-    public void testEquals()
+    public void testDestEquals()
     {
         r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
         assertEquals(r1, new RailroadLine(dest2, dest1));
@@ -68,4 +71,26 @@ public class RailroadLineTest
         r1.setOwner(player1);
         assertThrows(IllegalStateException.class, () -> r1.setOwner(player2));
     }
+
+    @Test
+    public void testGetters()
+    {
+        assertEquals(Color.BLUE, r1.getColor());
+        assertEquals(dest1, r1.getDestination1());
+        assertEquals(dest2, r1.getDestination2());
+        assertEquals(3, r1.getDistance());
+        assertNull(r1.getOwner());
+        r1.setOwner(player1);
+        assertEquals(player1, r1.getOwner());
+    }
+
+    @Test
+    public void testEquals()
+    {
+        assertTrue(r1.equals(new RailroadLine(dest1, dest2, Color.BLUE, 3)));
+        assertTrue(r1.equals(new RailroadLine(dest2, dest1, Color.BLUE, 3)));
+        assertFalse(r1.equals(new RailroadLine(dest1, dest3, Color.BLUE, 3)));
+    }
+
+
 }

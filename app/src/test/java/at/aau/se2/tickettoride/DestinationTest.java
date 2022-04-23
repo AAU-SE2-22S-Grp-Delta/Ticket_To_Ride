@@ -32,4 +32,11 @@ public class DestinationTest
     {
         assertThrows(IllegalArgumentException.class, () -> dest1.setName(""));
     }
+
+    @Test
+    public void testGetters()
+    {
+        //assertEquals(new Button(null), dest1.getButton());
+        assertEquals("testdest1", dest1.getName());
+    }
 }

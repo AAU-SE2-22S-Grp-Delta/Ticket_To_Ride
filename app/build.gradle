@@ -20,32 +20,18 @@ task jacocoTestReport(type: JacocoReport,
     description = "Generate Jacoco coverage reports after running tests."
 
     reports {
-        xml.enabled = true
-        html.enabled = true
+        xml.required
+        html.required
     }
 
-    def fileFilter = ['androidx/**/*.*',
-                      '**/view/*.*',
-                      '**/data/*.*',
-                      '**/data/model/*.*',
-                      '**/generated/callback/*.*',
-                      '**/lambda$*.class',
-                      '**/lambda.class',
-                      '**/*lambda.class',
-                      '**/*lambda*.class']
-
-    def debugTree = fileTree(dir:
-            "${buildDir}/intermediates/javac/debug/classes",
-            excludes: fileFilter
-    )
-
-    def mainSrc = "/src/main/java"
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
 
     sourceDirectories.from files([mainSrc])
-
     classDirectories.from files([debugTree])
-    executionData.from fileTree(dir: "${buildDir}", includes:[
-            "/jacoco/testDebugUnitTest.exec"])
+    executionData.from fileTree(dir: "${buildDir}", includes: [
+            "**/*.exec, **/*.ec"])
 }
 
 android {
