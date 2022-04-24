@@ -33,6 +33,9 @@ public class DeskOpenTrainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDeskOpenTrainBinding.inflate(inflater, container, false);
+
+        initComponents();
+
         return binding.getRoot();
     }
 
@@ -47,6 +50,20 @@ public class DeskOpenTrainFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void initComponents() {
+        getParentFragmentManager().setFragmentResultListener("refresh", this, (requestKey, result) -> displayData());
+
+        binding.card1.setOnClickListener(view -> drawCard(0));
+
+        binding.card2.setOnClickListener(view -> drawCard(1));
+
+        binding.card3.setOnClickListener(view -> drawCard(2));
+
+        binding.card4.setOnClickListener(view -> drawCard(3));
+
+        binding.card5.setOnClickListener(view -> drawCard(4));
     }
 
     private void displayData() {
@@ -73,5 +90,14 @@ public class DeskOpenTrainFragment extends Fragment {
                 }
             }
         }
+    }
+
+    private void drawCard(int i) {
+        gameModel.drawOpenTrainCard(i);
+
+        Bundle result = new Bundle();
+        getParentFragmentManager().setFragmentResult("refresh", result);
+
+        displayData();
     }
 }
