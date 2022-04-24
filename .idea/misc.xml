@@ -9,13 +9,19 @@
         <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/activity_game.xml" value="0.23697916666666666" />
         <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/activity_map.xml" value="0.35104166666666664" />
         <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.1" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_desk_destination.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_desk_train.xml" value="0.46059782608695654" />
         <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_game.xml" value="0.3765625" />
-        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.33" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/drawable/ic_train.xml" value="0.1" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/drawable/ic_train_black.xml" value="0.1" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_game.xml" value="0.13852073535699017" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_desk_open_train.xml" value="0.1" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_player_destination.xml" value="0.13852073535699017" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_main.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_map.xml" value="0.55" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_player_destination.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_player_train.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/dialog_destination_cards.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/fragment_desk_destination.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/fragment_desk_train.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.22" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/fragment_player_destination.xml" value="0.46059782608695654" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/fragment_player_train.xml" value="0.46059782608695654" />
       </map>
     </option>
   </component>

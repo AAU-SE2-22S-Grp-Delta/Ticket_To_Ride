@@ -1,6 +1,38 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.8.5'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+
+task jacocoTestReport(type: JacocoReport,
+        dependsOn: ['testDebugUnitTest',
+                    'createDebugCoverageReport']) {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+
+    reports {
+        xml.required
+        html.required
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories.from files([mainSrc])
+    classDirectories.from files([debugTree])
+    executionData.from fileTree(dir: "${buildDir}", includes: [
+            "**/*.exec, **/*.ec"])
+}
 
 android {
     compileSdk 32
@@ -11,11 +43,14 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -27,6 +62,13 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            unitTests.returnDefaultValues = true
+        }
     }
 }
 
