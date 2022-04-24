@@ -5,7 +5,7 @@
     android:id="@+id/desk_open_train"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_border"
+    app:srcCompat="@drawable/custom_border"
     tools:context=".fragments.DeskOpenTrainFragment">
 
     <ImageView
