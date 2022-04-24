@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -34,6 +36,15 @@ public class GameActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        builder.setView(R.layout.fragment_player_destination);
+
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+
+        binding.missionsButton.setOnClickListener(view1 -> {
+            dialog.show();
+        });
 
         startGame();
     }
