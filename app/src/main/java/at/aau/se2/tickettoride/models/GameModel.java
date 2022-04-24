@@ -67,7 +67,8 @@ public class GameModel {
     }
 
     public void setPlayerTrainCards(List<Integer> playerTrainCards) {
-        this.playerTrainCards = playerTrainCards;
+        this.playerTrainCards.clear();
+        this.playerTrainCards.addAll(playerTrainCards);
     }
 
     public List<Integer> getPlayerDestinationCards() {
@@ -99,7 +100,13 @@ public class GameModel {
         return deskClosedTrainCards.remove(0);
     }
 
-    public void addDiscardedTrainCards(Integer trainCard) {
+    public void drawOpenTrainCard(int pos) {
+        Integer current = deskOpenTrainCards[pos];
+        playerTrainCards.add(current);
+        deskOpenTrainCards[pos] = getNextClosedTrainCard();
+    }
+
+    public void addDiscardedTrainCard(Integer trainCard) {
         deskDiscardedTrainCards.add(trainCard);
     }
 }

@@ -28,6 +28,13 @@ public class PlayerDestinationFragment extends Fragment {
         return new PlayerDestinationFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        gameModel = GameModel.getInstance();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,12 +46,13 @@ public class PlayerDestinationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //List<Integer> heldDestinationCards = gameModel.getPlayerDestinationCards();
+        List<Integer> heldDestinationCards = gameModel.getPlayerDestinationCards();
 
+        /* für Testzwecke
         List<Integer> heldDestinationCards = new ArrayList<>();
         heldDestinationCards.add(1);
         heldDestinationCards.add(5);
-        heldDestinationCards.add(2);
+        heldDestinationCards.add(2);*/
 
         linearLayout = view.findViewById(R.id.linearLayoutTrackCards);
 
