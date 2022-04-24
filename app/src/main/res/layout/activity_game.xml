@@ -35,6 +35,7 @@
         android:id="@+id/cardsContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:minHeight="150px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/drawContainer"
         app:layout_constraintHorizontal_weight="80"

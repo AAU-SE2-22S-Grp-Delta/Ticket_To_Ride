@@ -70,8 +70,8 @@ public class PlayerTrainFragment extends Fragment {
 
             ImageView imageView = new ImageView(linearLayout.getContext());
             imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 160;
-            imageView.getLayoutParams().width = 160;
+//            imageView.getLayoutParams().height = 160;
+//            imageView.getLayoutParams().width = 160;
             imageView.setImageResource(getTrainResource(card));
 
             linearLayout.addView(imageView);
