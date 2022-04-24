@@ -18,6 +18,7 @@ import java.util.List;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
+import at.aau.se2.tickettoride.enums.TrainCards;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class PlayerTrainFragment extends Fragment {
@@ -49,14 +50,13 @@ public class PlayerTrainFragment extends Fragment {
 
         List<Integer> heldTrainCards = gameModel.getPlayerTrainCards();
 
-        /* für Testzwecke
+        /*für Testzwecke
         List<Integer> heldTrainCards = new ArrayList<>();
         heldTrainCards.add(9);
         heldTrainCards.add(1);
-        heldTrainCards.add(4);
         heldTrainCards.add(5);
-        heldTrainCards.add(7);
-        */
+        heldTrainCards.add(5);
+        heldTrainCards.add(7);*/
 
         linearLayout = view.findViewById(R.id.linearLayoutTrainCards);
 
