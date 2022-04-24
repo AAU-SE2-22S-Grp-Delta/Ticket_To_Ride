@@ -1,6 +1,5 @@
 package at.aau.se2.tickettoride.fragments;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.R;
@@ -21,7 +19,6 @@ import at.aau.se2.tickettoride.models.GameModel;
 
 public class PlayerDestinationFragment extends Fragment {
     private FragmentPlayerDestinationBinding binding;
-    private LinearLayout linearLayout;
     private GameModel gameModel;
 
     public static PlayerDestinationFragment newInstance() {
@@ -39,6 +36,8 @@ public class PlayerDestinationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPlayerDestinationBinding.inflate(inflater, container, false);
+        getParentFragmentManager().setFragmentResultListener("refresh",this,((requestKey, result) -> displayDestinationCards()));
+
         return binding.getRoot();
     }
 
@@ -46,6 +45,11 @@ public class PlayerDestinationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        displayDestinationCards();
+    }
+
+    public void displayDestinationCards()
+    {
         List<Integer> heldDestinationCards = gameModel.getPlayerDestinationCards();
 
         /* für Testzwecke
@@ -54,7 +58,7 @@ public class PlayerDestinationFragment extends Fragment {
         heldDestinationCards.add(5);
         heldDestinationCards.add(2);*/
 
-        linearLayout = view.findViewById(R.id.linearLayoutTrackCards);
+        binding.linearLayoutTrackCards.removeAllViews();
 
         for(int i=0;i<=heldDestinationCards.size()-1;i++)
         {
@@ -64,7 +68,7 @@ public class PlayerDestinationFragment extends Fragment {
             );
             layoutParams.setMargins(5,10,5,10);
 
-            ImageView imageView = new ImageView(linearLayout.getContext());
+            ImageView imageView = new ImageView(binding.linearLayoutTrackCards.getContext());
             imageView.setLayoutParams(layoutParams);
             imageView.getLayoutParams().height = 160;
             imageView.getLayoutParams().width = 250;
@@ -89,7 +93,7 @@ public class PlayerDestinationFragment extends Fragment {
                     imageView.setImageResource(R.drawable.seattle_newyork);
                     break;
             }
-            linearLayout.addView(imageView);
+            binding.linearLayoutTrackCards.addView(imageView);
         }
     }
 
