@@ -30,8 +30,8 @@ public class MapFragment extends Fragment
 {
     private FragmentMapBinding binding;
     private Destination firstDest = null;
-    private ArrayList<RailroadLine> railroads;
-    private ArrayList<Destination> destinations;
+    private ArrayList<RailroadLine> railroads= new ArrayList<>();
+    private ArrayList<Destination> destinations = new ArrayList<>();
 
     public static MapFragment newInstance()
     {
@@ -227,10 +227,10 @@ public class MapFragment extends Fragment
     @Override
     public void onDestroyView()
     {
-        for (RailroadLine r : railroads)
-            r = null;
-        for (Destination d : destinations)
-            d = null;
+//        for (RailroadLine r : railroads)
+//            r = null;
+//        for (Destination d : destinations)
+//            d = null;
         super.onDestroyView();
         binding = null;
     }
