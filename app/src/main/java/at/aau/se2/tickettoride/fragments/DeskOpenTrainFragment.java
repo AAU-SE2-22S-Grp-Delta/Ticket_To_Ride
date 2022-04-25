@@ -1,6 +1,6 @@
 package at.aau.se2.tickettoride.fragments;
 
-import static at.aau.se2.tickettoride.ResourceHelper.getTrainResource;
+import static at.aau.se2.tickettoride.helpers.ResourceHelper.getTrainResource;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

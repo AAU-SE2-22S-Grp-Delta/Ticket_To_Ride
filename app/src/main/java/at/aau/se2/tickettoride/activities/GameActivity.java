@@ -1,5 +1,6 @@
 package at.aau.se2.tickettoride.activities;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
@@ -7,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
+import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class GameActivity extends AppCompatActivity {
@@ -37,16 +41,17 @@ public class GameActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-        builder.setView(R.layout.fragment_player_destination);
-
-        androidx.appcompat.app.AlertDialog dialog = builder.create();
-
-        binding.missionsButton.setOnClickListener(view1 -> {
-            dialog.show();
-        });
+        initComponents(binding);
 
         startGame();
+    }
+
+    private void initComponents(ActivityGameBinding binding) {
+        binding.missionsButton.setOnClickListener(view -> {
+            FragmentManager fm = getSupportFragmentManager();
+            PlayerDestinationFragment destinationFragment = PlayerDestinationFragment.newInstance();
+            destinationFragment.show(fm, "fragment_player_destination");
+        });
     }
 
     private void startGame() {
