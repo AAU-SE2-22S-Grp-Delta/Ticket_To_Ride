@@ -48,13 +48,7 @@ public class DestinationDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        ArrayList <Integer> newPlayerDestinationCards = new ArrayList<>(gameModel.getPlayerDestinationCards());
-                        for (int i = 0; i < selectedItems.size(); i++) {
-                            newPlayerDestinationCards.add(selectedItems.get(i));
-                            gameModel.getDeskDestinationCards().remove(selectedItems.get(i));
-                            Log.i("RESULT", selectedItems.get(i).toString());
-                        }
-                        gameModel.setPlayerDestinationCards(newPlayerDestinationCards);
+                        addChosenCardsToHand();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -72,5 +66,15 @@ public class DestinationDialogFragment extends DialogFragment {
             cardsToChoose.add(number);
             destinations[i] = "Ziel " + number;
         }
+    }
+
+    private void addChosenCardsToHand(){
+        ArrayList <Integer> newPlayerDestinationCards = new ArrayList<>(gameModel.getPlayerDestinationCards());
+        for (int i = 0; i < selectedItems.size(); i++) {
+            newPlayerDestinationCards.add(selectedItems.get(i));
+            gameModel.getDeskDestinationCards().remove(selectedItems.get(i));
+            Log.i("RESULT", selectedItems.get(i).toString());
+        }
+        gameModel.setPlayerDestinationCards(newPlayerDestinationCards);
     }
 }
