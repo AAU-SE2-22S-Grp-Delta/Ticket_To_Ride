@@ -17,14 +17,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class GameActivity extends AppCompatActivity {
     private GameModel gameModel;
-    private ClientConnection clientConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +56,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void startGame() {
         gameModel = GameModel.getInstance();
-        clientConnection = ClientConnection.getInstance();
-        clientConnection.sendCommand("enterLobby:testPlayer;createGame:testGame:testPlayer");
-
-
 
         // Generate a new game (will be made on server)
-
-        /*
-            225 Waggons in
-            144 (lieber 255?) farbige Spielkarten    8 farben = 25 wagons jeder farbe + 25 lokomotiven
-        */
-
         generateTestGame();
 
         // After starting a new game send refresh to all attached fragments
