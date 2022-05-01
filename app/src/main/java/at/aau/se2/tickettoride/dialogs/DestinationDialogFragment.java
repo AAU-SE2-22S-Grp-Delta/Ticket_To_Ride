@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,13 +30,23 @@ public class DestinationDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_destination_cards, null);
 
         getChoices();
 
+        CheckBox checkBox1 = view.findViewById(R.id.checkBox1);
+        checkBox1.setText(destinations[0]);
+
+        CheckBox checkBox2 = view.findViewById(R.id.checkBox2);
+        checkBox2.setText(destinations[1]);
+
+        CheckBox checkBox3 = view.findViewById(R.id.checkBox3);
+        checkBox3.setText(destinations[2]);
+
         //Set Dialog
-        builder.setView(inflater.inflate(R.layout.dialog_destination_cards, null))
+        builder.setView(view)
                 .setTitle("Wähle eine Karte")
-                .setMultiChoiceItems(destinations, null, new DialogInterface.OnMultiChoiceClickListener() {
+                /*.setMultiChoiceItems(destinations, null, new DialogInterface.OnMultiChoiceClickListener() {
                     //Add Selected Items to List of Choices
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
@@ -44,7 +56,7 @@ public class DestinationDialogFragment extends DialogFragment {
                             selectedItems.remove(cardsToChoose.get(i));
                         }
                     }
-                })
+                })*/
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
