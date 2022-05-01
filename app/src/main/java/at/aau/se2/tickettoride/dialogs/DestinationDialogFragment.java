@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,27 +37,34 @@ public class DestinationDialogFragment extends DialogFragment {
 
         CheckBox checkBox1 = view.findViewById(R.id.checkBox1);
         checkBox1.setText(destinations[0]);
+        checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                choose(isChecked, 0);
+            }
+        });
 
         CheckBox checkBox2 = view.findViewById(R.id.checkBox2);
         checkBox2.setText(destinations[1]);
+        checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                choose(isChecked, 1);
+            }
+        });
 
         CheckBox checkBox3 = view.findViewById(R.id.checkBox3);
         checkBox3.setText(destinations[2]);
+        checkBox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                choose(isChecked, 2);
+            }
+        });
 
         //Set Dialog
         builder.setView(view)
                 .setTitle("Wähle eine Karte")
-                /*.setMultiChoiceItems(destinations, null, new DialogInterface.OnMultiChoiceClickListener() {
-                    //Add Selected Items to List of Choices
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
-                        if(isChecked){
-                            selectedItems.add(cardsToChoose.get(i));
-                        }else if(selectedItems.contains(cardsToChoose.get(i))){
-                            selectedItems.remove(cardsToChoose.get(i));
-                        }
-                    }
-                })*/
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
@@ -77,6 +85,14 @@ public class DestinationDialogFragment extends DialogFragment {
             int number = gameModel.getDeskDestinationCards().get(i);
             cardsToChoose.add(number);
             destinations[i] = "Ziel " + number;
+        }
+    }
+
+    private void choose(boolean cheeked, int i){
+        if(cheeked){
+            selectedItems.add(cardsToChoose.get(i));
+        }else if(selectedItems.contains(cardsToChoose.get(i))){
+            selectedItems.remove(cardsToChoose.get(i));
         }
     }
 
