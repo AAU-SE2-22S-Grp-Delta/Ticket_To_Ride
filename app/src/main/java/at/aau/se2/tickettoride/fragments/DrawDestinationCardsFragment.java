@@ -68,20 +68,12 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
         binding.imageView3.setImageResource(cardsList.get(card3).getImage());
         binding.imageView3.setTag(cardsList.get(card3));
 
-        Random randomCard4 = new Random();
-        int card4 = randomCard4.nextInt(cardsList.size());
-        while (card1 == card4 || card2 == card4 || card3 == card4) {
-            randomCard4 = new Random();
-            card4 = randomCard4.nextInt(cardsList.size());
-        }
-        binding.imageView4.setImageResource(cardsList.get(card4).getImage());
-        binding.imageView4.setTag(cardsList.get(card4));
 
         binding.button6.setOnClickListener(this);
         binding.imageView.setOnClickListener(this);
         binding.imageView2.setOnClickListener(this);
         binding.imageView3.setOnClickListener(this);
-        binding.imageView4.setOnClickListener(this);
+
 
         return binding.getRoot();
     }
@@ -115,13 +107,6 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 binding.imageView3.setBackgroundColor(Color.GREEN);
             }
         }
-        if (view.getId() == binding.imageView4.getId()) {
-            if (((ColorDrawable) binding.imageView4.getBackground()).getColor() == Color.GREEN) {
-                binding.imageView4.setBackgroundColor(Color.BLACK);
-            } else {
-                binding.imageView4.setBackgroundColor(Color.GREEN);
-            }
-        }
         if (view.getId() == binding.button6.getId()) {
 
             ArrayList<DestinationCard> cards = new ArrayList<>();
@@ -129,14 +114,11 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
             if (((ColorDrawable) binding.imageView.getBackground()).getColor() == Color.GREEN) {
                 cards.add((DestinationCard) binding.imageView.getTag());
             }
-            if (((ColorDrawable) binding.imageView3.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView3.getTag());
-            }
             if (((ColorDrawable) binding.imageView2.getBackground()).getColor() == Color.GREEN) {
                 cards.add((DestinationCard) binding.imageView2.getTag());
             }
-            if (((ColorDrawable) binding.imageView4.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView4.getTag());
+            if (((ColorDrawable) binding.imageView3.getBackground()).getColor() == Color.GREEN) {
+                cards.add((DestinationCard) binding.imageView3.getTag());
             }
 
             ArrayList<DestinationCard> roadCards = new ArrayList<>();
@@ -146,9 +128,8 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 DestinationCard roadCard2 = cards.get(1);
 
                 binding.imageView.setImageResource(roadCard1.getImage());
-                binding.imageView3.setImageResource(roadCard2.getImage());
-                binding.imageView2.setVisibility(View.GONE);
-                binding.imageView4.setVisibility(View.GONE);
+                binding.imageView2.setImageResource(roadCard2.getImage());
+                binding.imageView3.setVisibility(View.GONE);
                 binding.button6.setVisibility(View.GONE);
 
                 roadCards.add(roadCard1);
@@ -160,31 +141,13 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 DestinationCard roadCard3 = cards.get(2);
 
                 binding.imageView.setImageResource(roadCard1.getImage());
-                binding.imageView3.setImageResource(roadCard2.getImage());
-                binding.imageView2.setImageResource(roadCard3.getImage());
-                binding.imageView4.setVisibility(View.GONE);
+                binding.imageView2.setImageResource(roadCard2.getImage());
+                binding.imageView3.setImageResource(roadCard3.getImage());
                 binding.button6.setVisibility(View.GONE);
 
                 roadCards.add(roadCard1);
                 roadCards.add(roadCard2);
                 roadCards.add(roadCard3);
-            }
-            else if (cards.size() == 4) {
-                DestinationCard roadCard1 = cards.get(0);
-                DestinationCard roadCard2 = cards.get(1);
-                DestinationCard roadCard3 = cards.get(2);
-                DestinationCard roadCard4 = cards.get(3);
-
-                binding.imageView.setImageResource(roadCard1.getImage());
-                binding.imageView3.setImageResource(roadCard2.getImage());
-                binding.imageView2.setImageResource(roadCard3.getImage());
-                binding.imageView4.setImageResource(roadCard4.getImage());
-                binding.button6.setVisibility(View.GONE);
-
-                roadCards.add(roadCard1);
-                roadCards.add(roadCard2);
-                roadCards.add(roadCard3);
-                roadCards.add(roadCard4);
             }
         }
     }
