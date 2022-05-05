@@ -2,8 +2,8 @@ package at.aau.se2.tickettoride.dataStructures;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -93,9 +93,11 @@ public class RailroadLine {
         //check if player has enough cards of given color to build
 
         //build road
+        Log.d("Info", "Now building road from " + destination1.getName() + " " + destination2.getName());
         paint.setColor(this.color);
         canvas.drawLine(this.destination1.getX(), this.destination1.getY(), this.destination2.getX(), this.destination2.getY(), paint);
         imageView.setImageBitmap(bm);
+        imageView.invalidate();
 
         //set owner
 
@@ -105,6 +107,7 @@ public class RailroadLine {
 
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView, Player player)
     {
+        paint.setStrokeWidth(24);
         //check if there is already a road built
         if(owner != null)
             throw new IllegalStateException("Track already owned");

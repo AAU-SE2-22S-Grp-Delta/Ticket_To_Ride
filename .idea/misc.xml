@@ -10,7 +10,10 @@
         <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/activity_map.xml" value="0.35104166666666664" />
         <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.1" />
         <entry key="..\:/Ticket_To_Ride/app/src/main/res/drawable/custom_border.xml" value="0.192" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/drawable/destination.xml" value="0.135" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/drawable/ic_destination.xml" value="0.135" />
         <entry key="..\:/Ticket_To_Ride/app/src/main/res/drawable/ic_train_green.xml" value="0.192" />
+        <entry key="..\:/Ticket_To_Ride/app/src/main/res/drawable/selDestination.xml" value="0.2835" />
         <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_desk_destination.xml" value="0.46059782608695654" />
         <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_desk_open_train.xml" value="0.13385416666666666" />
         <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_desk_train.xml" value="0.46059782608695654" />
