@@ -2,9 +2,14 @@ package at.aau.se2.tickettoride.helpers;
 
 import java.util.ArrayList;
 
+import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class PointsHelper {
+    GameModel gameModel = GameModel.getInstance();
+    ArrayList<RailroadLine> railroadLines = new ArrayList<>(gameModel.getMap().getRailroadLines());
+    RailroadLine railroad;
+
     //TODO Fragen, ob wir während des Spiels die Punkte berechnen oder erst am Ende
     //Punkte für vollständige Strecken
     public int getPointsForRoutes(int lengthOfRoute){
@@ -26,28 +31,32 @@ public class PointsHelper {
         }
     }
 
-    //TODO Fragen, ob es irgendwo Punkte gibt Weg finden bezüglich Punkte von Ziele
-    public int getPointsForDestinations(int Destination){
-        return 0;
+    public boolean checkDestination(int destination, String owner){
+        for (int j = 0; j < railroadLines.size(); j++) {
+            //TODO Check it after the functions is in game
+            if (railroadLines.get(j).getOwner().getName().equals(owner) && railroadLines.get(j).getId() == destination){
+                railroad = railroadLines.get(j);
+                return true;
+            }
+        }
+        return false;
     }
 
     //TODO Fragen bezüglich Zwischenergebnis
-    public int calculateSum(){
-        GameModel gameModel = GameModel.getInstance();
-        ArrayList<Integer> playerPlayedDestinations = new ArrayList<>(gameModel.getPlayerPlayedDestinations());
+    public int calculateSum(String player){
         ArrayList<Integer> playerDestinationCards = new ArrayList<>(gameModel.getPlayerDestinationCards());
         //TODO Zwischenergebnis zu Summe rechnen
         int sum = 0;
 
         //Punkte von Zielkarten dazuzählen und abziehen
         for (int i = 0; i < playerDestinationCards.size(); i++) {
-            if (playerDestinationCards.contains(playerDestinationCards.get(i))) sum+=getPointsForDestinations(playerDestinationCards.get(i));
-            else sum-=getPointsForDestinations(playerDestinationCards.get(i));
+            if (checkDestination(i, player)) sum+=railroad.getDistance();
+            else sum-=railroad.getDistance();
         }
 
         //Zusatzpunkte für längste Strecke
         //TODO Checken ob Spieler die längste Strecke hat.
-        // Falls Spieler nicht hat, checken ob es überhaupt einen gibt mit längster Stecke.
+        // Falls Spieler es nicht hat, checken ob es überhaupt einen gibt mit längster Stecke.
         // Falls Gleichstand bekommen die jenigen Spieler 10 Punkte
 
         return sum;
