@@ -47,6 +47,10 @@ public class RailroadLine {
         this.destination2 = destination2;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Destination getDestination1() {
         return destination1;
     }
