@@ -11,6 +11,7 @@ import android.widget.ImageView;
  */
 public class RailroadLine {
     //TODO exception-handling
+    private int id;
     private Destination destination1;
     private Destination destination2;
     private int color = 0;
@@ -24,7 +25,8 @@ public class RailroadLine {
      * @param color to build the line train cards of this color will be needed
      * @param distance to build the line that many train cards will be needed
      */
-    public RailroadLine(Destination destination1, Destination destination2, int color, int distance) {
+    public RailroadLine(int id, Destination destination1, Destination destination2, int color, int distance) {
+        this.id = id;
         configureConnection(destination1, destination2);
         this.color = color;
         this.distance = distance;
