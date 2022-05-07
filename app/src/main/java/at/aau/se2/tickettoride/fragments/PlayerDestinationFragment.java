@@ -89,8 +89,8 @@ public class PlayerDestinationFragment extends DialogFragment {
 
             ImageView imageView = new ImageView(binding.linearLayoutTrackCards.getContext());
             imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 160;
-            imageView.getLayoutParams().width = 250;
+            imageView.getLayoutParams().height = 400;
+            imageView.getLayoutParams().width = 600;
             imageView.setImageDrawable(ResourceHelper.getMissionResource(getContext(), card));
 
             binding.linearLayoutTrackCards.addView(imageView);
