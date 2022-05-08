@@ -22,14 +22,13 @@ import at.aau.se2.tickettoride.helpers.ResourceHelper;
 public class TrainDialogFragment extends DialogFragment {
 
     GameModel gameModel = GameModel.getInstance();
-    int cardNr;
+    public int cardNr;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        //Colors color;
 
         //Create View
         LinearLayout layout = new LinearLayout(getActivity());
@@ -48,7 +47,7 @@ public class TrainDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        addChosenCardToHand();
+                        addCardToHand();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -59,7 +58,7 @@ public class TrainDialogFragment extends DialogFragment {
                 });
         return builder.create();
     }
-    private void addChosenCardToHand(){
+    public void addCardToHand(){
         ArrayList<Integer> newPlayerTrainCards = new ArrayList<>(gameModel.getPlayerTrainCards());
         newPlayerTrainCards.add(cardNr);
         gameModel.setPlayerTrainCards(newPlayerTrainCards);
