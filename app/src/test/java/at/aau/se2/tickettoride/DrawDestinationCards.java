@@ -12,6 +12,7 @@ import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
 import at.aau.se2.tickettoride.models.GameModel;
@@ -29,8 +30,15 @@ public class DrawDestinationCards {
     }
 
     @Test
-    public void TestGetChoices(){
+    public void testGetChoicesLength(){
         String[] destinations = destinationDialogFragment.getChoices();
         assertEquals(destinations.length, 3);
+    }
+
+    @Test
+    public void testGetChoicesItems(){
+        String[] destinations = destinationDialogFragment.getChoices();
+        String[] array = {"Ziel 1", "Ziel 2", "Ziel 3"};
+        assertEquals(destinations, array);
     }
 }
