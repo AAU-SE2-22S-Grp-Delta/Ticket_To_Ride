@@ -57,4 +57,21 @@ public class DrawDestinationCards {
         ArrayList<Integer> selected = new ArrayList<>(Arrays.asList(1, 3));
         assertEquals(destinationDialogFragment.selectedItems, selected);
     }
+
+    @Test
+    public void testChooseDelete1(){
+        destinationDialogFragment.choose(true, 0);
+        destinationDialogFragment.choose(false,0);
+        ArrayList<Integer> selected = new ArrayList<>();
+        assertEquals(destinationDialogFragment.selectedItems, selected);
+    }
+
+    @Test
+    public void testChooseDelete2(){
+        destinationDialogFragment.choose(true, 0);
+        destinationDialogFragment.choose(true, 2);
+        destinationDialogFragment.choose(false,0);
+        ArrayList<Integer> selected = new ArrayList<>(Arrays.asList(3));
+        assertEquals(destinationDialogFragment.selectedItems, selected);
+    }
 }
