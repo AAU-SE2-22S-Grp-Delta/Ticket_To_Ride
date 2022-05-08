@@ -24,7 +24,6 @@ public class DestinationDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
     ArrayList<Integer> selectedItems = new ArrayList<Integer>();
     private final ArrayList<Integer> cardsToChoose = new ArrayList<Integer>();
-    String[] destinations = new String[3];
 
     @NonNull
     @Override
@@ -33,7 +32,7 @@ public class DestinationDialogFragment extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_destination_cards, null);
 
-        getChoices();
+        String[] destinations = getChoices();
 
         CheckBox checkBox1 = view.findViewById(R.id.checkBox1);
         checkBox1.setText(destinations[0]);
@@ -80,15 +79,17 @@ public class DestinationDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    private void getChoices(){
+    public String[] getChoices(){
+        String[] destinations = new String[3];
         for (int i = 0; i < 3; i++) {
             int number = gameModel.getDeskDestinationCards().get(i);
             cardsToChoose.add(number);
             destinations[i] = "Ziel " + number;
         }
+        return destinations;
     }
 
-    private void choose(boolean cheeked, int i){
+    public void choose(boolean cheeked, int i){
         if(cheeked){
             selectedItems.add(cardsToChoose.get(i));
         }else if(selectedItems.contains(cardsToChoose.get(i))){
@@ -96,7 +97,7 @@ public class DestinationDialogFragment extends DialogFragment {
         }
     }
 
-    private void addChosenCardsToHand(){
+    public void addChosenCardsToHand(){
         ArrayList <Integer> newPlayerDestinationCards = new ArrayList<>(gameModel.getPlayerDestinationCards());
         for (int i = 0; i < selectedItems.size(); i++) {
             newPlayerDestinationCards.add(selectedItems.get(i));
