@@ -22,7 +22,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 
 public class DestinationDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
-    ArrayList<Integer> selectedItems = new ArrayList<Integer>();
+    public ArrayList<Integer> selectedItems = new ArrayList<Integer>();
     private final ArrayList<Integer> cardsToChoose = new ArrayList<Integer>();
 
     @NonNull

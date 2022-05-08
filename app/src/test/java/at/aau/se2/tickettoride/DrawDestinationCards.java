@@ -12,6 +12,7 @@ import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
@@ -20,6 +21,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 @RunWith(JUnit4.class)
 public class DrawDestinationCards {
     DestinationDialogFragment destinationDialogFragment;
+    String[] destinations;
 
     @Before
     public void SetUp(){
@@ -27,18 +29,32 @@ public class DrawDestinationCards {
         GameModel gameModel = GameModel.getInstance();
         gameModel.setDeskDestinationCards(deskDestinationCards);
         destinationDialogFragment = new DestinationDialogFragment();
+        destinations = destinationDialogFragment.getChoices();
     }
 
     @Test
     public void testGetChoicesLength(){
-        String[] destinations = destinationDialogFragment.getChoices();
         assertEquals(destinations.length, 3);
     }
 
     @Test
     public void testGetChoicesItems(){
-        String[] destinations = destinationDialogFragment.getChoices();
         String[] array = {"Ziel 1", "Ziel 2", "Ziel 3"};
         assertEquals(destinations, array);
+    }
+
+    @Test
+    public void testChooseAdd1(){
+        destinationDialogFragment.choose(true, 0);
+        ArrayList<Integer> selected = new ArrayList<>(Collections.singletonList(1));
+        assertEquals(destinationDialogFragment.selectedItems, selected);
+    }
+
+    @Test
+    public void testChooseAdd2(){
+        destinationDialogFragment.choose(true, 0);
+        destinationDialogFragment.choose(true, 2);
+        ArrayList<Integer> selected = new ArrayList<>(Arrays.asList(1, 3));
+        assertEquals(destinationDialogFragment.selectedItems, selected);
     }
 }
