@@ -22,11 +22,12 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class DrawDestinationCards {
     DestinationDialogFragment destinationDialogFragment;
     String[] destinations;
+    GameModel gameModel;
 
     @Before
     public void SetUp(){
         ArrayList<Integer> deskDestinationCards = new ArrayList<>(Arrays.asList(1, 2, 3));
-        GameModel gameModel = GameModel.getInstance();
+        gameModel = GameModel.getInstance();
         gameModel.setDeskDestinationCards(deskDestinationCards);
         destinationDialogFragment = new DestinationDialogFragment();
         destinations = destinationDialogFragment.getChoices();
@@ -73,5 +74,21 @@ public class DrawDestinationCards {
         destinationDialogFragment.choose(false,0);
         ArrayList<Integer> selected = new ArrayList<>(Arrays.asList(3));
         assertEquals(destinationDialogFragment.selectedItems, selected);
+    }
+
+    @Test
+    public void testChosenCardsToHand(){
+        destinationDialogFragment.choose(true, 0);
+        destinationDialogFragment.choose(true, 2);
+        ArrayList<Integer> playerCards = new ArrayList<>(Arrays.asList(1,3));
+        destinationDialogFragment.addChosenCardsToHand();
+        assertEquals(gameModel.getPlayerDestinationCards(), playerCards);
+    }
+
+    @Test
+    public void testChosenCardsToHandNoChoices(){
+        ArrayList<Integer> playerCards = new ArrayList<>();
+        destinationDialogFragment.addChosenCardsToHand();
+        assertEquals(gameModel.getPlayerDestinationCards(), playerCards);
     }
 }
