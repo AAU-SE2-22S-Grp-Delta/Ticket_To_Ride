@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.models.GameModel;

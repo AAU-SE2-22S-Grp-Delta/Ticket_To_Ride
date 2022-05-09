@@ -79,11 +79,4 @@ public class DrawDestinationCards {
         destinationDialogFragment.addChosenCardsToHand();
         assertEquals(gameModel.getPlayerDestinationCards(), playerCards);
     }
-
-    @Test
-    public void testAddChosenCardsToHandNoChoices(){
-        ArrayList<Integer> playerCards = new ArrayList<>();
-        destinationDialogFragment.addChosenCardsToHand();
-        assertEquals(gameModel.getPlayerDestinationCards(), playerCards);
-    }
 }
