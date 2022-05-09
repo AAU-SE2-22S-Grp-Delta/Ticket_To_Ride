@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import at.aau.se2.tickettoride.databinding.ActivityMainBinding;
+import at.aau.se2.tickettoride.dialogs.HelpDialogFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -54,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
         binding.button7.setOnClickListener(v -> {
             Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
             startActivity(intent);
+        });
+        binding.floatingActionButton.setOnClickListener(v -> {
+            HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
+            helpDialogFragment.show(getSupportFragmentManager(), "helpDialog");
         });
     }
 }
