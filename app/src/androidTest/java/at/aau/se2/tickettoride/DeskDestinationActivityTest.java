@@ -1,5 +1,15 @@
 package at.aau.se2.tickettoride;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import org.junit.Rule;
@@ -16,8 +26,24 @@ public class DeskDestinationActivityTest
     public ActivityScenarioRule<DeskDestinationActivity> mapActivityRule = new ActivityScenarioRule<>(DeskDestinationActivity.class);
 
     @Test
-    public void defaultTest()
+    public void testAcceptButton()
     {
+        try {
+            onView(withText(R.string.accept)).perform(click());
+            Espresso.pressBack();
+        }catch (NoMatchingViewException e){
 
+        }
+    }
+
+    @Test
+    public void testCancelButton()
+    {
+        try {
+            onView(withText(R.string.cancel)).perform(click());
+            Espresso.pressBack();
+        }catch (NoMatchingViewException e){
+
+        }
     }
 }
