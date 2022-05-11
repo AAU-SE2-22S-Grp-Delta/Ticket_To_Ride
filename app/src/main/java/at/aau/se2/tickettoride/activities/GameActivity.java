@@ -18,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
+import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -51,6 +52,10 @@ public class GameActivity extends AppCompatActivity {
             FragmentManager fm = getSupportFragmentManager();
             PlayerDestinationFragment destinationFragment = PlayerDestinationFragment.newInstance();
             destinationFragment.show(fm, "fragment_player_destination");
+        });
+        binding.pointsTextView.setOnClickListener(view -> {
+            DialogFragment pointsDialog = new PointsDialog();
+            pointsDialog.show(getSupportFragmentManager(), "points");
         });
     }
 
