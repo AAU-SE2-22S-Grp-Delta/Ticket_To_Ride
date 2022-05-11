@@ -32,13 +32,13 @@ public class PointsHelper {
     }
 
     public boolean checkDestination(int destination, String owner){
-        for (int j = 0; j < railroadLines.size(); j++) {
-            //TODO Check it after the functions is in game
+        /*for (int j = 0; j < railroadLines.size(); j++) {
+            //TODO Change function
             if (railroadLines.get(j).getOwner().getName().equals(owner) && railroadLines.get(j).getId() == destination){
                 railroad = railroadLines.get(j);
                 return true;
             }
-        }
+        }*/
         return false;
     }
 

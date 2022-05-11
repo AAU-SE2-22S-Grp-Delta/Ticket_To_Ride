@@ -25,8 +25,7 @@ public class RailroadLine {
      * @param color to build the line train cards of this color will be needed
      * @param distance to build the line that many train cards will be needed
      */
-    public RailroadLine(int id, Destination destination1, Destination destination2, int color, int distance) {
-        this.id = id;
+    public RailroadLine(Destination destination1, Destination destination2, int color, int distance) {
         configureConnection(destination1, destination2);
         this.color = color;
         this.distance = distance;
@@ -45,10 +44,6 @@ public class RailroadLine {
         if (destination1.getName().equals(destination2.getName())) throw new IllegalArgumentException ("destination1 == destination2");
         this.destination1 = destination1;
         this.destination2 = destination2;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public Destination getDestination1() {
