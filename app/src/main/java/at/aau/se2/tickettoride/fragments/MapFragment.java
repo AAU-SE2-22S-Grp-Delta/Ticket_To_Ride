@@ -52,6 +52,8 @@ public class MapFragment extends Fragment
     final int PINK = Color.rgb(188,143,143);
     final int ORANGE = Color.rgb(255, 127, 0);
 
+    Player currentPlayer;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -284,7 +286,7 @@ public class MapFragment extends Fragment
 
         Player player1 = new Player("player one", Color.RED);
         //Set currentPlayer to whoevers turn it is
-        Player currentPlayer = player1;
+        currentPlayer = player1;
 
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable()
@@ -304,7 +306,7 @@ public class MapFragment extends Fragment
         for (Destination d : destinations)
         {
             d.getButton().setOnClickListener(view1 -> {
-                railBuilder(d, currentPlayer);
+                selector(d, currentPlayer);
             });
         }
         return view;
@@ -319,32 +321,72 @@ public class MapFragment extends Fragment
     }
 
 
+    //finish this
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void railBuilder(Destination secondDest, Player player)
+    public void selector(Destination secondDest, Player player)
     {
+        boolean building = false;
         if (firstDest == null)
         {
             firstDest = secondDest;
-            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+            for (RailroadLine rl : railroads)
+            {
+                if(rl.getDestination1().equals(firstDest))
+                    rl.getDestination2().getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+                else if(rl.getDestination2().equals(firstDest))
+                    rl.getDestination1().getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+            }
         }
         else if (firstDest.equals(secondDest))
         {
             firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            for (RailroadLine rl : railroads)
+            {
+                if(rl.getDestination1().equals(firstDest) && rl.getOwner() != null)
+                    rl.getDestination2().getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+                else if(rl.getDestination2().equals(firstDest) && rl.getOwner() != null)
+                    rl.getDestination1().getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            }
             firstDest = null;
+        }
+        else if (!building)
+        {
+            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+            secondDest.getButton().setOnClickListener(view -> railBuilder(secondDest, player));
+            building = true;
+
         }
         else
         {
-            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
-            //TODO Confirmation Dialog or confirmation button???
-            RailroadLine rl = new RailroadLine(firstDest, secondDest);
-            if (railroads.contains(rl))
-            {
-                RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
-                currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player);
-            }
-            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-            firstDest = null;
+            resetButtons();
+            firstDest = secondDest;
+            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+            building = false;
+        }
+    }
+
+    public void railBuilder(Destination secondDest, Player player)
+    {
+        RailroadLine rl = new RailroadLine(firstDest, secondDest);
+        if (railroads.contains(rl))
+        {
+            RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
+            currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player);
+        }
+        resetButtons();
+        firstDest = null;
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public void resetButtons()
+    {
+        for (Destination d : destinations)
+        {
+            d.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            d.getButton().setOnClickListener(view1 -> {
+                selector(d, currentPlayer);
+            });
         }
     }
 }

@@ -174,6 +174,7 @@ public class RailroadLine {
         imageView.setImageBitmap(bm);
 
         //set owner
+        this.owner = player;
 
         //remove cards and pieces
 
