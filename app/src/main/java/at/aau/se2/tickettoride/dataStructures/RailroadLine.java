@@ -93,7 +93,6 @@ public class RailroadLine {
         //check if player has enough cards of given color to build
 
         //build road
-        Log.d("Info", "Now building road from " + destination1.getName() + " " + destination2.getName());
         paint.setColor(this.color);
         canvas.drawLine(this.destination1.getX(), this.destination1.getY(), this.destination2.getX(), this.destination2.getY(), paint);
         imageView.setImageBitmap(bm);
