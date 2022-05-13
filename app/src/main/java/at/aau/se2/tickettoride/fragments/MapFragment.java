@@ -159,6 +159,7 @@ public class MapFragment extends Fragment
 
         railroads.add(new RailroadLine(montréal, newyork, Color.BLUE, 3));
         railroads.add(new RailroadLine(montréal, toronto, Color.GRAY, 3));
+
 //        railroads.add(new DoubleRailroadLine(newyork, boston, Color.YELLOW, 2, Color.RED));
 //        railroads.add(new DoubleRailroadLine(newyork, pittsburgh, Color.YELLOW, 2, Color.GREEN));
         railroads.add(new RailroadLine(newyork, boston, Color.YELLOW, 2));
@@ -173,10 +174,12 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(helena, calgary, Color.GRAY, 4));
         railroads.add(new RailroadLine(helena, duluth, ORANGE, 6));
         railroads.add(new RailroadLine(helena, seattle, Color.YELLOW, 6));
+
 //        railroads.add(new DoubleRailroadLine(seattle, vancouver, Color.GRAY, 1, Color.GRAY));
         railroads.add(new RailroadLine(seattle, vancouver, Color.GRAY, 1));
 
         railroads.add(new RailroadLine(seattle, calgary, Color.GRAY, 4));
+
 //        railroads.add(new DoubleRailroadLine(seattle, portland, Color.GRAY, 1, Color.GRAY));
 //        railroads.add(new DoubleRailroadLine(portland, sanfrancisco, Color.GREEN, 5, Color.PINK));
 //        railroads.add(new DoubleRailroadLine(sanfrancisco, saltlakecity, Color.ORANGE, 5, Color.WHITE));
@@ -187,11 +190,13 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(saltlakecity, portland, Color.BLUE, 6));
         railroads.add(new RailroadLine(saltlakecity, helena, PINK, 3));
         railroads.add(new RailroadLine(helena, omaha, Color.RED, 5));
+
 //        railroads.add(new DoubleRailroadLine(omaha, duluth, Color.GRAY, 2, Color.GRAY));
         railroads.add(new RailroadLine(omaha, duluth, Color.GRAY, 2));
 
         railroads.add(new RailroadLine(duluth, chicago, Color.RED, 3));
         railroads.add(new RailroadLine(chicago, toronto, Color.WHITE, 4));
+
 //        railroads.add(new DoubleRailroadLine(newyork, washington, Color.ORANGE, 2, Color.BLACK));
         railroads.add(new RailroadLine(newyork, washington, ORANGE, 2));
 
@@ -206,6 +211,7 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(losangeles, phoenix, Color.GRAY, 3));
         railroads.add(new RailroadLine(phoenix, elpaso, Color.GRAY, 3));
         railroads.add(new RailroadLine(elpaso, losangeles, Color.BLACK, 6));
+
 //        railroads.add(new DoubleRailroadLine(losangeles, sanfrancisco, Color.YELLOW, 3, Color.PINK));
         railroads.add(new RailroadLine(losangeles, sanfrancisco, Color.YELLOW, 3));
 
@@ -217,14 +223,17 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(elpaso, dallas, Color.RED,4));
         railroads.add(new RailroadLine(elpaso, houston, Color.GREEN, 6));
         railroads.add(new RailroadLine(houston, neworleans, Color.RED, 2));
+
 //        railroads.add(new DoubleRailroadLine(houston, dallas, Color.GRAY, 1, Color.GRAY));
         railroads.add(new RailroadLine(houston, dallas, Color.GRAY, 1));
 
         railroads.add(new RailroadLine(dallas, littlerock, Color.GRAY, 2));
+
 //        railroads.add(new DoubleRailroadLine(dallas, oklahomacity, Color.GRAY, 2, Color.GRAY));
         railroads.add(new RailroadLine(dallas, oklahomacity, Color.GRAY, 2));
 
         railroads.add(new RailroadLine(oklahomacity, littlerock, Color.GRAY, 2));
+
 //        railroads.add(new DoubleRailroadLine(oklahomacity, kansascity, Color.GRAY, 2, Color.GRAY));
         railroads.add(new RailroadLine(oklahomacity, kansascity, Color.GRAY, 2));
 
@@ -233,17 +242,20 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(littlerock, nashville, Color.WHITE, 3));
         railroads.add(new RailroadLine(littlerock, saintlouis, Color.GRAY, 2));
         railroads.add(new RailroadLine(neworleans, miami, Color.RED, 6));
+
 //        railroads.add(new DoubleRailroadLine(neworleans, atlanta, Color.ORANGE, 4, Color.YELLOW));
         railroads.add(new RailroadLine(neworleans, atlanta, ORANGE, 4));
 
         railroads.add(new RailroadLine(atlanta, miami, Color.BLUE, 5));
         railroads.add(new RailroadLine(atlanta,charleston, Color.GRAY, 2));
+
 //        railroads.add(new DoubleRailroadLine(atlanta, raleigh, Color.GRAY, 2, Color.GRAY));
         railroads.add(new RailroadLine(atlanta, raleigh, Color.GRAY, 2));
 
         railroads.add(new RailroadLine(atlanta, nashville, Color.GRAY, 1));
         railroads.add(new RailroadLine(miami, charleston, PINK, 4));
         railroads.add(new RailroadLine(charleston, raleigh, Color.GRAY, 2));
+
 //        railroads.add(new DoubleRailroadLine(raleigh, washington, Color.GRAY, 2, Color.GRAY));
         railroads.add(new RailroadLine(raleigh, washington, Color.GRAY, 2));
 
@@ -252,6 +264,7 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(nashville, pittsburgh, Color.YELLOW, 4));
         railroads.add(new RailroadLine(nashville, saintlouis, Color.GRAY,2));
         railroads.add(new RailroadLine(saintlouis, pittsburgh, Color.GREEN, 5));
+
 //        railroads.add(new DoubleRailroadLine(saintlouis, chicago, Color.GREEN, 2, Color.WHITE));
 //        railroads.add(new DoubleRailroadLine(saintlouis, kansascity, Color.BLUE, 2, Color.PINK));
 //        railroads.add(new DoubleRailroadLine(kansascity, omaha, Color.GRAY, 1, Color.GRAY));
@@ -270,7 +283,7 @@ public class MapFragment extends Fragment
         paint.setAntiAlias(true);
 
         Player player1 = new Player("player one", Color.RED);
-        //Set currentPlayer to whoever's turn it is
+        //Set currentPlayer to whoevers turn it is
         Player currentPlayer = player1;
 
         final Handler handler = new Handler(Looper.getMainLooper());

@@ -86,8 +86,8 @@
             android:id="@+id/phoenix"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:layout_x="300dp"
-            android:layout_y="542dp"
+            android:layout_x="312dp"
+            android:layout_y="518dp"
             android:background="@drawable/destination"
             android:text="1" />
 
@@ -104,8 +104,8 @@
             android:id="@+id/dallas"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:layout_x="693dp"
-            android:layout_y="555dp"
+            android:layout_x="696dp"
+            android:layout_y="543dp"
             android:background="@drawable/destination"
             android:text="1" />
 
@@ -367,7 +367,7 @@
             android:layout_height="2160px"
             android:layout_x="0dp"
             android:layout_y="0dp"
-            android:src="@drawable/map"
+            android:src="@drawable/untitled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
