@@ -1,5 +1,6 @@
 package at.aau.se2.tickettoride.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import at.aau.se2.tickettoride.R;
+import at.aau.se2.tickettoride.activities.GameActivity;
+import at.aau.se2.tickettoride.activities.MainActivity;
 import at.aau.se2.tickettoride.databinding.FragmentDrawDestinationCardsBinding;
 
 public class DrawDestinationCardsFragment extends Fragment implements View.OnClickListener {
@@ -44,6 +47,8 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
         cardsList.add(newAtl);
         cardsList.add(porPho);
         cardsList.add(seaNew);
+
+        binding.button8.setVisibility(View.INVISIBLE);
 
         Random randomCard1 = new Random();
         int card1 = randomCard1.nextInt(cardsList.size());
@@ -128,7 +133,9 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 DestinationCard roadCard2 = cards.get(1);
 
                 binding.imageView.setImageResource(roadCard1.getImage());
+                binding.imageView.setBackgroundColor(Color.TRANSPARENT);
                 binding.imageView2.setImageResource(roadCard2.getImage());
+                binding.imageView2.setBackgroundColor(Color.TRANSPARENT);
                 binding.imageView3.setVisibility(View.GONE);
                 binding.button6.setVisibility(View.GONE);
 
@@ -141,15 +148,21 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 DestinationCard roadCard3 = cards.get(2);
 
                 binding.imageView.setImageResource(roadCard1.getImage());
+                binding.imageView.setBackgroundColor(Color.TRANSPARENT);
                 binding.imageView2.setImageResource(roadCard2.getImage());
+                binding.imageView2.setBackgroundColor(Color.TRANSPARENT);
                 binding.imageView3.setImageResource(roadCard3.getImage());
+                binding.imageView3.setBackgroundColor(Color.TRANSPARENT);
                 binding.button6.setVisibility(View.GONE);
 
                 roadCards.add(roadCard1);
                 roadCards.add(roadCard2);
                 roadCards.add(roadCard3);
             }
+
+            binding.button8.setVisibility(View.VISIBLE);
         }
+
     }
 }
 
