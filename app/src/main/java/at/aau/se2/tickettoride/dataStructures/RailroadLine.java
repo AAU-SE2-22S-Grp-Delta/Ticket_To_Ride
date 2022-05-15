@@ -11,6 +11,7 @@ import android.widget.ImageView;
  */
 public class RailroadLine {
     //TODO exception-handling
+    private int id;
     private Destination destination1;
     private Destination destination2;
     private int color = 0;

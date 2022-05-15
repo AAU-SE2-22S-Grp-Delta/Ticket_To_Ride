@@ -34,7 +34,7 @@ public class RailroadLineTest
         dest2 = new Destination("testdest2", new Button(null));
         dest3 = new Destination("testdest3", new Button(null));
         dest4 = new Destination("testdest4", new Button(null));
-        r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
+        r1 = new RailroadLine(1, dest1, dest2, Color.BLUE, 3);
         player1 = new Player("testplayer1", Color.GREEN);
         player2 = new Player("testplayer2", Color.RED);
 
@@ -43,25 +43,25 @@ public class RailroadLineTest
     @Test
     public void testConnectionFirstNull()
     {
-        assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(null, dest2, Color.BLUE, 3));
+        assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(2, null, dest2, Color.BLUE, 3));
     }
 
     @Test
     public void testConnectionSecondNull()
     {
-        assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(dest1, null, Color.BLUE, 3));
+        assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(2, dest1, null, Color.BLUE, 3));
     }
 
     @Test
     public void testConnectionSameDest()
     {
-        assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(dest1, dest1, Color.BLUE, 3));
+        assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(2, dest1, dest1, Color.BLUE, 3));
     }
 
     @Test
     public void testDestEquals()
     {
-        r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
+        r1 = new RailroadLine(1, dest1, dest2, Color.BLUE, 3);
         assertEquals(r1, new RailroadLine(dest2, dest1));
     }
 
@@ -87,9 +87,9 @@ public class RailroadLineTest
     @Test
     public void testEquals()
     {
-        assertTrue(r1.equals(new RailroadLine(dest1, dest2, Color.BLUE, 3)));
-        assertTrue(r1.equals(new RailroadLine(dest2, dest1, Color.BLUE, 3)));
-        assertFalse(r1.equals(new RailroadLine(dest1, dest3, Color.BLUE, 3)));
+        assertTrue(r1.equals(new RailroadLine(1, dest1, dest2, Color.BLUE, 3)));
+        assertTrue(r1.equals(new RailroadLine(1, dest2, dest1, Color.BLUE, 3)));
+        assertFalse(r1.equals(new RailroadLine(1, dest1, dest3, Color.BLUE, 3)));
     }
 
 
