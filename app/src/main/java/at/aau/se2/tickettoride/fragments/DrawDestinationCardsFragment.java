@@ -159,7 +159,6 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 roadCards.add(roadCard2);
                 roadCards.add(roadCard3);
             }
-
             binding.button8.setVisibility(View.VISIBLE);
         }
 
