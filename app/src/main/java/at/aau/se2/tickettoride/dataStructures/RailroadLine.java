@@ -89,14 +89,69 @@ public class RailroadLine {
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
     {
         //check if there is already a road built
-        if(owner != null)
+        if (owner != null)
             throw new IllegalStateException("Track already owned");
         //check if player has enough cards of given color to build
 
         //build road
-        Log.d("Info", "Now building road from " + destination1.getName() + " " + destination2.getName());
         paint.setColor(this.color);
-        canvas.drawLine(this.destination1.getX(), this.destination1.getY(), this.destination2.getX(), this.destination2.getY(), paint);
+
+        float xDist = (Math.abs(destination2.getX() - destination1.getX()) / this.distance-1);
+        float yDist = (Math.abs(destination2.getY() - destination1.getY()) / this.distance-1);
+
+//        float dist = (float) (Math.sqrt(xDist*xDist + yDist*yDist)) / this.distance;
+//
+        //0,0 in top left
+        //point1 above point 2
+        float currX = 0;
+        float currY = 0;
+        for(int i = 1; i <= this.distance; i++)
+        {
+
+            if (destination1.getY() < destination2.getY())
+            {
+                if(i == 1)
+                {
+                    currX = this.destination1.getX();
+                    currY = this.destination1.getY();
+                }
+                //point1 left of point2
+                if (destination1.getX() < destination2.getX())
+                {
+                    canvas.drawLine(currX, currY, currX + xDist -10, currY + yDist -10, paint);
+                    currX += xDist;
+                }
+                //point1 right of point2
+                else
+                {
+                    canvas.drawLine(currX, currY, currX - xDist +10, currY + yDist -10, paint);
+                    currX -= xDist;
+                }
+                currY += yDist;
+
+            }
+            else
+            {
+                if(i == 1)
+                {
+                    currX = this.destination2.getX();
+                    currY = this.destination2.getY();
+                }
+                if (destination2.getX() < destination1.getX())
+                {
+                    canvas.drawLine(currX, currY, currX + xDist -10, currY + yDist - 10, paint);
+                    currX += xDist;
+                }
+                //point1 right of point2
+                else
+                {
+                    canvas.drawLine(currX, currY, currX - xDist + 10, currY + yDist - 10, paint);
+                    currX -= xDist;
+                }
+                currY += yDist;
+            }
+        }
+
         imageView.setImageBitmap(bm);
         imageView.invalidate();
 
@@ -120,8 +175,11 @@ public class RailroadLine {
         imageView.setImageBitmap(bm);
 
         //set owner
+        this.owner = player;
 
         //remove cards and pieces
 
     }
 }
+
+//highlight adjacent and double click to build

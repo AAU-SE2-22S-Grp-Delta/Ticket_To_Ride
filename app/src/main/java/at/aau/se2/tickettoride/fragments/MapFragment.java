@@ -44,44 +44,15 @@ public class MapFragment extends Fragment
         return new MapFragment();
     }
 
-    Destination dest1 = null;
-    Destination dest2 = null;
-    Destination dest3 = null;
-    Destination dest4 = null;
-    Destination dest5 = null;
-    Destination dest6 = null;
-    Destination dest7 = null;
-    Destination dest8 = null;
-    Destination dest9 = null;
-    Destination dest10 = null;
-    Destination dest11 = null;
-    Destination dest12 = null;
-    RailroadLine r1 = null;
-    RailroadLine r2 = null;
-    RailroadLine r3 = null;
-    RailroadLine r4 = null;
-    RailroadLine r5 = null;
-    RailroadLine r6 = null;
-    RailroadLine r7 = null;
-    RailroadLine r8 = null;
-    RailroadLine r9 = null;
-    RailroadLine r10 = null;
-    RailroadLine r11 = null;
-    RailroadLine r12 = null;
-    RailroadLine r13 = null;
-    RailroadLine r14 = null;
-    RailroadLine r15 = null;
-    RailroadLine r16 = null;
-    RailroadLine r17 = null;
-    RailroadLine r18 = null;
-    RailroadLine r19 = null;
-    RailroadLine r20 = null;
-    RailroadLine r21 = null;
-    RailroadLine r22 = null;
     Bitmap bm = Bitmap.createBitmap(3840, 2160, Bitmap.Config.ARGB_8888);
     Canvas canvas = new Canvas(bm);
     Paint paint = new Paint();
     Boolean drawn = false;
+
+    final int PINK = Color.rgb(188,143,143);
+    final int ORANGE = Color.rgb(255, 127, 0);
+
+    Player currentPlayer;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
@@ -103,55 +74,209 @@ public class MapFragment extends Fragment
 
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-        dest1 = new Destination("dest1", binding.dest1);
-        dest2 = new Destination("dest2", binding.dest2);
-        dest3 = new Destination("dest3", binding.dest3);
-        dest4 = new Destination("dest4", binding.dest4);
-        dest5 = new Destination("dest5", binding.dest5);
-        dest6 = new Destination("dest6", binding.dest6);
-        dest7 = new Destination("dest7", binding.dest7);
-        dest8 = new Destination("dest8", binding.dest8);
-        dest9 = new Destination("dest9", binding.dest9);
-        dest10 = new Destination("dest10", binding.dest10);
-        dest11 = new Destination("dest11", binding.dest11);
-        dest12 = new Destination("dest12", binding.dest12);
+        Destination atlanta = new Destination("Atlanta", binding.atlanta);
+        Destination boston = new Destination("Boston", binding.boston);
+        Destination calgary = new Destination("Calgary", binding.calgary);
+        Destination chicago = new Destination("Chicago", binding.chicago);
+        Destination dallas = new Destination("Dallas", binding.dallas);
+        Destination denver = new Destination("Denver", binding.denver);
+        Destination duluth = new Destination("Duluth", binding.duluth);
+        Destination elpaso = new Destination("El Paso", binding.elpaso);
+        Destination helena = new Destination("Helena", binding.helena);
+        Destination houston = new Destination("Houston", binding.houston);
+        Destination kansascity = new Destination("Kansas City", binding.kansasCity);
+        Destination littlerock = new Destination("Little Rock", binding.littleRock);
+        Destination losangeles = new Destination("Los Angeles", binding.losangeles);
+        Destination miami = new Destination("Miami", binding.miami);
+        Destination montréal = new Destination("Montréal", binding.montreal);
+        Destination nashville = new Destination("Nashville", binding.nashville);
+        Destination neworleans = new Destination("New Orleans", binding.newOrleans);
+        Destination newyork = new Destination("New York", binding.newYork);
+        Destination oklahomacity = new Destination("Oklahoma City", binding.oklahomaCity);
+        Destination phoenix = new Destination("Phoenix", binding.phoenix);
+        Destination pittsburgh = new Destination("Pittsburgh", binding.pittsburgh);
+        Destination portland = new Destination("Portland", binding.portland);
+        Destination saltlakecity = new Destination("Salt Lake City", binding.saltLakeCity);
+        Destination sanfrancisco = new Destination("San Francisco", binding.sanfrancisco);
+        Destination santafe = new Destination("Santa Fe", binding.santaFe);
+        Destination saultstmarie = new Destination("Sault St. Marie", binding.saultStMarie);
+        Destination seattle = new Destination("Seattle", binding.seattle);
+        Destination toronto = new Destination("Toronto", binding.toronto);
+        Destination vancouver = new Destination("Vancouver", binding.vancouver);
+        Destination winnipeg = new Destination("Winnipeg", binding.winnipeg);
+        Destination omaha = new Destination("Omaha", binding.omaha);
+        Destination washington = new Destination("Washington", binding.washington);
+        Destination lasvegas = new Destination("Las Vegas", binding.lasVegas);
+        Destination charleston = new Destination("Charleston",binding.charleston);
+        Destination saintlouis = new Destination("Saint Louis",binding.saintLouis);
+        Destination raleigh = new Destination("Raleigh", binding.raileigh);
+
 
         destinations = new ArrayList<>();
-        destinations.add(dest1);
-        destinations.add(dest2);
-        destinations.add(dest3);
-        destinations.add(dest4);
-        destinations.add(dest5);
-        destinations.add(dest6);
-        destinations.add(dest7);
-        destinations.add(dest8);
-        destinations.add(dest9);
-        destinations.add(dest10);
-        destinations.add(dest11);
-        destinations.add(dest12);
+        destinations.add(raleigh);
+        destinations.add(charleston);
+        destinations.add(saintlouis);
+        destinations.add(lasvegas);
+        destinations.add(washington);
+        destinations.add(omaha);
+        destinations.add(atlanta);
+        destinations.add(boston);
+        destinations.add(calgary);
+        destinations.add(chicago);
+        destinations.add(dallas);
+        destinations.add(denver);
+        destinations.add(duluth);
+        destinations.add(elpaso);
+        destinations.add(helena);
+        destinations.add(houston);
+        destinations.add(kansascity);
+        destinations.add(littlerock);
+        destinations.add(losangeles);
+        destinations.add(miami);
+        destinations.add(montréal);
+        destinations.add(nashville);
+        destinations.add(neworleans);
+        destinations.add(newyork);
+        destinations.add(oklahomacity);
+        destinations.add(phoenix);
+        destinations.add(pittsburgh);
+        destinations.add(portland);
+        destinations.add(saltlakecity);
+        destinations.add(sanfrancisco);
+        destinations.add(santafe);
+        destinations.add(saultstmarie);
+        destinations.add(seattle);
+        destinations.add(toronto);
+        destinations.add(vancouver);
+        destinations.add(winnipeg);
 
-        r1 = new RailroadLine(dest1, dest2, Color.GRAY, 1);
-        r2 = new RailroadLine(dest2, dest3, Color.BLUE, 2);
-        r3 = new RailroadLine(dest3, dest4, Color.GREEN, 3);
-        r4 = new RailroadLine(dest4, dest6, Color.BLUE, 2);
-        r5 = new RailroadLine(dest6, dest7, Color.YELLOW, 3);
-        r6 = new RailroadLine(dest5, dest7, Color.RED, 3);
-        r7 = new RailroadLine(dest5, dest8, Color.GREEN, 3);
-        r8 = new RailroadLine(dest8, dest9, Color.RED, 1);
-        r9 = new RailroadLine(dest1, dest5, Color.GRAY, 2);
-        r10 = new RailroadLine(dest8, dest12, Color.GRAY, 2);
-        r11 = new RailroadLine(dest12, dest10, Color.GREEN, 3);
-        r12 = new RailroadLine(dest11, dest10, Color.RED, 1);
 
-        r14 = new RailroadLine(dest9, dest12, Color.YELLOW, 2);
-        r15 = new RailroadLine(dest7, dest9, Color.GRAY, 2);
-        r16 = new RailroadLine(dest6, dest11, Color.GREEN, 3);
+        railroads = new ArrayList<>();
+        railroads.add(new RailroadLine(vancouver, calgary, Color.GRAY, 3));
+        railroads.add(new RailroadLine(calgary,winnipeg, Color.WHITE, 6));
+        railroads.add(new RailroadLine(winnipeg, saultstmarie, Color.GRAY, 6));
+        railroads.add(new RailroadLine(saultstmarie, montréal, Color.BLACK, 5));
+//        railroads.add(new DoubleRailroadLine(montréal, boston, Color.GRAY, 2, Color.GRAY));
+        railroads.add(new RailroadLine(montréal, boston,  Color.GRAY, 2));
 
-        r18 = new RailroadLine(dest2, dest5, Color.GRAY, 2);
-        r19 = new RailroadLine(dest5, dest7, Color.MAGENTA, 3);
-        r20 = new RailroadLine(dest4, dest7, Color.RED, 1);
-        r21 = new RailroadLine(dest11, dest9, Color.BLUE, 1);
-        r22 = new RailroadLine(dest5, dest3, Color.MAGENTA, 2);
+        railroads.add(new RailroadLine(montréal, newyork, Color.BLUE, 3));
+        railroads.add(new RailroadLine(montréal, toronto, Color.GRAY, 3));
+
+//        railroads.add(new DoubleRailroadLine(newyork, boston, Color.YELLOW, 2, Color.RED));
+//        railroads.add(new DoubleRailroadLine(newyork, pittsburgh, Color.YELLOW, 2, Color.GREEN));
+        railroads.add(new RailroadLine(newyork, boston, Color.YELLOW, 2));
+        railroads.add(new RailroadLine(newyork, pittsburgh, Color.YELLOW,2));
+
+        railroads.add(new RailroadLine(toronto, pittsburgh, Color.GRAY,2));
+        railroads.add(new RailroadLine(toronto, saultstmarie, Color.GRAY, 2));
+        railroads.add(new RailroadLine(toronto, duluth, PINK, 6));
+        railroads.add(new RailroadLine(saultstmarie, duluth, Color.GRAY, 3));
+        railroads.add(new RailroadLine(duluth, winnipeg, Color.BLACK,4));
+        railroads.add(new RailroadLine(winnipeg, helena, Color.BLUE, 4));
+        railroads.add(new RailroadLine(helena, calgary, Color.GRAY, 4));
+        railroads.add(new RailroadLine(helena, duluth, ORANGE, 6));
+        railroads.add(new RailroadLine(helena, seattle, Color.YELLOW, 6));
+
+//        railroads.add(new DoubleRailroadLine(seattle, vancouver, Color.GRAY, 1, Color.GRAY));
+        railroads.add(new RailroadLine(seattle, vancouver, Color.GRAY, 1));
+
+        railroads.add(new RailroadLine(seattle, calgary, Color.GRAY, 4));
+
+//        railroads.add(new DoubleRailroadLine(seattle, portland, Color.GRAY, 1, Color.GRAY));
+//        railroads.add(new DoubleRailroadLine(portland, sanfrancisco, Color.GREEN, 5, Color.PINK));
+//        railroads.add(new DoubleRailroadLine(sanfrancisco, saltlakecity, Color.ORANGE, 5, Color.WHITE));
+        railroads.add(new RailroadLine(seattle, portland, Color.GRAY, 1));
+        railroads.add(new RailroadLine(portland, sanfrancisco, Color.GREEN, 5));
+        railroads.add(new RailroadLine(sanfrancisco, saltlakecity, ORANGE, 5));
+
+        railroads.add(new RailroadLine(saltlakecity, portland, Color.BLUE, 6));
+        railroads.add(new RailroadLine(saltlakecity, helena, PINK, 3));
+        railroads.add(new RailroadLine(helena, omaha, Color.RED, 5));
+
+//        railroads.add(new DoubleRailroadLine(omaha, duluth, Color.GRAY, 2, Color.GRAY));
+        railroads.add(new RailroadLine(omaha, duluth, Color.GRAY, 2));
+
+        railroads.add(new RailroadLine(duluth, chicago, Color.RED, 3));
+        railroads.add(new RailroadLine(chicago, toronto, Color.WHITE, 4));
+
+//        railroads.add(new DoubleRailroadLine(newyork, washington, Color.ORANGE, 2, Color.BLACK));
+        railroads.add(new RailroadLine(newyork, washington, ORANGE, 2));
+
+        railroads.add(new RailroadLine(washington, pittsburgh, Color.GRAY, 2));
+        railroads.add(new RailroadLine(pittsburgh, chicago, Color.BLACK, 3));
+        railroads.add(new RailroadLine(chicago, omaha, Color.BLUE, 4));
+        railroads.add(new RailroadLine(omaha, denver, PINK, 4));
+        railroads.add(new RailroadLine(denver, helena, Color.GREEN,4));
+        railroads.add(new RailroadLine(denver, saltlakecity, Color.YELLOW, 3));
+        railroads.add(new RailroadLine(saltlakecity, lasvegas, ORANGE, 3));
+        railroads.add(new RailroadLine(lasvegas, losangeles, Color.GRAY, 2));
+        railroads.add(new RailroadLine(losangeles, phoenix, Color.GRAY, 3));
+        railroads.add(new RailroadLine(phoenix, elpaso, Color.GRAY, 3));
+        railroads.add(new RailroadLine(elpaso, losangeles, Color.BLACK, 6));
+
+//        railroads.add(new DoubleRailroadLine(losangeles, sanfrancisco, Color.YELLOW, 3, Color.PINK));
+        railroads.add(new RailroadLine(losangeles, sanfrancisco, Color.YELLOW, 3));
+
+        railroads.add(new RailroadLine(santafe, denver, Color.GRAY, 2));
+        railroads.add(new RailroadLine(santafe, oklahomacity, Color.BLUE, 3));
+        railroads.add(new RailroadLine(santafe, elpaso, Color.GRAY, 2));
+        railroads.add(new RailroadLine(santafe, phoenix, Color.GRAY, 3));
+        railroads.add(new RailroadLine(elpaso, oklahomacity, Color.YELLOW, 5));
+        railroads.add(new RailroadLine(elpaso, dallas, Color.RED,4));
+        railroads.add(new RailroadLine(elpaso, houston, Color.GREEN, 6));
+        railroads.add(new RailroadLine(houston, neworleans, Color.RED, 2));
+
+//        railroads.add(new DoubleRailroadLine(houston, dallas, Color.GRAY, 1, Color.GRAY));
+        railroads.add(new RailroadLine(houston, dallas, Color.GRAY, 1));
+
+        railroads.add(new RailroadLine(dallas, littlerock, Color.GRAY, 2));
+
+//        railroads.add(new DoubleRailroadLine(dallas, oklahomacity, Color.GRAY, 2, Color.GRAY));
+        railroads.add(new RailroadLine(dallas, oklahomacity, Color.GRAY, 2));
+
+        railroads.add(new RailroadLine(oklahomacity, littlerock, Color.GRAY, 2));
+
+//        railroads.add(new DoubleRailroadLine(oklahomacity, kansascity, Color.GRAY, 2, Color.GRAY));
+        railroads.add(new RailroadLine(oklahomacity, kansascity, Color.GRAY, 2));
+
+        railroads.add(new RailroadLine(oklahomacity, denver, Color.RED, 4));
+        railroads.add(new RailroadLine(littlerock, neworleans, Color.GREEN, 3));
+        railroads.add(new RailroadLine(littlerock, nashville, Color.WHITE, 3));
+        railroads.add(new RailroadLine(littlerock, saintlouis, Color.GRAY, 2));
+        railroads.add(new RailroadLine(neworleans, miami, Color.RED, 6));
+
+//        railroads.add(new DoubleRailroadLine(neworleans, atlanta, Color.ORANGE, 4, Color.YELLOW));
+        railroads.add(new RailroadLine(neworleans, atlanta, ORANGE, 4));
+
+        railroads.add(new RailroadLine(atlanta, miami, Color.BLUE, 5));
+        railroads.add(new RailroadLine(atlanta,charleston, Color.GRAY, 2));
+
+//        railroads.add(new DoubleRailroadLine(atlanta, raleigh, Color.GRAY, 2, Color.GRAY));
+        railroads.add(new RailroadLine(atlanta, raleigh, Color.GRAY, 2));
+
+        railroads.add(new RailroadLine(atlanta, nashville, Color.GRAY, 1));
+        railroads.add(new RailroadLine(miami, charleston, PINK, 4));
+        railroads.add(new RailroadLine(charleston, raleigh, Color.GRAY, 2));
+
+//        railroads.add(new DoubleRailroadLine(raleigh, washington, Color.GRAY, 2, Color.GRAY));
+        railroads.add(new RailroadLine(raleigh, washington, Color.GRAY, 2));
+
+        railroads.add(new RailroadLine(raleigh, pittsburgh, Color.GRAY, 2));
+        railroads.add(new RailroadLine(raleigh, nashville, Color.BLACK, 3));
+        railroads.add(new RailroadLine(nashville, pittsburgh, Color.YELLOW, 4));
+        railroads.add(new RailroadLine(nashville, saintlouis, Color.GRAY,2));
+        railroads.add(new RailroadLine(saintlouis, pittsburgh, Color.GREEN, 5));
+
+//        railroads.add(new DoubleRailroadLine(saintlouis, chicago, Color.GREEN, 2, Color.WHITE));
+//        railroads.add(new DoubleRailroadLine(saintlouis, kansascity, Color.BLUE, 2, Color.PINK));
+//        railroads.add(new DoubleRailroadLine(kansascity, omaha, Color.GRAY, 1, Color.GRAY));
+//        railroads.add(new DoubleRailroadLine(kansascity, denver, Color.BLACK, 4, Color.ORANGE));
+        railroads.add(new RailroadLine(saintlouis, chicago, Color.GREEN, 2));
+        railroads.add(new RailroadLine(saintlouis, kansascity, Color.BLUE, 2));
+        railroads.add(new RailroadLine(kansascity, omaha, Color.GRAY, 1));
+        railroads.add(new RailroadLine(kansascity, denver, Color.BLACK, 4));
+
+        railroads.add(new RailroadLine(denver, phoenix, Color.WHITE, 5));
 
 
         canvas.drawColor(Color.TRANSPARENT);
@@ -159,33 +284,9 @@ public class MapFragment extends Fragment
         paint.setStrokeWidth(12);
         paint.setAntiAlias(true);
 
-        railroads = new ArrayList<>();
-        railroads.add(r1);
-        railroads.add(r2);
-        railroads.add(r3);
-        railroads.add(r4);
-        railroads.add(r5);
-        railroads.add(r6);
-        railroads.add(r7);
-        railroads.add(r8);
-        railroads.add(r9);
-        railroads.add(r10);
-        railroads.add(r11);
-        railroads.add(r12);
-        railroads.add(r14);
-        railroads.add(r15);
-        railroads.add(r16);
-        railroads.add(r18);
-        railroads.add(r19);
-        railroads.add(r20);
-        railroads.add(r21);
-        railroads.add(r22);
-
         Player player1 = new Player("player one", Color.RED);
-        //Set currentPlayer to whoever's turn it is
-        Player currentPlayer = player1;
-        Destination[] destinations = {dest1, dest2, dest3, dest4, dest5, dest6, dest7, dest8, dest9, dest10, dest11, dest12};
-
+        //Set currentPlayer to whoevers turn it is
+        currentPlayer = player1;
 
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable()
@@ -200,12 +301,12 @@ public class MapFragment extends Fragment
                     drawn = true;
                 });
             }
-        }, 50);
+        }, 250);
 
         for (Destination d : destinations)
         {
             d.getButton().setOnClickListener(view1 -> {
-                railBuilder(d, currentPlayer);
+                selector(d, currentPlayer);
             });
         }
         return view;
@@ -220,32 +321,72 @@ public class MapFragment extends Fragment
     }
 
 
+    //finish this
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void railBuilder(Destination secondDest, Player player)
+    public void selector(Destination secondDest, Player player)
     {
+        boolean building = false;
         if (firstDest == null)
         {
             firstDest = secondDest;
-            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+            for (RailroadLine rl : railroads)
+            {
+                if(rl.getDestination1().equals(firstDest))
+                    rl.getDestination2().getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+                else if(rl.getDestination2().equals(firstDest))
+                    rl.getDestination1().getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+            }
         }
         else if (firstDest.equals(secondDest))
         {
             firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            for (RailroadLine rl : railroads)
+            {
+                if(rl.getDestination1().equals(firstDest) && rl.getOwner() != null)
+                    rl.getDestination2().getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+                else if(rl.getDestination2().equals(firstDest) && rl.getOwner() != null)
+                    rl.getDestination1().getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            }
             firstDest = null;
+        }
+        else if (!building)
+        {
+            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+            secondDest.getButton().setOnClickListener(view -> railBuilder(secondDest, player));
+            building = true;
+
         }
         else
         {
-            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
-            //TODO Confirmation Dialog or confirmation button???
-            RailroadLine rl = new RailroadLine(firstDest, secondDest);
-            if (railroads.contains(rl))
-            {
-                RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
-                currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player);
-            }
-            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-            firstDest = null;
+            resetButtons();
+            firstDest = secondDest;
+            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+            building = false;
+        }
+    }
+
+    public void railBuilder(Destination secondDest, Player player)
+    {
+        RailroadLine rl = new RailroadLine(firstDest, secondDest);
+        if (railroads.contains(rl))
+        {
+            RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
+            currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player);
+        }
+        resetButtons();
+        firstDest = null;
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public void resetButtons()
+    {
+        for (Destination d : destinations)
+        {
+            d.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            d.getButton().setOnClickListener(view1 -> {
+                selector(d, currentPlayer);
+            });
         }
     }
 }

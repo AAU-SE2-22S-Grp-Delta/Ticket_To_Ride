@@ -37,114 +37,329 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="121dp"
-            android:layout_y="73dp"
+            android:id="@+id/vancouver"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="93dp"
+            android:layout_y="50dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/seattle"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="89dp"
+            android:layout_y="119dp"
             android:background="@drawable/destination"
             android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="80dp"
-            android:layout_y="268dp"
+            android:id="@+id/portland"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="60dp"
+            android:layout_y="177dp"
             android:background="@drawable/destination"
-            android:text="2" />
+            android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="89dp"
-            android:layout_y="477dp"
+            android:id="@+id/sanfrancisco"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="45dp"
+            android:layout_y="410dp"
             android:background="@drawable/destination"
-            android:text="3" />
+            android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest4"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="365dp"
-            android:layout_y="517dp"
+            android:id="@+id/losangeles"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="144dp"
+            android:layout_y="537dp"
             android:background="@drawable/destination"
-            android:text="4" />
+            android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest5"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="425dp"
+            android:id="@+id/phoenix"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="312dp"
+            android:layout_y="518dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/elpaso"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="455dp"
+            android:layout_y="585dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dallas"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="696dp"
+            android:layout_y="543dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/houston"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="750dp"
+            android:layout_y="611dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/newOrleans"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="871dp"
+            android:layout_y="595dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/miami"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1158dp"
+            android:layout_y="635dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/atlanta"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="993dp"
+            android:layout_y="439dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/charleston"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1120dp"
+            android:layout_y="452dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/raileigh"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1079dp"
+            android:layout_y="370dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/washington"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1158dp"
+            android:layout_y="291dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pittsburgh"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1037dp"
+            android:layout_y="240dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nashville"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="925dp"
+            android:layout_y="399dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/littleRock"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="784dp"
+            android:layout_y="455dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/oklahomaCity"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="668dp"
+            android:layout_y="452dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saintLouis"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="807dp"
+            android:layout_y="355dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/kansasCity"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="689dp"
+            android:layout_y="351dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/omaha"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="661dp"
+            android:layout_y="292dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/denver"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="472dp"
+            android:layout_y="375dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saltLakeCity"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="302dp"
+            android:layout_y="333dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/helena"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="396dp"
+            android:layout_y="188dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/calgary"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="264dp"
+            android:layout_y="36dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/winnipeg"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="562dp"
+            android:layout_y="48dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saultStMarie"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="873dp"
             android:layout_y="102dp"
             android:background="@drawable/destination"
-            android:text="5" />
+            android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest6"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="598dp"
-            android:layout_y="660dp"
+            android:id="@+id/duluth"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="706dp"
+            android:layout_y="184dp"
             android:background="@drawable/destination"
-            android:text="6" />
+            android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest7"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="562dp"
-            android:layout_y="342dp"
+            android:id="@+id/newYork"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1145dp"
+            android:layout_y="186dp"
             android:background="@drawable/destination"
-            android:text="7" />
+            android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest8"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="815dp"
-            android:layout_y="135dp"
-            android:background="@drawable/destination"
-            android:backgroundTint="#FFFFFF"
-            android:text="8" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest9"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="928dp"
-            android:layout_y="344dp"
-            android:background="@drawable/destination"
-            android:text="9" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest10"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="1237dp"
-            android:layout_y="562dp"
-            android:background="@drawable/destination"
-            android:text="10" />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest11"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="857dp"
-            android:layout_y="701dp"
-            android:background="@drawable/destination"
-            android:text="11" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dest12"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="1221dp"
+            android:id="@+id/toronto"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1011dp"
             android:layout_y="134dp"
             android:background="@drawable/destination"
-            android:text="12" />
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/montreal"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1122dp"
+            android:layout_y="28dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/santaFe"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="465dp"
+            android:layout_y="479dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/boston"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="1215dp"
+            android:layout_y="98dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/lasVegas"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="228dp"
+            android:layout_y="464dp"
+            android:background="@drawable/destination"
+            android:text="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/chicago"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_x="863dp"
+            android:layout_y="256dp"
+            android:background="@drawable/destination"
+            android:text="1" />
 
         <ImageView
             android:id="@+id/drawView"
@@ -152,7 +367,7 @@
             android:layout_height="2160px"
             android:layout_x="0dp"
             android:layout_y="0dp"
-            android:src="@drawable/map"
+            android:src="@drawable/untitled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
