@@ -1,6 +1,6 @@
 package at.aau.se2.tickettoride.fragments;
 
-import android.media.Image;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +10,16 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import at.aau.se2.tickettoride.R;
+import at.aau.se2.tickettoride.helpers.ResourceHelper;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerDestinationBinding;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class PlayerDestinationFragment extends Fragment {
+public class PlayerDestinationFragment extends DialogFragment {
     private FragmentPlayerDestinationBinding binding;
-    private LinearLayout linearLayout;
     private GameModel gameModel;
 
     public static PlayerDestinationFragment newInstance() {
@@ -39,24 +37,49 @@ public class PlayerDestinationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPlayerDestinationBinding.inflate(inflater, container, false);
+
+        initComponents();
+
         return binding.getRoot();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        displayDestinationCards();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Set dialog to full screen size
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+    }
+
+    private void initComponents() {
+        binding.button.setOnClickListener(view -> dismiss());
+
+        getParentFragmentManager().setFragmentResultListener("refresh",this,((requestKey, result) -> displayDestinationCards()));
+    }
+
+    public void displayDestinationCards()
+    {
         List<Integer> heldDestinationCards = gameModel.getPlayerDestinationCards();
+        binding.linearLayoutTrackCards.removeAllViews();
 
-        /* für Testzwecke
-        List<Integer> heldDestinationCards = new ArrayList<>();
-        heldDestinationCards.add(1);
-        heldDestinationCards.add(5);
-        heldDestinationCards.add(2);*/
-
-        linearLayout = view.findViewById(R.id.linearLayoutTrackCards);
-
-        for(int i=0;i<=heldDestinationCards.size()-1;i++)
+        for (int card : heldDestinationCards)
         {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -64,38 +87,13 @@ public class PlayerDestinationFragment extends Fragment {
             );
             layoutParams.setMargins(5,10,5,10);
 
-            ImageView imageView = new ImageView(linearLayout.getContext());
+            ImageView imageView = new ImageView(binding.linearLayoutTrackCards.getContext());
             imageView.setLayoutParams(layoutParams);
             imageView.getLayoutParams().height = 160;
             imageView.getLayoutParams().width = 250;
+            imageView.setImageDrawable(ResourceHelper.getMissionResource(getContext(), card));
 
-            switch (heldDestinationCards.get(i)) {
-                case 1:
-                    imageView.setImageResource(R.drawable.calgary_saltlakecity);
-                    break;
-                case 2:
-                    imageView.setImageResource(R.drawable.kansascity_houston);
-                    break;
-                case 3:
-                    imageView.setImageResource(R.drawable.losangeles_chicago);
-                    break;
-                case 4:
-                    imageView.setImageResource(R.drawable.newyork_atlanta);
-                    break;
-                case 5:
-                    imageView.setImageResource(R.drawable.portland_phoenix);
-                    break;
-                case 6:
-                    imageView.setImageResource(R.drawable.seattle_newyork);
-                    break;
-            }
-            linearLayout.addView(imageView);
+            binding.linearLayoutTrackCards.addView(imageView);
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }

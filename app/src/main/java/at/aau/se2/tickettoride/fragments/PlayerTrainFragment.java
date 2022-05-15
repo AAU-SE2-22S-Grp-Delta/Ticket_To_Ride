@@ -1,6 +1,6 @@
 package at.aau.se2.tickettoride.fragments;
 
-import static at.aau.se2.tickettoride.ResourceHelper.getTrainResource;
+import static at.aau.se2.tickettoride.helpers.ResourceHelper.getTrainResource;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,17 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
-import at.aau.se2.tickettoride.enums.TrainCards;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class PlayerTrainFragment extends Fragment {
     private FragmentPlayerTrainBinding binding;
-    private LinearLayout linearLayout;
     private GameModel gameModel;
 
     public static PlayerTrainFragment newInstance() {
@@ -41,12 +37,19 @@ public class PlayerTrainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPlayerTrainBinding.inflate(inflater, container, false);
+        getParentFragmentManager().setFragmentResultListener("refresh",this,((requestKey, result) -> displayTrainCards()));
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        displayTrainCards();
+    }
+
+    public void displayTrainCards() {
 
         List<Integer> heldTrainCards = gameModel.getPlayerTrainCards();
 
@@ -58,7 +61,7 @@ public class PlayerTrainFragment extends Fragment {
         heldTrainCards.add(5);
         heldTrainCards.add(7);*/
 
-        linearLayout = view.findViewById(R.id.linearLayoutTrainCards);
+        binding.linearLayoutTrainCards.removeAllViews();
 
         for(Integer card : heldTrainCards)
         {
@@ -68,13 +71,13 @@ public class PlayerTrainFragment extends Fragment {
             );
             layoutParams.setMargins(5,10,5,10);
 
-            ImageView imageView = new ImageView(linearLayout.getContext());
+            ImageView imageView = new ImageView(binding.linearLayoutTrainCards.getContext());
             imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 160;
-            imageView.getLayoutParams().width = 160;
+//            imageView.getLayoutParams().height = 160;
+//            imageView.getLayoutParams().width = 160;
             imageView.setImageResource(getTrainResource(card));
 
-            linearLayout.addView(imageView);
+            binding.linearLayoutTrainCards.addView(imageView);
         }
     }
 

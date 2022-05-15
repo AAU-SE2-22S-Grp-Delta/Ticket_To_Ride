@@ -13,3 +13,23 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# User-specific configurations
+/.idea/compiler.xml
+/.idea/copyright/profiles_settings.xml
+/.idea/dataSources.ids
+/.idea/datasources.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/dictionaries
+/.idea/dynamic.xml
+/.idea/encodings.xml
+/.idea/gradle.xml
+/.idea/jarRepositories.xml
+/.idea/jsLibraryMappings.xml
+/.idea/misc.xml
+/.idea/scopes/scope_settings.xml
+/.idea/shelf
+/.idea/sqlDataSources.xml
+/.idea/tasks.xml
+/.idea/uiDesigner.xml
+/.idea/vcs.xml

@@ -13,11 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Objects;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.models.GameModel;
-import at.aau.se2.tickettoride.ResourceHelper;
+import at.aau.se2.tickettoride.helpers.ResourceHelper;
 
 public class TrainDialogFragment extends DialogFragment {
 
@@ -48,18 +48,21 @@ public class TrainDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
-                        ArrayList<Integer> newPlayerTrainCards = new ArrayList<>(gameModel.getPlayerTrainCards());
-                        newPlayerTrainCards.add(cardNr);
-                        gameModel.setPlayerTrainCards(newPlayerTrainCards);
-                        Log.i("RESULT", Integer.toString(cardNr));
+                        addChosenCardToHand();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        TrainDialogFragment.this.getDialog().cancel();
+                        Objects.requireNonNull(TrainDialogFragment.this.getDialog()).cancel();
                     }
                 });
         return builder.create();
+    }
+    private void addChosenCardToHand(){
+        ArrayList<Integer> newPlayerTrainCards = new ArrayList<>(gameModel.getPlayerTrainCards());
+        newPlayerTrainCards.add(cardNr);
+        gameModel.setPlayerTrainCards(newPlayerTrainCards);
+        Log.i("RESULT", Integer.toString(cardNr));
     }
 }
