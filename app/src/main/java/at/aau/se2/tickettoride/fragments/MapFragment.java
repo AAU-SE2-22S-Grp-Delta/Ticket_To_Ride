@@ -8,18 +8,24 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dataStructures.Destination;
 import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.RailroadLine;
@@ -30,8 +36,8 @@ public class MapFragment extends Fragment
 {
     private FragmentMapBinding binding;
     private Destination firstDest = null;
-    private ArrayList<RailroadLine> railroads= new ArrayList<>();
     private ArrayList<Destination> destinations = new ArrayList<>();
+    private ArrayList<RailroadLine> railroads = new ArrayList<>();
 
     public static MapFragment newInstance()
     {
@@ -72,7 +78,12 @@ public class MapFragment extends Fragment
     RailroadLine r20 = null;
     RailroadLine r21 = null;
     RailroadLine r22 = null;
+    Bitmap bm = Bitmap.createBitmap(3840, 2160, Bitmap.Config.ARGB_8888);
+    Canvas canvas = new Canvas(bm);
+    Paint paint = new Paint();
+    Boolean drawn = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
@@ -88,6 +99,8 @@ public class MapFragment extends Fragment
         binding.mapFragment.setOnTouchListener(mapOnTouchListener);
         binding.mapFragment.addOnLayoutChangeListener(mapOnTouchListener);
 
+        ImageView dv = binding.drawView;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
         dest1 = new Destination("dest1", binding.dest1);
@@ -102,6 +115,7 @@ public class MapFragment extends Fragment
         dest10 = new Destination("dest10", binding.dest10);
         dest11 = new Destination("dest11", binding.dest11);
         dest12 = new Destination("dest12", binding.dest12);
+
         destinations = new ArrayList<>();
         destinations.add(dest1);
         destinations.add(dest2);
@@ -128,11 +142,11 @@ public class MapFragment extends Fragment
         r10 = new RailroadLine(dest8, dest12, Color.GRAY, 2);
         r11 = new RailroadLine(dest12, dest10, Color.GREEN, 3);
         r12 = new RailroadLine(dest11, dest10, Color.RED, 1);
-        r13 = new RailroadLine(dest10, dest6, Color.RED, 1);
+
         r14 = new RailroadLine(dest9, dest12, Color.YELLOW, 2);
         r15 = new RailroadLine(dest7, dest9, Color.GRAY, 2);
         r16 = new RailroadLine(dest6, dest11, Color.GREEN, 3);
-        r17 = new RailroadLine(dest6, dest8, Color.RED, 1);
+
         r18 = new RailroadLine(dest2, dest5, Color.GRAY, 2);
         r19 = new RailroadLine(dest5, dest7, Color.MAGENTA, 3);
         r20 = new RailroadLine(dest4, dest7, Color.RED, 1);
@@ -140,15 +154,12 @@ public class MapFragment extends Fragment
         r22 = new RailroadLine(dest5, dest3, Color.MAGENTA, 2);
 
 
-        Bitmap bm = Bitmap.createBitmap(3840, 2160, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bm);
         canvas.drawColor(Color.TRANSPARENT);
-        Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(12);
         paint.setAntiAlias(true);
 
-        ArrayList<RailroadLine> railroads = new ArrayList<>();
+        railroads = new ArrayList<>();
         railroads.add(r1);
         railroads.add(r2);
         railroads.add(r3);
@@ -161,11 +172,9 @@ public class MapFragment extends Fragment
         railroads.add(r10);
         railroads.add(r11);
         railroads.add(r12);
-        railroads.add(r13);
         railroads.add(r14);
         railroads.add(r15);
         railroads.add(r16);
-        railroads.add(r17);
         railroads.add(r18);
         railroads.add(r19);
         railroads.add(r20);
@@ -173,70 +182,70 @@ public class MapFragment extends Fragment
         railroads.add(r22);
 
         Player player1 = new Player("player one", Color.RED);
-
+        //Set currentPlayer to whoever's turn it is
+        Player currentPlayer = player1;
         Destination[] destinations = {dest1, dest2, dest3, dest4, dest5, dest6, dest7, dest8, dest9, dest10, dest11, dest12};
+
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                railroads.forEach((railroadLine) ->
+                {
+                    railroadLine.buildRoad(canvas, paint, bm, binding.drawView);
+                    binding.drawView.setImageBitmap(bm);
+                    drawn = true;
+                });
+            }
+        }, 50);
 
         for (Destination d : destinations)
         {
             d.getButton().setOnClickListener(view1 -> {
-                try
-                {
-                    if (firstDest != null)
-                    {
-                        RailroadLine rl = new RailroadLine(firstDest, d);
-                        if (railroads.contains(rl))
-                        {
-                            RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
-                            paint.setXfermode(null);
-                            currentRoad.buildRoad(canvas, paint, bm, binding.drawView);
-                            builder.setTitle("Build Road");
-                            builder.setMessage("Do you wish to build the railroad from " + currentRoad.getDestination1().getName() + " to " + currentRoad.getDestination2().getName()
-                                    + " with a cost of: " + currentRoad.getDistance() + "?");
-                            builder.setPositiveButton("Confirm", (dialogInterface, i) -> {
-
-                                currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player1);
-                                firstDest = null;
-                            });
-                            builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
-                                paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-                                currentRoad.buildRoad(canvas, paint, bm, binding.drawView);
-                                firstDest = null;
-                            });
-
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                        } else
-                        {
-                            Log.d("Error", "not a valid road");
-                            firstDest = null;
-                        }
-                    } else
-                        firstDest = d;
-                } catch (Exception e)
-                {
-                    //handle errors via popup?
-                    firstDest = null;
-                    System.out.println(e.getMessage());
-                }
+                railBuilder(d, currentPlayer);
             });
         }
-
         return view;
     }
+
 
     @Override
     public void onDestroyView()
     {
-//        for (RailroadLine r : railroads)
-//            r = null;
-//        for (Destination d : destinations)
-//            d = null;
         super.onDestroyView();
         binding = null;
     }
 
-    public void initFields()
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public void railBuilder(Destination secondDest, Player player)
     {
-        //for later, cleaner code
+        if (firstDest == null)
+        {
+            firstDest = secondDest;
+            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+        }
+        else if (firstDest.equals(secondDest))
+        {
+            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            firstDest = null;
+        }
+        else
+        {
+            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+            //TODO Confirmation Dialog or confirmation button???
+            RailroadLine rl = new RailroadLine(firstDest, secondDest);
+            if (railroads.contains(rl))
+            {
+                RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
+                currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player);
+            }
+            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            firstDest = null;
+        }
     }
 }

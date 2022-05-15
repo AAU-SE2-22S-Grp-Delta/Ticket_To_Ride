@@ -36,7 +36,7 @@
         <!--            android:text="MapFragment" />-->
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest1"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -45,7 +45,7 @@
             android:background="@drawable/destination"
             android:text="1" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest2"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -54,7 +54,7 @@
             android:background="@drawable/destination"
             android:text="2" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest3"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -63,7 +63,7 @@
             android:background="@drawable/destination"
             android:text="3" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest4"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -72,7 +72,7 @@
             android:background="@drawable/destination"
             android:text="4" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest5"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -81,7 +81,7 @@
             android:background="@drawable/destination"
             android:text="5" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest6"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -90,7 +90,7 @@
             android:background="@drawable/destination"
             android:text="6" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest7"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -99,16 +99,17 @@
             android:background="@drawable/destination"
             android:text="7" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest8"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_x="815dp"
             android:layout_y="135dp"
             android:background="@drawable/destination"
+            android:backgroundTint="#FFFFFF"
             android:text="8" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest9"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -117,7 +118,7 @@
             android:background="@drawable/destination"
             android:text="9" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest10"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -127,7 +128,7 @@
             android:text="10" />
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest11"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -136,7 +137,7 @@
             android:background="@drawable/destination"
             android:text="11" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dest12"
             android:layout_width="50dp"
             android:layout_height="50dp"
