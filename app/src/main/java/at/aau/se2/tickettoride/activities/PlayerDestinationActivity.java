@@ -1,5 +1,6 @@
 package at.aau.se2.tickettoride.activities;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,5 +18,6 @@ public class PlayerDestinationActivity extends AppCompatActivity {
                     .replace(R.id.container, PlayerDestinationFragment.newInstance())
                     .commitNow();
         }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 }
