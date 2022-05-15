@@ -3,27 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/drawable/customborder.xml" value="0.1" />
-        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/drawable/ic_launcher_background.xml" value="0.327" />
-        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/activity_game.xml" value="0.23697916666666666" />
-        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/activity_map.xml" value="0.35104166666666664" />
-        <entry key="..\:/Meins/Android Projects/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.1" />
-        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/activity_game.xml" value="0.3765625" />
-        <entry key="..\:/Ticket_To_Ride/app/src/main/res/layout/fragment_map.xml" value="0.33" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/drawable/custom_border.xml" value="0.1" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/drawable/ic_train.xml" value="0.1" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/drawable/ic_train_black.xml" value="0.1" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_desk_open_train.xml" value="0.10944848225737494" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/activity_game.xml" value="0.13852073535699017" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_desk_destination.xml" value="0.10944848225737494" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_desk_open_train.xml" value="0.25" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_desk_train.xml" value="0.11372381359555365" />
-        <entry key="..\:/Users/rausc/Documents/Studium/21S/UE - SE2/Projekt - Zug um Zug/Ticket_To_Ride/app/src/main/res/layout/fragment_player_destination.xml" value="0.13852073535699017" />
+        <entry key="..\:/Users/matth/AndroidStudioProjects/Ticket_To_Ride_new/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17" />
+        <entry key="..\:/Users/matth/AndroidStudioProjects/Ticket_To_Ride_new/app/src/main/res/layout/fragment_player_destination.xml" value="0.23867753623188406" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
