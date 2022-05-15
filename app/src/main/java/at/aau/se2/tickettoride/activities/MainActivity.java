@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityMainBinding;
+import at.aau.se2.tickettoride.dialogs.HelpDialogFragment;
 
 
 
@@ -80,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         binding.button7.setOnClickListener(v -> {
             Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
             startActivity(intent);
+        });
+        binding.floatingActionButton.setOnClickListener(v -> {
+            HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
+            helpDialogFragment.show(getSupportFragmentManager(), "helpDialog");
         });
     }
 }
