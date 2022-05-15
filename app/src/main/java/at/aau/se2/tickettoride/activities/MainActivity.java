@@ -1,18 +1,12 @@
 package at.aau.se2.tickettoride.activities;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
@@ -44,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
 
         binding.button.setOnClickListener(v -> {
-            Intent intent = new Intent(this, GameActivity.class);
+            Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
             startActivity(intent);
         });
 

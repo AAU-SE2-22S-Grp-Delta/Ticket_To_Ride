@@ -1,9 +1,9 @@
 package at.aau.se2.tickettoride.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.fragments.DrawDestinationCardsFragment;
