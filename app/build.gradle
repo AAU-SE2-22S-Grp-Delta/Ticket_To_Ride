@@ -70,6 +70,7 @@ android {
             unitTests.returnDefaultValues = true
         }
     }
+    namespace 'at.aau.se2.tickettoride'
 }
 
 dependencies {
