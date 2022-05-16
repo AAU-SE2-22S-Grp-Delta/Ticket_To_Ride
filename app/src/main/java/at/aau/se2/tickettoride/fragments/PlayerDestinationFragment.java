@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,8 +12,8 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.List;
 
-import at.aau.se2.tickettoride.helpers.ResourceHelper;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerDestinationBinding;
+import at.aau.se2.tickettoride.helpers.ResourceHelper;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class PlayerDestinationFragment extends DialogFragment {
@@ -74,25 +72,12 @@ public class PlayerDestinationFragment extends DialogFragment {
         getParentFragmentManager().setFragmentResultListener("refresh",this,((requestKey, result) -> displayDestinationCards()));
     }
 
-    public void displayDestinationCards()
-    {
+    public void displayDestinationCards() {
         List<Integer> heldDestinationCards = gameModel.getPlayerDestinationCards();
         binding.linearLayoutTrackCards.removeAllViews();
 
-        for (int card : heldDestinationCards)
-        {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            layoutParams.setMargins(5,10,5,10);
-
-            ImageView imageView = new ImageView(binding.linearLayoutTrackCards.getContext());
-            imageView.setLayoutParams(layoutParams);
-            imageView.getLayoutParams().height = 400;
-            imageView.getLayoutParams().width = 600;
-            imageView.setImageDrawable(ResourceHelper.getMissionResource(getContext(), card));
-
+        for (int card : heldDestinationCards) {
+            View imageView = ResourceHelper.getMissionView(requireContext(), card);
             binding.linearLayoutTrackCards.addView(imageView);
         }
     }
