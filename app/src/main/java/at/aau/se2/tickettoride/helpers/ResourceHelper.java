@@ -7,11 +7,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
 import at.aau.se2.tickettoride.R;
+import at.aau.se2.tickettoride.dataStructures.Mission;
+import at.aau.se2.tickettoride.databinding.CardMissionBinding;
 import at.aau.se2.tickettoride.enums.TrainCards;
+import at.aau.se2.tickettoride.models.Missions;
 
 public class ResourceHelper {
     public static Drawable getMissionResource(Context context, int card) {
@@ -32,6 +37,17 @@ public class ResourceHelper {
                 Bitmap bitmap = textAsBitmap("Mission " + card, 48, Color.RED);
                 return new BitmapDrawable(context.getResources(), bitmap);
         }
+    }
+
+    public static View getMissionView(Context context, int card) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        CardMissionBinding binding = CardMissionBinding.inflate(inflater);
+        Mission mission = Missions.getMissionById(card);
+        if (mission != null) {
+            binding.destination.setText(String.format("%s - %s", mission.getDestination1(), mission.getDestination2()));
+            binding.points.setText(String.format("%s", mission.getPoints()));
+        }
+        return binding.getRoot();
     }
 
     public static int getTrainResource(int card) {
