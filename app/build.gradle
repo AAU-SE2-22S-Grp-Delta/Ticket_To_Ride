@@ -21,7 +21,7 @@ task jacocoTestReport(type: JacocoReport,
 
     reports {
         xml.required
-        html.required
+        html.requiredg
     }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
@@ -39,7 +39,7 @@ android {
 
     defaultConfig {
         applicationId "at.aau.se2.tickettoride"
-        minSdk 21
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
