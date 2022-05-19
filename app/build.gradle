@@ -21,7 +21,7 @@ task jacocoTestReport(type: JacocoReport,
 
     reports {
         xml.required
-        html.requiredg
+        html.required
     }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
