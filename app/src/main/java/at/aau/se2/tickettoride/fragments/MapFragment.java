@@ -2,28 +2,29 @@ package at.aau.se2.tickettoride.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dataStructures.Destination;
@@ -49,12 +50,11 @@ public class MapFragment extends Fragment
     Paint paint = new Paint();
     Boolean drawn = false;
 
-    final int PINK = Color.rgb(188,143,143);
+    final int PINK = Color.rgb(188, 143, 143);
     final int ORANGE = Color.rgb(255, 127, 0);
 
     Player currentPlayer;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
@@ -107,8 +107,8 @@ public class MapFragment extends Fragment
         Destination omaha = new Destination("Omaha", binding.omaha);
         Destination washington = new Destination("Washington", binding.washington);
         Destination lasvegas = new Destination("Las Vegas", binding.lasVegas);
-        Destination charleston = new Destination("Charleston",binding.charleston);
-        Destination saintlouis = new Destination("Saint Louis",binding.saintLouis);
+        Destination charleston = new Destination("Charleston", binding.charleston);
+        Destination saintlouis = new Destination("Saint Louis", binding.saintLouis);
         Destination raleigh = new Destination("Raleigh", binding.raileigh);
 
 
@@ -153,11 +153,11 @@ public class MapFragment extends Fragment
 
         railroads = new ArrayList<>();
         railroads.add(new RailroadLine(vancouver, calgary, Color.GRAY, 3));
-        railroads.add(new RailroadLine(calgary,winnipeg, Color.WHITE, 6));
+        railroads.add(new RailroadLine(calgary, winnipeg, Color.WHITE, 6));
         railroads.add(new RailroadLine(winnipeg, saultstmarie, Color.GRAY, 6));
         railroads.add(new RailroadLine(saultstmarie, montréal, Color.BLACK, 5));
 //        railroads.add(new DoubleRailroadLine(montréal, boston, Color.GRAY, 2, Color.GRAY));
-        railroads.add(new RailroadLine(montréal, boston,  Color.GRAY, 2));
+        railroads.add(new RailroadLine(montréal, boston, Color.GRAY, 2));
 
         railroads.add(new RailroadLine(montréal, newyork, Color.BLUE, 3));
         railroads.add(new RailroadLine(montréal, toronto, Color.GRAY, 3));
@@ -165,13 +165,13 @@ public class MapFragment extends Fragment
 //        railroads.add(new DoubleRailroadLine(newyork, boston, Color.YELLOW, 2, Color.RED));
 //        railroads.add(new DoubleRailroadLine(newyork, pittsburgh, Color.YELLOW, 2, Color.GREEN));
         railroads.add(new RailroadLine(newyork, boston, Color.YELLOW, 2));
-        railroads.add(new RailroadLine(newyork, pittsburgh, Color.YELLOW,2));
+        railroads.add(new RailroadLine(newyork, pittsburgh, Color.YELLOW, 2));
 
-        railroads.add(new RailroadLine(toronto, pittsburgh, Color.GRAY,2));
+        railroads.add(new RailroadLine(toronto, pittsburgh, Color.GRAY, 2));
         railroads.add(new RailroadLine(toronto, saultstmarie, Color.GRAY, 2));
         railroads.add(new RailroadLine(toronto, duluth, PINK, 6));
         railroads.add(new RailroadLine(saultstmarie, duluth, Color.GRAY, 3));
-        railroads.add(new RailroadLine(duluth, winnipeg, Color.BLACK,4));
+        railroads.add(new RailroadLine(duluth, winnipeg, Color.BLACK, 4));
         railroads.add(new RailroadLine(winnipeg, helena, Color.BLUE, 4));
         railroads.add(new RailroadLine(helena, calgary, Color.GRAY, 4));
         railroads.add(new RailroadLine(helena, duluth, ORANGE, 6));
@@ -206,7 +206,7 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(pittsburgh, chicago, Color.BLACK, 3));
         railroads.add(new RailroadLine(chicago, omaha, Color.BLUE, 4));
         railroads.add(new RailroadLine(omaha, denver, PINK, 4));
-        railroads.add(new RailroadLine(denver, helena, Color.GREEN,4));
+        railroads.add(new RailroadLine(denver, helena, Color.GREEN, 4));
         railroads.add(new RailroadLine(denver, saltlakecity, Color.YELLOW, 3));
         railroads.add(new RailroadLine(saltlakecity, lasvegas, ORANGE, 3));
         railroads.add(new RailroadLine(lasvegas, losangeles, Color.GRAY, 2));
@@ -222,7 +222,7 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(santafe, elpaso, Color.GRAY, 2));
         railroads.add(new RailroadLine(santafe, phoenix, Color.GRAY, 3));
         railroads.add(new RailroadLine(elpaso, oklahomacity, Color.YELLOW, 5));
-        railroads.add(new RailroadLine(elpaso, dallas, Color.RED,4));
+        railroads.add(new RailroadLine(elpaso, dallas, Color.RED, 4));
         railroads.add(new RailroadLine(elpaso, houston, Color.GREEN, 6));
         railroads.add(new RailroadLine(houston, neworleans, Color.RED, 2));
 
@@ -249,7 +249,7 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(neworleans, atlanta, ORANGE, 4));
 
         railroads.add(new RailroadLine(atlanta, miami, Color.BLUE, 5));
-        railroads.add(new RailroadLine(atlanta,charleston, Color.GRAY, 2));
+        railroads.add(new RailroadLine(atlanta, charleston, Color.GRAY, 2));
 
 //        railroads.add(new DoubleRailroadLine(atlanta, raleigh, Color.GRAY, 2, Color.GRAY));
         railroads.add(new RailroadLine(atlanta, raleigh, Color.GRAY, 2));
@@ -264,7 +264,7 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(raleigh, pittsburgh, Color.GRAY, 2));
         railroads.add(new RailroadLine(raleigh, nashville, Color.BLACK, 3));
         railroads.add(new RailroadLine(nashville, pittsburgh, Color.YELLOW, 4));
-        railroads.add(new RailroadLine(nashville, saintlouis, Color.GRAY,2));
+        railroads.add(new RailroadLine(nashville, saintlouis, Color.GRAY, 2));
         railroads.add(new RailroadLine(saintlouis, pittsburgh, Color.GREEN, 5));
 
 //        railroads.add(new DoubleRailroadLine(saintlouis, chicago, Color.GREEN, 2, Color.WHITE));
@@ -289,25 +289,16 @@ public class MapFragment extends Fragment
         currentPlayer = player1;
 
         final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable()
+        handler.postDelayed(() -> railroads.forEach((railroadLine) ->
         {
-            @Override
-            public void run()
-            {
-                railroads.forEach((railroadLine) ->
-                {
-                    railroadLine.buildRoad(canvas, paint, bm, binding.drawView);
-                    binding.drawView.setImageBitmap(bm);
-                    drawn = true;
-                });
-            }
-        }, 250);
+            railroadLine.buildRoad(canvas, paint, bm, binding.drawView);
+            binding.drawView.setImageBitmap(bm);
+            drawn = true;
+        }), 250);
 
         for (Destination d : destinations)
         {
-            d.getButton().setOnClickListener(view1 -> {
-                selector(d, currentPlayer);
-            });
+            d.getButton().setOnClickListener(view1 -> selector(d, currentPlayer));
         }
         return view;
     }
@@ -320,50 +311,49 @@ public class MapFragment extends Fragment
         binding = null;
     }
 
+    List<Destination> reachable = new ArrayList<>();
 
-    //finish this
     @SuppressLint("UseCompatLoadingForDrawables")
     public void selector(Destination secondDest, Player player)
     {
-        boolean building = false;
         if (firstDest == null)
+            firstDestHandler(secondDest);
+        else if(firstDest.equals(secondDest))
         {
-            firstDest = secondDest;
-            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
-            for (RailroadLine rl : railroads)
-            {
-                if(rl.getDestination1().equals(firstDest))
-                    rl.getDestination2().getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
-                else if(rl.getDestination2().equals(firstDest))
-                    rl.getDestination1().getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
-            }
-        }
-        else if (firstDest.equals(secondDest))
-        {
-            firstDest.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-            for (RailroadLine rl : railroads)
-            {
-                if(rl.getDestination1().equals(firstDest) && rl.getOwner() != null)
-                    rl.getDestination2().getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-                else if(rl.getDestination2().equals(firstDest) && rl.getOwner() != null)
-                    rl.getDestination1().getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-            }
             firstDest = null;
+            resetButtons();
         }
-        else if (!building)
+        else if(reachable.contains(secondDest))
         {
             secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
             secondDest.getButton().setOnClickListener(view -> railBuilder(secondDest, player));
-            building = true;
-
         }
         else
         {
             resetButtons();
-            firstDest = secondDest;
-            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
-            building = false;
+            firstDestHandler(secondDest);
         }
+    }
+
+    public void firstDestHandler(Destination secondDest)
+    {
+        firstDest = secondDest;
+        for (RailroadLine rl : railroads)
+        {
+            if (rl.getDestination1().equals(firstDest))
+                reachable.add(rl.getDestination2());
+            else if (rl.getDestination2().equals(firstDest))
+                reachable.add(rl.getDestination1());
+        }
+        btnHighlighter(firstDest, reachable);
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public void btnHighlighter(Destination d, List<Destination> reachable)
+    {
+        d.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+        for (Destination rd : reachable)
+            rd.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
     }
 
     public void railBuilder(Destination secondDest, Player player)
@@ -381,12 +371,11 @@ public class MapFragment extends Fragment
     @SuppressLint("UseCompatLoadingForDrawables")
     public void resetButtons()
     {
+        reachable.clear();
         for (Destination d : destinations)
         {
             d.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
-            d.getButton().setOnClickListener(view1 -> {
-                selector(d, currentPlayer);
-            });
+            d.getButton().setOnClickListener(view1 -> selector(d, currentPlayer));
         }
     }
 }
