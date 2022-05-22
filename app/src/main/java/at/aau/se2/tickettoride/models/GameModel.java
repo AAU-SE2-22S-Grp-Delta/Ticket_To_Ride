@@ -100,6 +100,10 @@ public class GameModel {
         return deskClosedTrainCards.remove(0);
     }
 
+    public Integer getNextMissionCard() {
+        return deskDestinationCards.remove(0);
+    }
+
     public void drawOpenTrainCard(int pos) {
         Integer current = deskOpenTrainCards[pos];
         playerTrainCards.add(current);
