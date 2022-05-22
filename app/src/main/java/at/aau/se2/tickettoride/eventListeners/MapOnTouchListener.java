@@ -1,10 +1,12 @@
 package at.aau.se2.tickettoride.eventListeners;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ScrollView;
 
-public class MapOnTouchListener implements View.OnTouchListener, View.OnLayoutChangeListener {
+public class MapOnTouchListener extends ScrollView implements View.OnTouchListener, View.OnLayoutChangeListener {
     //TODO: When the map zooms out, the off gets visible. When scrolling for a bit, the window jumps into the bounds. This is to be fixed
 
     //Attributes for controlls
@@ -23,6 +25,7 @@ public class MapOnTouchListener implements View.OnTouchListener, View.OnLayoutCh
 
 
     public MapOnTouchListener(View window, View target) {
+        super(target.getContext());
         this.window = window;
         this.target = target;
     }

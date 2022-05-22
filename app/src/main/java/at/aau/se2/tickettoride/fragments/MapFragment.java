@@ -2,30 +2,22 @@ package at.aau.se2.tickettoride.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dataStructures.Destination;
 import at.aau.se2.tickettoride.dataStructures.Player;
