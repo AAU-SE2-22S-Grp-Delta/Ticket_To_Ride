@@ -58,9 +58,6 @@ public class GameActivity extends AppCompatActivity {
         clientConnection = ClientConnection.getInstance();
         clientConnection.sendCommand("enterLobby:testPlayer;createGame:testGame:testPlayer");
 
-        // Generate a new game (will be made on server)
-        LocalGameHelper.generateTestGame(gameModel);
-
         // After starting a new game send refresh to all attached fragments
         Bundle result = new Bundle();
         getSupportFragmentManager().setFragmentResult("refresh", result);

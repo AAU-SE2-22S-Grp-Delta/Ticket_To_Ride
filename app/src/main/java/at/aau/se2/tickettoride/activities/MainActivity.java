@@ -12,6 +12,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityMainBinding;
 import at.aau.se2.tickettoride.dialogs.HelpDialogFragment;
+import at.aau.se2.tickettoride.helpers.LocalGameHelper;
+import at.aau.se2.tickettoride.models.GameModel;
 
 public class MainActivity extends AppCompatActivity {
     private ClientConnection cc;
@@ -41,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.buttonLocal.setOnClickListener(v -> {
+            // Generate a new local game
+            GameModel gameModel = GameModel.getInstance();
+            LocalGameHelper.generateTestGame(gameModel);
+
             Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
             startActivity(intent);
         });
