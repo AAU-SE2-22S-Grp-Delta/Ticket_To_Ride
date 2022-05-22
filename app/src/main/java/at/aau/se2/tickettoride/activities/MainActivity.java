@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.buttonLocal.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
+            startActivity(intent);
+        });
+
         binding.floatingActionButton.setOnClickListener(v -> {
             HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
             helpDialogFragment.show(getSupportFragmentManager(), "helpDialog");
