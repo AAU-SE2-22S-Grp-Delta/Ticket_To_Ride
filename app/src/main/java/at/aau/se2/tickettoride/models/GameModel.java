@@ -113,4 +113,8 @@ public class GameModel {
     public void addDiscardedTrainCard(Integer trainCard) {
         deskDiscardedTrainCards.add(trainCard);
     }
+
+    public void addDiscardedMissionCards(List<Integer> missionCards) {
+        deskDestinationCards.addAll(missionCards);
+    }
 }
