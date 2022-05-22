@@ -128,8 +128,10 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
 
                 binding.imageView.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard1.getId()));
                 binding.imageView.setBackgroundColor(Color.TRANSPARENT);
+                binding.imageView.setOnClickListener(null);
                 binding.imageView2.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard2.getId()));
                 binding.imageView2.setBackgroundColor(Color.TRANSPARENT);
+                binding.imageView2.setOnClickListener(null);
                 binding.imageView3.setVisibility(View.GONE);
                 binding.button6.setVisibility(View.GONE);
 
@@ -143,10 +145,13 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
 
                 binding.imageView.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard1.getId()));
                 binding.imageView.setBackgroundColor(Color.TRANSPARENT);
+                binding.imageView.setOnClickListener(null);
                 binding.imageView2.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard2.getId()));
                 binding.imageView2.setBackgroundColor(Color.TRANSPARENT);
+                binding.imageView2.setOnClickListener(null);
                 binding.imageView3.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard3.getId()));
                 binding.imageView3.setBackgroundColor(Color.TRANSPARENT);
+                binding.imageView3.setOnClickListener(null);
                 binding.button6.setVisibility(View.GONE);
 
                 missionCards.add(roadCard1);
