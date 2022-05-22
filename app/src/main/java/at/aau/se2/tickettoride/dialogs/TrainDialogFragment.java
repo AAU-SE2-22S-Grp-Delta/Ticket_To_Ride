@@ -53,15 +53,18 @@ public class TrainDialogFragment extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        gameModel.addDiscardedTrainCard(cardNr);
                         Objects.requireNonNull(TrainDialogFragment.this.getDialog()).cancel();
                     }
                 });
         return builder.create();
     }
     public void addCardToHand(){
-        ArrayList<Integer> newPlayerTrainCards = new ArrayList<>(gameModel.getPlayerTrainCards());
-        newPlayerTrainCards.add(cardNr);
-        gameModel.setPlayerTrainCards(newPlayerTrainCards);
+        gameModel.addDrawnTrainCard(cardNr);
+
+        Bundle result = new Bundle();
+        getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
+
         Log.i("RESULT", Integer.toString(cardNr));
     }
 }
