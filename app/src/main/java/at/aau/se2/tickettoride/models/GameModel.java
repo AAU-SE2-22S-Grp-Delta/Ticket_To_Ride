@@ -110,6 +110,10 @@ public class GameModel {
         deskOpenTrainCards[pos] = getNextClosedTrainCard();
     }
 
+    public void addDrawnTrainCard(Integer trainCard) {
+        playerTrainCards.add(trainCard);
+    }
+
     public void addDiscardedTrainCard(Integer trainCard) {
         deskDiscardedTrainCards.add(trainCard);
     }
