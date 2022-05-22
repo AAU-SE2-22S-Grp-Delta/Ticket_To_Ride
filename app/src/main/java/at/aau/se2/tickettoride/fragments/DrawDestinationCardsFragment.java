@@ -15,9 +15,11 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Random;
 
-import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.activities.GameActivity;
+import at.aau.se2.tickettoride.dataStructures.Mission;
 import at.aau.se2.tickettoride.databinding.FragmentDrawDestinationCardsBinding;
+import at.aau.se2.tickettoride.helpers.ResourceHelper;
+import at.aau.se2.tickettoride.models.Missions;
 
 public class DrawDestinationCardsFragment extends Fragment implements View.OnClickListener {
     private FragmentDrawDestinationCardsBinding binding;
@@ -29,14 +31,8 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
         super(contentLayoutId);
     }
 
-    ArrayList<DestinationCard> cardsList = new ArrayList<>();
-
-    DestinationCard calSal = new DestinationCard("Calgary","Salt Lake City",7, R.drawable.calgary_saltlakecity);
-    DestinationCard kanHou = new DestinationCard("Kansas City","Houston",5,R.drawable.kansascity_houston);
-    DestinationCard losChi = new DestinationCard("Los Angeles","Houston", 16,R.drawable.losangeles_chicago);
-    DestinationCard newAtl = new DestinationCard("New York","Atlanta", 6,R.drawable.newyork_atlanta);
-    DestinationCard porPho = new DestinationCard("Portland","Phoenix",11,R.drawable.portland_phoenix);
-    DestinationCard seaNew = new DestinationCard("Seattle","New York", 22,R.drawable.seattle_newyork);
+    ArrayList<Mission> missions = Missions.getMissions();
+    ArrayList<Mission> missionCards = new ArrayList<>();
 
     public static DrawDestinationCardsFragment newInstance() {
         return new DrawDestinationCardsFragment();
@@ -47,37 +43,30 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDrawDestinationCardsBinding.inflate(inflater, container, false);
 
-        cardsList.add(calSal);
-        cardsList.add(kanHou);
-        cardsList.add(losChi);
-        cardsList.add(newAtl);
-        cardsList.add(porPho);
-        cardsList.add(seaNew);
-
         binding.button9.setVisibility(View.INVISIBLE);
 
         Random randomCard1 = new Random();
-        int card1 = randomCard1.nextInt(cardsList.size());
-        binding.imageView.setImageResource(cardsList.get(card1).getImage());
-        binding.imageView.setTag(cardsList.get(card1));
+        int card1 = randomCard1.nextInt(missions.size());
+        binding.imageView.setImageDrawable(ResourceHelper.getMissionResource(getActivity(), missions.get(card1).getId()));
+        binding.imageView.setTag(missions.get(card1));
 
         Random randomCard2 = new Random();
-        int card2 = randomCard2.nextInt(cardsList.size());
+        int card2 = randomCard2.nextInt(missions.size());
         while (card1 == card2) {
             randomCard2 = new Random();
-            card2 = randomCard2.nextInt(cardsList.size());
+            card2 = randomCard2.nextInt(missions.size());
         }
-        binding.imageView2.setImageResource(cardsList.get(card2).getImage());
-        binding.imageView2.setTag(cardsList.get(card2));
+        binding.imageView2.setImageDrawable(ResourceHelper.getMissionResource(getActivity(), missions.get(card2).getId()));
+        binding.imageView2.setTag(missions.get(card2));
 
         Random randomCard3 = new Random();
-        int card3 = randomCard3.nextInt(cardsList.size());
+        int card3 = randomCard3.nextInt(missions.size());
         while (card1 == card3 || card2 == card3) {
             randomCard3 = new Random();
-            card3 = randomCard3.nextInt(cardsList.size());
+            card3 = randomCard3.nextInt(missions.size());
         }
-        binding.imageView3.setImageResource(cardsList.get(card3).getImage());
-        binding.imageView3.setTag(cardsList.get(card3));
+        binding.imageView3.setImageDrawable(ResourceHelper.getMissionResource(getActivity(), missions.get(card3).getId()));
+        binding.imageView3.setTag(missions.get(card3));
 
 
         binding.button6.setOnClickListener(this);
@@ -120,50 +109,49 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
         }
         if (view.getId() == binding.button6.getId()) {
 
-            ArrayList<DestinationCard> cards = new ArrayList<>();
+            ArrayList<Mission> cards = new ArrayList<>();
 
             if (((ColorDrawable) binding.imageView.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView.getTag());
+                cards.add((Mission) binding.imageView.getTag());
             }
             if (((ColorDrawable) binding.imageView2.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView2.getTag());
+                cards.add((Mission) binding.imageView2.getTag());
             }
             if (((ColorDrawable) binding.imageView3.getBackground()).getColor() == Color.GREEN) {
-                cards.add((DestinationCard) binding.imageView3.getTag());
+                cards.add((Mission) binding.imageView3.getTag());
             }
 
-            ArrayList<DestinationCard> roadCards = new ArrayList<>();
 
             if (cards.size() == 2) {
-                DestinationCard roadCard1 = cards.get(0);
-                DestinationCard roadCard2 = cards.get(1);
+                Mission roadCard1 = cards.get(0);
+                Mission roadCard2 = cards.get(1);
 
-                binding.imageView.setImageResource(roadCard1.getImage());
+                binding.imageView.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard1.getId()));
                 binding.imageView.setBackgroundColor(Color.TRANSPARENT);
-                binding.imageView2.setImageResource(roadCard2.getImage());
+                binding.imageView2.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard2.getId()));
                 binding.imageView2.setBackgroundColor(Color.TRANSPARENT);
                 binding.imageView3.setVisibility(View.GONE);
                 binding.button6.setVisibility(View.GONE);
 
-                roadCards.add(roadCard1);
-                roadCards.add(roadCard2);
+                missionCards.add(roadCard1);
+                missionCards.add(roadCard2);
             }
             else if (cards.size() == 3) {
-                DestinationCard roadCard1 = cards.get(0);
-                DestinationCard roadCard2 = cards.get(1);
-                DestinationCard roadCard3 = cards.get(2);
+                Mission roadCard1 = cards.get(0);
+                Mission roadCard2 = cards.get(1);
+                Mission roadCard3 = cards.get(2);
 
-                binding.imageView.setImageResource(roadCard1.getImage());
+                binding.imageView.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard1.getId()));
                 binding.imageView.setBackgroundColor(Color.TRANSPARENT);
-                binding.imageView2.setImageResource(roadCard2.getImage());
+                binding.imageView2.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard2.getId()));
                 binding.imageView2.setBackgroundColor(Color.TRANSPARENT);
-                binding.imageView3.setImageResource(roadCard3.getImage());
+                binding.imageView3.setImageDrawable(ResourceHelper.getMissionResource(getActivity(),roadCard3.getId()));
                 binding.imageView3.setBackgroundColor(Color.TRANSPARENT);
                 binding.button6.setVisibility(View.GONE);
 
-                roadCards.add(roadCard1);
-                roadCards.add(roadCard2);
-                roadCards.add(roadCard3);
+                missionCards.add(roadCard1);
+                missionCards.add(roadCard2);
+                missionCards.add(roadCard3);
             }
             binding.button9.setVisibility(View.VISIBLE);
             binding.button9.setOnClickListener(v -> {
@@ -172,6 +160,10 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
             });
         }
 
+    }
+
+    public ArrayList<Mission> getMissionCards() {
+        return missionCards;
     }
 }
 

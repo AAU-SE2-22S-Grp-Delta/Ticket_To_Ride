@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import at.aau.se2.tickettoride.dataStructures.Mission;
 
 public class Missions {
-    private static ArrayList<Mission> getMissions() {
+    public static ArrayList<Mission> getMissions() {
         ArrayList<Mission> missions = new ArrayList<>();
 
         missions.add(new Mission(1, "Boston", "Miami", 12));
