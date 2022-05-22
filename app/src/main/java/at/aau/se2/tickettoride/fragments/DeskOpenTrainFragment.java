@@ -53,7 +53,7 @@ public class DeskOpenTrainFragment extends Fragment {
     }
 
     private void initComponents() {
-        getParentFragmentManager().setFragmentResultListener("refresh", this, (requestKey, result) -> displayData());
+        getParentFragmentManager().setFragmentResultListener("RefreshDeskOpenTrain", this, (requestKey, result) -> displayData());
 
         binding.card1.setOnClickListener(view -> drawCard(0));
 
@@ -96,8 +96,7 @@ public class DeskOpenTrainFragment extends Fragment {
         gameModel.drawOpenTrainCard(i);
 
         Bundle result = new Bundle();
-        getParentFragmentManager().setFragmentResult("refresh", result);
-
-        displayData();
+        getParentFragmentManager().setFragmentResult("RefreshDeskOpenTrain", result);
+        getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
     }
 }

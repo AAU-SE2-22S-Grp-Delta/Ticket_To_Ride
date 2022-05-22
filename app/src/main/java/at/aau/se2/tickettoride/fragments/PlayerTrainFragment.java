@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
@@ -39,7 +37,8 @@ public class PlayerTrainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPlayerTrainBinding.inflate(inflater, container, false);
-        getParentFragmentManager().setFragmentResultListener("refresh",this,((requestKey, result) -> displayTrainCards()));
+
+        getParentFragmentManager().setFragmentResultListener("RefreshPlayerTrain",this,((requestKey, result) -> displayTrainCards()));
 
         return binding.getRoot();
     }
@@ -54,15 +53,6 @@ public class PlayerTrainFragment extends Fragment {
     public void displayTrainCards() {
 
         List<Integer> heldTrainCards = gameModel.getPlayerTrainCards();
-
-        /*für Testzwecke
-        List<Integer> heldTrainCards = new ArrayList<>();
-        heldTrainCards.add(9);
-        heldTrainCards.add(1);
-        heldTrainCards.add(5);
-        heldTrainCards.add(5);
-        heldTrainCards.add(7);
-        */
 
         binding.linearLayoutTrainCards.removeAllViews();
 
