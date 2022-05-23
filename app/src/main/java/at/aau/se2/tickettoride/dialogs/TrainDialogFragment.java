@@ -11,13 +11,13 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.models.GameModel;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
+import at.aau.se2.tickettoride.models.GameModel;
 
 public class TrainDialogFragment extends DialogFragment {
 
@@ -62,8 +62,11 @@ public class TrainDialogFragment extends DialogFragment {
     public void addCardToHand(){
         gameModel.addDrawnTrainCard(cardNr);
 
-        Bundle result = new Bundle();
-        getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            Bundle result = new Bundle();
+            getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
+        }
 
         Log.i("RESULT", Integer.toString(cardNr));
     }
