@@ -26,18 +26,7 @@ public class MainActivityTest
     @Test
     public void testNavButtons()
     {
-        //Here we still get errors due to destinations being created again when names have to be unique
-//        onView(withId(R.id.button)).perform(click());
-//        Espresso.pressBack();
-//        onView(withId(R.id.button1)).perform(click());
-//        Espresso.pressBack();
-        onView(withId(R.id.button2)).perform(click());
-        Espresso.pressBack();
-        onView(withId(R.id.button3)).perform(click());
-        Espresso.pressBack();
-        onView(withId(R.id.button4)).perform(click());
-        Espresso.pressBack();
-        onView(withId(R.id.button5)).perform(click());
+        onView(withId(R.id.button)).perform(click());
         Espresso.pressBack();
     }
 }
