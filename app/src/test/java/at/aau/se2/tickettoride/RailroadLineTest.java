@@ -1,10 +1,9 @@
 package at.aau.se2.tickettoride;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
 
 import android.graphics.Color;
 import android.widget.Button;
@@ -87,10 +86,8 @@ public class RailroadLineTest
     @Test
     public void testEquals()
     {
-        assertTrue(r1.equals(new RailroadLine(dest1, dest2, Color.BLUE, 3)));
-        assertTrue(r1.equals(new RailroadLine(dest2, dest1, Color.BLUE, 3)));
-        assertFalse(r1.equals(new RailroadLine(dest1, dest3, Color.BLUE, 3)));
+        assertEquals(r1, new RailroadLine(dest1, dest2, Color.BLUE, 3));
+        assertEquals(r1, new RailroadLine(dest2, dest1, Color.BLUE, 3));
+        assertNotEquals(r1, new RailroadLine(dest1, dest3, Color.BLUE, 3));
     }
-
-
 }
