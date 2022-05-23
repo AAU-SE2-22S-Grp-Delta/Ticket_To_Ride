@@ -2,10 +2,10 @@ package at.aau.se2.tickettoride.helpers;
 
 import androidx.annotation.NonNull;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -27,10 +27,11 @@ public class LocalGameHelper {
     @NonNull
     private static List<Integer> generateTrainCards() {
         List<Integer> trainCards = new ArrayList<>();
+        SecureRandom random = new SecureRandom();
         int[] countTrainCards = new int[9];
         int generatedCards = 0;
         while (generatedCards < 110) {
-            int card = ThreadLocalRandom.current().nextInt(1, 9 + 1);
+            int card = random.nextInt(9) + 1;
             int count = countTrainCards[card - 1];
             if (card != 9 && count >= 12 || card == 9 && count >= 14) {
                 continue;
@@ -47,9 +48,10 @@ public class LocalGameHelper {
     @NonNull
     private static List<Integer> generateDestinationCards() {
         List<Integer> destinationCards = new ArrayList<>();
+        SecureRandom random = new SecureRandom();
         int generatedCards = 0;
         while (generatedCards < 30) {
-            int card = ThreadLocalRandom.current().nextInt(1, 30 + 1);
+            int card = random.nextInt(30) + 1;
             if (destinationCards.contains(card)) {
                 continue;
             }
