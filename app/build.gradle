@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
+    id 'jacoco'
+    id "org.sonarqube" version "3.3"
 }
-apply plugin: 'jacoco'
 
 jacoco {
     toolVersion = '0.8.5'
@@ -11,7 +12,6 @@ tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
     jacoco.excludes = ['jdk.internal.*']
 }
-
 
 task jacocoTestReport(type: JacocoReport,
         dependsOn: ['testDebugUnitTest',
@@ -46,7 +46,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -56,10 +55,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding true
     }
@@ -70,7 +71,16 @@ android {
             unitTests.returnDefaultValues = true
         }
     }
+
     namespace 'at.aau.se2.tickettoride'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "AAU-SE2-22S-Grp-Delta_Ticket_To_Ride"
+        property "sonar.organization", "aau-se2-22s-grp-delta"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
 
 dependencies {

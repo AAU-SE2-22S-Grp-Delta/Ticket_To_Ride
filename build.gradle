@@ -1,24 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.0'
-        classpath 'org.jacoco:org.jacoco.core:0.8.5'
-    }
-}
-
 plugins {
     id 'com.android.application' version '7.2.0' apply false
     id 'com.android.library' version '7.2.0' apply false
-    id "org.sonarqube" version "3.3"
-
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "AAU-SE2-22S-Grp-Delta_Ticket_To_Ride"
-        property "sonar.organization", "aau-se2-22s-grp-delta"
-        property "sonar.host.url", "https://sonarcloud.io"
-    }
 }
 
 task clean(type: Delete) {
