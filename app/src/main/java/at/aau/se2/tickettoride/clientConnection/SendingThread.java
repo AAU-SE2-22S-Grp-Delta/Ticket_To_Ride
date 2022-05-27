@@ -43,7 +43,7 @@ public class SendingThread extends Thread {
     public void setCommand(String command) {
         this.command = command;
         synchronized (lock) {
-            lock.notify();
+            lock.notifyAll();
         }
     }
 

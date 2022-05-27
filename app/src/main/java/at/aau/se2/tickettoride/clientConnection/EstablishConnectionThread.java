@@ -45,7 +45,7 @@ public class EstablishConnectionThread extends Thread {
     public void setIpv4(String ipv4) {
         this.ipv4 = ipv4;
         synchronized (lock) {
-            lock.notify();
+            lock.notifyAll();
         }
     }
 }
