@@ -9,7 +9,7 @@ import at.aau.se2.tickettoride.dataStructures.Map;
  * GameModel-class represents an active game and stores the current game situation
  */
 public class GameModel {
-    private static volatile GameModel instance = null;
+    private static GameModel instance = null;
 
     private List<Integer> deskClosedTrainCards = new ArrayList<>();
     private Integer[] deskOpenTrainCards = new Integer[5];
