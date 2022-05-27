@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class ReceiveingThread extends Thread {
-
     protected DataInputStream receive;
 
-    protected ReceiveingThread(Socket clientSocket) throws Exception{
+    protected ReceiveingThread(Socket clientSocket) throws IOException {
         receive = new DataInputStream(clientSocket.getInputStream());
     }
 
@@ -20,8 +19,8 @@ public class ReceiveingThread extends Thread {
             try {
                 String line = receive.readLine();
                 praseServerMsg(line);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
+                Log.d("ClientReceive", e.toString());
             }
         }
     }
@@ -30,7 +29,7 @@ public class ReceiveingThread extends Thread {
         String[] messages = line.split(";");
         for (int i = 0; i < messages.length; i++) {
             Log.d("ClientReceive", messages[i]);
-            if(messages[i].equals(""));
+            if (messages[i].equals("")) ;
         }
     }
 }

@@ -9,11 +9,11 @@ import java.net.Socket;
 public class SendingThread extends Thread {
     protected Socket clientSocket;
     protected DataOutputStream send;
-    private Object lock;
 
+    private final Object lock;
     private String command = null;
 
-    public SendingThread(Socket clientSocket) throws Exception {
+    public SendingThread(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
         send = new DataOutputStream(clientSocket.getOutputStream());
         lock = new Object();
@@ -23,19 +23,17 @@ public class SendingThread extends Thread {
     public void run() {
         while (true) {
             try {
-
                 synchronized (lock) {
                     if (command == null) {
-                        Log.d("ClientConnection", "Pause sending thread");
+                        Log.d("ClientSend", "Pause sending thread");
                         lock.wait();
-                        Log.d("ClientConnection", "Continue sending thread");
+                        Log.d("ClientSend", "Continue sending thread");
                     }
                     if (command != null && sendCommand(command) == 0) command = null;
                 }
-
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
                 Log.d("ClientSend", e.toString());
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
