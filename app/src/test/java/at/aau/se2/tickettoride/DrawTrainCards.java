@@ -1,24 +1,23 @@
 package at.aau.se2.tickettoride;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
-import at.aau.se2.tickettoride.models.GameModel;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
-@RunWith(JUnit4.class)
+import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
+import at.aau.se2.tickettoride.models.GameModel;
+
 public class DrawTrainCards {
     TrainDialogFragment trainDialogFragment;
     GameModel gameModel;
 
-    @Before
-    public void SetUp(){
+    @BeforeEach
+    public void SetUp() {
         gameModel = GameModel.getInstance();
         gameModel.setDeskClosedTrainCards(new ArrayList<>(Arrays.asList(1, 2, 3)));
         trainDialogFragment = new TrainDialogFragment();
@@ -26,9 +25,9 @@ public class DrawTrainCards {
     }
 
     @Test
-    public void testAddCardToHand(){
+    public void testAddCardToHand() {
         trainDialogFragment.addCardToHand();
         assertEquals(gameModel.getPlayerTrainCards().size(), 1);
-        assertEquals(gameModel.getPlayerTrainCards(), new ArrayList<>(Arrays.asList(1)));
+        assertEquals(gameModel.getPlayerTrainCards(), new ArrayList<>(Collections.singletonList(1)));
     }
 }
