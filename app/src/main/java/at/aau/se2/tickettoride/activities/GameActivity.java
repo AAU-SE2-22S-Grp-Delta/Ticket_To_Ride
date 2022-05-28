@@ -5,9 +5,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.hardware.TriggerEvent;
-import android.hardware.TriggerEventListener;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -17,13 +16,21 @@ import androidx.fragment.app.FragmentManager;
 
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
+import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
+import at.aau.se2.tickettoride.helpers.ShakeDetection;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements SensorEventListener  {
     private GameModel gameModel;
     private ClientConnection clientConnection;
+
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private ShakeDetection shakeDetection;
+    private int shakeCount;
+    private Vibrator v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,14 @@ public class GameActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        //Cheating function (when the smartphone is shaken, then the dialog CheatingFunctionDialogFragment will be shown
+        shakeDetection = new ShakeDetection();
+        shakeCount = 0;
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        sensorManager.registerListener(this, accelerometer , SensorManager.SENSOR_DELAY_NORMAL);
 
         initComponents(binding);
 
@@ -69,4 +84,31 @@ public class GameActivity extends AppCompatActivity {
         getSupportFragmentManager().setFragmentResult("refresh", result);
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        shakeDetection.checkShake(sensorEvent, shakeCount);
+
+        if(shakeCount > 5)
+        {
+            DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
+            cheatingDialog.show(getSupportFragmentManager(),"cheating");
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+        //ignore
+    }
+
+    @Override
+    protected void onPause() {
+        sensorManager.unregisterListener(this);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+    }
 }
