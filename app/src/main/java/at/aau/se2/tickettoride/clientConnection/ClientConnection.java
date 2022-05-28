@@ -2,20 +2,16 @@ package at.aau.se2.tickettoride.clientConnection;
 
 import android.util.Log;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-
 public class ClientConnection {
     private static ClientConnection clientConnection;
     private SendingThread sendingThread;
-    private ReceiveingThread receiveingThread;
+    private ReceivingThread receivingThread;
     private EstablishConnectionThread establishConnectionThread;
 
     public static ClientConnection getInstance() {
-        if (clientConnection == null) clientConnection = new ClientConnection();
+        if (clientConnection == null) {
+            clientConnection = new ClientConnection();
+        }
         return clientConnection;
     }
 
@@ -28,8 +24,8 @@ public class ClientConnection {
         this.sendingThread = sendingThread;
     }
 
-    public void setReceiveingThread(ReceiveingThread receiveingThread) {
-        this.receiveingThread = receiveingThread;
+    public void setReceivingThread(ReceivingThread receivingThread) {
+        this.receivingThread = receivingThread;
     }
 
     public void sendCommand(String command) {
@@ -42,7 +38,9 @@ public class ClientConnection {
 
     public void setIPv4(String iPv4) {
         //TODO this is temporary
-        if (establishConnectionThread == null) return;
+        if (establishConnectionThread == null) {
+            return;
+        }
         establishConnectionThread.setIpv4(iPv4);
     }
 }

@@ -8,7 +8,7 @@ import java.net.Socket;
 public class EstablishConnectionThread extends Thread {
     protected Socket clientSocket;
     private SendingThread sendingThread;
-    private ReceiveingThread receivingTread;
+    private ReceivingThread receivingTread;
 
     private final Object lock = new Object();
     private String ipv4;
@@ -26,12 +26,12 @@ public class EstablishConnectionThread extends Thread {
                     clientSocket = new Socket(ipv4, 8001);
                     Log.d("ClientConnection", "connected");
                     sendingThread = new SendingThread(clientSocket);
-                    receivingTread = new ReceiveingThread(clientSocket);
+                    receivingTread = new ReceivingThread(clientSocket);
                     sendingThread.start();
                     receivingTread.start();
                     ClientConnection cc = ClientConnection.getInstance();
                     cc.setSendingThread(sendingThread);
-                    cc.setReceiveingThread(receivingTread);
+                    cc.setReceivingThread(receivingTread);
                     Log.d("ClientConnection", "launched communication threads");
                 }
             }
