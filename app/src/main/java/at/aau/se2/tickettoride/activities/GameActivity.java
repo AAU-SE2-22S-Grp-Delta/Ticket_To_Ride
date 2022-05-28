@@ -1,5 +1,12 @@
 package at.aau.se2.tickettoride.activities;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.hardware.TriggerEvent;
+import android.hardware.TriggerEventListener;
 import android.os.Bundle;
 import android.view.View;
 
@@ -61,4 +68,5 @@ public class GameActivity extends AppCompatActivity {
         Bundle result = new Bundle();
         getSupportFragmentManager().setFragmentResult("refresh", result);
     }
+
 }
