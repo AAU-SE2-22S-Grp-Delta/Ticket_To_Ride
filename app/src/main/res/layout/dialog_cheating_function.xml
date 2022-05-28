@@ -9,64 +9,70 @@
         android:id="@+id/textViewStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Select a player:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckedTextView
+        android:id="@+id/checkedTextViewPlayer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Player 1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewStart"/>
+
+    <CheckedTextView
         android:id="@+id/checkedTextViewPlayer2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Player 2"
+        app:layout_constraintEnd_toStartOf="@id/checkedTextViewPlayer3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewStart" />
+        app:layout_constraintTop_toBottomOf="@id/checkedTextViewPlayer1" />
 
     <CheckedTextView
         android:id="@+id/checkedTextViewPlayer3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Player 3"
+        app:layout_constraintEnd_toStartOf="@id/checkedTextViewPlayer4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkedTextViewPlayer2" />
+        app:layout_constraintTop_toBottomOf="@id/checkedTextViewPlayer2" />
 
     <CheckedTextView
         android:id="@+id/checkedTextViewPlayer4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Player 4"
+        app:layout_constraintEnd_toStartOf="@id/textViewMissionCards"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkedTextViewPlayer3" />
-
-    <CheckedTextView
-        android:id="@+id/checkedTextViewPlayer5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="8dp"
-        android:text="Player 5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkedTextViewPlayer4" />
+        app:layout_constraintTop_toBottomOf="@id/checkedTextViewPlayer3" />
 
     <HorizontalScrollView
         android:id="@+id/scrollViewTrackCards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonOk"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkedTextViewPlayer4">
+        app:layout_constraintTop_toBottomOf="@+id/textViewMissionCards">
 
         <LinearLayout
-            android:id="@+id/linearLayoutTrackCards"
+            android:id="@+id/linearLayoutMissionCards"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -80,21 +86,20 @@
         android:id="@+id/textViewMissionCards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Mission Cards:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkedTextViewPlayer5" />
+        app:layout_constraintTop_toBottomOf="@+id/checkedTextViewPlayer4" />
 
     <Button
         android:id="@+id/buttonOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"
         android:text="OK"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewTrackCards" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
