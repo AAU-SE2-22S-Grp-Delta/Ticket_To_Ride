@@ -19,7 +19,7 @@ import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class CheatingFunctionDialog extends DialogFragment {
+public class CheatingFunctionDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
     LinearLayout linearLayoutMissionCards;
     Button ok;
