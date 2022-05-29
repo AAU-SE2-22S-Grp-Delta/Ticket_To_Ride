@@ -10,8 +10,6 @@ import android.widget.ImageView;
  */
 public class RailroadLine
 {
-    //TODO exception-handling
-    private int id;
     private Destination destination1;
     private Destination destination2;
     private int color = 0;
@@ -112,12 +110,8 @@ public class RailroadLine
 
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
     {
-        //check if there is already a road built
         if (isBuilt())
             throw new IllegalStateException("Track already owned");
-        //check if player has enough cards of given color to build
-
-        //build road
         paint.setColor(this.color);
 
         float xDist = (Math.abs(destination2.getX() - destination1.getX()) / this.distance - 1);
@@ -169,14 +163,8 @@ public class RailroadLine
                 currY += yDist;
             }
         }
-
         imageView.setImageBitmap(bm);
         imageView.invalidate();
-
-        //set owner
-
-        //remove cards and pieces
-
     }
 
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView, Player player)
