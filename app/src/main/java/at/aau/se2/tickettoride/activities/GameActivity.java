@@ -6,8 +6,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.helpers.ShakeDetection;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class GameActivity extends AppCompatActivity implements SensorEventListener  {
+public class GameActivity extends AppCompatActivity {
     private GameModel gameModel;
     private ClientConnection clientConnection;
 
@@ -30,7 +31,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private Sensor accelerometer;
     private ShakeDetection shakeDetection;
     private int shakeCount;
-    private Vibrator v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +54,34 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         shakeCount = 0;
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        sensorManager.registerListener(this, accelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(sensorListener, accelerometer , SensorManager.SENSOR_DELAY_UI);
 
         initComponents(binding);
 
         startGame();
     }
+
+    private SensorEventListener sensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            int count = shakeDetection.checkShake(sensorEvent, shakeCount);
+            shakeCount = count;
+            String msg = String.valueOf(count);
+            Log.d("Sensor Count", msg);
+
+            if(shakeCount == 5)
+            {
+                shakeCount = 0;
+                DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
+                cheatingDialog.show(getSupportFragmentManager(),"cheating");
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+            //ignore
+        }
+    };
 
     private void initComponents(ActivityGameBinding binding) {
         binding.missionsButton.setOnClickListener(view -> {
@@ -85,30 +106,14 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-        shakeDetection.checkShake(sensorEvent, shakeCount);
-
-        if(shakeCount > 5)
-        {
-            DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
-            cheatingDialog.show(getSupportFragmentManager(),"cheating");
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-        //ignore
-    }
-
-    @Override
     protected void onPause() {
-        sensorManager.unregisterListener(this);
+        sensorManager.unregisterListener(sensorListener);
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(sensorListener,accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
