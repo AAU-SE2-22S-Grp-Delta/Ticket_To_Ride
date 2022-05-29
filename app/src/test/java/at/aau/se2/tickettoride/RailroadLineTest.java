@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import android.graphics.Color;
 import android.widget.Button;
@@ -35,6 +36,13 @@ public class RailroadLineTest {
         player1 = new Player("testplayer1", Color.GREEN);
         player2 = new Player("testplayer2", Color.RED);
 
+    }
+
+    @Test
+    public void testIsBuilt()
+    {
+        r1.setOwner(player1);
+        assertTrue(r1.isBuilt());
     }
 
     @Test
