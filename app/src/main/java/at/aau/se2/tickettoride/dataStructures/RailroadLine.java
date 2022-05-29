@@ -12,8 +12,8 @@ public class RailroadLine
 {
     private Destination destination1;
     private Destination destination2;
-    private int color = 0;
-    private int distance = 0;
+    private int color;
+    private int distance;
     private Player owner;
 
     /**
@@ -82,7 +82,7 @@ public class RailroadLine
     public void setOwner(Player owner) throws IllegalStateException
     {
         if (this.owner != null)
-            throw new IllegalStateException("Line already owned by " + owner.getName());
+            throw new IllegalStateException("Line already owned by " + this.owner.getName());
         this.owner = owner;
     }
 
@@ -105,7 +105,7 @@ public class RailroadLine
 
     public boolean isBuilt()
     {
-        return this.owner == null;
+        return this.owner != null;
     }
 
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
@@ -171,8 +171,7 @@ public class RailroadLine
     {
         paint.setStrokeWidth(24);
         //check if there is already a road built
-        if (owner != null)
-            throw new IllegalStateException("Track already owned");
+        this.setOwner(player);
         //check if player has enough cards of given color to build
 
         //build road
@@ -181,7 +180,7 @@ public class RailroadLine
         imageView.setImageBitmap(bm);
 
         //set owner
-        this.owner = player;
+
 
         //remove cards and pieces
 

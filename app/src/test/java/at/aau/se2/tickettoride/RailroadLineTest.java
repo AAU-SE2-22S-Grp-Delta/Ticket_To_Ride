@@ -1,6 +1,7 @@
 package at.aau.se2.tickettoride;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -41,6 +42,7 @@ public class RailroadLineTest {
     @Test
     public void testIsBuilt()
     {
+        assertFalse(r1.isBuilt());
         r1.setOwner(player1);
         assertTrue(r1.isBuilt());
     }

@@ -23,11 +23,22 @@
             android:id="@+id/imageview"
             android:layout_width="3840px"
             android:layout_height="2160px"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/map"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/map" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:id="@+id/drawView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/map"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         <!--        <TextView-->
         <!--            android:id="@+id/message"-->
@@ -53,7 +64,7 @@
             android:layout_x="89dp"
             android:layout_y="119dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/portland"
@@ -62,7 +73,7 @@
             android:layout_x="60dp"
             android:layout_y="177dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="3" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sanfrancisco"
@@ -71,7 +82,7 @@
             android:layout_x="45dp"
             android:layout_y="410dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="4" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/losangeles"
@@ -80,7 +91,7 @@
             android:layout_x="144dp"
             android:layout_y="537dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="5" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/phoenix"
@@ -89,7 +100,7 @@
             android:layout_x="312dp"
             android:layout_y="518dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="6" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/elpaso"
@@ -98,7 +109,7 @@
             android:layout_x="455dp"
             android:layout_y="585dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="7" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dallas"
@@ -107,7 +118,7 @@
             android:layout_x="696dp"
             android:layout_y="543dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="8" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/houston"
@@ -116,7 +127,7 @@
             android:layout_x="750dp"
             android:layout_y="611dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="9" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/newOrleans"
@@ -125,7 +136,7 @@
             android:layout_x="871dp"
             android:layout_y="595dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="10" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/miami"
@@ -134,7 +145,7 @@
             android:layout_x="1158dp"
             android:layout_y="635dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="11" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/atlanta"
@@ -143,7 +154,7 @@
             android:layout_x="993dp"
             android:layout_y="439dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="12" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/charleston"
@@ -152,7 +163,7 @@
             android:layout_x="1120dp"
             android:layout_y="452dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="13" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/raileigh"
@@ -161,7 +172,7 @@
             android:layout_x="1079dp"
             android:layout_y="370dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="14" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/washington"
@@ -170,7 +181,7 @@
             android:layout_x="1158dp"
             android:layout_y="291dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="15" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pittsburgh"
@@ -179,7 +190,7 @@
             android:layout_x="1037dp"
             android:layout_y="240dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="16" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nashville"
@@ -188,7 +199,7 @@
             android:layout_x="925dp"
             android:layout_y="399dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="17" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/littleRock"
@@ -197,7 +208,7 @@
             android:layout_x="784dp"
             android:layout_y="455dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="18" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/oklahomaCity"
@@ -206,7 +217,7 @@
             android:layout_x="668dp"
             android:layout_y="452dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="19" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saintLouis"
@@ -215,7 +226,7 @@
             android:layout_x="807dp"
             android:layout_y="355dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="20" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/kansasCity"
@@ -224,7 +235,7 @@
             android:layout_x="689dp"
             android:layout_y="351dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="21" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/omaha"
@@ -233,7 +244,7 @@
             android:layout_x="661dp"
             android:layout_y="292dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="22" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/denver"
@@ -242,7 +253,7 @@
             android:layout_x="472dp"
             android:layout_y="375dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="23" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saltLakeCity"
@@ -251,7 +262,7 @@
             android:layout_x="302dp"
             android:layout_y="333dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="24" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/helena"
@@ -260,7 +271,7 @@
             android:layout_x="396dp"
             android:layout_y="188dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="25" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/calgary"
@@ -269,7 +280,7 @@
             android:layout_x="264dp"
             android:layout_y="36dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="26" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/winnipeg"
@@ -278,7 +289,7 @@
             android:layout_x="562dp"
             android:layout_y="48dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="27" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saultStMarie"
@@ -287,7 +298,7 @@
             android:layout_x="873dp"
             android:layout_y="102dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="28" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/duluth"
@@ -296,7 +307,7 @@
             android:layout_x="706dp"
             android:layout_y="184dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="29" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/newYork"
@@ -305,7 +316,7 @@
             android:layout_x="1145dp"
             android:layout_y="186dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="30" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/toronto"
@@ -314,7 +325,7 @@
             android:layout_x="1011dp"
             android:layout_y="134dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="31" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/montreal"
@@ -323,7 +334,7 @@
             android:layout_x="1122dp"
             android:layout_y="28dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="32" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/santaFe"
@@ -332,7 +343,7 @@
             android:layout_x="465dp"
             android:layout_y="479dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="33" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/boston"
@@ -341,7 +352,7 @@
             android:layout_x="1215dp"
             android:layout_y="98dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="34" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lasVegas"
@@ -350,7 +361,7 @@
             android:layout_x="228dp"
             android:layout_y="464dp"
             android:background="@drawable/destination"
-            android:text="1" />
+            android:text="35" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/chicago"
@@ -359,19 +370,7 @@
             android:layout_x="863dp"
             android:layout_y="256dp"
             android:background="@drawable/destination"
-            android:text="1" />
-
-        <ImageView
-            android:id="@+id/drawView"
-            android:layout_width="3840px"
-            android:layout_height="2160px"
-            android:layout_x="0dp"
-            android:layout_y="0dp"
-            android:src="@drawable/map"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="36" />
 
 
     </AbsoluteLayout>

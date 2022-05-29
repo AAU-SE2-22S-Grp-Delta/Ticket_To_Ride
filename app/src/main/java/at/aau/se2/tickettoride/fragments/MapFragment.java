@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -62,9 +63,9 @@ public class MapFragment extends Fragment
         binding.mapFragment.setOnTouchListener(mapOnTouchListener);
         binding.mapFragment.addOnLayoutChangeListener(mapOnTouchListener);
 
-        ImageView dv = binding.drawView;
+        ImageView drawView = binding.drawView;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
 
         Destination atlanta = new Destination("Atlanta", binding.atlanta);
         Destination boston = new Destination("Boston", binding.boston);
@@ -283,8 +284,8 @@ public class MapFragment extends Fragment
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> railroads.forEach((railroadLine) ->
         {
-            railroadLine.buildRoad(canvas, paint, bm, binding.drawView);
-            binding.drawView.setImageBitmap(bm);
+            railroadLine.buildRoad(canvas, paint, bm, drawView);
+            drawView.setImageBitmap(bm);
             drawn = true;
         }), 250);
 
