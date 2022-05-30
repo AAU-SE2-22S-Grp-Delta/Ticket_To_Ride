@@ -181,7 +181,6 @@ public class RailroadLine
 
         //set owner
 
-
         //remove cards and pieces
 
     }

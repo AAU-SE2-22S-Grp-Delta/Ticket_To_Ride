@@ -7,44 +7,112 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnit;
 
 import at.aau.se2.tickettoride.dataStructures.Destination;
 import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 
 public class RailroadLineTest {
-    Destination dest1;
-    Destination dest2;
-    Destination dest3;
-    Destination dest4;
-    RailroadLine r1;
-    RailroadLine r2;
-    Player player1;
-    Player player2;
+    static Destination dest1;
+    static Destination dest2;
+    static Destination dest3;
+    static Destination dest4;
+    static RailroadLine r1;
+    static RailroadLine r2;
+    static RailroadLine r3;
+    static RailroadLine r4;
+    static RailroadLine r5;
+    static Player player1;
+    static Player player2;
 
-    @BeforeEach
-    public void init() {
-        dest1 = new Destination("testdest1", new Button(null));
-        dest2 = new Destination("testdest2", new Button(null));
-        dest3 = new Destination("testdest3", new Button(null));
-        dest4 = new Destination("testdest4", new Button(null));
+    static Button btn1;
+    static Button btn2;
+    static Button btn3;
+
+    static ImageView drawView;
+    static Bitmap bm;
+    static Canvas canvas;
+    static Paint paint;
+
+    @BeforeAll
+    public static void init() {
+        btn1 = Mockito.mock(Button.class);
+        Mockito.when(btn1.getX()).thenReturn(10f);
+        Mockito.when(btn1.getY()).thenReturn(10f);
+        Mockito.when(btn1.getWidth()).thenReturn(10);
+        Mockito.when(btn1.getHeight()).thenReturn(10);
+
+        btn2 = Mockito.mock(Button.class);
+        Mockito.when(btn1.getX()).thenReturn(20f);
+        Mockito.when(btn1.getY()).thenReturn(20f);
+        Mockito.when(btn1.getWidth()).thenReturn(10);
+        Mockito.when(btn1.getHeight()).thenReturn(10);
+
+        btn3 = Mockito.mock(Button.class);
+        Mockito.when(btn1.getX()).thenReturn(5f);
+        Mockito.when(btn1.getY()).thenReturn(40f);
+        Mockito.when(btn1.getWidth()).thenReturn(10);
+        Mockito.when(btn1.getHeight()).thenReturn(10);
+
+        drawView = Mockito.mock(ImageView.class);
+        bm = Bitmap.createBitmap(3840, 2160, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(bm);
+        paint = new Paint();
+
+
+        dest1 = new Destination("testRLdest1", btn1);
+        dest2 = new Destination("testRLdest2", btn2);
+        dest3 = new Destination("testRLdest3", btn3);
+        dest4 = new Destination("testRLdest4", btn2);
+
         r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
+        r2 = new RailroadLine(dest3, dest4, Color.BLUE, 3);
+        r4 = new RailroadLine(dest1, dest3, Color.RED, 2);
+        r5 = new RailroadLine(dest1, dest3, Color.RED, 2);
+        r3 = new RailroadLine(dest2, dest4);
+
         player1 = new Player("testplayer1", Color.GREEN);
         player2 = new Player("testplayer2", Color.RED);
 
+        r2.setOwner(player1);
+
+
+    }
+
+    @Test
+    public void testGetOwnerNone()
+    {
+        assertNull(r1.getOwner());
+    }
+
+    @Test
+    public void testGetOwner()
+    {
+        assertEquals(player1, r2.getOwner());
+    }
+
+    @Test
+    public void testIsNotBuilt()
+    {
+        assertFalse(r1.isBuilt());
     }
 
     @Test
     public void testIsBuilt()
     {
-        assertFalse(r1.isBuilt());
-        r1.setOwner(player1);
-        assertTrue(r1.isBuilt());
+        assertTrue(r2.isBuilt());
     }
 
     @Test
@@ -64,25 +132,40 @@ public class RailroadLineTest {
 
     @Test
     public void testDestEquals() {
-        r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
+        assertEquals(r1, new RailroadLine(dest1, dest2));
         assertEquals(r1, new RailroadLine(dest2, dest1));
+        assertNotEquals(r1, r2);
     }
 
-    @Test
-    public void testSetOwner() {
-        r1.setOwner(player1);
-        assertThrows(IllegalStateException.class, () -> r1.setOwner(player2));
-    }
 
     @Test
-    public void testGetters() {
-        assertEquals(Color.BLUE, r1.getColor());
+    public void testGetDest() {
         assertEquals(dest1, r1.getDestination1());
         assertEquals(dest2, r1.getDestination2());
+    }
+
+    @Test
+    public void testGetColor(){
+        assertEquals(Color.BLUE, r1.getColor());
+    }
+
+    @Test
+    public void testGetDist()
+    {
         assertEquals(3, r1.getDistance());
-        assertNull(r1.getOwner());
-        r1.setOwner(player1);
-        assertEquals(player1, r1.getOwner());
+    }
+
+    @Test
+    public void testSetOwnerNew()
+    {
+        r4.setOwner(player2);
+        assertEquals(player2, r4.getOwner());
+    }
+
+    @Test
+    public void testSetOwnerBuilt()
+    {
+        assertThrows(IllegalStateException.class, () -> r2.setOwner(player1));
     }
 
     @Test
@@ -90,5 +173,29 @@ public class RailroadLineTest {
         assertEquals(r1, new RailroadLine(dest1, dest2, Color.BLUE, 3));
         assertEquals(r1, new RailroadLine(dest2, dest1, Color.BLUE, 3));
         assertNotEquals(r1, new RailroadLine(dest1, dest3, Color.BLUE, 3));
+    }
+
+    @Test
+    public void testBuildRoadOwned()
+    {
+        assertThrows(IllegalStateException.class, () -> r2.buildRoad(canvas, paint, bm, drawView));
+        //dest1 10 10, dest2 20 20, dest3 5 40
+
+        //Y1 < Y2
+            //X1 < X2
+        r1.buildRoad(canvas, paint, bm, drawView);
+            //X1 > X2
+        new RailroadLine(dest3, dest1, Color.GREEN, 2).buildRoad(canvas, paint, bm, drawView);
+        //Y1 > Y2
+            //X1 < X2
+        new RailroadLine(dest3, dest2, Color.GREEN, 2).buildRoad(canvas, paint, bm, drawView);
+            //X1 > X2
+        new RailroadLine(dest2, dest1, Color.GREEN, 2).buildRoad(canvas, paint, bm, drawView);
+    }
+
+    @Test
+    public void testBuildRoad()
+    {
+        r5.buildRoad(canvas, paint, bm, drawView, player1);
     }
 }
