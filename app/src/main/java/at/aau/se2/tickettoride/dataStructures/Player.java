@@ -1,13 +1,5 @@
 package at.aau.se2.tickettoride.dataStructures;
 
-import android.graphics.Color;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * Player-Class represents a person who is playing the Game
  */

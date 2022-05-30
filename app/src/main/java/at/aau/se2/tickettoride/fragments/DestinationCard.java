@@ -1,7 +1,5 @@
 package at.aau.se2.tickettoride.fragments;
 
-import android.media.Image;
-
 public class DestinationCard {
 
     private String destination1;

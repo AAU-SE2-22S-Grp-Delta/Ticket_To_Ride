@@ -2,7 +2,6 @@ package at.aau.se2.tickettoride.activities;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;

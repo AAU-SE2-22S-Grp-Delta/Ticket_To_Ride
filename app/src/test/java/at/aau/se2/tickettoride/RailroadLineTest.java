@@ -15,10 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
 
 import at.aau.se2.tickettoride.dataStructures.Destination;
 import at.aau.se2.tickettoride.dataStructures.Player;

@@ -12,7 +12,6 @@ import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
-import at.aau.se2.tickettoride.helpers.LocalGameHelper;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class GameActivity extends AppCompatActivity {

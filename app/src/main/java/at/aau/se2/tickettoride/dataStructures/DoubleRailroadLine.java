@@ -1,7 +1,5 @@
 package at.aau.se2.tickettoride.dataStructures;
 
-import android.graphics.Color;
-
 /**
  * RailroadLine-class represents a double connection between two Destination-Objects
  */

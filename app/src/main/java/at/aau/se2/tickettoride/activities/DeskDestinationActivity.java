@@ -1,14 +1,10 @@
 package at.aau.se2.tickettoride.activities;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import java.util.ArrayList;
-
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
 import at.aau.se2.tickettoride.fragments.DeskDestinationFragment;
 
 public class DeskDestinationActivity extends AppCompatActivity {
