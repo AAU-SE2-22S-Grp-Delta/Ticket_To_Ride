@@ -21,10 +21,10 @@ public class Player
 
     public Player(String name, int color)
     {
-        this.id = id++;
         setName(name);
         this.playerColor = color;
         this.isInGame = false;
+        this.numStones = 0;
     }
 
     public int getId()
@@ -36,6 +36,16 @@ public class Player
     {
         return name;
     }
+
+    public int getStones() {return this.numStones;}
+
+    public void removeStones(int numToRemove)
+    {
+        if (numStones >= numToRemove)
+            this.numStones -= numToRemove;
+        else throw new IllegalArgumentException("Not enough pieces");
+    }
+
 
     //TODO change unique name check
     public void setName(String name)
