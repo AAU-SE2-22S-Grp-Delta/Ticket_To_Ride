@@ -1,8 +1,5 @@
 package at.aau.se2.tickettoride.dataStructures;
-
-import android.graphics.Point;
 import android.widget.Button;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +36,7 @@ public class Destination {
     public void setName(String name) {
         if (name == null) throw new IllegalArgumentException("name is null");
         if (name.length() == 0) throw new IllegalArgumentException("name.length is 0");
-        if (names.contains(name)) System.out.println("Name already taken");
+        if (names.contains(name)) throw new IllegalArgumentException("Name already taken");
         names.remove(this.name);
         names.add(name);
         this.name = name;

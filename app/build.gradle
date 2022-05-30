@@ -79,6 +79,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'org.mockito:mockito-core:2.19.0'
     androidTestImplementation('androidx.test.uiautomator:uiautomator:2.2.0')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter'
