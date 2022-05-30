@@ -50,7 +50,7 @@ public class SendingThread extends Thread {
             Log.d("ClientSend", "sent: " + command);
             send.writeBytes(command + "\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("ClientSend", e.toString());
             return -1;
         }
 //        String in = response.readLine();
