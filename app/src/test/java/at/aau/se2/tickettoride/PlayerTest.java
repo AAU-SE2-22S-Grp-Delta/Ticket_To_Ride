@@ -8,21 +8,28 @@ import org.junit.jupiter.api.Test;
 
 import at.aau.se2.tickettoride.dataStructures.Player;
 
-public class PlayerTest {
-   static Player player1;
+public class PlayerTest
+{
+    static Player player1;
+    static Player player2;
 
     @BeforeAll
-    public static void init() {
+    public static void init()
+    {
         player1 = new Player("a", 1);
+        player2 = new Player("b", 1);
+        player1.enterGame();
     }
 
     @Test
-    public void testSetNameNull() {
+    public void testSetNameNull()
+    {
         assertThrows(IllegalArgumentException.class, () -> player1.setName(null));
     }
 
     @Test
-    public void testSetNameEmpty() {
+    public void testSetNameEmpty()
+    {
         assertThrows(IllegalArgumentException.class, () -> player1.setName(""));
     }
 
@@ -58,17 +65,16 @@ public class PlayerTest {
     }
 
     @Test
-    @BeforeAll
-    public static void testIsNotInGame()
+    public void testIsNotInGame()
     {
-        player1.enterGame();
-        assertEquals(45, player1.getStones());
+        player2.enterGame();
+        assertEquals(45, player2.getStones());
     }
 
     @Test
     public void testIsInGame()
     {
-        assertThrows(IllegalStateException.class,() -> player1.enterGame());
+        assertThrows(IllegalStateException.class, () -> player1.enterGame());
     }
 
     @Test
@@ -81,6 +87,6 @@ public class PlayerTest {
     @Test
     public void testRemoveStones()
     {
-        assertThrows(IllegalArgumentException.class, ()-> player1.removeStones(46));
+        assertThrows(IllegalArgumentException.class, () -> player1.removeStones(46));
     }
 }
