@@ -14,6 +14,7 @@ public class Map {
 
     public void addDestination(Destination destination) {
         if (destination == null) throw new IllegalStateException("destination is null");
+        if (destinations.contains(destination)) throw new IllegalStateException("destination is already added");
         destinations.add(destination);
     }
 
@@ -22,9 +23,9 @@ public class Map {
         Destination destination1 = railroadLine.getDestination1();
         Destination destination2 = railroadLine.getDestination2();
         if (!destinations.contains(destination1))
-            throw new IllegalArgumentException("destination1 " + destination1.getName() + " don't exist on the map");
+            throw new IllegalArgumentException("destination1 " + destination1.getName() + " doesn't exist on the map");
         if (!destinations.contains(destination2))
-            throw new IllegalArgumentException("destination2 " + destination2.getName() + " don't exist on the map");
+            throw new IllegalArgumentException("destination2 " + destination2.getName() + " doesn't exist on the map");
         for (RailroadLine line : railroadLines)
             if (line.equals(railroadLine))
                 throw new IllegalStateException("connection between " + railroadLine.getDestination1().getName() + " and " +
