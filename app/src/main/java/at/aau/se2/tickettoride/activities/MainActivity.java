@@ -2,13 +2,17 @@ package at.aau.se2.tickettoride.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityMainBinding;
 import at.aau.se2.tickettoride.dialogs.HelpDialogFragment;
@@ -55,5 +59,21 @@ public class MainActivity extends AppCompatActivity {
             HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
             helpDialogFragment.show(getSupportFragmentManager(), "helpDialog");
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
