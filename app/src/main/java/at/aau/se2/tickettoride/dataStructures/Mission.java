@@ -1,5 +1,7 @@
 package at.aau.se2.tickettoride.dataStructures;
 
+import androidx.annotation.Nullable;
+
 public class Mission {
     private final int id;
     private final String destination1;
@@ -27,5 +29,19 @@ public class Mission {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj)
+    {
+        if (!(obj instanceof Mission)) return false;
+        Mission m2 = (Mission) obj;
+        return this.id == m2.getId();
     }
 }
