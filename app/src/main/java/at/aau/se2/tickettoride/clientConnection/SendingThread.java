@@ -7,16 +7,12 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class SendingThread extends Thread {
-    protected Socket clientSocket;
-    protected DataOutputStream send;
-
-    private final Object lock;
+    private final DataOutputStream send;
+    private final Object lock = new Object();
     private String command = null;
 
     public SendingThread(Socket clientSocket) throws IOException {
-        this.clientSocket = clientSocket;
-        send = new DataOutputStream(clientSocket.getOutputStream());
-        lock = new Object();
+        this.send = new DataOutputStream(clientSocket.getOutputStream());
     }
 
     @Override
@@ -29,7 +25,10 @@ public class SendingThread extends Thread {
                         lock.wait();
                         Log.d("ClientSend", "Continue sending thread");
                     }
-                    if (command != null && sendCommand(command) == 0) command = null;
+
+                    if (command != null && sendCommand(command) == 0) {
+                        command = null;
+                    }
                 }
             } catch (InterruptedException e) {
                 Log.d("ClientSend", e.toString());
@@ -53,8 +52,6 @@ public class SendingThread extends Thread {
             Log.d("ClientSend", e.toString());
             return -1;
         }
-//        String in = response.readLine();
-//        System.out.println(in);
         return 0;
     }
 }
