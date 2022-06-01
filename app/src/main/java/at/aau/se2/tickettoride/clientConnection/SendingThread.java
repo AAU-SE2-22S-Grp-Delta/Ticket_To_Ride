@@ -5,11 +5,14 @@ import android.util.Log;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class SendingThread extends Thread {
     private final DataOutputStream send;
     private final Object lock = new Object();
+    private final ArrayList<String> queue = new ArrayList<>();
     private String command = null;
+    private boolean isSending = false;
 
     public SendingThread(Socket clientSocket) throws IOException {
         this.send = new DataOutputStream(clientSocket.getOutputStream());
@@ -27,7 +30,12 @@ public class SendingThread extends Thread {
                     }
 
                     if (command != null && sendCommand(command) == 0) {
-                        command = null;
+                        if (queue.isEmpty()) {
+                            command = null;
+                            isSending = false;
+                        } else {
+                            command = queue.remove(0);
+                        }
                     }
                 }
             } catch (InterruptedException e) {
@@ -38,6 +46,12 @@ public class SendingThread extends Thread {
     }
 
     public void setCommand(String command) {
+        if (isSending) {
+            queue.add(command);
+            return;
+        }
+
+        isSending = true;
         this.command = command;
         synchronized (lock) {
             lock.notifyAll();
