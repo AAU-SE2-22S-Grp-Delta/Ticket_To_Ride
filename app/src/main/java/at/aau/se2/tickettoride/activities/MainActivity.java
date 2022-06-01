@@ -1,16 +1,15 @@
 package at.aau.se2.tickettoride.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.preference.PreferenceManager;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
@@ -20,27 +19,36 @@ import at.aau.se2.tickettoride.helpers.LocalGameHelper;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class MainActivity extends AppCompatActivity {
-    private ClientConnection cc;
+    private ActivityMainBinding binding;
+    private ClientConnection client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        //establish connection;
-        cc = ClientConnection.getInstance();
+        initComponents();
+    }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-        builder.setTitle("Enter IP of server");
-        TextInputEditText textInput = new TextInputEditText(builder.getContext());
-        builder.setView(textInput);
-        builder.setPositiveButton("set", (dialogInterface, i) -> {
-            cc.setIPv4(textInput.getText().toString());
-        });
-        builder.create().show();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initComponents() {
         binding.button.setOnClickListener(v -> {
             Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
             startActivity(intent);
@@ -59,21 +67,16 @@ public class MainActivity extends AppCompatActivity {
             HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
             helpDialogFragment.show(getSupportFragmentManager(), "helpDialog");
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        // Establish connection
+        client = ClientConnection.getInstance();
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String serverAddress = sharedPreferences.getString("server_address", "");
+        if (serverAddress.isEmpty()) {
+            binding.button.setEnabled(false);
+        } else {
+            client.setIPv4(serverAddress);
         }
-        return super.onOptionsItemSelected(item);
     }
 }
