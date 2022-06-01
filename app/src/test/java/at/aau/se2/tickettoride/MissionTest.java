@@ -1,6 +1,7 @@
 package at.aau.se2.tickettoride;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import at.aau.se2.tickettoride.dataStructures.Mission;
 
 public class MissionTest
 {
-    Mission m1 = new Mission(0, "dest1", "dest2", 4);;
+    Mission m1 = new Mission(0, "dest1", "dest2", 4);
 
 
     @Test
@@ -31,6 +32,7 @@ public class MissionTest
     {
         assertEquals(0, m1.getId());
     }
-
+    @Test
+    public void testEquals() {assertEquals(new Mission(0, "a", "b", 0), m1);}
 
 }
