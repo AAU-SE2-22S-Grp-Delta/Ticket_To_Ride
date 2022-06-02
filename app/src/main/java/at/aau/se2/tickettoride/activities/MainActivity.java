@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         if (serverAddress.isEmpty()) {
             binding.button.setEnabled(false);
         } else {
-            client.setIPv4(serverAddress);
+            client.setup(this, serverAddress);
         }
     }
 }
