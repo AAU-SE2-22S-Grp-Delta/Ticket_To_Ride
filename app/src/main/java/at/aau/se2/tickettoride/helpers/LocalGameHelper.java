@@ -4,18 +4,19 @@ import androidx.annotation.NonNull;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class LocalGameHelper {
     public static void generateTestGame(GameModel gameModel) {
-        List<Integer> trainCards = generateTrainCards();
-        List<Integer> playerTrainCards = Arrays.asList(getNumCards(trainCards, 4));
-        Integer[] deskOpenTrainCards = getNumCards(trainCards, 5);
+        List<TrainCard> trainCards = getTrainCards();
+        List<TrainCard> playerTrainCards = getPlayerTrainCards(trainCards, 4);
+        List<TrainCard> deskOpenTrainCards = getPlayerTrainCards(trainCards, 5);
         List<Integer> destinationCards = generateDestinationCards();
-        List<Integer> playerDestinationCards = Arrays.asList(getNumCards(destinationCards, 3));
+        List<Integer> playerDestinationCards = getPlayerMissionCards(destinationCards);
 
         gameModel.setDeskOpenTrainCards(deskOpenTrainCards);
         gameModel.setDeskClosedTrainCards(trainCards);
@@ -25,24 +26,25 @@ public class LocalGameHelper {
     }
 
     @NonNull
-    private static List<Integer> generateTrainCards() {
-        List<Integer> trainCards = new ArrayList<>();
-        SecureRandom random = new SecureRandom();
-        int[] countTrainCards = new int[9];
-        int generatedCards = 0;
-        while (generatedCards < 110) {
-            int card = random.nextInt(9) + 1;
-            int count = countTrainCards[card - 1];
-            if (card != 9 && count >= 12 || card == 9 && count >= 14) {
-                continue;
-            }
-
-            countTrainCards[card - 1]++;
-            trainCards.add(card);
-
-            generatedCards++;
+    private static List<TrainCard> getTrainCards() {
+        List<TrainCard> cards = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            cards.add(new TrainCard(TrainCard.Type.BOX));
+            cards.add(new TrainCard(TrainCard.Type.PASSENGER));
+            cards.add(new TrainCard(TrainCard.Type.TANKER));
+            cards.add(new TrainCard(TrainCard.Type.REEFER));
+            cards.add(new TrainCard(TrainCard.Type.FREIGHT));
+            cards.add(new TrainCard(TrainCard.Type.HOPPER));
+            cards.add(new TrainCard(TrainCard.Type.COAL));
+            cards.add(new TrainCard(TrainCard.Type.CABOOSE));
         }
-        return trainCards;
+        for (int i = 0; i < 14; i++) {
+            cards.add(new TrainCard(TrainCard.Type.LOCOMOTIVE));
+        }
+
+        Collections.shuffle(cards);
+
+        return cards;
     }
 
     @NonNull
@@ -64,12 +66,22 @@ public class LocalGameHelper {
     }
 
     @NonNull
-    private static Integer[] getNumCards(List<Integer> cards, int count) {
-        Integer[] numCards = new Integer[count];
-        for (int i = 0; i < count; i++) {
-            Integer card = cards.remove(0);
-            numCards[i] = card;
+    private static List<TrainCard> getPlayerTrainCards(List<TrainCard> trainCards, int numCards) {
+        List<TrainCard> cards = new ArrayList<>();
+        for (int i = 0; i < numCards; i++) {
+            TrainCard card = trainCards.remove(0);
+            cards.add(card);
         }
-        return numCards;
+        return cards;
+    }
+
+    @NonNull
+    private static List<Integer> getPlayerMissionCards(List<Integer> missionCards) {
+        List<Integer> cards = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Integer card = missionCards.remove(0);
+            cards.add(card);
+        }
+        return cards;
     }
 }

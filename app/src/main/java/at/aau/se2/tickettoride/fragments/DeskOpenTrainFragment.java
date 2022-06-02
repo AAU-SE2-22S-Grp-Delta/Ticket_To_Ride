@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
+
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.databinding.FragmentDeskOpenTrainBinding;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -67,9 +70,9 @@ public class DeskOpenTrainFragment extends Fragment {
     }
 
     private void displayData() {
-        Integer[] cards = gameModel.getDeskOpenTrainCards();
-        for (int i = 0; i < cards.length; i++) {
-            Integer card = cards[i];
+        List<TrainCard> cards = gameModel.getDeskOpenTrainCards();
+        for (int i = 0; i < cards.size(); i++) {
+            TrainCard card = cards.get(i);
             if (card != null) {
                 switch (i) {
                     case 0:

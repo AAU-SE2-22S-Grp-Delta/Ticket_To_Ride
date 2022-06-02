@@ -6,8 +6,8 @@ import android.view.View;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dataStructures.Mission;
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.databinding.CardMissionBinding;
-import at.aau.se2.tickettoride.enums.TrainCards;
 import at.aau.se2.tickettoride.models.Missions;
 
 public class ResourceHelper {
@@ -22,8 +22,8 @@ public class ResourceHelper {
         return binding.getRoot();
     }
 
-    public static int getTrainResource(int card) {
-        switch (TrainCards.valueOf(card)) {
+    public static int getTrainResource(TrainCard card) {
+        switch (card.getType()) {
             case BOX:
                 return R.drawable.ic_train_purpur;
             case PASSENGER:
