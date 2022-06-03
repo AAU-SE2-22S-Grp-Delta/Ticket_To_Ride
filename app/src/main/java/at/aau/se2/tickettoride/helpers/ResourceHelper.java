@@ -24,22 +24,22 @@ public class ResourceHelper {
 
     public static int getTrainResource(TrainCard card) {
         switch (card.getType()) {
-            case BOX:
-                return R.drawable.ic_train_purpur;
-            case PASSENGER:
-                return R.drawable.ic_train_white;
-            case TANKER:
+            case PINK:
+                return R.drawable.ic_train_pink;
+            case BLUE:
                 return R.drawable.ic_train_blue;
-            case REEFER:
-                return R.drawable.ic_train_yellow;
-            case FREIGHT:
-                return R.drawable.ic_train_orange;
-            case HOPPER:
-                return R.drawable.ic_train_black;
-            case COAL:
-                return R.drawable.ic_train_red;
-            case CABOOSE:
+            case GREEN:
                 return R.drawable.ic_train_green;
+            case YELLOW:
+                return R.drawable.ic_train_yellow;
+            case RED:
+                return R.drawable.ic_train_red;
+            case WHITE:
+                return R.drawable.ic_train_white;
+            case ORANGE:
+                return R.drawable.ic_train_orange;
+            case BLACK:
+                return R.drawable.ic_train_black;
             case LOCOMOTIVE:
                 return R.drawable.ic_train;
             default:

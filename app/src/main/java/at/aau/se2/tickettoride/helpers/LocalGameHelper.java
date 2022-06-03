@@ -29,14 +29,14 @@ public class LocalGameHelper {
     private static List<TrainCard> getTrainCards() {
         List<TrainCard> cards = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            cards.add(new TrainCard(TrainCard.Type.BOX));
-            cards.add(new TrainCard(TrainCard.Type.PASSENGER));
-            cards.add(new TrainCard(TrainCard.Type.TANKER));
-            cards.add(new TrainCard(TrainCard.Type.REEFER));
-            cards.add(new TrainCard(TrainCard.Type.FREIGHT));
-            cards.add(new TrainCard(TrainCard.Type.HOPPER));
-            cards.add(new TrainCard(TrainCard.Type.COAL));
-            cards.add(new TrainCard(TrainCard.Type.CABOOSE));
+            cards.add(new TrainCard(TrainCard.Type.PINK));
+            cards.add(new TrainCard(TrainCard.Type.BLUE));
+            cards.add(new TrainCard(TrainCard.Type.GREEN));
+            cards.add(new TrainCard(TrainCard.Type.YELLOW));
+            cards.add(new TrainCard(TrainCard.Type.RED));
+            cards.add(new TrainCard(TrainCard.Type.WHITE));
+            cards.add(new TrainCard(TrainCard.Type.ORANGE));
+            cards.add(new TrainCard(TrainCard.Type.BLACK));
         }
         for (int i = 0; i < 14; i++) {
             cards.add(new TrainCard(TrainCard.Type.LOCOMOTIVE));
