@@ -1,15 +1,23 @@
 package at.aau.se2.tickettoride.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
@@ -22,6 +30,22 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ClientConnection client;
 
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            for (String key : bundle.keySet()) {
+                switch (key) {
+                    case "listGames":
+                        Log.v("Broadcast", "Command: " + key + " - Value: " + bundle.getString(key));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         initComponents();
+    }
+
+    @Override
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        super.onDestroy();
     }
 
     @Override
@@ -50,6 +80,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void initComponents() {
         binding.button.setOnClickListener(v -> {
+            // TODO: Temporary generate player with time
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss");
+            String date = simpleDateFormat.format(new Date());
+            client.sendCommand("enterLobby:Player" + date);
+
+            client.sendCommand("listGames");
+
+            // TODO: Temporary needed to test start of a game
+            GameModel gameModel = GameModel.getInstance();
+            LocalGameHelper.generateTestGame(gameModel);
+
             Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
             startActivity(intent);
         });
@@ -76,7 +117,9 @@ public class MainActivity extends AppCompatActivity {
         if (serverAddress.isEmpty()) {
             binding.button.setEnabled(false);
         } else {
-            client.setIPv4(serverAddress);
+            client.setup(this, serverAddress);
         }
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
     }
 }

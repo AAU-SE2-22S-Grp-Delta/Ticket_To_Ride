@@ -21,7 +21,7 @@ public class DrawTrainCards {
         gameModel = GameModel.getInstance();
         gameModel.setDeskClosedTrainCards(new ArrayList<>(Arrays.asList(1, 2, 3)));
         trainDialogFragment = new TrainDialogFragment();
-        trainDialogFragment.cardNr = gameModel.getNextClosedTrainCard();
+        trainDialogFragment.card = gameModel.getNextClosedTrainCard();
     }
 
     @Test
