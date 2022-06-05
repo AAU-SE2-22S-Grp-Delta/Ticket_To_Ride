@@ -18,6 +18,7 @@ public class GameModel {
     private List<Integer> deskDestinationCards = new ArrayList<>();
     private List<TrainCard> playerTrainCards = new ArrayList<>();
     private List<Integer> playerDestinationCards = new ArrayList<>();
+    private List<Integer> chooseMissionCards = new ArrayList<>();
     private int playerColoredTrainCards = 45;
     private Map map = new Map();
 
@@ -78,6 +79,14 @@ public class GameModel {
 
     public void setPlayerDestinationCards(List<Integer> playerDestinationCards) {
         this.playerDestinationCards = playerDestinationCards;
+    }
+
+    public List<Integer> getChooseMissionCards() {
+        return chooseMissionCards;
+    }
+
+    public void setChooseMissionCards(List<Integer> chooseMissionCards) {
+        this.chooseMissionCards = chooseMissionCards;
     }
 
     public int getPlayerColoredTrainCards() {

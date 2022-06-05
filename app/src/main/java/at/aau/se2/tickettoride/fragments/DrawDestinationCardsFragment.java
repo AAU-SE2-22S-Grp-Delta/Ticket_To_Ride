@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import at.aau.se2.tickettoride.activities.GameActivity;
 import at.aau.se2.tickettoride.databinding.FragmentDrawDestinationCardsBinding;
@@ -47,17 +48,13 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
 
         binding.button9.setVisibility(View.INVISIBLE);
 
-        int card = gameModel.getNextMissionCard();
-        binding.imageView.addView(ResourceHelper.getMissionView(requireContext(), card));
-        binding.imageView.setTag(card);
-
-        card = gameModel.getNextMissionCard();
-        binding.imageView2.addView(ResourceHelper.getMissionView(requireContext(), card));
-        binding.imageView2.setTag(card);
-
-        card = gameModel.getNextMissionCard();
-        binding.imageView3.addView(ResourceHelper.getMissionView(requireContext(), card));
-        binding.imageView3.setTag(card);
+        List<Integer> cards = gameModel.getChooseMissionCards();
+        binding.imageView.addView(ResourceHelper.getMissionView(requireContext(), cards.get(0)));
+        binding.imageView.setTag(cards.get(0));
+        binding.imageView2.addView(ResourceHelper.getMissionView(requireContext(), cards.get(1)));
+        binding.imageView2.setTag(cards.get(1));
+        binding.imageView3.addView(ResourceHelper.getMissionView(requireContext(), cards.get(2)));
+        binding.imageView3.setTag(cards.get(2));
 
         binding.button6.setOnClickListener(this);
         binding.imageView.setOnClickListener(this);
