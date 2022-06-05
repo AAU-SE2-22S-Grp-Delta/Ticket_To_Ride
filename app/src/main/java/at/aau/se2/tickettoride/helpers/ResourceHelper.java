@@ -1,5 +1,6 @@
 package at.aau.se2.tickettoride.helpers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,13 @@ import at.aau.se2.tickettoride.databinding.CardMissionBinding;
 import at.aau.se2.tickettoride.models.Missions;
 
 public class ResourceHelper {
+    @SuppressLint("SetTextI18n")
     public static View getMissionView(Context context, int card) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         CardMissionBinding binding = CardMissionBinding.inflate(inflater);
         Mission mission = Missions.getMissionById(card);
         if (mission != null) {
+            binding.mission.setText(Integer.toString(mission.getId()));
             binding.destination.setText(String.format("%s - %s", mission.getDestination1(), mission.getDestination2()));
             binding.points.setText(String.format("%s", mission.getPoints()));
         }
