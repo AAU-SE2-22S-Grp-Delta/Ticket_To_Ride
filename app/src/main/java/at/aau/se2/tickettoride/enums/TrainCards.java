@@ -28,6 +28,8 @@ public enum TrainCards {
     }
 
     public static TrainCards valueOf(int card) {
+        if (card > map.size())
+            throw new IllegalStateException("Invalid number");
         return (TrainCards) map.get(card);
     }
 
