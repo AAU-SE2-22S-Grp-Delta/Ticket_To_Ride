@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
                     case "listGames":
                         Log.v("Broadcast", "Command: " + key + " - Value: " + bundle.getString(key));
                         break;
+                    case "drawMission":
+                        if (bundle.getString(key).equals("1")) {
+                            Intent i = new Intent(context, DrawDestinationCardsActivity.class);
+                            startActivity(i);
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -80,19 +86,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void initComponents() {
         binding.button.setOnClickListener(v -> {
-            // TODO: Temporary generate player with time
+            // TODO: Temporary generate player and game with time
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss");
             String date = simpleDateFormat.format(new Date());
+
+            // Enter lobby with Player + time
             client.sendCommand("enterLobby:Player" + date);
 
+            // Create game with Game + time
+            client.sendCommand("createGame:Game" + date);
+
+            // List available games
             client.sendCommand("listGames");
 
-            // TODO: Temporary needed to test start of a game
-            GameModel gameModel = GameModel.getInstance();
-            LocalGameHelper.generateTestGame(gameModel);
-
-            Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
-            startActivity(intent);
+            // Start game created
+            client.sendCommand("startGame");
         });
 
         binding.buttonLocal.setOnClickListener(v -> {
