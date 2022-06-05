@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import android.graphics.Color;
 import android.widget.Button;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,11 +31,18 @@ public class GameModelTests
     static int playerColoredTrainCards = 45;
     static Map map = new Map();
 
-    GameModel gm = GameModel.getInstance();
+    static GameModel gm = GameModel.getInstance();
 
     @BeforeAll
     public static void init()
     {
+        gm.setPlayerTrainCards(playerTrainCards);
+        gm.setPlayerDestinationCards(playerDestinationCards);
+        gm.setDeskOpenTrainCards(deskOpenTrainCards);
+        gm.setDeskDiscardedTrainCards(deskDiscardedTrainCards);
+        gm.setDeskOpenTrainCards(deskOpenTrainCards);
+        gm.setDeskClosedTrainCards(deskClosedTrainCards);
+        gm.setPlayerColoredTrainCards(playerColoredTrainCards);
         deskClosedTrainCards.add(3);
         deskOpenTrainCards = new Integer[]{2,3,1,5,4};
         deskDiscardedTrainCards.add(7);
@@ -42,6 +52,24 @@ public class GameModelTests
         playerDestinationCards.add(19);
         deskNextClosedTrainCards.add(3);
         nextMission.add(12);
+    }
+    @AfterAll
+    public static void exitTests(){
+        deskClosedTrainCards = new ArrayList<>();
+        nextMission = new ArrayList<>();
+        deskNextClosedTrainCards = new ArrayList<>();
+        deskOpenTrainCards = new Integer[5];
+        deskDiscardedTrainCards = new ArrayList<>();
+        deskDestinationCards = new ArrayList<>();
+        playerTrainCards = new ArrayList<>();
+        playerDestinationCards = new ArrayList<>();
+        gm.setPlayerTrainCards(playerTrainCards);
+        gm.setPlayerDestinationCards(playerDestinationCards);
+        gm.setDeskOpenTrainCards(deskOpenTrainCards);
+        gm.setDeskDiscardedTrainCards(deskDiscardedTrainCards);
+        gm.setDeskOpenTrainCards(deskOpenTrainCards);
+        gm.setDeskClosedTrainCards(deskClosedTrainCards);
+        gm.setPlayerColoredTrainCards(playerColoredTrainCards);
     }
 
     @Test
@@ -99,18 +127,6 @@ public class GameModelTests
     }
 
     @Test
-    public void testGetMap()
-    {
-
-    }
-
-    @Test
-    public void testSetMap()
-    {
-
-    }
-
-    @Test
     public void testGetNextClosed()
     {
         gm.setDeskClosedTrainCards(deskNextClosedTrainCards);
@@ -148,6 +164,7 @@ public class GameModelTests
     @Test
     public void testAddDiscardedTrainCard()
     {
+        gm.setDeskDiscardedTrainCards(new ArrayList<>());
         List<Integer> tmp = new ArrayList<>();
         gm.addDiscardedTrainCard(2);
         tmp.add(2);
@@ -157,6 +174,7 @@ public class GameModelTests
     @Test
     public void testAddDiscardedMissionCards()
     {
+        gm.setDeskDiscardedTrainCards(new ArrayList<>());
         List<Integer> tmp = new ArrayList<>();
         tmp.add(7);
         tmp.add(2);
@@ -164,6 +182,6 @@ public class GameModelTests
         List<Integer> tmp2 = new ArrayList<>();
         tmp2.add(7);
         tmp2.add(2);
-        assertEquals(tmp2, gm.getDeskDestinationCards());
+        assertEquals(new ArrayList<>(Arrays.asList(7, 2)), gm.getDeskDestinationCards());
     }
 }
