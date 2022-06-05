@@ -20,7 +20,7 @@ public class GameHelperTests
         assertEquals(101, gm.getDeskClosedTrainCards().size());
         assertEquals(27, gm.getDeskDestinationCards().size());
         assertEquals(4, gm.getPlayerTrainCards().size());
-        assertEquals(5, gm.getDeskOpenTrainCards().length);
+        assertEquals(5, gm.getDeskOpenTrainCards().size());
         assertEquals(3, gm.getPlayerDestinationCards().size());
     }
 }
