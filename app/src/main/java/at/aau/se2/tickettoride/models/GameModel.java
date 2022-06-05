@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.dataStructures.Map;
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 
 /**
  * GameModel-class represents an active game and stores the current game situation
@@ -11,11 +12,11 @@ import at.aau.se2.tickettoride.dataStructures.Map;
 public class GameModel {
     private static GameModel instance = null;
 
-    private List<Integer> deskClosedTrainCards = new ArrayList<>();
-    private Integer[] deskOpenTrainCards = new Integer[5];
-    private List<Integer> deskDiscardedTrainCards = new ArrayList<>();
+    private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
+    private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
+    private List<TrainCard> deskDiscardedTrainCards = new ArrayList<>();
     private List<Integer> deskDestinationCards = new ArrayList<>();
-    private List<Integer> playerTrainCards = new ArrayList<>();
+    private List<TrainCard> playerTrainCards = new ArrayList<>();
     private List<Integer> playerDestinationCards = new ArrayList<>();
     private int playerColoredTrainCards = 45;
     private Map map = new Map();
@@ -30,27 +31,27 @@ public class GameModel {
         return instance;
     }
 
-    public List<Integer> getDeskClosedTrainCards() {
+    public List<TrainCard> getDeskClosedTrainCards() {
         return deskClosedTrainCards;
     }
 
-    public void setDeskClosedTrainCards(List<Integer> deskClosedTrainCards) {
+    public void setDeskClosedTrainCards(List<TrainCard> deskClosedTrainCards) {
         this.deskClosedTrainCards = deskClosedTrainCards;
     }
 
-    public Integer[] getDeskOpenTrainCards() {
+    public List<TrainCard> getDeskOpenTrainCards() {
         return deskOpenTrainCards;
     }
 
-    public void setDeskOpenTrainCards(Integer[] deskOpenTrainCards) {
+    public void setDeskOpenTrainCards(List<TrainCard> deskOpenTrainCards) {
         this.deskOpenTrainCards = deskOpenTrainCards;
     }
 
-    public List<Integer> getDeskDiscardedTrainCards() {
+    public List<TrainCard> getDeskDiscardedTrainCards() {
         return deskDiscardedTrainCards;
     }
 
-    public void setDeskDiscardedTrainCards(List<Integer> deskDiscardedTrainCards) {
+    public void setDeskDiscardedTrainCards(List<TrainCard> deskDiscardedTrainCards) {
         this.deskDiscardedTrainCards = deskDiscardedTrainCards;
     }
 
@@ -62,11 +63,11 @@ public class GameModel {
         this.deskDestinationCards = deskDestinationCards;
     }
 
-    public List<Integer> getPlayerTrainCards() {
+    public List<TrainCard> getPlayerTrainCards() {
         return playerTrainCards;
     }
 
-    public void setPlayerTrainCards(List<Integer> playerTrainCards) {
+    public void setPlayerTrainCards(List<TrainCard> playerTrainCards) {
         this.playerTrainCards.clear();
         this.playerTrainCards.addAll(playerTrainCards);
     }
@@ -96,7 +97,7 @@ public class GameModel {
     }
 
     // Special methods
-    public Integer getNextClosedTrainCard() {
+    public TrainCard getNextClosedTrainCard() {
         return deskClosedTrainCards.remove(0);
     }
 
@@ -105,16 +106,16 @@ public class GameModel {
     }
 
     public void drawOpenTrainCard(int pos) {
-        Integer current = deskOpenTrainCards[pos];
+        TrainCard current = deskOpenTrainCards.get(pos);
         playerTrainCards.add(current);
-        deskOpenTrainCards[pos] = getNextClosedTrainCard();
+        deskOpenTrainCards.add(pos, getNextClosedTrainCard());
     }
 
-    public void addDrawnTrainCard(Integer trainCard) {
+    public void addDrawnTrainCard(TrainCard trainCard) {
         playerTrainCards.add(trainCard);
     }
 
-    public void addDiscardedTrainCard(Integer trainCard) {
+    public void addDiscardedTrainCard(TrainCard trainCard) {
         deskDiscardedTrainCards.add(trainCard);
     }
 

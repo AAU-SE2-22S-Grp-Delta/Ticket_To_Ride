@@ -2,4 +2,8 @@
     <string name="app_name">Ticket To Ride</string>
     <string name="cancel">Abbruch</string>
     <string name="accept">Bestätigen</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="server_header">Socket Server</string>
+    <string name="server_address_title">Server Address</string>
 </resources>

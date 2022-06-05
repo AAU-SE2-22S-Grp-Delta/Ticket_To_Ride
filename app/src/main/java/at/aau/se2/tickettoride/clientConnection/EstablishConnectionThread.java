@@ -1,17 +1,15 @@
 package at.aau.se2.tickettoride.clientConnection;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
 import java.net.Socket;
 
 public class EstablishConnectionThread extends Thread {
-    protected Socket clientSocket;
-    private SendingThread sendingThread;
-    private ReceivingThread receivingTread;
-
     private final Object lock = new Object();
-    private String ipv4;
+    private Context context;
+    private String serverAddress;
 
     @Override
     public void run() {
@@ -19,19 +17,22 @@ public class EstablishConnectionThread extends Thread {
             Log.d("ClientConnection", "EstablishConnectionThread: waiting for ipv4 ...");
             synchronized (lock) {
                 lock.wait();
-                if (!ipv4.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
-                    throw new IllegalArgumentException("illegal ipv4 format for " + ipv4);
+                if (!serverAddress.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
+                    throw new IllegalArgumentException("illegal ipv4 format for " + serverAddress);
                 } else {
                     Log.d("ClientConnection", "EstablishConnectionThread: connecting ...");
-                    clientSocket = new Socket(ipv4, 8001);
+                    Socket clientSocket = new Socket(serverAddress, 8001);
                     Log.d("ClientConnection", "connected");
-                    sendingThread = new SendingThread(clientSocket);
-                    receivingTread = new ReceivingThread(clientSocket);
+                    SendingThread sendingThread = new SendingThread(clientSocket);
                     sendingThread.start();
+
+                    ReceivingThread receivingTread = new ReceivingThread(clientSocket);
+                    receivingTread.setContext(context);
                     receivingTread.start();
-                    ClientConnection cc = ClientConnection.getInstance();
-                    cc.setSendingThread(sendingThread);
-                    cc.setReceivingThread(receivingTread);
+
+                    ClientConnection client = ClientConnection.getInstance();
+                    client.setSendingThread(sendingThread);
+                    client.setReceivingThread(receivingTread);
                     Log.d("ClientConnection", "launched communication threads");
                 }
             }
@@ -43,8 +44,9 @@ public class EstablishConnectionThread extends Thread {
         }
     }
 
-    public void setIpv4(String ipv4) {
-        this.ipv4 = ipv4;
+    public void setup(Context context, String serverAddress) {
+        this.context = context;
+        this.serverAddress = serverAddress;
         synchronized (lock) {
             lock.notifyAll();
         }

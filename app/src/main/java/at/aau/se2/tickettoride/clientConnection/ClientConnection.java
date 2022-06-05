@@ -1,12 +1,13 @@
 package at.aau.se2.tickettoride.clientConnection;
 
+import android.content.Context;
 import android.util.Log;
 
 public class ClientConnection {
     private static ClientConnection clientConnection;
+    private final EstablishConnectionThread establishConnectionThread;
     private SendingThread sendingThread;
     private ReceivingThread receivingThread;
-    private EstablishConnectionThread establishConnectionThread;
 
     public static ClientConnection getInstance() {
         if (clientConnection == null) {
@@ -36,11 +37,11 @@ public class ClientConnection {
         sendingThread.setCommand(command);
     }
 
-    public void setIPv4(String iPv4) {
+    public void setup(Context context, String serverAddress) {
         //TODO this is temporary
         if (establishConnectionThread == null) {
             return;
         }
-        establishConnectionThread.setIpv4(iPv4);
+        establishConnectionThread.setup(context, serverAddress);
     }
 }

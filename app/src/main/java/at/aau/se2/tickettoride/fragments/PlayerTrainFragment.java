@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.databinding.FragmentPlayerTrainBinding;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -51,12 +52,10 @@ public class PlayerTrainFragment extends Fragment {
     }
 
     public void displayTrainCards() {
-
-        List<Integer> heldTrainCards = gameModel.getPlayerTrainCards();
-
         binding.linearLayoutTrainCards.removeAllViews();
 
-        for(Integer card : heldTrainCards)
+        List<TrainCard> heldTrainCards = gameModel.getPlayerTrainCards();
+        for(TrainCard card : heldTrainCards)
         {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -16,13 +15,14 @@ import androidx.fragment.app.FragmentActivity;
 import java.util.Objects;
 
 import at.aau.se2.tickettoride.R;
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class TrainDialogFragment extends DialogFragment {
 
     GameModel gameModel = GameModel.getInstance();
-    public int cardNr;
+    public TrainCard card;
 
     @NonNull
     @Override
@@ -33,10 +33,9 @@ public class TrainDialogFragment extends DialogFragment {
         //Create View
         LinearLayout layout = new LinearLayout(getActivity());
         ImageView imageView = new ImageView(getActivity());
-        //Generate Random color
-        cardNr = gameModel.getNextClosedTrainCard();
 
-        imageView.setImageResource(ResourceHelper.getTrainResource(cardNr));
+        card = gameModel.getNextClosedTrainCard();
+        imageView.setImageResource(ResourceHelper.getTrainResource(card));
         imageView.setMinimumHeight(500);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.addView(imageView);
@@ -53,21 +52,19 @@ public class TrainDialogFragment extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        gameModel.addDiscardedTrainCard(cardNr);
+                        gameModel.addDiscardedTrainCard(card);
                         Objects.requireNonNull(TrainDialogFragment.this.getDialog()).cancel();
                     }
                 });
         return builder.create();
     }
     public void addCardToHand(){
-        gameModel.addDrawnTrainCard(cardNr);
+        gameModel.addDrawnTrainCard(card);
 
         FragmentActivity activity = getActivity();
         if (activity != null) {
             Bundle result = new Bundle();
             getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
         }
-
-        Log.i("RESULT", Integer.toString(cardNr));
     }
 }

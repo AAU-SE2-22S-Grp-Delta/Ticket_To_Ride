@@ -1,16 +1,23 @@
 package at.aau.se2.tickettoride.clientConnection;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class ReceivingThread extends Thread {
-    protected DataInputStream receive;
+    private final BufferedReader receive;
+    private Context context;
 
-    protected ReceivingThread(Socket clientSocket) throws IOException {
-        receive = new DataInputStream(clientSocket.getInputStream());
+    public ReceivingThread(Socket clientSocket) throws IOException {
+        this.receive = new BufferedReader(new InputStreamReader(new DataInputStream(clientSocket.getInputStream())));
     }
 
     @Override
@@ -18,18 +25,47 @@ public class ReceivingThread extends Thread {
         while (true) {
             try {
                 String line = receive.readLine();
-                parseServerMsg(line);
+                parseMessage(line);
             } catch (IOException e) {
                 Log.d("ClientReceive", e.toString());
             }
         }
     }
 
-    private void parseServerMsg(String line) {
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    private void parseMessage(String line) {
         String[] messages = line.split(";");
-        for (int i = 0; i < messages.length; i++) {
-            Log.d("ClientReceive", messages[i]);
-            if (messages[i].equals("")) ;
+        for (String message : messages) {
+            Log.d("ClientReceive", message);
+            if (message.isEmpty()) {
+                continue;
+            }
+            handleResponse(message);
+        }
+    }
+
+    private void handleResponse(String message) {
+        String[] split = message.split(":");
+        String command = split[0];
+        String response = split[1];
+
+        switch (command) {
+            case "listGames":
+                broadcastResponse("listGames", response);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void broadcastResponse(String command, String response) {
+        if (context != null) {
+            Intent intent = new Intent("server");
+            intent.putExtra(command, response);
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
         }
     }
 }
