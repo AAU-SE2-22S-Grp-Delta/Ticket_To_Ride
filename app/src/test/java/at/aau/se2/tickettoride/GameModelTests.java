@@ -10,11 +10,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import at.aau.se2.tickettoride.dataStructures.Map;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class GameModelTests
+class GameModelTests
 {
     static List<TrainCard> deskClosedTrainCards;
     static List<Integer> nextMission;
@@ -28,7 +27,7 @@ public class GameModelTests
     static GameModel gm = GameModel.getInstance();
 
     @BeforeAll
-    public static void init()
+    static void init()
     {
         deskClosedTrainCards = new ArrayList<>(Collections.singletonList(new TrainCard(TrainCard.Type.BLACK)));
         nextMission = new ArrayList<>(Collections.singletonList(12));
@@ -49,21 +48,21 @@ public class GameModelTests
     }
 
     @Test
-    public void testGetClosedTrainCards()
+    void testGetClosedTrainCards()
     {
         gm.setDeskClosedTrainCards(deskClosedTrainCards);
         assertEquals(deskClosedTrainCards, gm.getDeskClosedTrainCards());
     }
 
     @Test
-    public void testGetOpenTrainCards()
+    void testGetOpenTrainCards()
     {
         gm.setDeskOpenTrainCards(deskOpenTrainCards);
         assertEquals(deskOpenTrainCards, gm.getDeskOpenTrainCards());
     }
 
     @Test
-    public void testGetDiscardedTrainCards()
+    void testGetDiscardedTrainCards()
     {
         gm.setDeskDiscardedTrainCards(deskDiscardedTrainCards);
         assertEquals(deskDiscardedTrainCards, gm.getDeskDiscardedTrainCards());
@@ -71,7 +70,7 @@ public class GameModelTests
 
 
     @Test
-    public void testGetDeskDestCards()
+    void testGetDeskDestCards()
     {
         gm.setDeskDestinationCards(deskDestinationCards);
         assertEquals(deskDestinationCards, gm.getDeskDestinationCards());
@@ -79,7 +78,7 @@ public class GameModelTests
 
 
     @Test
-    public void testGetPlayerTrainCards()
+    void testGetPlayerTrainCards()
     {
         gm.setPlayerTrainCards(playerTrainCards);
         assertEquals(playerTrainCards, gm.getPlayerTrainCards());
@@ -87,7 +86,7 @@ public class GameModelTests
 
 
     @Test
-    public void testGetPlayerDestCards()
+    void testGetPlayerDestCards()
     {
         gm.setPlayerDestinationCards(playerDestinationCards);
         assertEquals(playerDestinationCards, gm.getPlayerDestinationCards());
@@ -95,7 +94,7 @@ public class GameModelTests
 
 
     @Test
-    public void testGetPlayerColorTrainCards()
+    void testGetPlayerColorTrainCards()
     {
         playerColoredTrainCards = 35;
         gm.setPlayerColoredTrainCards(playerColoredTrainCards);
@@ -103,32 +102,32 @@ public class GameModelTests
     }
 
     @Test
-    public void testGetMap()
+    void testGetMap()
     {
 
     }
 
     @Test
-    public void testSetMap()
+    void testSetMap()
     {
 
     }
 
     @Test
-    public void testGetNextClosed()
+    void testGetNextClosed()
     {
         gm.setDeskClosedTrainCards(deskNextClosedTrainCards);
         assertEquals(new TrainCard(TrainCard.Type.RED).getType(), gm.getNextClosedTrainCard().getType());
     }
     @Test
-    public void testGetNextMission()
+    void testGetNextMission()
     {
         gm.setDeskDestinationCards(nextMission);
         assertEquals(12, gm.getNextMissionCard());
     }
 
     @Test
-    public void testDrawOpen()
+    void testDrawOpen()
     {
         List<TrainCard> tmp = new ArrayList<>();
         tmp.add(new TrainCard(TrainCard.Type.PINK));
@@ -140,7 +139,7 @@ public class GameModelTests
     }
 
     @Test
-    public void testAddTrainCard()
+    void testAddTrainCard()
     {
         List<TrainCard> tmp = new ArrayList<>();
         gm.addDrawnTrainCard(new TrainCard(TrainCard.Type.BLACK));
@@ -150,14 +149,14 @@ public class GameModelTests
     }
 
     @Test
-    public void testAddDiscardedTrainCard()
+    void testAddDiscardedTrainCard()
     {
         gm.addDiscardedTrainCard(new TrainCard(TrainCard.Type.BLACK));
         assertEquals(new TrainCard(TrainCard.Type.GREEN).getType(), gm.getDeskDiscardedTrainCards().get(0).getType());
     }
 
     @Test
-    public void testAddDiscardedMissionCards()
+    void testAddDiscardedMissionCards()
     {
         List<Integer> tmp = new ArrayList<>();
         tmp.add(7);

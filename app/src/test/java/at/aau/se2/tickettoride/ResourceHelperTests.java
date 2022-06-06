@@ -2,18 +2,17 @@ package at.aau.se2.tickettoride;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
 
-public class ResourceHelperTests
+class ResourceHelperTests
 {
     
     @Test
-    public void testGetResource()
+    void testGetResource()
     {
         assertEquals(R.drawable.ic_train_pink, ResourceHelper.getTrainResource(new TrainCard(TrainCard.Type.PINK)));
         assertEquals(R.drawable.ic_train_blue, ResourceHelper.getTrainResource(new TrainCard(TrainCard.Type.BLUE)));

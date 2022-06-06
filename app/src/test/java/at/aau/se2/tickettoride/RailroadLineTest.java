@@ -22,7 +22,7 @@ import at.aau.se2.tickettoride.dataStructures.Destination;
 import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 
-public class RailroadLineTest {
+class RailroadLineTest {
     static Destination dest1;
     static Destination dest2;
     static Destination dest3;
@@ -45,7 +45,7 @@ public class RailroadLineTest {
     static Paint paint;
 
     @BeforeAll
-    public static void init() {
+    static void init() {
         btn1 = Mockito.mock(Button.class);
         Mockito.when(btn1.getX()).thenReturn(10f);
         Mockito.when(btn1.getY()).thenReturn(10f);
@@ -85,51 +85,49 @@ public class RailroadLineTest {
         player2 = new Player("testplayer2", Color.RED);
 
         r2.setOwner(player1);
-
-
     }
 
     @Test
-    public void testGetOwnerNone()
+    void testGetOwnerNone()
     {
         assertNull(r1.getOwner());
     }
 
     @Test
-    public void testGetOwner()
+    void testGetOwner()
     {
         assertEquals(player1, r2.getOwner());
     }
 
     @Test
-    public void testIsNotBuilt()
+    void testIsNotBuilt()
     {
         assertFalse(r1.isBuilt());
     }
 
     @Test
-    public void testIsBuilt()
+    void testIsBuilt()
     {
         assertTrue(r2.isBuilt());
     }
 
     @Test
-    public void testConnectionFirstNull() {
+    void testConnectionFirstNull() {
         assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(null, dest2, Color.BLUE, 3));
     }
 
     @Test
-    public void testConnectionSecondNull() {
+    void testConnectionSecondNull() {
         assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(dest1, null, Color.BLUE, 3));
     }
 
     @Test
-    public void testConnectionSameDest() {
+    void testConnectionSameDest() {
         assertThrows(IllegalArgumentException.class, () -> r2 = new RailroadLine(dest1, dest1, Color.BLUE, 3));
     }
 
     @Test
-    public void testDestEquals() {
+    void testDestEquals() {
         assertEquals(r1, new RailroadLine(dest1, dest2));
         assertEquals(r1, new RailroadLine(dest2, dest1));
         assertNotEquals(r1, r2);
@@ -137,44 +135,44 @@ public class RailroadLineTest {
 
 
     @Test
-    public void testGetDest() {
+    void testGetDest() {
         assertEquals(dest1, r1.getDestination1());
         assertEquals(dest2, r1.getDestination2());
     }
 
     @Test
-    public void testGetColor(){
+    void testGetColor(){
         assertEquals(Color.BLUE, r1.getColor());
     }
 
     @Test
-    public void testGetDist()
+    void testGetDist()
     {
         assertEquals(3, r1.getDistance());
     }
 
     @Test
-    public void testSetOwnerNew()
+    void testSetOwnerNew()
     {
         r4.setOwner(player2);
         assertEquals(player2, r4.getOwner());
     }
 
     @Test
-    public void testSetOwnerBuilt()
+    void testSetOwnerBuilt()
     {
         assertThrows(IllegalStateException.class, () -> r2.setOwner(player1));
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         assertEquals(r1, new RailroadLine(dest1, dest2, Color.BLUE, 3));
         assertEquals(r1, new RailroadLine(dest2, dest1, Color.BLUE, 3));
         assertNotEquals(r1, new RailroadLine(dest1, dest3, Color.BLUE, 3));
     }
 
     @Test
-    public void testBuildRoadOwned()
+    void testBuildRoadOwned()
     {
         assertThrows(IllegalStateException.class, () -> r2.buildRoad(canvas, paint, bm, drawView));
         //dest1 10 10, dest2 20 20, dest3 5 40
@@ -192,7 +190,7 @@ public class RailroadLineTest {
     }
 
     @Test
-    public void testBuildRoad()
+    void testBuildRoad()
     {
         r5.buildRoad(canvas, paint, bm, drawView, player1);
     }
