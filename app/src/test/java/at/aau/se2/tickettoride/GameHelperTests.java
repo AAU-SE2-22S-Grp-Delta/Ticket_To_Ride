@@ -1,6 +1,5 @@
 package at.aau.se2.tickettoride;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -8,10 +7,9 @@ import org.junit.jupiter.api.Test;
 import at.aau.se2.tickettoride.helpers.LocalGameHelper;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class GameHelperTests
+class GameHelperTests
 {
     GameModel gm = GameModel.getInstance();
-
 
     @Test
     void testGenerate()
