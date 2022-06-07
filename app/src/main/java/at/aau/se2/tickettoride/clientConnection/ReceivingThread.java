@@ -68,6 +68,8 @@ public class ReceivingThread extends Thread {
                 gameModel.setChooseMissionCards(cards);
                 broadcastResponse("drawMission", "1");
                 break;
+            case "getPoints":
+                broadcastResponse("getPoints", response);
             default:
                 break;
         }

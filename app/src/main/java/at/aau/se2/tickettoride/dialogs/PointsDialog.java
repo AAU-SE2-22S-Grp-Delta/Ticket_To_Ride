@@ -2,8 +2,12 @@ package at.aau.se2.tickettoride.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,7 +15,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import at.aau.se2.tickettoride.activities.DrawDestinationCardsActivity;
+import at.aau.se2.tickettoride.clientConnection.ClientConnection;
+
 public class PointsDialog extends DialogFragment {
+
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            for (String key : bundle.keySet()) {
+                switch (key) {
+                    case "getPoints":
+                        String response = bundle.getString(key);
+                        //TODO Find a way to split
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
 
     @NonNull
     @Override
@@ -20,6 +45,8 @@ public class PointsDialog extends DialogFragment {
         LinearLayout layout = new LinearLayout(getActivity());
         layout.setOrientation(LinearLayout.VERTICAL);
         //TODO Edit to get real number of players
+        ClientConnection client = ClientConnection.getInstance();
+        client.sendCommand("getPoints");
         int numberOfPlayers = 4;
 
         for (int i = 1; i <= numberOfPlayers; i++) {
