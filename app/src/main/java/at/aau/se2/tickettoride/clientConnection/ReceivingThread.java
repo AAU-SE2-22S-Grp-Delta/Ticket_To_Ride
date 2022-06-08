@@ -70,6 +70,10 @@ public class ReceivingThread extends Thread {
                 break;
             case "getPoints":
                 broadcastResponse("getPoints", response);
+                break;
+            case "listPlayersGame":
+                broadcastResponse("listPlayersGame", response);
+                break;
             default:
                 break;
         }

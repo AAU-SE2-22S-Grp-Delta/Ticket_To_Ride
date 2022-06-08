@@ -1,9 +1,15 @@
 package at.aau.se2.tickettoride.models;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.dataStructures.Map;
+import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
 
 /**
@@ -11,6 +17,8 @@ import at.aau.se2.tickettoride.dataStructures.TrainCard;
  */
 public class GameModel {
     private static GameModel instance = null;
+    //TODO Add Symbol
+    private static final String SYMBOLTOSPLIT = "";
 
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
@@ -21,6 +29,25 @@ public class GameModel {
     private List<Integer> chooseMissionCards = new ArrayList<>();
     private int playerColoredTrainCards = 45;
     private Map map = new Map();
+    private String[] players;
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            String response;
+            for (String key : bundle.keySet()) {
+                switch (key) {
+                    case "listPlayersGame":
+                        response = bundle.getString(key);
+                        players = response.split(SYMBOLTOSPLIT);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
 
     private GameModel() {
     }
@@ -103,6 +130,10 @@ public class GameModel {
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    public String[] getPlayers(){
+        return players;
     }
 
     // Special methods
