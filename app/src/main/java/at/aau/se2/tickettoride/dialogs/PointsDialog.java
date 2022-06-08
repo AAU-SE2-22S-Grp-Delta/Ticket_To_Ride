@@ -15,21 +15,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import at.aau.se2.tickettoride.activities.DrawDestinationCardsActivity;
+import java.util.HashMap;
+
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
+import at.aau.se2.tickettoride.models.GameModel;
 
 public class PointsDialog extends DialogFragment {
-
+    GameModel gameModel = GameModel.getInstance();
+    //TODO Add symbol
+    private static final String SPLITTER = "";
+    private String[] response;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        //GET VALUES FROM RECEIVING THREAD
         @Override
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
             for (String key : bundle.keySet()) {
                 switch (key) {
                     case "getPoints":
-                        String response = bundle.getString(key);
-                        //TODO Find a way to split
+                        response = bundle.getString(key).split(SPLITTER);
                         break;
                     default:
                         break;
@@ -44,15 +49,18 @@ public class PointsDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LinearLayout layout = new LinearLayout(getActivity());
         layout.setOrientation(LinearLayout.VERTICAL);
-        //TODO Edit to get real number of players
+
+        //SEND COMMAND TO SERVER
         ClientConnection client = ClientConnection.getInstance();
         client.sendCommand("getPoints");
-        int numberOfPlayers = 4;
 
-        for (int i = 1; i <= numberOfPlayers; i++) {
+        String[] players = gameModel.getPlayers();
+
+        for (int i = 1; i < players.length; i++) {
             TextView textView = new TextView(getActivity());
-            //TODO Get Points
-            textView.setText("Player " + i + ": 0");
+            String player = players[i];
+            String points = response[i].split(player)[1];
+            textView.setText(player+ ": " + points);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(80, 20, 50, 0);
