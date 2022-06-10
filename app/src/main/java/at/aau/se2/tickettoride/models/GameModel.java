@@ -18,7 +18,7 @@ import at.aau.se2.tickettoride.dataStructures.TrainCard;
 public class GameModel {
     private static GameModel instance = null;
     //TODO Add Symbol
-    private static final String SYMBOLTOSPLIT = "";
+    private static final String SYMBOLTOSPLIT = "\\.";
 
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();

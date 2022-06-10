@@ -22,8 +22,6 @@ import at.aau.se2.tickettoride.models.GameModel;
 
 public class PointsDialog extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
-    //TODO Add symbol
-    private static final String SPLITTER = "";
     private String[] response;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -34,7 +32,7 @@ public class PointsDialog extends DialogFragment {
             for (String key : bundle.keySet()) {
                 switch (key) {
                     case "getPoints":
-                        response = bundle.getString(key).split(SPLITTER);
+                        response = bundle.getString(key).split("\\.");
                         break;
                     default:
                         break;
