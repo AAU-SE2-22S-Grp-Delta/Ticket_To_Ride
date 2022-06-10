@@ -15,12 +15,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class ReceivingThread extends Thread {
     private final BufferedReader receive;
     private Context context;
     private final GameModel gameModel = GameModel.getInstance();
+    private final ClientConnection client = ClientConnection.getInstance();
 
     public ReceivingThread(Socket clientSocket) throws IOException {
         this.receive = new BufferedReader(new InputStreamReader(new DataInputStream(clientSocket.getInputStream())));
@@ -66,6 +68,13 @@ public class ReceivingThread extends Thread {
                 List<Integer> cards = Arrays.stream(response.split(":")).map(Integer::parseInt).collect(Collectors.toList());
                 gameModel.setChooseMissionCards(cards);
                 broadcastResponse("drawMission", "1");
+                client.sendCommand("getOpenCards");
+                break;
+            case "getOpenCards":
+                List<TrainCard> trainCards = Arrays.stream(response.split(":"))
+                        .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
+                        .collect(Collectors.toList());
+                gameModel.setDeskOpenTrainCards(trainCards);
                 break;
             default:
                 break;
