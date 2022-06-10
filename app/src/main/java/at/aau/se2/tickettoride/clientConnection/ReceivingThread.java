@@ -11,7 +11,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +20,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class ReceivingThread extends Thread {
     private final BufferedReader receive;
     private Context context;
-    private GameModel gameModel = GameModel.getInstance();
+    private final GameModel gameModel = GameModel.getInstance();
 
     public ReceivingThread(Socket clientSocket) throws IOException {
         this.receive = new BufferedReader(new InputStreamReader(new DataInputStream(clientSocket.getInputStream())));
