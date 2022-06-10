@@ -2,7 +2,9 @@ package at.aau.se2.tickettoride.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.dataStructures.Map;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
 
@@ -11,6 +13,7 @@ import at.aau.se2.tickettoride.dataStructures.TrainCard;
  */
 public class GameModel {
     private static GameModel instance = null;
+    private final ClientConnection client;
 
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
@@ -23,6 +26,7 @@ public class GameModel {
     private Map map = new Map();
 
     private GameModel() {
+        this.client = ClientConnection.getInstance();
     }
 
     public static synchronized GameModel getInstance() {
@@ -77,8 +81,11 @@ public class GameModel {
         return playerDestinationCards;
     }
 
-    public void setPlayerDestinationCards(List<Integer> playerDestinationCards) {
-        this.playerDestinationCards = playerDestinationCards;
+    public void setPlayerDestinationCards(List<Integer> cards) {
+        this.playerDestinationCards = cards;
+
+        String result = cards.stream().map(Object::toString).collect(Collectors.joining(":"));
+        client.sendCommand("chooseMission:" + result);
     }
 
     public List<Integer> getChooseMissionCards() {
