@@ -75,6 +75,7 @@ public class ReceivingThread extends Thread {
                         .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
                         .collect(Collectors.toList());
                 gameModel.setDeskOpenTrainCards(trainCards);
+                broadcastResponse("refresh_desk_open_train", "1");
                 break;
             default:
                 break;

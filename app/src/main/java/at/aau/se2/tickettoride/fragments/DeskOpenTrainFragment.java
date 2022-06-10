@@ -2,6 +2,9 @@ package at.aau.se2.tickettoride.fragments;
 
 import static at.aau.se2.tickettoride.helpers.ResourceHelper.getTrainResource;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,22 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class DeskOpenTrainFragment extends Fragment {
     private FragmentDeskOpenTrainBinding binding;
     private GameModel gameModel;
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            for (String key : bundle.keySet()) {
+                switch (key) {
+                    case "refresh_desk_open_train":
+                        displayData();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
 
     public static DeskOpenTrainFragment newInstance() {
         return new DeskOpenTrainFragment();
@@ -56,8 +75,6 @@ public class DeskOpenTrainFragment extends Fragment {
     }
 
     private void initComponents() {
-        getParentFragmentManager().setFragmentResultListener("RefreshDeskOpenTrain", this, (requestKey, result) -> displayData());
-
         binding.card1.setOnClickListener(view -> drawCard(0));
 
         binding.card2.setOnClickListener(view -> drawCard(1));
@@ -99,7 +116,6 @@ public class DeskOpenTrainFragment extends Fragment {
         gameModel.drawOpenTrainCard(i);
 
         Bundle result = new Bundle();
-        getParentFragmentManager().setFragmentResult("RefreshDeskOpenTrain", result);
         getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
     }
 }
