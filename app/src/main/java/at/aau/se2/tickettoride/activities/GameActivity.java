@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -55,14 +54,10 @@ public class GameActivity extends AppCompatActivity {
         startGame();
     }
 
-    private SensorEventListener sensorListener = new SensorEventListener() {
+    private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            int count = shakeDetection.checkShake(sensorEvent, shakeCount);
-            shakeCount = count;
-            String msg = String.valueOf(count);
-            Log.d("Sensor Count", msg);
-
+            shakeCount = shakeDetection.checkShake(sensorEvent, shakeCount);
             if(shakeCount == 5)
             {
                 shakeCount = 0;
