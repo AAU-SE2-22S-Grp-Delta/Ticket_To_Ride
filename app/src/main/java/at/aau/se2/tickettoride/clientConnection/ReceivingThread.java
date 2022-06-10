@@ -57,14 +57,14 @@ public class ReceivingThread extends Thread {
     private void handleResponse(String message) {
         String[] split = message.split(":");
         String command = split[0];
-        String response = split[1];
+        String response = message.substring(command.length() + 1);
 
         switch (command) {
             case "listGames":
                 broadcastResponse("listGames", response);
                 break;
             case "drawMission":
-                List<Integer> cards = Arrays.stream(response.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+                List<Integer> cards = Arrays.stream(response.split(":")).map(Integer::parseInt).collect(Collectors.toList());
                 gameModel.setChooseMissionCards(cards);
                 broadcastResponse("drawMission", "1");
                 break;
