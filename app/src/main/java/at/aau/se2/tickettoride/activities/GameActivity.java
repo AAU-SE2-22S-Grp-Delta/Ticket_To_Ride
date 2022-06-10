@@ -14,18 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
 import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.helpers.ShakeDetection;
-import at.aau.se2.tickettoride.models.GameModel;
 
 public class GameActivity extends AppCompatActivity {
-    private GameModel gameModel;
-    private ClientConnection clientConnection;
-
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private ShakeDetection shakeDetection;
@@ -95,10 +90,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startGame() {
-        gameModel = GameModel.getInstance();
-        clientConnection = ClientConnection.getInstance();
-        clientConnection.sendCommand("enterLobby:testPlayer;createGame:testGame:testPlayer");
-
         // After starting a new game send refresh to all attached fragments
         Bundle result = new Bundle();
         getSupportFragmentManager().setFragmentResult("refresh", result);
