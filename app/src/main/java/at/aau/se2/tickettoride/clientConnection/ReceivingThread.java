@@ -11,10 +11,17 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import at.aau.se2.tickettoride.models.GameModel;
 
 public class ReceivingThread extends Thread {
     private final BufferedReader receive;
     private Context context;
+    private GameModel gameModel = GameModel.getInstance();
 
     public ReceivingThread(Socket clientSocket) throws IOException {
         this.receive = new BufferedReader(new InputStreamReader(new DataInputStream(clientSocket.getInputStream())));
@@ -55,6 +62,11 @@ public class ReceivingThread extends Thread {
         switch (command) {
             case "listGames":
                 broadcastResponse("listGames", response);
+                break;
+            case "drawMission":
+                List<Integer> cards = Arrays.stream(response.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+                gameModel.setChooseMissionCards(cards);
+                broadcastResponse("drawMission", "1");
                 break;
             default:
                 break;
