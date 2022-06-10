@@ -27,7 +27,7 @@ class DrawTrainCards {
     @Test
     void testAddCardToHand() {
         trainDialogFragment.addCardToHand();
-        assertEquals(gameModel.getPlayerTrainCards().size(), 1);
+        assertEquals(1, gameModel.getPlayerTrainCards().size());
         assertEquals(gameModel.getPlayerTrainCards().get(0).getType(), new TrainCard(TrainCard.Type.PINK).getType());
     }
 }
