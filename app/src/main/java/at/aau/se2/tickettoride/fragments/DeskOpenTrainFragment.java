@@ -5,6 +5,7 @@ import static at.aau.se2.tickettoride.helpers.ResourceHelper.getTrainResource;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.List;
 
@@ -28,14 +30,8 @@ public class DeskOpenTrainFragment extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
-            for (String key : bundle.keySet()) {
-                switch (key) {
-                    case "refresh_desk_open_train":
-                        displayData();
-                        break;
-                    default:
-                        break;
-                }
+            if (bundle.getString("refresh_desk_open_train", "0").equals("1")) {
+                displayData();
             }
         }
     };
@@ -71,6 +67,8 @@ public class DeskOpenTrainFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).unregisterReceiver(receiver);
         binding = null;
     }
 
@@ -84,6 +82,8 @@ public class DeskOpenTrainFragment extends Fragment {
         binding.card4.setOnClickListener(view -> drawCard(3));
 
         binding.card5.setOnClickListener(view -> drawCard(4));
+
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).registerReceiver(receiver, new IntentFilter("server"));
     }
 
     private void displayData() {
