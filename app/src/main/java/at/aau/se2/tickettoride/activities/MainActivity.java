@@ -18,6 +18,7 @@ import androidx.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private void initComponents() {
         binding.button.setOnClickListener(v -> {
             // TODO: Temporary generate player and game with time
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss", Locale.getDefault());
             String date = simpleDateFormat.format(new Date());
 
             String playerName = "Player" + date;
