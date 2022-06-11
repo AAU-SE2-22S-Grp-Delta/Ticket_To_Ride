@@ -19,6 +19,8 @@ import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class ReceivingThread extends Thread {
+    private static final String DELIMITER_VALUE = "\\.";
+
     private final BufferedReader receive;
     private Context context;
     private final GameModel gameModel = GameModel.getInstance();
@@ -59,6 +61,9 @@ public class ReceivingThread extends Thread {
         String[] split = message.split(":");
         String command = split[0];
         String response = split.length > 1 ? message.substring(command.length() + 1) : "";
+        if (response.endsWith(DELIMITER_VALUE)) {
+            response = response.substring(0, response.length() - 1);
+        }
 
         List<TrainCard> trainCards;
         switch (command) {
@@ -73,7 +78,7 @@ public class ReceivingThread extends Thread {
                 break;
             case "getHandCards":
                 if (!response.isEmpty()) {
-                    trainCards = Arrays.stream(response.split(":"))
+                    trainCards = Arrays.stream(response.split(DELIMITER_VALUE))
                             .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
                             .collect(Collectors.toList());
                     gameModel.setPlayerTrainCards(trainCards);
@@ -82,7 +87,7 @@ public class ReceivingThread extends Thread {
                 break;
             case "getOpenCards":
                 if (!response.isEmpty()) {
-                    trainCards = Arrays.stream(response.split(":"))
+                    trainCards = Arrays.stream(response.split(DELIMITER_VALUE))
                             .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
                             .collect(Collectors.toList());
                     gameModel.setDeskOpenTrainCards(trainCards);
