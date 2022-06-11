@@ -58,7 +58,7 @@ public class ReceivingThread extends Thread {
     private void handleResponse(String message) {
         String[] split = message.split(":");
         String command = split[0];
-        String response = message.substring(command.length() + 1);
+        String response = split.length > 1 ? message.substring(command.length() + 1) : "";
 
         switch (command) {
             case "listGames":
@@ -71,10 +71,12 @@ public class ReceivingThread extends Thread {
                 client.sendCommand("getOpenCards");
                 break;
             case "getOpenCards":
-                List<TrainCard> trainCards = Arrays.stream(response.split(":"))
-                        .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
-                        .collect(Collectors.toList());
-                gameModel.setDeskOpenTrainCards(trainCards);
+                if (!response.isEmpty()) {
+                    List<TrainCard> trainCards = Arrays.stream(response.split(":"))
+                            .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
+                            .collect(Collectors.toList());
+                    gameModel.setDeskOpenTrainCards(trainCards);
+                }
                 broadcastResponse("refresh_desk_open_train", "1");
                 break;
             default:
