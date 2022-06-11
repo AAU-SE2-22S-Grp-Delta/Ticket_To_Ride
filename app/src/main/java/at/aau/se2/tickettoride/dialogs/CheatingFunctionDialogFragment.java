@@ -3,6 +3,7 @@ package at.aau.se2.tickettoride.dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -46,19 +47,54 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
         player1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(actions != 0)
-                {
+                if(actions != 0) {
                     displayDestinationCards(gameModel.getPlayerDestinationCards());
+                    actions--;
+                } else {
+                    Log.d("Error", "No cheating action left!");
                 }
             }
         });
 
         player2 = view.findViewById(R.id.textViewPlayer2);
-        player3 = view.findViewById(R.id.textViewPlayer3);
-        player4 = view.findViewById(R.id.textViewPlayer4);
-        linearLayoutMissionCards = view.findViewById(R.id.linearLayoutMissionCards);
-        ok = view.findViewById(R.id.buttonOk);
+        player2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(actions != 0) {
+                    displayDestinationCards(gameModel.getPlayerDestinationCards());
+                } else {
+                    Log.d("Error", "No cheating action left!");
+                }
+            }
+        });
 
+        player3 = view.findViewById(R.id.textViewPlayer3);
+        player3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(actions != 0) {
+                    displayDestinationCards(gameModel.getPlayerDestinationCards());
+                } else {
+                    Log.d("Error", "No cheating action left!");
+                }
+            }
+        });
+
+        player4 = view.findViewById(R.id.textViewPlayer4);
+        player4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(actions != 0) {
+                    displayDestinationCards(gameModel.getPlayerDestinationCards());
+                } else {
+                    Log.d("Error", "No cheating action left!");
+                }
+            }
+        });
+
+        linearLayoutMissionCards = view.findViewById(R.id.linearLayoutMissionCards);
+
+        ok = view.findViewById(R.id.buttonOk);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
