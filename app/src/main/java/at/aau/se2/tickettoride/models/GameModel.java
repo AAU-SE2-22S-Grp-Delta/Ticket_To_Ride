@@ -122,9 +122,7 @@ public class GameModel {
     }
 
     public void drawOpenTrainCard(int pos) {
-        TrainCard current = deskOpenTrainCards.get(pos);
-        playerTrainCards.add(current);
-        deskOpenTrainCards.add(pos, getNextClosedTrainCard());
+        client.sendCommand("cardOpen:" + pos);
     }
 
     public void addDrawnTrainCard(TrainCard trainCard) {
