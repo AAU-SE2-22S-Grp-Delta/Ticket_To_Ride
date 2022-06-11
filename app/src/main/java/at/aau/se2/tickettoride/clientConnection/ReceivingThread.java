@@ -69,8 +69,7 @@ public class ReceivingThread extends Thread {
                 List<Integer> cards = Arrays.stream(response.split(":")).map(Integer::parseInt).collect(Collectors.toList());
                 gameModel.setChooseMissionCards(cards);
                 broadcastResponse("drawMission", "1");
-                client.sendCommand("getHandCards");
-                client.sendCommand("getOpenCards");
+                syncGame();
                 break;
             case "getHandCards":
                 if (!response.isEmpty()) {
@@ -90,9 +89,17 @@ public class ReceivingThread extends Thread {
                 }
                 broadcastResponse("refresh_desk_open_train", "1");
                 break;
+            case "sync":
+                syncGame();
+                break;
             default:
                 break;
         }
+    }
+
+    private void syncGame() {
+        client.sendCommand("getHandCards");
+        client.sendCommand("getOpenCards");
     }
 
     private void broadcastResponse(String command, String response) {
