@@ -114,8 +114,5 @@ public class DeskOpenTrainFragment extends Fragment {
 
     private void drawCard(int i) {
         gameModel.drawOpenTrainCard(i);
-
-        Bundle result = new Bundle();
-        getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
     }
 }

@@ -60,6 +60,7 @@ public class ReceivingThread extends Thread {
         String command = split[0];
         String response = split.length > 1 ? message.substring(command.length() + 1) : "";
 
+        List<TrainCard> trainCards;
         switch (command) {
             case "listGames":
                 broadcastResponse("listGames", response);
@@ -68,11 +69,21 @@ public class ReceivingThread extends Thread {
                 List<Integer> cards = Arrays.stream(response.split(":")).map(Integer::parseInt).collect(Collectors.toList());
                 gameModel.setChooseMissionCards(cards);
                 broadcastResponse("drawMission", "1");
+                client.sendCommand("getHandCards");
                 client.sendCommand("getOpenCards");
+                break;
+            case "getHandCards":
+                if (!response.isEmpty()) {
+                    trainCards = Arrays.stream(response.split(":"))
+                            .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
+                            .collect(Collectors.toList());
+                    gameModel.setPlayerTrainCards(trainCards);
+                }
+                broadcastResponse("refresh_player_train", "1");
                 break;
             case "getOpenCards":
                 if (!response.isEmpty()) {
-                    List<TrainCard> trainCards = Arrays.stream(response.split(":"))
+                    trainCards = Arrays.stream(response.split(":"))
                             .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
                             .collect(Collectors.toList());
                     gameModel.setDeskOpenTrainCards(trainCards);
