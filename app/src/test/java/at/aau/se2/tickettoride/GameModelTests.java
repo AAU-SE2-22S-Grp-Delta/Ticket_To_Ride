@@ -48,6 +48,13 @@ class GameModelTests
     }
 
     @Test
+    void testGetPlayerName() {
+        String playerName = "Player1";
+        gm.setPlayerName(playerName);
+        assertEquals(playerName, gm.getPlayerName());
+    }
+
+    @Test
     void testGetClosedTrainCards()
     {
         gm.setDeskClosedTrainCards(deskClosedTrainCards);

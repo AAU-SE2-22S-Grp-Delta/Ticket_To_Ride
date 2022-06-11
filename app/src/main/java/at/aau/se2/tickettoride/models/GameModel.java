@@ -15,6 +15,8 @@ public class GameModel {
     private static GameModel instance = null;
     private final ClientConnection client;
 
+    private String playerName;
+
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
     private List<TrainCard> deskDiscardedTrainCards = new ArrayList<>();
@@ -34,6 +36,15 @@ public class GameModel {
             instance = new GameModel();
         }
         return instance;
+    }
+
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public List<TrainCard> getDeskClosedTrainCards() {

@@ -28,6 +28,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private final GameModel gameModel;
     private ClientConnection client;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    public MainActivity() {
+        gameModel = GameModel.getInstance();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +95,11 @@ public class MainActivity extends AppCompatActivity {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss");
             String date = simpleDateFormat.format(new Date());
 
+            String playerName = "Player" + date;
+            gameModel.setPlayerName(playerName);
+
             // Enter lobby with Player + time
-            client.sendCommand("enterLobby:Player" + date);
+            client.sendCommand("enterLobby:" + playerName);
 
             // Create game with Game + time
             client.sendCommand("createGame:Game" + date);
@@ -105,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding.buttonLocal.setOnClickListener(v -> {
             // Generate a new local game
-            GameModel gameModel = GameModel.getInstance();
             LocalGameHelper.generateTestGame(gameModel);
 
             Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
