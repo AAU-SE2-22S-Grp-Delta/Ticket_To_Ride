@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +23,12 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class CheatingFunctionDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
     LinearLayout linearLayoutMissionCards;
+    TextView player1;
+    TextView player2;
+    TextView player3;
+    TextView player4;
     Button ok;
+    int actions;
 
 
     @NonNull
@@ -34,18 +40,22 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
 
         // TODO: Karten von den richtigen Spielern bekommen (vom Server)
 
+        actions = 1;
         // für Testzweck
-        CheckedTextView player1 = view.findViewById(R.id.checkedTextViewPlayer1);
+        player1 = view.findViewById(R.id.textViewPlayer1);
         player1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayDestinationCards(gameModel.getPlayerDestinationCards());
+                if(actions != 0)
+                {
+                    displayDestinationCards(gameModel.getPlayerDestinationCards());
+                }
             }
         });
 
-        CheckedTextView player2 = view.findViewById(R.id.checkedTextViewPlayer2);
-        CheckedTextView player3 = view.findViewById(R.id.checkedTextViewPlayer3);
-        CheckedTextView player4 = view.findViewById(R.id.checkedTextViewPlayer4);
+        player2 = view.findViewById(R.id.textViewPlayer2);
+        player3 = view.findViewById(R.id.textViewPlayer3);
+        player4 = view.findViewById(R.id.textViewPlayer4);
         linearLayoutMissionCards = view.findViewById(R.id.linearLayoutMissionCards);
         ok = view.findViewById(R.id.buttonOk);
 
