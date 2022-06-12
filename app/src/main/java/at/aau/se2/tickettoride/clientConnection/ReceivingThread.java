@@ -121,11 +121,14 @@ public class ReceivingThread extends Thread {
                 break;
             case "getPoints":
                 if(!response.isEmpty()){
-                    String[] playerToDELIMETER = gameModel.playersString;
+                    List<Player> players = gameModel.getPlayers();
                     String[] points = response.split(DELIMITER_VALUE);
-                    for (int i = 0; i < playerToDELIMETER.length; i++) {
-                        String player = playerToDELIMETER[i];
-                        
+                    for (int i = 0; i < players.size(); i++) {
+                        Player player = gameModel.getPlayers().get(i);
+                        String DELIMITER = player.getName();
+                        int point = Integer.parseInt(points[i].split(DELIMITER)[1]);
+                        //player.setPoints(point);
+                        Log.i("POINTS", String.valueOf(point));
                     }
                 }
                 broadcastResponse("getPoints", "1");
