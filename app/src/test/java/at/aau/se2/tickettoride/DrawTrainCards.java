@@ -12,12 +12,12 @@ import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class DrawTrainCards {
+class DrawTrainCards {
     TrainDialogFragment trainDialogFragment;
     GameModel gameModel;
 
     @BeforeEach
-    public void SetUp() {
+    void SetUp() {
         gameModel = GameModel.getInstance();
         gameModel.setDeskClosedTrainCards(new ArrayList<>(Arrays.asList(new TrainCard(TrainCard.Type.PINK), new TrainCard(TrainCard.Type.BLACK), new TrainCard(TrainCard.Type.ORANGE))));
         trainDialogFragment = new TrainDialogFragment();
@@ -25,9 +25,9 @@ public class DrawTrainCards {
     }
 
     @Test
-    public void testAddCardToHand() {
+    void testAddCardToHand() {
         trainDialogFragment.addCardToHand();
-        assertEquals(gameModel.getPlayerTrainCards().size(), 1);
+        assertEquals(1, gameModel.getPlayerTrainCards().size());
         assertEquals(gameModel.getPlayerTrainCards().get(0).getType(), new TrainCard(TrainCard.Type.PINK).getType());
     }
 }

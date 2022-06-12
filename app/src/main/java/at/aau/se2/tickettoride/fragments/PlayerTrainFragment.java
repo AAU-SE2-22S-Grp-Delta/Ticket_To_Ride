@@ -2,6 +2,10 @@ package at.aau.se2.tickettoride.fragments;
 
 import static at.aau.se2.tickettoride.helpers.ResourceHelper.getTrainResource;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.List;
 
@@ -22,6 +27,16 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class PlayerTrainFragment extends Fragment {
     private FragmentPlayerTrainBinding binding;
     private GameModel gameModel;
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            if (bundle.getString("refresh_player_train", "0").equals("1")) {
+                displayTrainCards();
+            }
+        }
+    };
 
     public static PlayerTrainFragment newInstance() {
         return new PlayerTrainFragment();
@@ -39,7 +54,7 @@ public class PlayerTrainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPlayerTrainBinding.inflate(inflater, container, false);
 
-        getParentFragmentManager().setFragmentResultListener("RefreshPlayerTrain",this,((requestKey, result) -> displayTrainCards()));
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).registerReceiver(receiver, new IntentFilter("server"));
 
         return binding.getRoot();
     }
@@ -74,6 +89,8 @@ public class PlayerTrainFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).unregisterReceiver(receiver);
         binding = null;
     }
 }

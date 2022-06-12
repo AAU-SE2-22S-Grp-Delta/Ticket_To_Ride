@@ -15,8 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckedTextView
-        android:id="@+id/checkedTextViewPlayer1"
+    <TextView
+        android:id="@+id/textViewPlayer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,32 +25,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStart"/>
 
-    <CheckedTextView
-        android:id="@+id/checkedTextViewPlayer2"
+    <TextView
+        android:id="@+id/textViewPlayer2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Player 2"
-        app:layout_constraintEnd_toStartOf="@id/checkedTextViewPlayer3"
+        app:layout_constraintEnd_toStartOf="@id/textViewPlayer3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkedTextViewPlayer1" />
+        app:layout_constraintTop_toBottomOf="@id/textViewPlayer1" />
 
-    <CheckedTextView
-        android:id="@+id/checkedTextViewPlayer3"
+    <TextView
+        android:id="@+id/textViewPlayer3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Player 3"
-        app:layout_constraintEnd_toStartOf="@id/checkedTextViewPlayer4"
+        app:layout_constraintEnd_toStartOf="@id/textViewPlayer4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkedTextViewPlayer2" />
+        app:layout_constraintTop_toBottomOf="@id/textViewPlayer2" />
 
-    <CheckedTextView
-        android:id="@+id/checkedTextViewPlayer4"
+    <TextView
+        android:id="@+id/textViewPlayer4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toStartOf="@id/textViewMissionCards"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkedTextViewPlayer3" />
+        app:layout_constraintTop_toBottomOf="@id/textViewPlayer3" />
 
     <HorizontalScrollView
         android:id="@+id/scrollViewTrackCards"
@@ -90,7 +90,7 @@
         android:layout_marginTop="8dp"
         android:text="Mission Cards:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkedTextViewPlayer4" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPlayer4" />
 
     <Button
         android:id="@+id/buttonOk"

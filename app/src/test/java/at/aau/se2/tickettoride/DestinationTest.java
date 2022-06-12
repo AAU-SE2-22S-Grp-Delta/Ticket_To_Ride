@@ -11,14 +11,14 @@ import org.mockito.Mockito;
 
 import at.aau.se2.tickettoride.dataStructures.Destination;
 
-public class DestinationTest
+class DestinationTest
 {
     static Destination dest1;
     static Destination dest2;
     static Button btn1;
 
     @BeforeAll
-    public static void init()
+    static void init()
     {
         btn1 = Mockito.mock(Button.class);
         Mockito.when(btn1.getX()).thenReturn(10f);
@@ -30,25 +30,25 @@ public class DestinationTest
     }
 
     @Test
-    public void testSetNameNull()
+    void testSetNameNull()
     {
         assertThrows(IllegalArgumentException.class, () -> dest1.setName(null));
     }
 
     @Test
-    public void testSetNameEmpty()
+    void testSetNameEmpty()
     {
         assertThrows(IllegalArgumentException.class, () -> dest1.setName(""));
     }
 
     @Test
-    public void testSetNameUsed()
+    void testSetNameUsed()
     {
         assertThrows(IllegalArgumentException.class, () -> dest1.setName("testdest2"));
     }
 
     @Test
-    public void testGetX()
+    void testGetX()
     {
         assertEquals(15f, dest1.getX());
     }
@@ -60,7 +60,7 @@ public class DestinationTest
     }
 
     @Test
-    public void testGetters()
+    void testGetters()
     {
         assertEquals("testdest1", dest1.getName());
         assertEquals(btn1, dest1.getButton());

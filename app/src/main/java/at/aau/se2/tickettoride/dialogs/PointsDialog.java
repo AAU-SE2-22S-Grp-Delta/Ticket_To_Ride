@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ import java.util.HashMap;
 
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.models.GameModel;
+
+import java.text.MessageFormat;
 
 public class PointsDialog extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
@@ -56,11 +59,13 @@ public class PointsDialog extends DialogFragment {
 
         for (int i = 1; i < players.length; i++) {
             TextView textView = new TextView(getActivity());
+            //TODO Get Points
+            textView.setText(MessageFormat.format("Player {0}: {1}", i, 0));
             String player = players[i];
             String points = response[i].split(player)[1];
             textView.setText(player+ ": " + points);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(80, 20, 50, 0);
 
             layout.addView(textView, params);
@@ -68,12 +73,7 @@ public class PointsDialog extends DialogFragment {
 
         builder.setView(layout)
                 .setTitle("Punkte")
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dismiss();
-                    }
-                });
+                .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> dismiss());
 
         return builder.create();
     }

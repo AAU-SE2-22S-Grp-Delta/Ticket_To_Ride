@@ -2,6 +2,10 @@ package at.aau.se2.tickettoride.fragments;
 
 import static at.aau.se2.tickettoride.helpers.ResourceHelper.getTrainResource;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.List;
 
@@ -20,6 +25,16 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class DeskOpenTrainFragment extends Fragment {
     private FragmentDeskOpenTrainBinding binding;
     private GameModel gameModel;
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            if (bundle.getString("refresh_desk_open_train", "0").equals("1")) {
+                displayData();
+            }
+        }
+    };
 
     public static DeskOpenTrainFragment newInstance() {
         return new DeskOpenTrainFragment();
@@ -52,12 +67,12 @@ public class DeskOpenTrainFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).unregisterReceiver(receiver);
         binding = null;
     }
 
     private void initComponents() {
-        getParentFragmentManager().setFragmentResultListener("RefreshDeskOpenTrain", this, (requestKey, result) -> displayData());
-
         binding.card1.setOnClickListener(view -> drawCard(0));
 
         binding.card2.setOnClickListener(view -> drawCard(1));
@@ -67,6 +82,8 @@ public class DeskOpenTrainFragment extends Fragment {
         binding.card4.setOnClickListener(view -> drawCard(3));
 
         binding.card5.setOnClickListener(view -> drawCard(4));
+
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).registerReceiver(receiver, new IntentFilter("server"));
     }
 
     private void displayData() {
@@ -97,9 +114,5 @@ public class DeskOpenTrainFragment extends Fragment {
 
     private void drawCard(int i) {
         gameModel.drawOpenTrainCard(i);
-
-        Bundle result = new Bundle();
-        getParentFragmentManager().setFragmentResult("RefreshDeskOpenTrain", result);
-        getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
     }
 }

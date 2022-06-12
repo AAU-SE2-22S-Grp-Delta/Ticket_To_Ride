@@ -7,7 +7,9 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.dataStructures.Map;
 import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
@@ -19,6 +21,9 @@ public class GameModel {
     private static GameModel instance = null;
     //TODO Add Symbol
     private static final String SYMBOLTOSPLIT = "\\.";
+    private final ClientConnection client;
+
+    private String playerName;
 
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
@@ -50,6 +55,7 @@ public class GameModel {
     };
 
     private GameModel() {
+        this.client = ClientConnection.getInstance();
     }
 
     public static synchronized GameModel getInstance() {
@@ -57,6 +63,15 @@ public class GameModel {
             instance = new GameModel();
         }
         return instance;
+    }
+
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public List<TrainCard> getDeskClosedTrainCards() {
@@ -104,8 +119,11 @@ public class GameModel {
         return playerDestinationCards;
     }
 
-    public void setPlayerDestinationCards(List<Integer> playerDestinationCards) {
-        this.playerDestinationCards = playerDestinationCards;
+    public void setPlayerDestinationCards(List<Integer> cards) {
+        this.playerDestinationCards = cards;
+
+        String result = cards.stream().map(Object::toString).collect(Collectors.joining(":"));
+        client.sendCommand("chooseMission:" + result);
     }
 
     public List<Integer> getChooseMissionCards() {
@@ -146,9 +164,7 @@ public class GameModel {
     }
 
     public void drawOpenTrainCard(int pos) {
-        TrainCard current = deskOpenTrainCards.get(pos);
-        playerTrainCards.add(current);
-        deskOpenTrainCards.add(pos, getNextClosedTrainCard());
+        client.sendCommand("cardOpen:" + pos);
     }
 
     public void addDrawnTrainCard(TrainCard trainCard) {

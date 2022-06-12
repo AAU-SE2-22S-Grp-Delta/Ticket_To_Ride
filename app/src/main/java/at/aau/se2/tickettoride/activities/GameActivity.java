@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -14,18 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
 import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.helpers.ShakeDetection;
-import at.aau.se2.tickettoride.models.GameModel;
 
 public class GameActivity extends AppCompatActivity {
-    private GameModel gameModel;
-    private ClientConnection clientConnection;
-
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private ShakeDetection shakeDetection;
@@ -60,14 +54,10 @@ public class GameActivity extends AppCompatActivity {
         startGame();
     }
 
-    private SensorEventListener sensorListener = new SensorEventListener() {
+    private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            int count = shakeDetection.checkShake(sensorEvent, shakeCount);
-            shakeCount = count;
-            String msg = String.valueOf(count);
-            Log.d("Sensor Count", msg);
-
+            shakeCount = shakeDetection.checkShake(sensorEvent, shakeCount);
             if(shakeCount == 5)
             {
                 shakeCount = 0;
@@ -95,10 +85,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startGame() {
-        gameModel = GameModel.getInstance();
-        clientConnection = ClientConnection.getInstance();
-        clientConnection.sendCommand("enterLobby:testPlayer;createGame:testGame:testPlayer");
-
         // After starting a new game send refresh to all attached fragments
         Bundle result = new Bundle();
         getSupportFragmentManager().setFragmentResult("refresh", result);

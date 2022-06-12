@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 
 import at.aau.se2.tickettoride.dataStructures.Player;
 
-public class PlayerTest
+class PlayerTest
 {
     static Player player1;
     static Player player2;
 
     @BeforeAll
-    public static void init()
+    static void init()
     {
         player1 = new Player("a", 1);
         player2 = new Player("b", 1);
@@ -22,70 +22,70 @@ public class PlayerTest
     }
 
     @Test
-    public void testSetNameNull()
+    void testSetNameNull()
     {
         assertThrows(IllegalArgumentException.class, () -> player1.setName(null));
     }
 
     @Test
-    public void testSetNameEmpty()
+    void testSetNameEmpty()
     {
         assertThrows(IllegalArgumentException.class, () -> player1.setName(""));
     }
 
     @Test
-    public void testGetColor()
+    void testGetColor()
     {
         assertEquals(1, player1.getPlayerColor());
     }
 
     @Test
-    public void testGetName()
+    void testGetName()
     {
         assertEquals("a", player1.getName());
     }
 
     @Test
-    public void getStones()
+    void getStones()
     {
         assertEquals(23, player1.getStones());
     }
 
     @Test
-    public void testGetId()
+    void testGetId()
     {
         assertEquals(0, player1.getId());
     }
 
     @Test
-    public void testSetName()
+    void testSetName()
     {
         player1.setName("test");
         assertEquals("test", player1.getName());
     }
 
     @Test
-    public void testIsNotInGame()
+    void testIsNotInGame()
     {
         player2.enterGame();
         assertEquals(45, player2.getStones());
     }
 
     @Test
-    public void testIsInGame()
+    void testIsInGame()
     {
         assertThrows(IllegalStateException.class, () -> player1.enterGame());
     }
 
     @Test
-    public void testRemoveStonesEnough()
+    void testRemoveStonesEnough()
     {
         player1.removeStones(22);
         assertEquals(23, player1.getStones());
     }
 
     @Test
-    public void testRemoveStones()
+    void testRemoveStones()
     {
         assertThrows(IllegalArgumentException.class, () -> player1.removeStones(46));
     }

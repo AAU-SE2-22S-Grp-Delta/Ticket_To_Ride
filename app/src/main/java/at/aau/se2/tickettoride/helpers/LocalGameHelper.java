@@ -23,6 +23,8 @@ public class LocalGameHelper {
         gameModel.setDeskDestinationCards(destinationCards);
         gameModel.setPlayerTrainCards(playerTrainCards);
         gameModel.setChooseMissionCards(playerDestinationCards);
+        gameModel.setDeskDiscardedTrainCards(new ArrayList<>());
+        gameModel.setPlayerColoredTrainCards(45);
     }
 
     @NonNull
