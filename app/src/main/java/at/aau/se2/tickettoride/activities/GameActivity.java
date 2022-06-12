@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
+import at.aau.se2.tickettoride.dialogs.CheatFaceDownDialogFragment;
 import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
@@ -31,6 +31,9 @@ public class GameActivity extends AppCompatActivity {
     private Sensor accelerometer;
     private ShakeDetection shakeDetection;
     private int shakeCount;
+    DialogFragment dialogFragment = new CheatFaceDownDialogFragment();
+    boolean condition = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class GameActivity extends AppCompatActivity {
     private SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
+            float z = sensorEvent.values[2];
+
             int count = shakeDetection.checkShake(sensorEvent, shakeCount);
             shakeCount = count;
             String msg = String.valueOf(count);
@@ -74,6 +79,11 @@ public class GameActivity extends AppCompatActivity {
                 shakeCount = 0;
                 DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
                 cheatingDialog.show(getSupportFragmentManager(),"cheating");
+            }
+
+            if (z < -10 && condition) {
+                condition = false;
+                dialogFragment.show(getSupportFragmentManager(), "cheating2");
             }
         }
 
