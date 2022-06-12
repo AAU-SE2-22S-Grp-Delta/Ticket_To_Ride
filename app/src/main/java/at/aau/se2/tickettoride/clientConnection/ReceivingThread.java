@@ -98,7 +98,6 @@ public class ReceivingThread extends Thread {
             case "sync":
                 syncGame();
                 break;
-                //TODO Dann das mit einer GameModel Variablen
             case "listPlayersGame":
                 if(!response.isEmpty()){
                     gameModel.playersString = response.split(DELIMITER_VALUE);
