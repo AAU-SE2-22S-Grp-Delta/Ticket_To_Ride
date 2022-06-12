@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -135,6 +136,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             client.setup(this, serverAddress);
         }
+
+        Button btn_lobby = binding.btnLobby;
+        btn_lobby.setOnClickListener(v -> {
+            Intent intent = new Intent(this, LobbyActivity.class);
+            startActivity(intent);
+        });
 
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
     }
