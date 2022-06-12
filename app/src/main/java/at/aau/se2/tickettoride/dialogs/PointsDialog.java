@@ -28,27 +28,7 @@ import java.util.List;
 
 public class PointsDialog extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
-    private String[] response;
     private AlertDialog.Builder builder;
-    private HashMap<String, String> score = new HashMap<>();
-    ClientConnection client = ClientConnection.getInstance();
-
-    /*private final BroadcastReceiver receiver = new BroadcastReceiver() {
-        //GET VALUES FROM RECEIVING THREAD
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle bundle = intent.getExtras();
-            for (String key : bundle.keySet()) {
-                switch (key) {
-                    case "getPoints":
-                        response = bundle.getString(key).split("\\.");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    };*/
 
     @NonNull
     @Override
@@ -56,8 +36,6 @@ public class PointsDialog extends DialogFragment {
         builder = new AlertDialog.Builder(getActivity());
         LinearLayout layout = new LinearLayout(getActivity());
         layout.setOrientation(LinearLayout.VERTICAL);
-
-        client.sendCommand("getPoints");
 
         List<Player> players = gameModel.getPlayers();
 

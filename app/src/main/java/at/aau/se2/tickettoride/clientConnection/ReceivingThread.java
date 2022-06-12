@@ -126,8 +126,7 @@ public class ReceivingThread extends Thread {
                         Player player = gameModel.getPlayers().get(i);
                         String DELIMITER = player.getName();
                         int point = Integer.parseInt(points[i].split(DELIMITER)[1]);
-                        //player.setPoints(point);
-                        Log.i("POINTS", String.valueOf(point));
+                        player.setPoints(point);
                     }
                 }
                 broadcastResponse("getPoints", "1");
@@ -151,6 +150,9 @@ public class ReceivingThread extends Thread {
     private void syncGame() {
         client.sendCommand("getHandCards");
         client.sendCommand("getOpenCards");
+        client.sendCommand("listPlayersGame");
+        client.sendCommand("getColors");
+        client.sendCommand("getPoints");
     }
 
     private void broadcastResponse(String command, String response) {
