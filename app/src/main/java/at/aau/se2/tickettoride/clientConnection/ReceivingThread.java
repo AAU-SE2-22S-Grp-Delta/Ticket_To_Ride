@@ -113,7 +113,7 @@ public class ReceivingThread extends Thread {
                         //Sonst leeres Wort!!!
                         String color = colors[i].split(player)[1];
                         int colorCodex = getColorCodex(color);
-                        gameModel.getPlayers().add(new Player(player, colorCodex));
+                        if(colorCodex != -1) gameModel.getPlayers().add(new Player(player, colorCodex));
                     }
                 }
                 broadcastResponse("colors", "1");
