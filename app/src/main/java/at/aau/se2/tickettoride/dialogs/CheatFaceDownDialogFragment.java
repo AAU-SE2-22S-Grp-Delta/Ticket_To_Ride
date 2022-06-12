@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.Random;
+
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -35,6 +37,13 @@ public class CheatFaceDownDialogFragment extends DialogFragment {
         action1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Random random = new Random();
+                int rand = random.nextInt(5);
+                gameModel.drawOpenTrainCard(rand);
+                Bundle result = new Bundle();
+                getParentFragmentManager().setFragmentResult("RefreshDeskOpenTrain", result);
+                getParentFragmentManager().setFragmentResult("RefreshPlayerTrain", result);
+                dialog.dismiss();
             }
         });
 
