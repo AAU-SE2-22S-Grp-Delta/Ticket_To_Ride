@@ -81,7 +81,7 @@ public class GameActivity extends AppCompatActivity {
                 cheatingDialog.show(getSupportFragmentManager(),"cheating");
             }
 
-            if (z < -10 && condition) {
+            if ((z > -10 && z < -9) && condition) {
                 condition = false;
                 dialogFragment.show(getSupportFragmentManager(), "cheating2");
             }
