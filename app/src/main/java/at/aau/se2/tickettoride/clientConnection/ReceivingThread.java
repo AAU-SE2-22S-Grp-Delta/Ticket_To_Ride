@@ -150,9 +150,6 @@ public class ReceivingThread extends Thread {
     private void syncGame() {
         client.sendCommand("getHandCards");
         client.sendCommand("getOpenCards");
-        client.sendCommand("listPlayersGame");
-        client.sendCommand("getColors");
-        client.sendCommand("getPoints");
     }
 
     private void broadcastResponse(String command, String response) {
