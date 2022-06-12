@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -97,14 +98,51 @@ public class ReceivingThread extends Thread {
             case "sync":
                 syncGame();
                 break;
-            case "getPoints":
-                broadcastResponse("getPoints", response);
-                break;
+                //TODO Dann das mit einer GameModel Variablen
             case "listPlayersGame":
-                broadcastResponse("listPlayersGame", response);
+                if(!response.isEmpty()){
+                    gameModel.playersString = response.split(DELIMITER_VALUE);
+                }
+                broadcastResponse("refresh_players", "1");
+                break;
+            case "getColors":
+                if(!response.isEmpty()){
+                    String[] playersToDELIMITER = gameModel.playersString;
+                    String[] colors = response.split(DELIMITER_VALUE);
+                    for (int i = 0; i < playersToDELIMITER.length; i++) {
+                        String player = playersToDELIMITER[i];
+                        //Sonst leeres Wort!!!
+                        String color = colors[i].split(player)[1];
+                        int colorCodex = getColorCodex(color);
+                        gameModel.getPlayers().add(new Player(player, colorCodex));
+                    }
+                }
+                broadcastResponse("colors", "1");
+                break;
+            case "getPoints":
+                if(!response.isEmpty()){
+                    String[] playerToDELIMETER = gameModel.playersString;
+                    String[] points = response.split(DELIMITER_VALUE);
+                    for (int i = 0; i < playerToDELIMETER.length; i++) {
+                        String player = playerToDELIMETER[i];
+                        
+                    }
+                }
+                broadcastResponse("getPoints", "1");
                 break;
             default:
                 break;
+        }
+    }
+
+    private int getColorCodex(String color){
+        switch (color) {
+            case "RED": return 0;
+            case "BLUE": return 1;
+            case "GREEN": return 2;
+            case "YELLOW": return 3;
+            case "BLACK": return 4;
+            default: return -1;
         }
     }
 

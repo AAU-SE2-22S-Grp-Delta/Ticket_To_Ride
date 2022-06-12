@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,25 +35,8 @@ public class GameModel {
     private List<Integer> chooseMissionCards = new ArrayList<>();
     private int playerColoredTrainCards = 45;
     private Map map = new Map();
-    private String[] players;
-
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle bundle = intent.getExtras();
-            String response;
-            for (String key : bundle.keySet()) {
-                switch (key) {
-                    case "listPlayersGame":
-                        response = bundle.getString(key);
-                        players = response.split(SYMBOLTOSPLIT);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    };
+    public String[] playersString;
+    private List<Player> players = new ArrayList<>();
 
     private GameModel() {
         this.client = ClientConnection.getInstance();
@@ -150,7 +134,11 @@ public class GameModel {
         this.map = map;
     }
 
-    public String[] getPlayers(){
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public List<Player> getPlayers(){
         return players;
     }
 

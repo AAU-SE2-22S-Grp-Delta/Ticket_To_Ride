@@ -110,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
             // Start game created
             client.sendCommand("startGame");
+
+            client.sendCommand("listPlayersGame:Game"+date);
+
+            client.sendCommand("getColors");
         });
 
         binding.buttonLocal.setOnClickListener(v -> {
