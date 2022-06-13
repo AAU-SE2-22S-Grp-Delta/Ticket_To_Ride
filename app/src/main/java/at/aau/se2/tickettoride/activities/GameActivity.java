@@ -45,6 +45,7 @@ public class GameActivity extends AppCompatActivity {
             shakeCount = shakeDetection.checkShake(sensorEvent, shakeCount);
             if (shakeCount == 5) {
                 shakeCount = 0;
+                gameModel.cheatMission();
                 DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
                 cheatingDialog.show(getSupportFragmentManager(), "cheating");
             }

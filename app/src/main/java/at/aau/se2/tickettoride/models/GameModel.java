@@ -26,8 +26,8 @@ public class GameModel {
     private List<TrainCard> playerTrainCards = new ArrayList<>();
     private List<Integer> playerDestinationCards = new ArrayList<>();
     private List<Integer> chooseMissionCards = new ArrayList<>();
-    private List<List<Integer>> allMissions = new ArrayList<>();
-    private List<String> allRival = new ArrayList<>();
+    private List<List<Integer>> allMissions = new ArrayList<>(4);
+    private List<String> allRival = new ArrayList<>(4);
     private int playerColoredTrainCards = 45;
     private Map map = new Map();
     public String[] playersString;
@@ -185,5 +185,10 @@ public class GameModel {
     public List<String> getAllRival()
     {
         return allRival;
+    }
+
+    public void cheatMission()
+    {
+        client.sendCommand("cheatMission");
     }
 }
