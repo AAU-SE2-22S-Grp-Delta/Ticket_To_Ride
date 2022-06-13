@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import at.aau.se2.tickettoride.dataStructures.Mission;
 import at.aau.se2.tickettoride.models.Missions;
 
-public class MissionModelTests
+class MissionModelTests
 {
     static ArrayList<Mission> missions = new ArrayList<>();
 
     @BeforeAll
-    public static void init()
+    static void init()
     {
         missions.add(new Mission(1, "Boston", "Miami", 12));
         missions.add(new Mission(2, "Calgary", "Phoenix", 13));
@@ -51,20 +51,20 @@ public class MissionModelTests
     }
 
     @Test
-    public void testGetMissions()
+    void testGetMissions()
     {
         assertEquals(missions, Missions.getMissions());
     }
 
     @Test
-    public void testGetMission()
+    void testGetMission()
     {
         Mission m1 = new Mission(28, "Vancouver", "Santa Fe", 13);
         assertEquals(m1, Missions.getMissionById(28));
     }
 
     @Test
-    public void NotExists()
+    void NotExists()
     {
         assertNull(Missions.getMissionById(3000));
     }

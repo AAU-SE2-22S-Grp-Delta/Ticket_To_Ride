@@ -2,8 +2,11 @@ package at.aau.se2.tickettoride.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.dataStructures.Map;
+import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
 
 /**
@@ -11,6 +14,10 @@ import at.aau.se2.tickettoride.dataStructures.TrainCard;
  */
 public class GameModel {
     private static GameModel instance = null;
+    private final ClientConnection client;
+
+    private String playerName;
+    private String activePlayer;
 
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
@@ -21,8 +28,11 @@ public class GameModel {
     private List<Integer> chooseMissionCards = new ArrayList<>();
     private int playerColoredTrainCards = 45;
     private Map map = new Map();
+    public String[] playersString;
+    private List<Player> players = new ArrayList<>();
 
     private GameModel() {
+        this.client = ClientConnection.getInstance();
     }
 
     public static synchronized GameModel getInstance() {
@@ -30,6 +40,22 @@ public class GameModel {
             instance = new GameModel();
         }
         return instance;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public String getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(String activePlayer) {
+        this.activePlayer = activePlayer;
     }
 
     public List<TrainCard> getDeskClosedTrainCards() {
@@ -77,8 +103,13 @@ public class GameModel {
         return playerDestinationCards;
     }
 
-    public void setPlayerDestinationCards(List<Integer> playerDestinationCards) {
-        this.playerDestinationCards = playerDestinationCards;
+    public void setPlayerDestinationCards(List<Integer> cards) {
+        cards.stream()
+                .filter(c -> !this.playerDestinationCards.contains(c))
+                .forEach(c -> this.playerDestinationCards.add(c));
+
+        String result = cards.stream().map(Object::toString).collect(Collectors.joining(":"));
+        client.sendCommand("chooseMission:" + result);
     }
 
     public List<Integer> getChooseMissionCards() {
@@ -105,19 +136,17 @@ public class GameModel {
         this.map = map;
     }
 
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
     // Special methods
-    public TrainCard getNextClosedTrainCard() {
-        return deskClosedTrainCards.remove(0);
-    }
-
-    public Integer getNextMissionCard() {
-        return deskDestinationCards.remove(0);
-    }
-
     public void drawOpenTrainCard(int pos) {
-        TrainCard current = deskOpenTrainCards.get(pos);
-        playerTrainCards.add(current);
-        deskOpenTrainCards.add(pos, getNextClosedTrainCard());
+        client.sendCommand("cardOpen:" + pos);
     }
 
     public void addDrawnTrainCard(TrainCard trainCard) {
@@ -130,5 +159,9 @@ public class GameModel {
 
     public void addDiscardedMissionCards(List<Integer> missionCards) {
         deskDestinationCards.addAll(missionCards);
+    }
+
+    public boolean isPlaying() {
+        return playerName.equals(activePlayer);
     }
 }

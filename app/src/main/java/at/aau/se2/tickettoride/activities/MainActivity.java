@@ -18,6 +18,7 @@ import androidx.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
@@ -28,6 +29,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private final GameModel gameModel;
     private ClientConnection client;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public MainActivity() {
+        gameModel = GameModel.getInstance();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +69,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-        super.onDestroy();
     }
 
     @Override
@@ -87,11 +101,14 @@ public class MainActivity extends AppCompatActivity {
     private void initComponents() {
         binding.button.setOnClickListener(v -> {
             // TODO: Temporary generate player and game with time
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss", Locale.getDefault());
             String date = simpleDateFormat.format(new Date());
 
+            String playerName = "Player" + date;
+            gameModel.setPlayerName(playerName);
+
             // Enter lobby with Player + time
-            client.sendCommand("enterLobby:Player" + date);
+            client.sendCommand("enterLobby:" + playerName);
 
             // Create game with Game + time
             client.sendCommand("createGame:Game" + date);
@@ -101,11 +118,14 @@ public class MainActivity extends AppCompatActivity {
 
             // Start game created
             client.sendCommand("startGame");
+
+            client.sendCommand("listPlayersGame:Game"+date);
+
+            client.sendCommand("getColors");
         });
 
         binding.buttonLocal.setOnClickListener(v -> {
             // Generate a new local game
-            GameModel gameModel = GameModel.getInstance();
             LocalGameHelper.generateTestGame(gameModel);
 
             Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
@@ -127,7 +147,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             client.setup(this, serverAddress);
         }
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
     }
 }

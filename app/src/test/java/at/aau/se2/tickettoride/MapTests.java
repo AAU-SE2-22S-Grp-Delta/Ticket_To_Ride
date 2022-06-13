@@ -12,7 +12,7 @@ import at.aau.se2.tickettoride.dataStructures.Destination;
 import at.aau.se2.tickettoride.dataStructures.Map;
 import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 
-public class MapTests
+class MapTests
 {
     static Destination dest1;
     static Destination dest2;
@@ -29,9 +29,8 @@ public class MapTests
     Set<Destination> testDestSet = new HashSet<>();
     Set<RailroadLine> testSet = new HashSet<>();
 
-
     @BeforeAll
-    static public void init()
+    static void init()
     {
         Button btn1 = new Button(null);
         Button btn2 = new Button(null);
@@ -56,7 +55,7 @@ public class MapTests
     }
 
     @Test
-    public void testAddDestination()
+    void testAddDestination()
     {
         testDestSet.add(dest3);
         testDestSet.add(dest1);
@@ -66,14 +65,14 @@ public class MapTests
     }
 
     @Test
-    public void testAddDestTaken()
+    void testAddDestTaken()
     {
         map.addDestination(dest4);
         assertThrows(IllegalStateException.class, () -> map.addDestination(dest4));
     }
 
     @Test
-    public void testAddRailroad()
+    void testAddRailroad()
     {
         testSet.add(r2);
         testSet.add(r6);
@@ -82,7 +81,7 @@ public class MapTests
     }
 
     @Test
-    public void testAddRailroadThrows()
+    void testAddRailroadThrows()
     {
         assertThrows(IllegalArgumentException.class, ()-> map.addRailroadLine(r3));
         assertThrows(IllegalArgumentException.class, ()-> map.addRailroadLine(r4));

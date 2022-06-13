@@ -11,17 +11,21 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class ReceivingThread extends Thread {
+    private static final String DELIMITER_VALUE = "\\.";
+
     private final BufferedReader receive;
     private Context context;
-    private GameModel gameModel = GameModel.getInstance();
+    private final GameModel gameModel = GameModel.getInstance();
+    private final ClientConnection client = ClientConnection.getInstance();
 
     public ReceivingThread(Socket clientSocket) throws IOException {
         this.receive = new BufferedReader(new InputStreamReader(new DataInputStream(clientSocket.getInputStream())));
@@ -57,20 +61,106 @@ public class ReceivingThread extends Thread {
     private void handleResponse(String message) {
         String[] split = message.split(":");
         String command = split[0];
-        String response = split[1];
+        String response = split.length > 1 ? message.substring(command.length() + 1) : "";
+        if (response.endsWith(DELIMITER_VALUE)) {
+            response = response.substring(0, response.length() - 1);
+        }
 
+        List<TrainCard> trainCards;
         switch (command) {
+            case "actionCall":
+                String[] actions = response.split(":");
+                gameModel.setActivePlayer(actions[0]);
+                broadcastResponse("action_call", "1");
+                break;
             case "listGames":
                 broadcastResponse("listGames", response);
                 break;
             case "drawMission":
-                List<Integer> cards = Arrays.stream(response.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+                List<Integer> cards = Arrays.stream(response.split(":")).map(Integer::parseInt).collect(Collectors.toList());
                 gameModel.setChooseMissionCards(cards);
                 broadcastResponse("drawMission", "1");
+                broadcastResponse("card_mission", "1");
+                syncGame();
+                break;
+            case "cardStack":
+                if (!response.isEmpty() && !response.equals("null")) {
+                    broadcastResponse("card_drawn", response);
+                }
+                break;
+            case "getHandCards":
+                if (!response.isEmpty()) {
+                    trainCards = Arrays.stream(response.split(DELIMITER_VALUE))
+                            .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
+                            .collect(Collectors.toList());
+                    gameModel.setPlayerTrainCards(trainCards);
+                }
+                broadcastResponse("refresh_player_train", "1");
+                break;
+            case "getOpenCards":
+                if (!response.isEmpty()) {
+                    trainCards = Arrays.stream(response.split(DELIMITER_VALUE))
+                            .map(c -> new TrainCard(TrainCard.Type.getByString(c)))
+                            .collect(Collectors.toList());
+                    gameModel.setDeskOpenTrainCards(trainCards);
+                }
+                broadcastResponse("refresh_desk_open_train", "1");
+                break;
+            case "sync":
+                syncGame();
+                break;
+            case "listPlayersGame":
+                if(!response.isEmpty()){
+                    gameModel.playersString = response.split(DELIMITER_VALUE);
+                }
+                broadcastResponse("refresh_players", "1");
+                break;
+            case "getColors":
+                if(!response.isEmpty()){
+                    String[] playersToDELIMITER = gameModel.playersString;
+                    String[] colors = response.split(DELIMITER_VALUE);
+                    for (int i = 0; i < playersToDELIMITER.length; i++) {
+                        String player = playersToDELIMITER[i];
+                        //Sonst leeres Wort!!!
+                        String color = colors[i].split(player)[1];
+                        int colorCodex = getColorCodex(color);
+                        if(colorCodex != -1) gameModel.getPlayers().add(new Player(player, colorCodex));
+                    }
+                }
+                broadcastResponse("colors", "1");
+                break;
+            case "getPoints":
+                if(!response.isEmpty()){
+                    List<Player> players = gameModel.getPlayers();
+                    String[] points = response.split(DELIMITER_VALUE);
+                    for (int i = 0; i < players.size(); i++) {
+                        Player player = gameModel.getPlayers().get(i);
+                        String DELIMITER = player.getName();
+                        int point = Integer.parseInt(points[i].split(DELIMITER)[1]);
+                        player.setPoints(point);
+                    }
+                }
+                broadcastResponse("getPoints", "1");
                 break;
             default:
                 break;
         }
+    }
+
+    private int getColorCodex(String color){
+        switch (color) {
+            case "RED": return 0;
+            case "BLUE": return 1;
+            case "GREEN": return 2;
+            case "YELLOW": return 3;
+            case "BLACK": return 4;
+            default: return -1;
+        }
+    }
+
+    private void syncGame() {
+        client.sendCommand("getHandCards");
+        client.sendCommand("getOpenCards");
     }
 
     private void broadcastResponse(String command, String response) {

@@ -372,4 +372,5 @@ public class MapFragment extends Fragment
             d.getButton().setOnClickListener(view1 -> selector(d, currentPlayer));
         }
     }
+
 }

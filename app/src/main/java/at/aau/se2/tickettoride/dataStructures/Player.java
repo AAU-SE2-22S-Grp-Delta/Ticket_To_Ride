@@ -9,6 +9,7 @@ public class Player
     private int id = 0;
     private int playerColor;
     private int numStones;
+    private int points;
     private boolean isInGame;
 
     public Player(String name, int color)
@@ -17,6 +18,7 @@ public class Player
         this.playerColor = color;
         this.isInGame = false;
         this.numStones = 0;
+        this.points = 0;
     }
 
     public int getId()
@@ -45,6 +47,14 @@ public class Player
         if (name == null) throw new IllegalArgumentException("name is null");
         if (name.length() == 0) throw new IllegalArgumentException("name.length is 0");
         this.name = name;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public void enterGame()

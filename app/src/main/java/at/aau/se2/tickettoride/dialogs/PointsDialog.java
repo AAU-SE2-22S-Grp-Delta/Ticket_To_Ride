@@ -2,8 +2,13 @@ package at.aau.se2.tickettoride.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,23 +16,36 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.io.IOException;
+import java.util.HashMap;
+
+import at.aau.se2.tickettoride.clientConnection.ClientConnection;
+import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.models.GameModel;
+
+import java.text.MessageFormat;
+import java.util.List;
+
 public class PointsDialog extends DialogFragment {
+    GameModel gameModel = GameModel.getInstance();
+    private AlertDialog.Builder builder;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder = new AlertDialog.Builder(getActivity());
         LinearLayout layout = new LinearLayout(getActivity());
         layout.setOrientation(LinearLayout.VERTICAL);
-        //TODO Edit to get real number of players
-        int numberOfPlayers = 4;
 
-        for (int i = 1; i <= numberOfPlayers; i++) {
+        List<Player> players = gameModel.getPlayers();
+
+        for (int i = 0; i < players.size(); i++) {
             TextView textView = new TextView(getActivity());
-            //TODO Get Points
-            textView.setText("Player " + i + ": 0");
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            Player player = players.get(i);
+            textView.setText(MessageFormat.format("{0}: {1}", player.getName(), player.getPoints()));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(80, 20, 50, 0);
 
             layout.addView(textView, params);
@@ -35,12 +53,7 @@ public class PointsDialog extends DialogFragment {
 
         builder.setView(layout)
                 .setTitle("Punkte")
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dismiss();
-                    }
-                });
+                .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> dismiss());
 
         return builder.create();
     }
