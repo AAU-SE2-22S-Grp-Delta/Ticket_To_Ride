@@ -26,7 +26,7 @@ public class GameModel {
     private List<TrainCard> playerTrainCards = new ArrayList<>();
     private List<Integer> playerDestinationCards = new ArrayList<>();
     private List<Integer> chooseMissionCards = new ArrayList<>();
-    private List<Integer> allMissions = new ArrayList<>();
+    private List<List<Integer>> allMissions = new ArrayList<>();
     private List<String> allRival = new ArrayList<>();
     private int playerColoredTrainCards = 45;
     private Map map = new Map();
@@ -167,12 +167,12 @@ public class GameModel {
         return playerName.equals(activePlayer);
     }
 
-    public void setAllMissions(List<Integer> allMissions)
+    public void setAllMissions(List<List<Integer>> allMissions)
     {
         this.allMissions = allMissions;
     }
 
-    public List<Integer> getAllMissions()
+    public List<List<Integer>> getAllMissions()
     {
         return allMissions;
     }
