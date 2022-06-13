@@ -31,10 +31,8 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
     TextView rival2;
     TextView rival3;
     TextView rival4;
-    List<TextView> allRivals;
     Button ok;
     int actions;
-
 
     @NonNull
     @Override
@@ -42,34 +40,62 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_cheating_function,null);
-        allRivals = new ArrayList<>();
-        allRivals.add(rival1);
-        allRivals.add(rival2);
-        allRivals.add(rival3);
-        allRivals.add(rival4);
+
+        rival1 = view.findViewById(R.id.textViewRival1);
+        rival2 = view.findViewById(R.id.textViewRival2);
+        rival3 = view.findViewById(R.id.textViewRival3);
+        rival4 = view.findViewById(R.id.textViewRival4);
+        linearLayoutMissionCards = view.findViewById(R.id.linearLayoutMissionCards);
+        ok = view.findViewById(R.id.buttonOk);
 
         List<String> allRival = gameModel.getAllRival();
         List<List<Integer>> allMissions = gameModel.getAllMissions();
 
-        for(int i = 0; i<allRival.size(); i++)
-        {
-            if(allRival.get(i) != null)
-            {
-                allRivals.get(i).setText(allRival.get(i));
-            }
+        switch (allRival.size()) {
+            case 0:
+                rival1.setText("-");
+                rival2.setText("-");
+                rival3.setText("-");
+                rival4.setText("-");
+                break;
+            case 1:
+                rival1.setText(allRival.get(0));
+                rival2.setText("-");
+                rival3.setText("-");
+                rival4.setText("-");
+                break;
+            case 2:
+                rival1.setText(allRival.get(0));
+                rival2.setText(allRival.get(1));
+                rival3.setText("-");
+                rival4.setText("-");
+                break;
+            case 3:
+                rival1.setText(allRival.get(0));
+                rival2.setText(allRival.get(1));
+                rival3.setText(allRival.get(2));
+                rival4.setText("-");
+                break;
+            case 4:
+                rival1.setText(allRival.get(0));
+                rival2.setText(allRival.get(1));
+                rival3.setText(allRival.get(2));
+                rival4.setText(allRival.get(3));
+                break;
         }
 
         actions = 1;
 
-        rival1 = view.findViewById(R.id.textViewRival1);
         rival1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    List<Integer> missions = allMissions.get(0);
-                    if(missions != null) {
+                    if(allMissions.size() == 1) {
+                        List<Integer> missions = allMissions.get(0);
                         displayDestinationCards(missions);
                         actions--;
+                    } else {
+                        Log.d("Error", "No rival!");
                     }
                 } else {
                     Log.d("Error", "No cheating action left!");
@@ -77,15 +103,16 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
             }
         });
 
-        rival2 = view.findViewById(R.id.textViewRival2);
         rival2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    List<Integer> missions = allMissions.get(1);
-                    if(missions != null) {
+                    if(allMissions.size() == 2) {
+                        List<Integer> missions = allMissions.get(1);
                         displayDestinationCards(missions);
                         actions--;
+                    } else {
+                        Log.d("Error", "No rival!");
                     }
                 } else {
                     Log.d("Error", "No cheating action left!");
@@ -93,15 +120,16 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
             }
         });
 
-        rival3 = view.findViewById(R.id.textViewRival3);
         rival3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    List<Integer> missions = allMissions.get(2);
-                    if(missions != null) {
+                    if(allMissions.size() == 3) {
+                        List<Integer> missions = allMissions.get(2);
                         displayDestinationCards(missions);
                         actions--;
+                    } else {
+                        Log.d("Error", "No rival!");
                     }
                 } else {
                     Log.d("Error", "No cheating action left!");
@@ -109,15 +137,16 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
             }
         });
 
-        rival4 = view.findViewById(R.id.textViewRival4);
         rival4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    List<Integer> missions = allMissions.get(3);
-                    if(missions != null) {
+                    if(allMissions.size() == 4) {
+                        List<Integer> missions = allMissions.get(3);
                         displayDestinationCards(missions);
                         actions--;
+                    } else {
+                        Log.d("Error", "No rival!");
                     }
                 } else {
                     Log.d("Error", "No cheating action left!");
@@ -125,9 +154,6 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
             }
         });
 
-        linearLayoutMissionCards = view.findViewById(R.id.linearLayoutMissionCards);
-
-        ok = view.findViewById(R.id.buttonOk);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
