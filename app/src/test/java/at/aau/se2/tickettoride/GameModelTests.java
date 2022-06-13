@@ -121,13 +121,6 @@ class GameModelTests
     }
 
     @Test
-    void testGetNextMission()
-    {
-        gm.setDeskDestinationCards(nextMission);
-        assertEquals(12, gm.getNextMissionCard());
-    }
-
-    @Test
     void testDrawOpen()
     {
         List<TrainCard> tmp = new ArrayList<>();
@@ -164,6 +157,7 @@ class GameModelTests
         tmp.add(2);
         gm.addDiscardedMissionCards(tmp);
         List<Integer> tmp2 = new ArrayList<>();
+        tmp2.add(12);
         tmp2.add(7);
         tmp2.add(2);
         assertEquals(tmp2, gm.getDeskDestinationCards());

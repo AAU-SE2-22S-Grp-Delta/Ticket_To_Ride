@@ -75,6 +75,7 @@ public class ReceivingThread extends Thread {
                 List<Integer> cards = Arrays.stream(response.split(":")).map(Integer::parseInt).collect(Collectors.toList());
                 gameModel.setChooseMissionCards(cards);
                 broadcastResponse("drawMission", "1");
+                broadcastResponse("card_mission", "1");
                 syncGame();
                 break;
             case "cardStack":

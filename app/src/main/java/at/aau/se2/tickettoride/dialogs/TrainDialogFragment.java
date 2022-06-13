@@ -13,7 +13,6 @@ import androidx.fragment.app.DialogFragment;
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
-import at.aau.se2.tickettoride.models.GameModel;
 
 public class TrainDialogFragment extends DialogFragment {
     private TrainCard card;

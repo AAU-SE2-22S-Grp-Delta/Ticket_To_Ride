@@ -95,7 +95,9 @@ public class GameModel {
     }
 
     public void setPlayerDestinationCards(List<Integer> cards) {
-        this.playerDestinationCards = cards;
+        cards.stream()
+                .filter(c -> !this.playerDestinationCards.contains(c))
+                .forEach(c -> this.playerDestinationCards.add(c));
 
         String result = cards.stream().map(Object::toString).collect(Collectors.joining(":"));
         client.sendCommand("chooseMission:" + result);
@@ -134,10 +136,6 @@ public class GameModel {
     }
 
     // Special methods
-    public Integer getNextMissionCard() {
-        return deskDestinationCards.remove(0);
-    }
-
     public void drawOpenTrainCard(int pos) {
         client.sendCommand("cardOpen:" + pos);
     }

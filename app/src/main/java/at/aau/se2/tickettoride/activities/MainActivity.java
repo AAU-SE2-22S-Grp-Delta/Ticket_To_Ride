@@ -69,9 +69,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-        super.onDestroy();
     }
 
     @Override
@@ -139,7 +147,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             client.setup(this, serverAddress);
         }
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
     }
 }
