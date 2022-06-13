@@ -25,8 +25,10 @@ class DestinationTest
         Mockito.when(btn1.getY()).thenReturn(10f);
         Mockito.when(btn1.getWidth()).thenReturn(10);
         Mockito.when(btn1.getHeight()).thenReturn(10);
-        dest1 = new Destination("testdest1", btn1);
-        dest2 = new Destination("testdest2", btn1);
+        dest1 = new Destination("testdest1");
+        dest2 = new Destination("testdest2");
+        dest1.setButton(btn1);
+        dest2.setButton(btn1);
     }
 
     @Test

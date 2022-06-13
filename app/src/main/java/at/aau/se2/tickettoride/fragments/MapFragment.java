@@ -8,9 +8,11 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.R;
@@ -27,15 +31,13 @@ import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
 import at.aau.se2.tickettoride.eventListeners.MapOnTouchListener;
 
-public class MapFragment extends Fragment
-{
+public class MapFragment extends Fragment {
     private FragmentMapBinding binding;
     private Destination firstDest = null;
     private ArrayList<Destination> destinations = new ArrayList<>();
     private ArrayList<RailroadLine> railroads = new ArrayList<>();
 
-    public static MapFragment newInstance()
-    {
+    public static MapFragment newInstance() {
         return new MapFragment();
     }
 
@@ -52,8 +54,7 @@ public class MapFragment extends Fragment
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View view = binding.getRoot(); //the root is this view
 
@@ -67,43 +68,42 @@ public class MapFragment extends Fragment
         ImageView drawView = binding.drawView;
 
 
-
-        Destination atlanta = new Destination("Atlanta", binding.atlanta);
-        Destination boston = new Destination("Boston", binding.boston);
-        Destination calgary = new Destination("Calgary", binding.calgary);
-        Destination chicago = new Destination("Chicago", binding.chicago);
-        Destination dallas = new Destination("Dallas", binding.dallas);
-        Destination denver = new Destination("Denver", binding.denver);
-        Destination duluth = new Destination("Duluth", binding.duluth);
-        Destination elpaso = new Destination("El Paso", binding.elpaso);
-        Destination helena = new Destination("Helena", binding.helena);
-        Destination houston = new Destination("Houston", binding.houston);
-        Destination kansascity = new Destination("Kansas City", binding.kansasCity);
-        Destination littlerock = new Destination("Little Rock", binding.littleRock);
-        Destination losangeles = new Destination("Los Angeles", binding.losangeles);
-        Destination miami = new Destination("Miami", binding.miami);
-        Destination montréal = new Destination("Montréal", binding.montreal);
-        Destination nashville = new Destination("Nashville", binding.nashville);
-        Destination neworleans = new Destination("New Orleans", binding.newOrleans);
-        Destination newyork = new Destination("New York", binding.newYork);
-        Destination oklahomacity = new Destination("Oklahoma City", binding.oklahomaCity);
-        Destination phoenix = new Destination("Phoenix", binding.phoenix);
-        Destination pittsburgh = new Destination("Pittsburgh", binding.pittsburgh);
-        Destination portland = new Destination("Portland", binding.portland);
-        Destination saltlakecity = new Destination("Salt Lake City", binding.saltLakeCity);
-        Destination sanfrancisco = new Destination("San Francisco", binding.sanfrancisco);
-        Destination santafe = new Destination("Santa Fe", binding.santaFe);
-        Destination saultstmarie = new Destination("Sault St. Marie", binding.saultStMarie);
-        Destination seattle = new Destination("Seattle", binding.seattle);
-        Destination toronto = new Destination("Toronto", binding.toronto);
-        Destination vancouver = new Destination("Vancouver", binding.vancouver);
-        Destination winnipeg = new Destination("Winnipeg", binding.winnipeg);
-        Destination omaha = new Destination("Omaha", binding.omaha);
-        Destination washington = new Destination("Washington", binding.washington);
-        Destination lasvegas = new Destination("Las Vegas", binding.lasVegas);
-        Destination charleston = new Destination("Charleston", binding.charleston);
-        Destination saintlouis = new Destination("Saint Louis", binding.saintLouis);
-        Destination raleigh = new Destination("Raleigh", binding.raileigh);
+        Destination atlanta = new Destination("Atlanta");
+        Destination boston = new Destination("Boston");
+        Destination calgary = new Destination("Calgary");
+        Destination chicago = new Destination("Chicago");
+        Destination dallas = new Destination("Dallas");
+        Destination denver = new Destination("Denver");
+        Destination duluth = new Destination("Duluth");
+        Destination elpaso = new Destination("El Paso");
+        Destination helena = new Destination("Helena");
+        Destination houston = new Destination("Houston");
+        Destination kansascity = new Destination("Kansas City");
+        Destination littlerock = new Destination("Little Rock");
+        Destination losangeles = new Destination("Los Angeles");
+        Destination miami = new Destination("Miami");
+        Destination montreal = new Destination("Montreal");
+        Destination nashville = new Destination("Nashville");
+        Destination neworleans = new Destination("New Orleans");
+        Destination newyork = new Destination("New York");
+        Destination oklahomacity = new Destination("Oklahoma City");
+        Destination phoenix = new Destination("Phoenix");
+        Destination pittsburgh = new Destination("Pittsburgh");
+        Destination portland = new Destination("Portland");
+        Destination saltlakecity = new Destination("Salt Lake City");
+        Destination sanfrancisco = new Destination("San Francisco");
+        Destination santafe = new Destination("Santa Fe");
+        Destination saultstmarie = new Destination("Sault St. Marie");
+        Destination seattle = new Destination("Seattle");
+        Destination toronto = new Destination("Toronto");
+        Destination vancouver = new Destination("Vancouver");
+        Destination winnipeg = new Destination("Winnipeg");
+        Destination omaha = new Destination("Omaha");
+        Destination washington = new Destination("Washington");
+        Destination lasvegas = new Destination("Las Vegas");
+        Destination charleston = new Destination("Charleston");
+        Destination saintlouis = new Destination("Saint Louis");
+        Destination raleigh = new Destination("Raleigh");
 
 
         destinations = new ArrayList<>();
@@ -127,7 +127,7 @@ public class MapFragment extends Fragment
         destinations.add(littlerock);
         destinations.add(losangeles);
         destinations.add(miami);
-        destinations.add(montréal);
+        destinations.add(montreal);
         destinations.add(nashville);
         destinations.add(neworleans);
         destinations.add(newyork);
@@ -149,12 +149,12 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(vancouver, calgary, Color.GRAY, 3));
         railroads.add(new RailroadLine(calgary, winnipeg, Color.WHITE, 6));
         railroads.add(new RailroadLine(winnipeg, saultstmarie, Color.GRAY, 6));
-        railroads.add(new RailroadLine(saultstmarie, montréal, Color.BLACK, 5));
-//        railroads.add(new DoubleRailroadLine(montréal, boston, Color.GRAY, 2, Color.GRAY));
-        railroads.add(new RailroadLine(montréal, boston, Color.GRAY, 2));
+        railroads.add(new RailroadLine(saultstmarie, montreal, Color.BLACK, 5));
+//        railroads.add(new DoubleRailroadLine(montreal, boston, Color.GRAY, 2, Color.GRAY));
+        railroads.add(new RailroadLine(montreal, boston, Color.GRAY, 2));
 
-        railroads.add(new RailroadLine(montréal, newyork, Color.BLUE, 3));
-        railroads.add(new RailroadLine(montréal, toronto, Color.GRAY, 3));
+        railroads.add(new RailroadLine(montreal, newyork, Color.BLUE, 3));
+        railroads.add(new RailroadLine(montreal, toronto, Color.GRAY, 3));
 
 //        railroads.add(new DoubleRailroadLine(newyork, boston, Color.YELLOW, 2, Color.RED));
 //        railroads.add(new DoubleRailroadLine(newyork, pittsburgh, Color.YELLOW, 2, Color.GREEN));
@@ -273,6 +273,9 @@ public class MapFragment extends Fragment
         railroads.add(new RailroadLine(denver, phoenix, Color.WHITE, 5));
 
 
+        initButtons();
+
+
         canvas.drawColor(Color.TRANSPARENT);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(12);
@@ -290,17 +293,17 @@ public class MapFragment extends Fragment
             drawn = true;
         }), 250);
 
-        for (Destination d : destinations)
-        {
+        for (Destination d : destinations) {
             d.getButton().setOnClickListener(view1 -> selector(d, currentPlayer));
         }
         return view;
     }
 
 
+
+
     @Override
-    public void onDestroyView()
-    {
+    public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
@@ -308,32 +311,24 @@ public class MapFragment extends Fragment
     List<Destination> reachable = new ArrayList<>();
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void selector(Destination secondDest, Player player)
-    {
+    public void selector(Destination secondDest, Player player) {
         if (firstDest == null)
             firstDestHandler(secondDest);
-        else if(firstDest.equals(secondDest))
-        {
+        else if (firstDest.equals(secondDest)) {
             firstDest = null;
             resetButtons();
-        }
-        else if(reachable.contains(secondDest))
-        {
+        } else if (reachable.contains(secondDest)) {
             secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
             secondDest.getButton().setOnClickListener(view -> railBuilder(secondDest, player));
-        }
-        else
-        {
+        } else {
             resetButtons();
             firstDestHandler(secondDest);
         }
     }
 
-    public void firstDestHandler(Destination secondDest)
-    {
+    public void firstDestHandler(Destination secondDest) {
         firstDest = secondDest;
-        for (RailroadLine rl : railroads)
-        {
+        for (RailroadLine rl : railroads) {
             if (rl.getDestination1().equals(firstDest))
                 reachable.add(rl.getDestination2());
             else if (rl.getDestination2().equals(firstDest))
@@ -343,18 +338,15 @@ public class MapFragment extends Fragment
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void btnHighlighter(Destination d, List<Destination> reachable)
-    {
+    public void btnHighlighter(Destination d, List<Destination> reachable) {
         d.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
         for (Destination rd : reachable)
             rd.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
     }
 
-    public void railBuilder(Destination secondDest, Player player)
-    {
+    public void railBuilder(Destination secondDest, Player player) {
         RailroadLine rl = new RailroadLine(firstDest, secondDest);
-        if (railroads.contains(rl))
-        {
+        if (railroads.contains(rl)) {
             RailroadLine currentRoad = railroads.get(railroads.indexOf(rl));
             currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player);
         }
@@ -363,14 +355,79 @@ public class MapFragment extends Fragment
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void resetButtons()
-    {
+    public void resetButtons() {
         reachable.clear();
-        for (Destination d : destinations)
-        {
+        for (Destination d : destinations) {
             d.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
             d.getButton().setOnClickListener(view1 -> selector(d, currentPlayer));
         }
     }
 
+
+    private void initButtons() {
+        HashMap<String, Button> destButtons = new HashMap<>();
+
+        destButtons.put("Atlanta",binding.atlanta);
+        destButtons.put("Boston",binding.boston);
+        destButtons.put("Calgary",binding.calgary);
+        destButtons.put("Chicago",binding.chicago);
+        destButtons.put("Dallas",binding.dallas);
+        destButtons.put("Denver",binding.denver);
+        destButtons.put("Duluth",binding.duluth);
+        destButtons.put("El Paso",binding.elpaso);
+        destButtons.put("Helena",binding.helena);
+        destButtons.put("Houston",binding.houston);
+        destButtons.put("Kansas City",binding.kansasCity);
+        destButtons.put("Little Rock",binding.littleRock);
+        destButtons.put("Los Angeles",binding.losangeles);
+        destButtons.put("Miami",binding.miami);
+        destButtons.put("Montreal",binding.montreal);
+        destButtons.put("Nashville",binding.nashville);
+        destButtons.put("New Orleans",binding.newOrleans);
+        destButtons.put("New York",binding.newYork);
+        destButtons.put("Oklahoma City",binding.oklahomaCity);
+        destButtons.put("Phoenix",binding.phoenix);
+        destButtons.put("Pittsburgh",binding.pittsburgh);
+        destButtons.put("Portland",binding.portland);
+        destButtons.put("Salt Lake City",binding.saltLakeCity);
+        destButtons.put("San Francisco",binding.sanfrancisco);
+        destButtons.put("Santa Fe",binding.santaFe);
+        destButtons.put("Sault St. Marie",binding.saultStMarie);
+        destButtons.put("Seattle",binding.seattle);
+        destButtons.put("Toronto",binding.toronto);
+        destButtons.put("Vancouver",binding.vancouver);
+        destButtons.put("Winnipeg",binding.winnipeg);
+        destButtons.put("Omaha",binding.omaha);
+        destButtons.put("Washington",binding.washington);
+        destButtons.put("Las Vegas",binding.lasVegas);
+        destButtons.put("Charleston",binding.charleston);
+        destButtons.put("Saint Louis",binding.saintLouis);
+        destButtons.put("Raleigh",binding.raileigh);
+
+        for (Destination d : this.destinations) {
+            Log.d("DrawMap", d.getName());
+            Button button = destButtons.get(d.getName());
+            d.setButton(button);
+        }
+        Log.d("DrawMap", "Buttons initialized");
+    }
+
+
+//    private class ButtonRememberer{
+//        ArrayList<String> keys = new ArrayList<>();
+//        ArrayList<Button> values = new ArrayList<>();
+//
+//        private void put(String key, Button value) {
+//            keys.add(key);
+//            values.add(value);
+//        }
+//        private Button get(String key) {
+//            int index = 0;
+//            for (String k : keys) {
+//                index++;
+//                if (k.equals(key)) return values.get(index);
+//            }
+//            return null;
+//        }
+//    }
 }

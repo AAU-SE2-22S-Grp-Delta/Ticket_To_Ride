@@ -37,12 +37,19 @@ class MapTests
         Button btn3 = new Button(null);
         map = new Map();
 
-        dest1 = new Destination("testMdest1", btn1);
-        dest2 = new Destination("testMdest2", btn2);
-        dest3 = new Destination("testMdest3", btn3);
-        dest4 = new Destination("testMdest4", btn2);
-        dest5 = new Destination("testMdest5", btn2);
-        dest6 = new Destination("testMdest6", btn2);
+        dest1 = new Destination("testMdest1");
+        dest2 = new Destination("testMdest2");
+        dest3 = new Destination("testMdest3");
+        dest4 = new Destination("testMdest4");
+        dest5 = new Destination("testMdest5");
+        dest6 = new Destination("testMdest6");
+
+        dest1.setButton(btn1);
+        dest2.setButton(btn2);
+        dest3.setButton(btn3);
+        dest4.setButton(btn2);
+        dest5.setButton(btn2);
+        dest6.setButton(btn2);
 
         r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
         r2 = new RailroadLine(dest3, dest2, Color.BLUE, 3);

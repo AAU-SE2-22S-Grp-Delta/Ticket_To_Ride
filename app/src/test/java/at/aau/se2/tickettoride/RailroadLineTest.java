@@ -70,10 +70,15 @@ class RailroadLineTest {
         paint = new Paint();
 
 
-        dest1 = new Destination("testRLdest1", btn1);
-        dest2 = new Destination("testRLdest2", btn2);
-        dest3 = new Destination("testRLdest3", btn3);
-        dest4 = new Destination("testRLdest4", btn2);
+        dest1 = new Destination("testRLdest1");
+        dest2 = new Destination("testRLdest2");
+        dest3 = new Destination("testRLdest3");
+        dest4 = new Destination("testRLdest4");
+
+        dest1.setButton(btn1);
+        dest2.setButton(btn2);
+        dest3.setButton(btn3);
+        dest4.setButton(btn2);
 
         r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
         r2 = new RailroadLine(dest3, dest4, Color.BLUE, 3);

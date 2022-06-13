@@ -17,11 +17,13 @@ public class Destination {
     /**
      * Creates a Destination Object and marks the name as used
      * @param name a unique name
-     * @param button a button on the map, representing the location and its coordinates
      */
-    public Destination(String name, Button button) {
-        this.button = button;
+    public Destination(String name) {
         setName(name);
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
     }
 
     public Button getButton()
