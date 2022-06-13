@@ -1,6 +1,11 @@
 package at.aau.se2.tickettoride.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -12,6 +17,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
@@ -19,18 +25,70 @@ import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.helpers.ShakeDetection;
+import at.aau.se2.tickettoride.models.GameModel;
 
 public class GameActivity extends AppCompatActivity {
+    private ActivityGameBinding binding;
+    private final GameModel gameModel;
+    private final ClientConnection client;
+
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private ShakeDetection shakeDetection;
     private int shakeCount;
-    private ClientConnection client = ClientConnection.getInstance();
+
+    private Dialog playerDialog;
+
+    private final SensorEventListener sensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            shakeCount = shakeDetection.checkShake(sensorEvent, shakeCount);
+            if (shakeCount == 5) {
+                shakeCount = 0;
+                DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
+                cheatingDialog.show(getSupportFragmentManager(), "cheating");
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+            //ignore
+        }
+    };
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            for (String key : bundle.keySet()) {
+                switch (key) {
+                    case "action_call":
+                        if (bundle.getString(key).equals("1")) {
+                            displayPlayerDialog();
+                        }
+                        break;
+                    case "drawMission":
+                        if (bundle.getString(key).equals("1")) {
+                            Intent i = new Intent(context, DrawDestinationCardsActivity.class);
+                            startActivity(i);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+
+    public GameActivity() {
+        this.gameModel = GameModel.getInstance();
+        this.client = ClientConnection.getInstance();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityGameBinding binding = ActivityGameBinding.inflate(getLayoutInflater());
+        binding = ActivityGameBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -49,37 +107,36 @@ public class GameActivity extends AppCompatActivity {
         shakeCount = 0;
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(sensorListener, accelerometer , SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_UI);
 
-        initComponents(binding);
+        initComponents();
 
-        startGame();
+        displayPlayerDialog();
     }
 
-    private final SensorEventListener sensorListener = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent sensorEvent) {
-            shakeCount = shakeDetection.checkShake(sensorEvent, shakeCount);
-            if(shakeCount == 5)
-            {
-                shakeCount = 0;
-                DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
-                cheatingDialog.show(getSupportFragmentManager(),"cheating");
-            }
-        }
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        sensorManager.unregisterListener(sensorListener);
 
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int i) {
-            //ignore
-        }
-    };
+        super.onPause();
+    }
 
-    private void initComponents(ActivityGameBinding binding) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
+        sensorManager.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    private void initComponents() {
         binding.missionsButton.setOnClickListener(view -> {
             FragmentManager fm = getSupportFragmentManager();
             PlayerDestinationFragment destinationFragment = PlayerDestinationFragment.newInstance();
             destinationFragment.show(fm, "fragment_player_destination");
         });
+
         binding.pointsTextView.setOnClickListener(view -> {
             try {
                 client.sendCommand("getPoints");
@@ -92,21 +149,18 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    private void startGame() {
-        // After starting a new game send refresh to all attached fragments
-        Bundle result = new Bundle();
-        getSupportFragmentManager().setFragmentResult("refresh", result);
-    }
+    private void displayPlayerDialog() {
+        if (playerDialog != null && playerDialog.isShowing()) {
+            playerDialog.dismiss();
+        }
 
-    @Override
-    protected void onPause() {
-        sensorManager.unregisterListener(sensorListener);
-        super.onPause();
-    }
+        if (!gameModel.isPlaying()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Aktiver Spieler")
+                    .setMessage(gameModel.getActivePlayer());
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        sensorManager.registerListener(sensorListener,accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+            playerDialog = builder.create();
+            playerDialog.show();
+        }
     }
 }

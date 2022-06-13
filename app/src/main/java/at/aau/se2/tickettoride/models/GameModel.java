@@ -17,6 +17,7 @@ public class GameModel {
     private final ClientConnection client;
 
     private String playerName;
+    private String activePlayer;
 
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
@@ -47,6 +48,14 @@ public class GameModel {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public String getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(String activePlayer) {
+        this.activePlayer = activePlayer;
     }
 
     public List<TrainCard> getDeskClosedTrainCards() {
@@ -150,5 +159,9 @@ public class GameModel {
 
     public void addDiscardedMissionCards(List<Integer> missionCards) {
         deskDestinationCards.addAll(missionCards);
+    }
+
+    public boolean isPlaying() {
+        return playerName.equals(activePlayer);
     }
 }

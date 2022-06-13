@@ -1,6 +1,7 @@
 package at.aau.se2.tickettoride;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -161,5 +162,12 @@ class GameModelTests
         tmp2.add(7);
         tmp2.add(2);
         assertEquals(tmp2, gm.getDeskDestinationCards());
+    }
+
+    @Test
+    void testIsPlaying() {
+        gm.setPlayerName("Player1");
+        gm.setActivePlayer("Player1");
+        assertTrue(gm.isPlaying());
     }
 }

@@ -68,6 +68,11 @@ public class ReceivingThread extends Thread {
 
         List<TrainCard> trainCards;
         switch (command) {
+            case "actionCall":
+                String[] actions = response.split(":");
+                gameModel.setActivePlayer(actions[0]);
+                broadcastResponse("action_call", "1");
+                break;
             case "listGames":
                 broadcastResponse("listGames", response);
                 break;
