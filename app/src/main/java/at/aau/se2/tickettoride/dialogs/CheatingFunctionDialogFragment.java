@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.R;
@@ -24,10 +27,11 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class CheatingFunctionDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
     LinearLayout linearLayoutMissionCards;
-    TextView player1;
-    TextView player2;
-    TextView player3;
-    TextView player4;
+    TextView rival1;
+    TextView rival2;
+    TextView rival3;
+    TextView rival4;
+    List<TextView> allRivals;
     Button ok;
     int actions;
 
@@ -38,54 +42,83 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_cheating_function,null);
+        allRivals = new ArrayList<>();
+        allRivals.add(rival1);
+        allRivals.add(rival2);
+        allRivals.add(rival3);
+        allRivals.add(rival4);
 
-        // TODO: Karten von den richtigen Spielern bekommen (vom Server)
+        List<String> allRival = gameModel.getAllRival();
+        List<List<Integer>> allMissions = gameModel.getAllMissions();
+
+        for(int i = 0; i<allRival.size(); i++)
+        {
+            if(allRival.get(i) != null)
+            {
+                allRivals.get(i).setText(allRival.get(i));
+            }
+        }
 
         actions = 1;
-        // für Testzweck
-        player1 = view.findViewById(R.id.textViewPlayer1);
-        player1.setOnClickListener(new View.OnClickListener() {
+
+        rival1 = view.findViewById(R.id.textViewRival1);
+        rival1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    displayDestinationCards(gameModel.getPlayerDestinationCards());
-                    actions--;
+                    List<Integer> missions = allMissions.get(0);
+                    if(missions != null) {
+                        displayDestinationCards(missions);
+                        actions--;
+                    }
                 } else {
                     Log.d("Error", "No cheating action left!");
                 }
             }
         });
 
-        player2 = view.findViewById(R.id.textViewPlayer2);
-        player2.setOnClickListener(new View.OnClickListener() {
+        rival2 = view.findViewById(R.id.textViewRival2);
+        rival2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    displayDestinationCards(gameModel.getPlayerDestinationCards());
+                    List<Integer> missions = allMissions.get(1);
+                    if(missions != null) {
+                        displayDestinationCards(missions);
+                        actions--;
+                    }
                 } else {
                     Log.d("Error", "No cheating action left!");
                 }
             }
         });
 
-        player3 = view.findViewById(R.id.textViewPlayer3);
-        player3.setOnClickListener(new View.OnClickListener() {
+        rival3 = view.findViewById(R.id.textViewRival3);
+        rival3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    displayDestinationCards(gameModel.getPlayerDestinationCards());
+                    List<Integer> missions = allMissions.get(2);
+                    if(missions != null) {
+                        displayDestinationCards(missions);
+                        actions--;
+                    }
                 } else {
                     Log.d("Error", "No cheating action left!");
                 }
             }
         });
 
-        player4 = view.findViewById(R.id.textViewPlayer4);
-        player4.setOnClickListener(new View.OnClickListener() {
+        rival4 = view.findViewById(R.id.textViewRival4);
+        rival4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(actions != 0) {
-                    displayDestinationCards(gameModel.getPlayerDestinationCards());
+                    List<Integer> missions = allMissions.get(3);
+                    if(missions != null) {
+                        displayDestinationCards(missions);
+                        actions--;
+                    }
                 } else {
                     Log.d("Error", "No cheating action left!");
                 }
