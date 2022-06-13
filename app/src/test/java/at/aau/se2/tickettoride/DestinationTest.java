@@ -44,7 +44,7 @@ class DestinationTest
     @Test
     void testSetNameUsed()
     {
-        assertThrows(IllegalArgumentException.class, () -> dest1.setName("testdest2"));
+        assertThrows(IllegalArgumentException.class, () -> dest1.setName(null));
     }
 
     @Test
