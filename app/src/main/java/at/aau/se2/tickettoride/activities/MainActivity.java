@@ -30,7 +30,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private final GameModel gameModel;
-    private ClientConnection client;
+    private final ClientConnection client;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public MainActivity() {
-        gameModel = GameModel.getInstance();
+        this.gameModel = GameModel.getInstance();
+        this.client = ClientConnection.getInstance();
     }
 
     @Override
@@ -136,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
             HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
             helpDialogFragment.show(getSupportFragmentManager(), "helpDialog");
         });
-
-        // Establish connection
-        client = ClientConnection.getInstance();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String serverAddress = sharedPreferences.getString("server_address", "");

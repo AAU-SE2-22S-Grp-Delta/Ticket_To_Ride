@@ -67,12 +67,6 @@ public class GameActivity extends AppCompatActivity {
                             displayPlayerDialog();
                         }
                         break;
-                    case "drawMission":
-                        if (bundle.getString(key).equals("1")) {
-                            Intent i = new Intent(context, DrawDestinationCardsActivity.class);
-                            startActivity(i);
-                        }
-                        break;
                     default:
                         break;
                 }
