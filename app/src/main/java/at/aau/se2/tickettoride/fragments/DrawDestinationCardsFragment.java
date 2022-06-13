@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.activities.GameActivity;
 import at.aau.se2.tickettoride.databinding.FragmentDrawDestinationCardsBinding;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
@@ -76,21 +77,21 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
             if (binding.imageView.getBackground() != null) {
                 binding.imageView.setBackground(null);
             } else {
-                binding.imageView.setBackgroundColor(Color.GREEN);
+                binding.imageView.setBackgroundResource(R.drawable.custom_border);
             }
         }
         if (view.getId() == binding.imageView2.getId()) {
             if (binding.imageView2.getBackground() != null) {
                 binding.imageView2.setBackground(null);
             } else {
-                binding.imageView2.setBackgroundColor(Color.GREEN);
+                binding.imageView2.setBackgroundResource(R.drawable.custom_border);
             }
         }
         if (view.getId() == binding.imageView3.getId()) {
             if (binding.imageView3.getBackground() != null) {
                 binding.imageView3.setBackground(null);
             } else {
-                binding.imageView3.setBackgroundColor(Color.GREEN);
+                binding.imageView3.setBackgroundResource(R.drawable.custom_border);
             }
         }
         if (view.getId() == binding.button6.getId()) {
