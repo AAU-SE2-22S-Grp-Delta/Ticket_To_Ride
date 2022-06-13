@@ -110,8 +110,10 @@ public class RailroadLine
 
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
     {
-        if (isBuilt())
-            throw new IllegalStateException("Track already owned");
+        if (isBuilt()) {
+            buildRoad(canvas, paint, bm, imageView, this.owner);
+            return;
+        }
         paint.setColor(this.color);
 
         float xDist = (Math.abs(destination2.getX() - destination1.getX()) / this.distance - 1);
@@ -171,7 +173,7 @@ public class RailroadLine
     {
         paint.setStrokeWidth(24);
         //check if there is already a road built
-        this.setOwner(player);
+        if (!isBuilt()) this.setOwner(player);
         //check if player has enough cards of given color to build
 
         //build road

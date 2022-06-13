@@ -1,5 +1,7 @@
 package at.aau.se2.tickettoride.models;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +37,8 @@ public class GameModel {
 
     private GameModel() {
         this.client = ClientConnection.getInstance();
-        
+        Player test = new Player("test", Color.BLUE);
+        getRailroadLineByName("Raleigh", "Atlanta").setOwner(test);
     }
 
     public static synchronized GameModel getInstance() {
