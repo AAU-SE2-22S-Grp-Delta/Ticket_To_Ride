@@ -156,6 +156,26 @@ public class GameModel {
         deskDestinationCards.addAll(missionCards);
     }
 
+
+    /**
+     * searches for a railroadLine which names are equal to dest1 and dest2
+     *
+     * @param destination1 the name of one destination of the line
+     * @param destination2 the name of one destination of the line
+     * @return the RailroadLine on success, null on fail
+     */
+    public RailroadLine getRailroadLineByName(String destination1, String destination2) {
+        for (RailroadLine r : map.getRailroadLines()) {
+            String d1 = r.getDestination1().getName();
+            String d2 = r.getDestination2().getName();
+            if (destination1.equals(d1) && destination2.equals(d2) || destination1.equals(d2) && destination2.equals(d1)) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+
     private Map buildMap() {
         Map map = new Map();
 
