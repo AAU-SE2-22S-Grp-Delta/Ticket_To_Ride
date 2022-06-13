@@ -1,9 +1,40 @@
 package at.aau.se2.tickettoride.dataStructures;
 
+import android.graphics.Color;
+
 import java.util.HashSet;
 import java.util.Set;
 
+enum MapColor {
+    BLUE("blue"), GREEN("green"), YELLOW("yellow"), RED("red"), WHITE("white"), ORANGE("orange"), GRAY("gray"), BLACK("black"), PINK("pink");
+
+    private String value;
+
+    MapColor(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    public static int getByString(String color) {
+        if (color.equals("blue")) return Color.BLUE;
+        else if (color.equals("green")) return Color.GREEN;
+        else if (color.equals("yellow")) return Color.YELLOW;
+        else if (color.equals("red")) return Color.RED;
+        else if (color.equals("white")) return Color.WHITE;
+        else if (color.equals("orange")) return Color.rgb(255,69,80);
+        else if (color.equals("gray")) return Color.GRAY;
+        else if (color.equals("black")) return Color.BLACK;
+        else return Color.rgb(199,21,133);
+    }
+}
+
 public class Map {
+
+
     private Set<Destination> destinations;
     private Set<RailroadLine> railroadLines;
 
@@ -33,6 +64,7 @@ public class Map {
 
         railroadLines.add(railroadLine);
     }
+
 
     public Set<Destination> getDestinations() {
         return destinations;
