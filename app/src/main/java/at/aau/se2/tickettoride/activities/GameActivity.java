@@ -23,6 +23,7 @@ import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
 import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
+import at.aau.se2.tickettoride.fragments.DrawDestinationCardsFragment;
 import at.aau.se2.tickettoride.fragments.PlayerDestinationFragment;
 import at.aau.se2.tickettoride.helpers.ShakeDetection;
 import at.aau.se2.tickettoride.models.GameModel;
@@ -106,6 +107,8 @@ public class GameActivity extends AppCompatActivity {
 
         initComponents();
 
+        displayChooseMission();
+
         displayPlayerDialog();
     }
 
@@ -142,6 +145,11 @@ public class GameActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void displayChooseMission() {
+        DrawDestinationCardsFragment dialog = DrawDestinationCardsFragment.newInstance();
+        dialog.show(getSupportFragmentManager(), "mission_cards");
     }
 
     private void displayPlayerDialog() {

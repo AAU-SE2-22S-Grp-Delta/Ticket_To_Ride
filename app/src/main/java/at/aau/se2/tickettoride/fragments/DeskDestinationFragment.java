@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.FragmentDeskDestinationBinding;
-import at.aau.se2.tickettoride.dialogs.DestinationDialogFragment;
 
 public class DeskDestinationFragment extends Fragment {
     private FragmentDeskDestinationBinding binding;
@@ -27,8 +25,8 @@ public class DeskDestinationFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
             if (bundle.getString("card_mission", "0").equals("1")) {
-                DialogFragment destinationDialog = new DestinationDialogFragment();
-                destinationDialog.show(getParentFragmentManager(), "destinationDialog");
+                DrawDestinationCardsFragment dialog = DrawDestinationCardsFragment.newInstance();
+                dialog.show(getParentFragmentManager(), "destinationDialog");
             }
         }
     };

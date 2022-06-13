@@ -41,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     case "listGames":
                         Log.v("Broadcast", "Command: " + key + " - Value: " + bundle.getString(key));
                         break;
-                    case "drawMission":
-                        if (bundle.getString(key).equals("1")) {
-                            Intent i = new Intent(context, DrawDestinationCardsActivity.class);
-                            startActivity(i);
-                        }
-                        break;
                     default:
                         break;
                 }
@@ -123,14 +117,15 @@ public class MainActivity extends AppCompatActivity {
             client.sendCommand("listPlayersGame:Game"+date);
 
             client.sendCommand("getColors");
+            
+            startGame();
         });
 
         binding.buttonLocal.setOnClickListener(v -> {
             // Generate a new local game
             LocalGameHelper.generateTestGame(gameModel);
 
-            Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
-            startActivity(intent);
+            startGame();
         });
 
         binding.floatingActionButton.setOnClickListener(v -> {
@@ -145,5 +140,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             client.setup(this, serverAddress);
         }
+    }
+
+    private void startGame() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }
