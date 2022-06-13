@@ -81,8 +81,6 @@ public class RailroadLine
      */
     public void setOwner(Player owner) throws IllegalStateException
     {
-        if (this.owner != null)
-            throw new IllegalStateException("Line already owned by " + this.owner.getName());
         this.owner = owner;
     }
 

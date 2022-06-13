@@ -137,6 +137,14 @@ public class ReceivingThread extends Thread {
                 }
                 broadcastResponse("getPoints", "1");
                 break;
+
+            case "getMap":
+                if (!response.isEmpty()) {
+                    Log.d("update_map", response);
+//                    gameModel.updateMap();
+                }
+                break;
+
             default:
                 break;
         }
@@ -156,6 +164,7 @@ public class ReceivingThread extends Thread {
     private void syncGame() {
         client.sendCommand("getHandCards");
         client.sendCommand("getOpenCards");
+        client.sendCommand("getMap");
     }
 
     private void broadcastResponse(String command, String response) {

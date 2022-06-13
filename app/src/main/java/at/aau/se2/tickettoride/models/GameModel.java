@@ -1,6 +1,12 @@
 package at.aau.se2.tickettoride.models;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+
+import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +19,14 @@ import at.aau.se2.tickettoride.dataStructures.Map;
 import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 
 /**
  * GameModel-class represents an active game and stores the current game situation
  */
+
 public class GameModel {
+
     private static GameModel instance = null;
     private final ClientConnection client;
 
@@ -130,10 +139,6 @@ public class GameModel {
         return map;
     }
 
-    public void setMap(Map map) {
-        this.map = map;
-    }
-
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
@@ -157,6 +162,28 @@ public class GameModel {
 
     public void addDiscardedMissionCards(List<Integer> missionCards) {
         deskDestinationCards.addAll(missionCards);
+    }
+
+
+    /**
+     *
+     * @param serverMap this is a command of the format "getMap:[DestName],[DestName],[ownerName],[ownerName2]:
+     */
+    public void updateMap(String serverMap) {
+        String sentences[] = serverMap.split(":");
+        if (!sentences[1].equals("getMap")) return;
+        for (int i = 1; i < sentences.length; i++) {
+            String words[] = sentences[i].split(",");
+            RailroadLine line = getRailroadLineByName(words[0], words[1]);
+            Player owner = getPlayerByName(words[2]);
+            if (owner == null) throw new IllegalArgumentException("Player of Name " + words[2] + " notFound");
+            line.setOwner(owner);
+        }
+    }
+
+    private Player getPlayerByName(String name) {
+        for (Player p : this.players) if (p.getName().equals(name)) return p;
+        return null;
     }
 
 

@@ -33,6 +33,8 @@ import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
 import at.aau.se2.tickettoride.eventListeners.MapOnTouchListener;
 import at.aau.se2.tickettoride.models.GameModel;
 
+
+
 public class MapFragment extends Fragment {
     private FragmentMapBinding binding;
     private Destination firstDest = null;
