@@ -1,12 +1,6 @@
 package at.aau.se2.tickettoride.models;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +14,6 @@ import at.aau.se2.tickettoride.dataStructures.TrainCard;
  */
 public class GameModel {
     private static GameModel instance = null;
-    //TODO Add Symbol
-    private static final String SYMBOLTOSPLIT = "\\.";
     private final ClientConnection client;
 
     private String playerName;
@@ -48,7 +40,6 @@ public class GameModel {
         }
         return instance;
     }
-
 
     public String getPlayerName() {
         return playerName;
@@ -138,15 +129,11 @@ public class GameModel {
         this.players = players;
     }
 
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         return players;
     }
 
     // Special methods
-    public TrainCard getNextClosedTrainCard() {
-        return deskClosedTrainCards.remove(0);
-    }
-
     public Integer getNextMissionCard() {
         return deskDestinationCards.remove(0);
     }

@@ -121,12 +121,6 @@ class GameModelTests
     }
 
     @Test
-    void testGetNextClosed()
-    {
-        gm.setDeskClosedTrainCards(deskNextClosedTrainCards);
-        assertEquals(new TrainCard(TrainCard.Type.RED).getType(), gm.getNextClosedTrainCard().getType());
-    }
-    @Test
     void testGetNextMission()
     {
         gm.setDeskDestinationCards(nextMission);

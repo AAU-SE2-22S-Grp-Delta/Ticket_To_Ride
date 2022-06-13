@@ -1,5 +1,9 @@
 package at.aau.se2.tickettoride.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +13,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.databinding.FragmentDeskTrainBinding;
 import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 
-//Fragment Stapel und offene Zugkarten
 public class DeskTrainFragment extends Fragment {
     private FragmentDeskTrainBinding binding;
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            String card = bundle.getString("card_drawn");
+            if (card != null) {
+                DialogFragment trainDialog = TrainDialogFragment.newInstance(card);
+                trainDialog.show(getParentFragmentManager(), "trainDialog");
+            }
+        }
+    };
 
     public static DeskTrainFragment newInstance() {
         return new DeskTrainFragment();
@@ -24,22 +41,14 @@ public class DeskTrainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //Instead of findViewById
         binding = FragmentDeskTrainBinding.inflate(inflater, container, false);
 
-        //TODO DELETE COMMENT
-        //Wagenkarten nehmen
-        // Der Spieler darf zwei Karten nehmen. Er kann eine der offen ausliegenden Karten oder die oberste vom verdeckten Stapel ziehen.
-        // Wenn er eine offene Karte wählt, wird diese sofort durch die oberste vom Stapel ersetzt.
-        // Dann nimmt der Spieler seine zweite Karte – entweder eine der offen ausliegenden Karten oder die oberste vom Stapel.
-        // (Siehe die speziellen Regeln für Lokomotivkarten im Abschnitt„Wagen- und Lokomotivkarten“).
-        binding.imageViewTrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment trainDialog = new TrainDialogFragment();
-                trainDialog.show(getFragmentManager(), "trainDialog");
-            }
+        binding.imageViewTrain.setOnClickListener(view -> {
+            ClientConnection client = ClientConnection.getInstance();
+            client.sendCommand("cardStack");
         });
+
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).registerReceiver(receiver, new IntentFilter("server"));
 
         return binding.getRoot();
     }
@@ -47,6 +56,8 @@ public class DeskTrainFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).unregisterReceiver(receiver);
         binding = null;
     }
 }

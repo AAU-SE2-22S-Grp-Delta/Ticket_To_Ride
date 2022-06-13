@@ -77,6 +77,11 @@ public class ReceivingThread extends Thread {
                 broadcastResponse("drawMission", "1");
                 syncGame();
                 break;
+            case "cardStack":
+                if (!response.isEmpty() && !response.equals("null")) {
+                    broadcastResponse("card_drawn", response);
+                }
+                break;
             case "getHandCards":
                 if (!response.isEmpty()) {
                     trainCards = Arrays.stream(response.split(DELIMITER_VALUE))
