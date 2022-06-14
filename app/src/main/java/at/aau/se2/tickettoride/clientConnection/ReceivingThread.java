@@ -165,6 +165,8 @@ public class ReceivingThread extends Thread {
                     gameModel.setAllRival(players);
                 }
                 break;
+            case "cheat":
+                broadcastResponse("cheat", "1");
             default:
                 break;
         }
