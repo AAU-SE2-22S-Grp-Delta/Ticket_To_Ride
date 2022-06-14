@@ -82,6 +82,8 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
                 rival3.setText(allRival.get(2));
                 rival4.setText(allRival.get(3));
                 break;
+            default:
+                break;
         }
 
         actions = 1;
