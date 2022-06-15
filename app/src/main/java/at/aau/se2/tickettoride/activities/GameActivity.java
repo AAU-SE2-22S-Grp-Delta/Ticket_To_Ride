@@ -39,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
     private int shakeCount;
 
     private Dialog playerDialog;
+    private Dialog cheatDialog;
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
@@ -67,6 +68,11 @@ public class GameActivity extends AppCompatActivity {
                     case "action_call":
                         if (bundle.getString(key).equals("1")) {
                             displayPlayerDialog();
+                        }
+                        break;
+                    case "cheat":
+                        if (bundle.getString(key).equals("1")) {
+                            displayCheatDialog();
                         }
                         break;
                     default:
@@ -165,5 +171,18 @@ public class GameActivity extends AppCompatActivity {
             playerDialog = builder.create();
             playerDialog.show();
         }
+    }
+
+    private void displayCheatDialog() {
+        if (cheatDialog != null && cheatDialog.isShowing()) {
+            cheatDialog.dismiss();
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Cheat detected!")
+                .setMessage("One player cheated");
+
+        cheatDialog = builder.create();
+        cheatDialog.show();
     }
 }
