@@ -178,6 +178,7 @@ public class RailroadLine
         if (!isBuilt())
         {
             GameModel.getInstance().buildRoad(destination1.getName(), destination2.getName(), this.color);
+            this.owner = player;
         }
 
 
@@ -185,10 +186,5 @@ public class RailroadLine
         paint.setColor(player.getPlayerColor());
         canvas.drawLine(this.destination1.getX(), this.destination1.getY(), this.destination2.getX(), this.destination2.getY(), paint);
         imageView.setImageBitmap(bm);
-
-        //set owner
-
-        //remove cards and pieces
-
     }
 }
