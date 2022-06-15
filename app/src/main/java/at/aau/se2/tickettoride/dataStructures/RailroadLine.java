@@ -2,8 +2,11 @@ package at.aau.se2.tickettoride.dataStructures;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.ImageView;
+
+import at.aau.se2.tickettoride.models.GameModel;
 
 /**
  * RailroadLine-class represents a single connection between two Destination-Objects
@@ -12,7 +15,7 @@ public class RailroadLine
 {
     private Destination destination1;
     private Destination destination2;
-    private int color;
+    private String color;
     private int distance;
     private Player owner;
 
@@ -24,7 +27,7 @@ public class RailroadLine
      * @param color        to build the line train cards of this color will be needed
      * @param distance     to build the line that many train cards will be needed
      */
-    public RailroadLine(Destination destination1, Destination destination2, int color, int distance)
+    public RailroadLine(Destination destination1, Destination destination2, String color, int distance)
     {
         configureConnection(destination1, destination2);
         this.color = color;
@@ -58,7 +61,7 @@ public class RailroadLine
         return destination2;
     }
 
-    public int getColor()
+    public String getColor()
     {
         return color;
     }
@@ -108,11 +111,12 @@ public class RailroadLine
 
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
     {
-        if (isBuilt()) {
+        if (isBuilt())
+        {
             buildRoad(canvas, paint, bm, imageView, this.owner);
             return;
         }
-        paint.setColor(this.color);
+        paint.setColor(Map.MapColor.getByString(this.color));
 
         float xDist = (Math.abs(destination2.getX() - destination1.getX()) / this.distance - 1);
         float yDist = (Math.abs(destination2.getY() - destination1.getY()) / this.distance - 1);
@@ -170,11 +174,14 @@ public class RailroadLine
     public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView, Player player)
     {
         paint.setStrokeWidth(24);
-        //check if there is already a road built
-        if (!isBuilt()) this.setOwner(player);
-        //check if player has enough cards of given color to build
 
-        //build road
+        if (!isBuilt())
+        {
+            GameModel.getInstance().buildRoad(destination1.getName(), destination2.getName(), this.color);
+        }
+
+
+
         paint.setColor(player.getPlayerColor());
         canvas.drawLine(this.destination1.getX(), this.destination1.getY(), this.destination2.getX(), this.destination2.getY(), paint);
         imageView.setImageBitmap(bm);

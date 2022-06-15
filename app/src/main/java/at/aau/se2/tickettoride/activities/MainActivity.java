@@ -30,7 +30,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private final GameModel gameModel;
-    private ClientConnection client;
+    private final ClientConnection client;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -41,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     case "listGames":
                         Log.v("Broadcast", "Command: " + key + " - Value: " + bundle.getString(key));
                         break;
-                    case "drawMission":
-                        if (bundle.getString(key).equals("1")) {
-                            Intent i = new Intent(context, DrawDestinationCardsActivity.class);
-                            startActivity(i);
-                        }
-                        break;
                     default:
                         break;
                 }
@@ -55,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public MainActivity() {
-        gameModel = GameModel.getInstance();
+        this.gameModel = GameModel.getInstance();
+        this.client = ClientConnection.getInstance();
     }
 
     @Override
@@ -122,23 +117,21 @@ public class MainActivity extends AppCompatActivity {
             client.sendCommand("listPlayersGame:Game"+date);
 
             client.sendCommand("getColors");
+            
+            startGame();
         });
 
         binding.buttonLocal.setOnClickListener(v -> {
             // Generate a new local game
             LocalGameHelper.generateTestGame(gameModel);
 
-            Intent intent = new Intent(this, DrawDestinationCardsActivity.class);
-            startActivity(intent);
+            startGame();
         });
 
         binding.floatingActionButton.setOnClickListener(v -> {
             HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
             helpDialogFragment.show(getSupportFragmentManager(), "helpDialog");
         });
-
-        // Establish connection
-        client = ClientConnection.getInstance();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String serverAddress = sharedPreferences.getString("server_address", "");
@@ -147,5 +140,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             client.setup(this, serverAddress);
         }
+    }
+
+    private void startGame() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }

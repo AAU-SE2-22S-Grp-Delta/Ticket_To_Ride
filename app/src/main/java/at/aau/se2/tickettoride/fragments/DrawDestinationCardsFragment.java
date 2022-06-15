@@ -1,7 +1,6 @@
 package at.aau.se2.tickettoride.fragments;
 
-import android.content.Intent;
-import android.graphics.Color;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,17 +8,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import at.aau.se2.tickettoride.activities.GameActivity;
+import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.databinding.FragmentDrawDestinationCardsBinding;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
 import at.aau.se2.tickettoride.models.GameModel;
 
-public class DrawDestinationCardsFragment extends Fragment implements View.OnClickListener {
+public class DrawDestinationCardsFragment extends DialogFragment implements View.OnClickListener {
     private FragmentDrawDestinationCardsBinding binding;
     private GameModel gameModel;
 
@@ -71,26 +70,37 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        // Set dialog to full screen size
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         if (view.getId() == binding.imageView.getId()) {
             if (binding.imageView.getBackground() != null) {
                 binding.imageView.setBackground(null);
             } else {
-                binding.imageView.setBackgroundColor(Color.GREEN);
+                binding.imageView.setBackgroundResource(R.drawable.custom_border);
             }
         }
         if (view.getId() == binding.imageView2.getId()) {
             if (binding.imageView2.getBackground() != null) {
                 binding.imageView2.setBackground(null);
             } else {
-                binding.imageView2.setBackgroundColor(Color.GREEN);
+                binding.imageView2.setBackgroundResource(R.drawable.custom_border);
             }
         }
         if (view.getId() == binding.imageView3.getId()) {
             if (binding.imageView3.getBackground() != null) {
                 binding.imageView3.setBackground(null);
             } else {
-                binding.imageView3.setBackgroundColor(Color.GREEN);
+                binding.imageView3.setBackgroundResource(R.drawable.custom_border);
             }
         }
         if (view.getId() == binding.button6.getId()) {
@@ -127,34 +137,7 @@ public class DrawDestinationCardsFragment extends Fragment implements View.OnCli
                 gameModel.addDiscardedMissionCards(discardedMissions);
             }
 
-            binding.imageView.setBackground(null);
-            binding.imageView.setOnClickListener(null);
-            binding.imageView2.setBackground(null);
-            binding.imageView2.setOnClickListener(null);
-            binding.imageView3.setBackground(null);
-            binding.imageView3.setOnClickListener(null);
-
-            if (selectedMissions.size() == 2) {
-                card = selectedMissions.get(0);
-                binding.imageView.removeAllViews();
-                binding.imageView.addView(ResourceHelper.getMissionView(requireContext(), card));
-                binding.imageView.setTag(card);
-
-                card = selectedMissions.get(1);
-                binding.imageView2.removeAllViews();
-                binding.imageView2.addView(ResourceHelper.getMissionView(requireContext(), card));
-                binding.imageView2.setTag(card);
-
-                binding.imageView3.removeAllViews();
-            }
-
-            binding.button6.setVisibility(View.GONE);
-
-            binding.button9.setVisibility(View.VISIBLE);
-            binding.button9.setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), GameActivity.class);
-                startActivity(intent);
-            });
+            dismiss();
         }
     }
 }

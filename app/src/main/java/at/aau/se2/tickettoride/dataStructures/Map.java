@@ -22,15 +22,27 @@ public class Map {
         }
 
         public static int getByString(String color) {
-            if (color.equals("blue")) return Color.BLUE;
-            else if (color.equals("green")) return Color.GREEN;
-            else if (color.equals("yellow")) return Color.YELLOW;
-            else if (color.equals("red")) return Color.RED;
-            else if (color.equals("white")) return Color.WHITE;
-            else if (color.equals("orange")) return Color.rgb(255,69,80);
-            else if (color.equals("gray")) return Color.GRAY;
-            else if (color.equals("black")) return Color.BLACK;
-            else return Color.rgb(199,21,133);
+            switch (color)
+            {
+                case "blue":
+                    return Color.BLUE;
+                case "green":
+                    return Color.GREEN;
+                case "yellow":
+                    return Color.YELLOW;
+                case "red":
+                    return Color.RED;
+                case "white":
+                    return Color.WHITE;
+                case "orange":
+                    return Color.rgb(255, 69, 80);
+                case "gray":
+                    return Color.GRAY;
+                case "black":
+                    return Color.BLACK;
+                default:
+                    return Color.rgb(199, 21, 133);
+            }
         }
     }
 

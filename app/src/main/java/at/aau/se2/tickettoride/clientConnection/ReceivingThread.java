@@ -11,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,6 +69,11 @@ public class ReceivingThread extends Thread {
 
         List<TrainCard> trainCards;
         switch (command) {
+            case "actionCall":
+                String[] actions = response.split(":");
+                gameModel.setActivePlayer(actions[0]);
+                broadcastResponse("action_call", "1");
+                break;
             case "listGames":
                 broadcastResponse("listGames", response);
                 break;
@@ -136,6 +142,29 @@ public class ReceivingThread extends Thread {
                     }
                 }
                 broadcastResponse("getPoints", "1");
+                break;
+            case "cheatMission":
+                if(!response.isEmpty()){
+
+                    List<String> players = new ArrayList<>(4);
+                    List<Integer> missions = new ArrayList<>();
+                    List<List<Integer>> allMissions = new ArrayList<>(4);
+
+                    String[] playersAndMissions = response.split(":");
+                    for (String playersAndMission : playersAndMissions) {
+                        String[] playerAndMission = playersAndMission.split(",");
+                        if (!playerAndMission[0].equals(gameModel.getActivePlayer())) {
+                            players.add(playerAndMission[0]);
+                            for (int j = 1; j < playerAndMission.length; j++) {
+                                missions.add(Integer.parseInt(playerAndMission[j]));
+                            }
+                            allMissions.add(missions);
+                        }
+                    }
+                    gameModel.setAllMissions(allMissions);
+                    gameModel.setAllRival(players);
+                }
+                broadcastResponse("cheatMission", "1");
                 break;
 
             case "getMap":

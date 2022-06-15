@@ -19,8 +19,8 @@ public class ResourceHelper {
         Mission mission = Missions.getMissionById(card);
         if (mission != null) {
             binding.mission.setText(Integer.toString(mission.getId()));
-            binding.destination.setText(String.format("%s - %s", mission.getDestination1(), mission.getDestination2()));
-            binding.points.setText(String.format("%s", mission.getPoints()));
+            binding.destination.setText(String.format("%s\n%s", "From: "+mission.getDestination1(), "To:       "+mission.getDestination2()));
+            binding.points.setText(String.format("%s", "Points: "+mission.getPoints()));
         }
         return binding.getRoot();
     }

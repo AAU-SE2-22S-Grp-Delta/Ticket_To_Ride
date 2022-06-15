@@ -6,60 +6,60 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewStart"
+        android:id="@+id/textViewSelectRival"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Select a player:"
+        android:text="Select a rival:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewPlayer1"
+        android:id="@+id/textViewRival1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Player 1"
+        android:text="Rival 1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewStart"/>
+        app:layout_constraintTop_toBottomOf="@id/textViewSelectRival"/>
 
     <TextView
-        android:id="@+id/textViewPlayer2"
+        android:id="@+id/textViewRival2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Player 2"
-        app:layout_constraintEnd_toStartOf="@id/textViewPlayer3"
+        android:text="Rival 2"
+        app:layout_constraintEnd_toStartOf="@id/textViewRival3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPlayer1" />
+        app:layout_constraintTop_toBottomOf="@id/textViewRival1" />
 
     <TextView
-        android:id="@+id/textViewPlayer3"
+        android:id="@+id/textViewRival3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Player 3"
-        app:layout_constraintEnd_toStartOf="@id/textViewPlayer4"
+        android:text="Rival 3"
+        app:layout_constraintEnd_toStartOf="@id/textViewRival4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPlayer2" />
+        app:layout_constraintTop_toBottomOf="@id/textViewRival2" />
 
     <TextView
-        android:id="@+id/textViewPlayer4"
+        android:id="@+id/textViewRival4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Player 4"
+        android:text="Rival 4"
         app:layout_constraintEnd_toStartOf="@id/textViewMissionCards"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPlayer3" />
+        app:layout_constraintTop_toBottomOf="@id/textViewRival3" />
 
     <HorizontalScrollView
         android:id="@+id/scrollViewTrackCards"
@@ -90,7 +90,7 @@
         android:layout_marginTop="8dp"
         android:text="Mission Cards:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPlayer4" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRival4" />
 
     <Button
         android:id="@+id/buttonOk"

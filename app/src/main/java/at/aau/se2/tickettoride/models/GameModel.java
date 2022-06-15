@@ -25,12 +25,14 @@ import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
  * GameModel-class represents an active game and stores the current game situation
  */
 
-public class GameModel {
+public class GameModel
+{
 
     private static GameModel instance = null;
     private final ClientConnection client;
 
     private String playerName;
+    private String activePlayer;
 
     private List<TrainCard> deskClosedTrainCards = new ArrayList<>();
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
@@ -39,78 +41,107 @@ public class GameModel {
     private List<TrainCard> playerTrainCards = new ArrayList<>();
     private List<Integer> playerDestinationCards = new ArrayList<>();
     private List<Integer> chooseMissionCards = new ArrayList<>();
+    private List<List<Integer>> allMissions = new ArrayList<>(4);
+    private List<String> allRival = new ArrayList<>(4);
     private int playerColoredTrainCards = 45;
     private Map map = buildMap();
     public String[] playersString;
     private List<Player> players = new ArrayList<>();
 
-    private GameModel() {
+    private GameModel()
+    {
         this.client = ClientConnection.getInstance();
         Player test = new Player("test", Color.BLUE);
         getRailroadLineByName("Raleigh", "Atlanta").setOwner(test);
     }
 
-    public static synchronized GameModel getInstance() {
-        if (instance == null) {
+    public static synchronized GameModel getInstance()
+    {
+        if (instance == null)
+        {
             instance = new GameModel();
         }
         return instance;
     }
 
-    public String getPlayerName() {
+    public String getPlayerName()
+    {
         return playerName;
     }
 
-    public void setPlayerName(String playerName) {
+    public void setPlayerName(String playerName)
+    {
         this.playerName = playerName;
     }
 
-    public List<TrainCard> getDeskClosedTrainCards() {
+    public String getActivePlayer()
+    {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(String activePlayer)
+    {
+        this.activePlayer = activePlayer;
+    }
+
+    public List<TrainCard> getDeskClosedTrainCards()
+    {
         return deskClosedTrainCards;
     }
 
-    public void setDeskClosedTrainCards(List<TrainCard> deskClosedTrainCards) {
+    public void setDeskClosedTrainCards(List<TrainCard> deskClosedTrainCards)
+    {
         this.deskClosedTrainCards = deskClosedTrainCards;
     }
 
-    public List<TrainCard> getDeskOpenTrainCards() {
+    public List<TrainCard> getDeskOpenTrainCards()
+    {
         return deskOpenTrainCards;
     }
 
-    public void setDeskOpenTrainCards(List<TrainCard> deskOpenTrainCards) {
+    public void setDeskOpenTrainCards(List<TrainCard> deskOpenTrainCards)
+    {
         this.deskOpenTrainCards = deskOpenTrainCards;
     }
 
-    public List<TrainCard> getDeskDiscardedTrainCards() {
+    public List<TrainCard> getDeskDiscardedTrainCards()
+    {
         return deskDiscardedTrainCards;
     }
 
-    public void setDeskDiscardedTrainCards(List<TrainCard> deskDiscardedTrainCards) {
+    public void setDeskDiscardedTrainCards(List<TrainCard> deskDiscardedTrainCards)
+    {
         this.deskDiscardedTrainCards = deskDiscardedTrainCards;
     }
 
-    public List<Integer> getDeskDestinationCards() {
+    public List<Integer> getDeskDestinationCards()
+    {
         return deskDestinationCards;
     }
 
-    public void setDeskDestinationCards(List<Integer> deskDestinationCards) {
+    public void setDeskDestinationCards(List<Integer> deskDestinationCards)
+    {
         this.deskDestinationCards = deskDestinationCards;
     }
 
-    public List<TrainCard> getPlayerTrainCards() {
+    public List<TrainCard> getPlayerTrainCards()
+    {
         return playerTrainCards;
     }
 
-    public void setPlayerTrainCards(List<TrainCard> playerTrainCards) {
+    public void setPlayerTrainCards(List<TrainCard> playerTrainCards)
+    {
         this.playerTrainCards.clear();
         this.playerTrainCards.addAll(playerTrainCards);
     }
 
-    public List<Integer> getPlayerDestinationCards() {
+    public List<Integer> getPlayerDestinationCards()
+    {
         return playerDestinationCards;
     }
 
-    public void setPlayerDestinationCards(List<Integer> cards) {
+    public void setPlayerDestinationCards(List<Integer> cards)
+    {
         cards.stream()
                 .filter(c -> !this.playerDestinationCards.contains(c))
                 .forEach(c -> this.playerDestinationCards.add(c));
@@ -119,69 +150,85 @@ public class GameModel {
         client.sendCommand("chooseMission:" + result);
     }
 
-    public List<Integer> getChooseMissionCards() {
+    public List<Integer> getChooseMissionCards()
+    {
         return chooseMissionCards;
     }
 
-    public void setChooseMissionCards(List<Integer> chooseMissionCards) {
+    public void setChooseMissionCards(List<Integer> chooseMissionCards)
+    {
         this.chooseMissionCards = chooseMissionCards;
     }
 
-    public int getPlayerColoredTrainCards() {
+    public int getPlayerColoredTrainCards()
+    {
         return playerColoredTrainCards;
     }
 
-    public void setPlayerColoredTrainCards(int playerColoredTrainCards) {
+    public void setPlayerColoredTrainCards(int playerColoredTrainCards)
+    {
         this.playerColoredTrainCards = playerColoredTrainCards;
     }
 
-    public Map getMap() {
+    public Map getMap()
+    {
         return map;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(List<Player> players)
+    {
         this.players = players;
     }
 
-    public List<Player> getPlayers() {
+    public List<Player> getPlayers()
+    {
         return players;
     }
 
     // Special methods
-    public void drawOpenTrainCard(int pos) {
+    public void drawOpenTrainCard(int pos)
+    {
         client.sendCommand("cardOpen:" + pos);
     }
 
-    public void addDrawnTrainCard(TrainCard trainCard) {
+    public void addDrawnTrainCard(TrainCard trainCard)
+    {
         playerTrainCards.add(trainCard);
     }
 
-    public void addDiscardedTrainCard(TrainCard trainCard) {
+    public void addDiscardedTrainCard(TrainCard trainCard)
+    {
         deskDiscardedTrainCards.add(trainCard);
     }
 
-    public void addDiscardedMissionCards(List<Integer> missionCards) {
+    public void addDiscardedMissionCards(List<Integer> missionCards)
+    {
         deskDestinationCards.addAll(missionCards);
+    }
+
+    public void buildRoad(String dest1, String dest2, String color)
+    {
+        client.sendCommand("buildRailroad:"+dest1+","+dest2+","+color+".");
     }
 
 
     /**
-     *
      * @param serverMap this is a command of the format "getMap:[DestName],[DestName],[ownerName],[ownerName2]:
      */
-    public void updateMap(String serverMap) {
-        String sentences[] = serverMap.split(":");
-        if (!sentences[1].equals("getMap")) return;
-        for (int i = 1; i < sentences.length; i++) {
-            String words[] = sentences[i].split(",");
-            RailroadLine line = getRailroadLineByName(words[0], words[1]);
-            Player owner = getPlayerByName(words[2]);
-            if (owner == null) throw new IllegalArgumentException("Player of Name " + words[2] + " notFound");
-            line.setOwner(owner);
+    public void updateMap(String serverMap)
+    {
+        String[] full = serverMap.split(":");
+        String[] roads = full[1].split("\\.");
+        for (String road : roads)
+        {
+            String[] values = road.split(",");
+            if (!values[2].equals("null"))
+                getRailroadLineByName(values[0], values[1]).setOwner(getPlayerByName(values[2]));
         }
     }
 
-    private Player getPlayerByName(String name) {
+    private Player getPlayerByName(String name)
+    {
         for (Player p : this.players) if (p.getName().equals(name)) return p;
         return null;
     }
@@ -194,11 +241,14 @@ public class GameModel {
      * @param destination2 the name of one destination of the line
      * @return the RailroadLine on success, null on fail
      */
-    public RailroadLine getRailroadLineByName(String destination1, String destination2) {
-        for (RailroadLine r : map.getRailroadLines()) {
+    public RailroadLine getRailroadLineByName(String destination1, String destination2)
+    {
+        for (RailroadLine r : map.getRailroadLines())
+        {
             String d1 = r.getDestination1().getName();
             String d2 = r.getDestination2().getName();
-            if (destination1.equals(d1) && destination2.equals(d2) || destination1.equals(d2) && destination2.equals(d1)) {
+            if (destination1.equals(d1) && destination2.equals(d2) || destination1.equals(d2) && destination2.equals(d1))
+            {
                 return r;
             }
         }
@@ -206,7 +256,8 @@ public class GameModel {
     }
 
 
-    private Map buildMap() {
+    private Map buildMap()
+    {
         Map map = new Map();
 
         Destination atlanta = new Destination("Atlanta");
@@ -284,85 +335,115 @@ public class GameModel {
         map.addDestination(vancouver);
         map.addDestination(winnipeg);
 
-        map.addRailroadLine(new RailroadLine(vancouver, calgary, Map.MapColor.getByString("gray"), 3));
-        map.addRailroadLine(new RailroadLine(calgary, winnipeg, Map.MapColor.getByString("white"), 6));
-        map.addRailroadLine(new RailroadLine(winnipeg, saultstmarie, Map.MapColor.getByString("gray"), 6));
-        map.addRailroadLine(new RailroadLine(saultstmarie, montreal, Map.MapColor.getByString("black"), 5));
-        map.addRailroadLine(new DoubleRailroadLine(montreal, boston, Map.MapColor.getByString("gray"), 2, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(montreal, newyork, Map.MapColor.getByString("blue"), 3));
-        map.addRailroadLine(new RailroadLine(montreal, toronto, Map.MapColor.getByString("gray"), 3));
-        map.addRailroadLine(new DoubleRailroadLine(newyork, boston, Map.MapColor.getByString("yellow"), 2, Map.MapColor.getByString("red")));
-        map.addRailroadLine(new DoubleRailroadLine(newyork, pittsburgh, Map.MapColor.getByString("yellow"), 2, Map.MapColor.getByString("yellow")));
-        map.addRailroadLine(new RailroadLine(toronto, pittsburgh, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(toronto, saultstmarie, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(toronto, duluth, Map.MapColor.getByString("pink"), 6));
-        map.addRailroadLine(new RailroadLine(saultstmarie, duluth, Map.MapColor.getByString("gray"), 3));
-        map.addRailroadLine(new RailroadLine(duluth, winnipeg, Map.MapColor.getByString("black"), 4));
-        map.addRailroadLine(new RailroadLine(winnipeg, helena, Map.MapColor.getByString("blue"), 4));
-        map.addRailroadLine(new RailroadLine(helena, calgary, Map.MapColor.getByString("gray"), 4));
-        map.addRailroadLine(new RailroadLine(helena, duluth, Map.MapColor.getByString("orange"), 6));
-        map.addRailroadLine(new RailroadLine(helena, seattle, Map.MapColor.getByString("yellow"), 6));
-        map.addRailroadLine(new DoubleRailroadLine(seattle, vancouver, Map.MapColor.getByString("gray"), 1, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(seattle, calgary, Map.MapColor.getByString("gray"), 4));
-        map.addRailroadLine(new DoubleRailroadLine(seattle, portland, Map.MapColor.getByString("gray"), 1, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new DoubleRailroadLine(portland, sanfrancisco, Map.MapColor.getByString("yellow"), 5, Map.MapColor.getByString("pink")));
-        map.addRailroadLine(new DoubleRailroadLine(sanfrancisco, saltlakecity, Map.MapColor.getByString("orange"), 5, Map.MapColor.getByString("white")));
-        map.addRailroadLine(new RailroadLine(saltlakecity, portland, Map.MapColor.getByString("blue"), 6));
-        map.addRailroadLine(new RailroadLine(saltlakecity, helena, Map.MapColor.getByString("pink"), 3));
-        map.addRailroadLine(new RailroadLine(helena, omaha, Map.MapColor.getByString("red"), 5));
-        map.addRailroadLine(new DoubleRailroadLine(omaha, duluth, Map.MapColor.getByString("gray"), 2, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(duluth, chicago, Map.MapColor.getByString("red"), 3));
-        map.addRailroadLine(new RailroadLine(chicago, toronto, Map.MapColor.getByString("white"), 4));
-        map.addRailroadLine(new DoubleRailroadLine(newyork, washington, Map.MapColor.getByString("orange"), 2, Map.MapColor.getByString("black")));
-        map.addRailroadLine(new RailroadLine(washington, pittsburgh, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(pittsburgh, chicago, Map.MapColor.getByString("black"), 3));
-        map.addRailroadLine(new RailroadLine(chicago, omaha, Map.MapColor.getByString("blue"), 4));
-        map.addRailroadLine(new RailroadLine(omaha, denver, Map.MapColor.getByString("pink"), 4));
-        map.addRailroadLine(new RailroadLine(denver, helena, Map.MapColor.getByString("yellow"), 4));
-        map.addRailroadLine(new RailroadLine(denver, saltlakecity, Map.MapColor.getByString("yellow"), 3));
-        map.addRailroadLine(new RailroadLine(saltlakecity, lasvegas, Map.MapColor.getByString("orange"), 3));
-        map.addRailroadLine(new RailroadLine(lasvegas, losangeles, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(losangeles, phoenix, Map.MapColor.getByString("gray"), 3));
-        map.addRailroadLine(new RailroadLine(phoenix, elpaso, Map.MapColor.getByString("gray"), 3));
-        map.addRailroadLine(new RailroadLine(elpaso, losangeles, Map.MapColor.getByString("black"), 6));
-        map.addRailroadLine(new DoubleRailroadLine(losangeles, sanfrancisco, Map.MapColor.getByString("yellow"), 3, Map.MapColor.getByString("pink")));
-        map.addRailroadLine(new RailroadLine(santafe, denver, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(santafe, oklahomacity, Map.MapColor.getByString("blue"), 3));
-        map.addRailroadLine(new RailroadLine(santafe, elpaso, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(santafe, phoenix, Map.MapColor.getByString("gray"), 3));
-        map.addRailroadLine(new RailroadLine(elpaso, oklahomacity, Map.MapColor.getByString("yellow"), 5));
-        map.addRailroadLine(new RailroadLine(elpaso, dallas, Map.MapColor.getByString("red"), 4));
-        map.addRailroadLine(new RailroadLine(elpaso, houston, Map.MapColor.getByString("yellow"), 6));
-        map.addRailroadLine(new RailroadLine(houston, neworleans, Map.MapColor.getByString("red"), 2));
-        map.addRailroadLine(new DoubleRailroadLine(houston, dallas, Map.MapColor.getByString("gray"), 1, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(dallas, littlerock, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new DoubleRailroadLine(dallas, oklahomacity, Map.MapColor.getByString("gray"), 2, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(oklahomacity, littlerock, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new DoubleRailroadLine(oklahomacity, kansascity, Map.MapColor.getByString("gray"), 2, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(oklahomacity, denver, Map.MapColor.getByString("red"), 4));
-        map.addRailroadLine(new RailroadLine(littlerock, neworleans, Map.MapColor.getByString("yellow"), 3));
-        map.addRailroadLine(new RailroadLine(littlerock, nashville, Map.MapColor.getByString("white"), 3));
-        map.addRailroadLine(new RailroadLine(littlerock, saintlouis, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(neworleans, miami, Map.MapColor.getByString("red"), 6));
-        map.addRailroadLine(new RailroadLine(neworleans, atlanta, Map.MapColor.getByString("orange"), 4));
-        map.addRailroadLine(new RailroadLine(atlanta, miami, Map.MapColor.getByString("blue"), 5));
-        map.addRailroadLine(new RailroadLine(atlanta, charleston, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new DoubleRailroadLine(atlanta, raleigh, Map.MapColor.getByString("gray"), 2, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(atlanta, nashville, Map.MapColor.getByString("gray"), 1));
-        map.addRailroadLine(new RailroadLine(miami, charleston, Map.MapColor.getByString("pink"), 4));
-        map.addRailroadLine(new RailroadLine(charleston, raleigh, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new DoubleRailroadLine(raleigh, washington, Map.MapColor.getByString("gray"), 2, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new RailroadLine(raleigh, pittsburgh, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(raleigh, nashville, Map.MapColor.getByString("black"), 3));
-        map.addRailroadLine(new RailroadLine(nashville, pittsburgh, Map.MapColor.getByString("yellow"), 4));
-        map.addRailroadLine(new RailroadLine(nashville, saintlouis, Map.MapColor.getByString("gray"), 2));
-        map.addRailroadLine(new RailroadLine(saintlouis, pittsburgh, Map.MapColor.getByString("yellow"), 5));
-        map.addRailroadLine(new DoubleRailroadLine(saintlouis, chicago, Map.MapColor.getByString("yellow"), 2, Map.MapColor.getByString("white")));
-        map.addRailroadLine(new DoubleRailroadLine(saintlouis, kansascity, Map.MapColor.getByString("blue"), 2, Map.MapColor.getByString("pink")));
-        map.addRailroadLine(new DoubleRailroadLine(kansascity, omaha, Map.MapColor.getByString("gray"), 1, Map.MapColor.getByString("gray")));
-        map.addRailroadLine(new DoubleRailroadLine(kansascity, denver, Map.MapColor.getByString("black"), 4, Map.MapColor.getByString("orange")));
-        map.addRailroadLine(new RailroadLine(denver, phoenix, Map.MapColor.getByString("white"), 5));
+        map.addRailroadLine(new RailroadLine(vancouver, calgary, "gray", 3));
+        map.addRailroadLine(new RailroadLine(calgary, winnipeg, "white", 6));
+        map.addRailroadLine(new RailroadLine(winnipeg, saultstmarie, "gray", 6));
+        map.addRailroadLine(new RailroadLine(saultstmarie, montreal, "black", 5));
+        map.addRailroadLine(new DoubleRailroadLine(montreal, boston, "gray", 2, "gray"));
+        map.addRailroadLine(new RailroadLine(montreal, newyork, "blue", 3));
+        map.addRailroadLine(new RailroadLine(montreal, toronto, "gray", 3));
+        map.addRailroadLine(new DoubleRailroadLine(newyork, boston, "yellow", 2, "red"));
+        map.addRailroadLine(new DoubleRailroadLine(newyork, pittsburgh, "yellow", 2, "yellow"));
+        map.addRailroadLine(new RailroadLine(toronto, pittsburgh, "gray", 2));
+        map.addRailroadLine(new RailroadLine(toronto, saultstmarie, "gray", 2));
+        map.addRailroadLine(new RailroadLine(toronto, duluth, "pink", 6));
+        map.addRailroadLine(new RailroadLine(saultstmarie, duluth, "gray", 3));
+        map.addRailroadLine(new RailroadLine(duluth, winnipeg, "black", 4));
+        map.addRailroadLine(new RailroadLine(winnipeg, helena, ("blue"), 4));
+        map.addRailroadLine(new RailroadLine(helena, calgary, ("gray"), 4));
+        map.addRailroadLine(new RailroadLine(helena, duluth, "orange", 6));
+        map.addRailroadLine(new RailroadLine(helena, seattle, ("yellow"), 6));
+        map.addRailroadLine(new DoubleRailroadLine(seattle, vancouver, "gray", 1, "gray"));
+        map.addRailroadLine(new RailroadLine(seattle, calgary, "gray", 4));
+        map.addRailroadLine(new DoubleRailroadLine(seattle, portland, "gray", 1, "gray"));
+        map.addRailroadLine(new DoubleRailroadLine(portland, sanfrancisco, "yellow", 5,"pink"));
+        map.addRailroadLine(new DoubleRailroadLine(sanfrancisco, saltlakecity, "orange", 5, "white"));
+        map.addRailroadLine(new RailroadLine(saltlakecity, portland, "blue", 6));
+        map.addRailroadLine(new RailroadLine(saltlakecity, helena, "pink", 3));
+        map.addRailroadLine(new RailroadLine(helena, omaha, "red", 5));
+        map.addRailroadLine(new DoubleRailroadLine(omaha, duluth, "gray", 2, "gray"));
+        map.addRailroadLine(new RailroadLine(duluth, chicago, "red", 3));
+        map.addRailroadLine(new RailroadLine(chicago, toronto, "white", 4));
+        map.addRailroadLine(new DoubleRailroadLine(newyork, washington, "orange", 2,"black"));
+        map.addRailroadLine(new RailroadLine(washington, pittsburgh, "gray", 2));
+        map.addRailroadLine(new RailroadLine(pittsburgh, chicago, ("black"), 3));
+        map.addRailroadLine(new RailroadLine(chicago, omaha, ("blue"), 4));
+        map.addRailroadLine(new RailroadLine(omaha, denver, ("pink"), 4));
+        map.addRailroadLine(new RailroadLine(denver, helena, ("yellow"), 4));
+        map.addRailroadLine(new RailroadLine(denver, saltlakecity, ("yellow"), 3));
+        map.addRailroadLine(new RailroadLine(saltlakecity, lasvegas, ("orange"), 3));
+        map.addRailroadLine(new RailroadLine(lasvegas, losangeles, ("gray"), 2));
+        map.addRailroadLine(new RailroadLine(losangeles, phoenix, ("gray"), 3));
+        map.addRailroadLine(new RailroadLine(phoenix, elpaso, ("gray"), 3));
+        map.addRailroadLine(new RailroadLine(elpaso, losangeles, ("black"), 6));
+        map.addRailroadLine(new DoubleRailroadLine(losangeles, sanfrancisco, "yellow", 3, "pink"));
+        map.addRailroadLine(new RailroadLine(santafe, denver, ("gray"), 2));
+        map.addRailroadLine(new RailroadLine(santafe, oklahomacity, ("blue"), 3));
+        map.addRailroadLine(new RailroadLine(santafe, elpaso, ("gray"), 2));
+        map.addRailroadLine(new RailroadLine(santafe, phoenix, ("gray"), 3));
+        map.addRailroadLine(new RailroadLine(elpaso, oklahomacity, ("yellow"), 5));
+        map.addRailroadLine(new RailroadLine(elpaso, dallas, ("red"), 4));
+        map.addRailroadLine(new RailroadLine(elpaso, houston, ("yellow"), 6));
+        map.addRailroadLine(new RailroadLine(houston, neworleans, ("red"), 2));
+        map.addRailroadLine(new DoubleRailroadLine(houston, dallas, ("gray"), 1, "gray"));
+        map.addRailroadLine(new RailroadLine(dallas, littlerock, ("gray"), 2));
+        map.addRailroadLine(new DoubleRailroadLine(dallas, oklahomacity, ("gray"), 2, ("gray")));
+        map.addRailroadLine(new RailroadLine(oklahomacity, littlerock, ("gray"), 2));
+        map.addRailroadLine(new DoubleRailroadLine(oklahomacity, kansascity, ("gray"), 2, ("gray")));
+        map.addRailroadLine(new RailroadLine(oklahomacity, denver, ("red"), 4));
+        map.addRailroadLine(new RailroadLine(littlerock, neworleans, ("yellow"), 3));
+        map.addRailroadLine(new RailroadLine(littlerock, nashville, ("white"), 3));
+        map.addRailroadLine(new RailroadLine(littlerock, saintlouis, ("gray"), 2));
+        map.addRailroadLine(new RailroadLine(neworleans, miami, ("red"), 6));
+        map.addRailroadLine(new RailroadLine(neworleans, atlanta, ("orange"), 4));
+        map.addRailroadLine(new RailroadLine(atlanta, miami, "blue", 5));
+        map.addRailroadLine(new RailroadLine(atlanta, charleston, ("gray"), 2));
+        map.addRailroadLine(new DoubleRailroadLine(atlanta, raleigh, ("gray"), 2, ("gray")));
+        map.addRailroadLine(new RailroadLine(atlanta, nashville, ("gray"), 1));
+        map.addRailroadLine(new RailroadLine(miami, charleston, ("pink"), 4));
+        map.addRailroadLine(new RailroadLine(charleston, raleigh, ("gray"), 2));
+        map.addRailroadLine(new DoubleRailroadLine(raleigh, washington, ("gray"), 2, ("gray")));
+        map.addRailroadLine(new RailroadLine(raleigh, pittsburgh, ("gray"), 2));
+        map.addRailroadLine(new RailroadLine(raleigh, nashville, ("black"), 3));
+        map.addRailroadLine(new RailroadLine(nashville, pittsburgh, ("yellow"), 4));
+        map.addRailroadLine(new RailroadLine(nashville, saintlouis, ("gray"), 2));
+        map.addRailroadLine(new RailroadLine(saintlouis, pittsburgh, ("yellow"), 5));
+        map.addRailroadLine(new DoubleRailroadLine(saintlouis, chicago, ("yellow"), 2, ("white")));
+        map.addRailroadLine(new DoubleRailroadLine(saintlouis, kansascity, ("blue"), 2, ("pink")));
+        map.addRailroadLine(new DoubleRailroadLine(kansascity, omaha, ("gray"), 1, ("gray")));
+        map.addRailroadLine(new DoubleRailroadLine(kansascity, denver, ("black"), 4, ("orange")));
+        map.addRailroadLine(new RailroadLine(denver, phoenix, ("white"), 5));
 
         return map;
+    }
+
+    public boolean isPlaying()
+    {
+        return playerName.equals(activePlayer);
+    }
+
+    public void setAllMissions(List<List<Integer>> allMissions)
+    {
+        this.allMissions = allMissions;
+    }
+
+    public List<List<Integer>> getAllMissions()
+    {
+        return allMissions;
+    }
+
+    public void setAllRival(List<String> allRival)
+    {
+        this.allRival = allRival;
+    }
+
+    public List<String> getAllRival()
+    {
+        return allRival;
+    }
+
+    public void cheatMission()
+    {
+        client.sendCommand("cheatMission");
     }
 }
