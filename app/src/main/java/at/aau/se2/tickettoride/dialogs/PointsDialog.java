@@ -50,6 +50,8 @@ public class PointsDialog extends DialogFragment {
             int colorPlayer = getTextColor(player.getPlayerColor());
             textView.setTextColor(colorPlayer);
 
+            textView.setTextSize(18);
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(80, 20, 50, 0);
 
