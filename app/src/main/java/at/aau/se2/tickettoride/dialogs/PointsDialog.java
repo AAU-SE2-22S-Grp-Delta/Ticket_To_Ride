@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -45,6 +46,10 @@ public class PointsDialog extends DialogFragment {
             Player player = players.get(i);
             textView.setText(MessageFormat.format("{0}: {1}", player.getName(), player.getPoints()));
 
+            //TextColor
+            int colorPlayer = getTextColor(player.getPlayerColor());
+            textView.setTextColor(colorPlayer);
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(80, 20, 50, 0);
 
@@ -56,5 +61,27 @@ public class PointsDialog extends DialogFragment {
                 .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> dismiss());
 
         return builder.create();
+    }
+
+    private int getTextColor(int colorPlayer){
+        switch (colorPlayer){
+            //RED
+            case 0:
+                return Color.RED;
+            //BLUE
+            case 1:
+                return Color.BLUE;
+            //GREEN
+            case 2:
+                return Color.GREEN;
+            //YELLOW
+            case 3:
+                return Color.YELLOW;
+            //BLACK
+            case 4:
+                return Color.BLACK;
+            default:
+                return Color.GRAY;
+        }
     }
 }
