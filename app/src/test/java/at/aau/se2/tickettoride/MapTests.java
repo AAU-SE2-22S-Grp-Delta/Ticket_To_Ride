@@ -51,11 +51,11 @@ class MapTests
         dest5.setButton(btn2);
         dest6.setButton(btn2);
 
-        r1 = new RailroadLine(dest1, dest2, Color.BLUE, 3);
-        r2 = new RailroadLine(dest3, dest2, Color.BLUE, 3);
-        r3 = new RailroadLine(dest3, dest5, Color.BLUE, 3);
-        r4 = new RailroadLine(dest5, dest3, Color.BLUE, 3);
-        r6 = new RailroadLine(dest5, dest6, Color.BLUE, 3);
+        r1 = new RailroadLine(dest1, dest2, "blue", 3);
+        r2 = new RailroadLine(dest3, dest2, "blue", 3);
+        r3 = new RailroadLine(dest3, dest5, "blue", 3);
+        r4 = new RailroadLine(dest5, dest3, "blue", 3);
+        r6 = new RailroadLine(dest5, dest6, "blue", 3);
         map.addDestination(dest1);
         map.addDestination(dest2);
 
