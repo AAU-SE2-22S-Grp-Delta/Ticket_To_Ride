@@ -10,7 +10,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -37,6 +40,8 @@ public class GameActivity extends AppCompatActivity {
     private Sensor accelerometer;
     private ShakeDetection shakeDetection;
     private int shakeCount;
+    private Vibrator vibrator;
+    private VibrationEffect vibrationEffect;
 
     private Dialog playerDialog;
     private Dialog cheatDialog;
@@ -73,6 +78,14 @@ public class GameActivity extends AppCompatActivity {
                     case "cheat":
                         if (bundle.getString(key).equals("1")) {
                             displayCheatDialog();
+
+                            // requires Oreo (API 26) or higher
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                vibrationEffect = VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE);
+                                vibrator.cancel();
+                                vibrator.vibrate(vibrationEffect);
+                            }
+
                         }
                         break;
                     default:
@@ -110,6 +123,7 @@ public class GameActivity extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_UI);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         initComponents();
 
