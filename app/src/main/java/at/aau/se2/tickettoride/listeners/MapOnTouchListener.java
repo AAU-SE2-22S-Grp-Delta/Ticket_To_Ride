@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.eventListeners;
+package at.aau.se2.tickettoride.listeners;
 
 import android.util.Log;
 import android.view.MotionEvent;

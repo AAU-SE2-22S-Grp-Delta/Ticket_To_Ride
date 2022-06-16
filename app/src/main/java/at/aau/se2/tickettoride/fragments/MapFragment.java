@@ -29,7 +29,7 @@ import at.aau.se2.tickettoride.datastructures.Destination;
 import at.aau.se2.tickettoride.datastructures.Player;
 import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
-import at.aau.se2.tickettoride.eventListeners.MapOnTouchListener;
+import at.aau.se2.tickettoride.listeners.MapOnTouchListener;
 import at.aau.se2.tickettoride.models.GameModel;
 
 
