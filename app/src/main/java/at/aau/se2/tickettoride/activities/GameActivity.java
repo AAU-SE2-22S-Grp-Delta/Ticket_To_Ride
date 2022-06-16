@@ -162,9 +162,8 @@ public class GameActivity extends AppCompatActivity {
                 Thread.sleep(500);
                 DialogFragment pointsDialog = new PointsDialog();
                 pointsDialog.show(getSupportFragmentManager(), "points");
-            } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    e.printStackTrace();
+            } catch (InterruptedException ignored) {
+                Thread.currentThread().interrupt();
             }
         });
     }
