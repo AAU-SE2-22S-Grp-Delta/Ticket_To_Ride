@@ -164,16 +164,16 @@ public class ReceivingThread extends Thread {
                     gameModel.setAllMissions(allMissions);
                     gameModel.setAllRival(players);
                 }
-                broadcastResponse("cheatMission", "1");
                 break;
-
+            case "cheat":
+                broadcastResponse("cheat", "1");
+                break;
             case "getMap":
                 if (!response.isEmpty()) {
                     Log.d("update_map", response);
 //                    gameModel.updateMap();
                 }
                 break;
-
             default:
                 break;
         }
