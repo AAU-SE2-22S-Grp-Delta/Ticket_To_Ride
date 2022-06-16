@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.datastructures.Player;
 
 public class ScoreAdapter extends ArrayAdapter<Player> {
     ArrayList<Player> players;

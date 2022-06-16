@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
 
 public class TrainDialogFragment extends DialogFragment {

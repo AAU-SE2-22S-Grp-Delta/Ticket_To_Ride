@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import at.aau.se2.tickettoride.client.ClientConnection;
-import at.aau.se2.tickettoride.dataStructures.Destination;
-import at.aau.se2.tickettoride.dataStructures.DoubleRailroadLine;
-import at.aau.se2.tickettoride.dataStructures.Map;
-import at.aau.se2.tickettoride.dataStructures.Player;
-import at.aau.se2.tickettoride.dataStructures.RailroadLine;
-import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.datastructures.Destination;
+import at.aau.se2.tickettoride.datastructures.DoubleRailroadLine;
+import at.aau.se2.tickettoride.datastructures.Map;
+import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.datastructures.RailroadLine;
+import at.aau.se2.tickettoride.datastructures.TrainCard;
 
 /**
  * GameModel-class represents an active game and stores the current game situation

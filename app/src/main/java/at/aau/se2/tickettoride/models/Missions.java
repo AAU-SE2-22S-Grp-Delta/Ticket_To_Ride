@@ -2,7 +2,7 @@ package at.aau.se2.tickettoride.models;
 
 import java.util.ArrayList;
 
-import at.aau.se2.tickettoride.dataStructures.Mission;
+import at.aau.se2.tickettoride.datastructures.Mission;
 
 public class Missions {
     public static ArrayList<Mission> getMissions() {

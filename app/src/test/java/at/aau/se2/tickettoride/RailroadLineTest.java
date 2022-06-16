@@ -18,9 +18,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import at.aau.se2.tickettoride.dataStructures.Destination;
-import at.aau.se2.tickettoride.dataStructures.Player;
-import at.aau.se2.tickettoride.dataStructures.RailroadLine;
+import at.aau.se2.tickettoride.datastructures.Destination;
+import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.datastructures.RailroadLine;
 
 class RailroadLineTest {
     static Destination dest1;

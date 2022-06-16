@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.dataStructures.Mission;
-import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.datastructures.Mission;
+import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.databinding.CardMissionBinding;
 import at.aau.se2.tickettoride.models.Missions;
 

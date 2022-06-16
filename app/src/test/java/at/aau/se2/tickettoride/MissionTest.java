@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import at.aau.se2.tickettoride.dataStructures.Mission;
+import at.aau.se2.tickettoride.datastructures.Mission;
 
 class MissionTest {
     Mission m1 = new Mission(0, "dest1", "dest2", 4);

@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.dataStructures;
+package at.aau.se2.tickettoride.datastructures;
 
 /**
  * RailroadLine-class represents a double connection between two Destination-Objects

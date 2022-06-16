@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.datastructures.Player;
 
 class PlayerTest
 {

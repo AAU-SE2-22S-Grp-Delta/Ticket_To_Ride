@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.helpers.ResourceHelper;
 
 class ResourceHelperTests

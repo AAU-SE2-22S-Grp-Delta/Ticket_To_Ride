@@ -2,15 +2,15 @@ package at.aau.se2.tickettoride;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import android.graphics.Color;
+
 import android.widget.Button;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
-import at.aau.se2.tickettoride.dataStructures.Destination;
-import at.aau.se2.tickettoride.dataStructures.Map;
-import at.aau.se2.tickettoride.dataStructures.RailroadLine;
+import at.aau.se2.tickettoride.datastructures.Destination;
+import at.aau.se2.tickettoride.datastructures.Map;
+import at.aau.se2.tickettoride.datastructures.RailroadLine;
 
 class MapTests
 {

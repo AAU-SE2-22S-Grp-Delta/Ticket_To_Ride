@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.dataStructures;
+package at.aau.se2.tickettoride.datastructures;
 import android.widget.Button;
 import java.util.HashSet;
 import java.util.Set;

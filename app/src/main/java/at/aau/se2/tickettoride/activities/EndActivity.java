@@ -1,6 +1,5 @@
 package at.aau.se2.tickettoride.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -8,12 +7,11 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
-import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.datastructures.Player;
 import at.aau.se2.tickettoride.databinding.ActivityEndBinding;
 
 

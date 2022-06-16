@@ -18,7 +18,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.List;
 
-import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.databinding.FragmentDeskOpenTrainBinding;
 import at.aau.se2.tickettoride.models.GameModel;
 

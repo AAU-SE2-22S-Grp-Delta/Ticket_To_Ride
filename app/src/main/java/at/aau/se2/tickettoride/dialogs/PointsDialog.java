@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.datastructures.Player;
 import at.aau.se2.tickettoride.models.GameModel;
 
 import java.text.MessageFormat;

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import at.aau.se2.tickettoride.dataStructures.Mission;
+import at.aau.se2.tickettoride.datastructures.Mission;
 import at.aau.se2.tickettoride.models.Missions;
 
 class MissionModelTests

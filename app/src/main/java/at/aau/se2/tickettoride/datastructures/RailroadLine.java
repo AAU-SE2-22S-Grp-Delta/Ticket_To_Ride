@@ -1,8 +1,7 @@
-package at.aau.se2.tickettoride.dataStructures;
+package at.aau.se2.tickettoride.datastructures;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.ImageView;
 

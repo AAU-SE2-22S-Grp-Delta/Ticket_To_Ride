@@ -21,14 +21,13 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.dataStructures.Destination;
-import at.aau.se2.tickettoride.dataStructures.Player;
-import at.aau.se2.tickettoride.dataStructures.RailroadLine;
+import at.aau.se2.tickettoride.datastructures.Destination;
+import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
 import at.aau.se2.tickettoride.eventListeners.MapOnTouchListener;
 import at.aau.se2.tickettoride.models.GameModel;

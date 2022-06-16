@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import at.aau.se2.tickettoride.dataStructures.Destination;
+import at.aau.se2.tickettoride.datastructures.Destination;
 
 class DestinationTest
 {

@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.dataStructures;
+package at.aau.se2.tickettoride.datastructures;
 
 /**
  * Player-Class represents a person who is playing the Game

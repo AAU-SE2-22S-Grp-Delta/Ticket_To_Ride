@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import at.aau.se2.tickettoride.dataStructures.Player;
-import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class ReceivingThread extends Thread {

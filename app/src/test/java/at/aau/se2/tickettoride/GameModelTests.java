@@ -13,10 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import at.aau.se2.tickettoride.dataStructures.Destination;
-import at.aau.se2.tickettoride.dataStructures.Map;
-import at.aau.se2.tickettoride.dataStructures.Player;
-import at.aau.se2.tickettoride.dataStructures.TrainCard;
+import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 class GameModelTests {
