@@ -107,6 +107,8 @@ public class DeskOpenTrainFragment extends Fragment {
                     case 4:
                         binding.card5.setImageResource(getTrainResource(card));
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + i);
                 }
             }
         }
