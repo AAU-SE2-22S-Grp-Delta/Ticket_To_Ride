@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,9 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import at.aau.se2.tickettoride.R;
@@ -88,83 +84,32 @@ public class CheatingFunctionDialogFragment extends DialogFragment {
 
         actions = 1;
 
-        rival1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(actions != 0) {
-                    if(allMissions.size() == 1) {
-                        List<Integer> missions = allMissions.get(0);
-                        displayDestinationCards(missions);
-                        actions--;
-                    } else {
-                        Log.d("Error", "No rival!");
-                    }
-                } else {
-                    Log.d("Error", "No cheating action left!");
-                }
-            }
-        });
+        rival1.setOnClickListener(v -> handleClick(allMissions,1));
 
-        rival2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(actions != 0) {
-                    if(allMissions.size() == 2) {
-                        List<Integer> missions = allMissions.get(1);
-                        displayDestinationCards(missions);
-                        actions--;
-                    } else {
-                        Log.d("Error", "No rival!");
-                    }
-                } else {
-                    Log.d("Error", "No cheating action left!");
-                }
-            }
-        });
+        rival2.setOnClickListener(v -> handleClick(allMissions,2));
 
-        rival3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(actions != 0) {
-                    if(allMissions.size() == 3) {
-                        List<Integer> missions = allMissions.get(2);
-                        displayDestinationCards(missions);
-                        actions--;
-                    } else {
-                        Log.d("Error", "No rival!");
-                    }
-                } else {
-                    Log.d("Error", "No cheating action left!");
-                }
-            }
-        });
+        rival3.setOnClickListener(v -> handleClick(allMissions,3));
 
-        rival4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(actions != 0) {
-                    if(allMissions.size() == 4) {
-                        List<Integer> missions = allMissions.get(3);
-                        displayDestinationCards(missions);
-                        actions--;
-                    } else {
-                        Log.d("Error", "No rival!");
-                    }
-                } else {
-                    Log.d("Error", "No cheating action left!");
-                }
-            }
-        });
+        rival4.setOnClickListener(v -> handleClick(allMissions, 4));
 
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
+        ok.setOnClickListener(v -> dismiss());
 
         builder.setView(view);
         return builder.create();
+    }
+
+    private void handleClick(List<List<Integer>> allMissions, int rival) {
+        if (actions != 0) {
+            if (allMissions.size() == rival) {
+                List<Integer> missions = allMissions.get(rival - 1);
+                displayDestinationCards(missions);
+                actions--;
+            } else {
+                Log.d("Error", "No rival!");
+            }
+        } else {
+            Log.d("Error", "No cheating action left!");
+        }
     }
 
     public void displayDestinationCards(List<Integer> missionCards) {
