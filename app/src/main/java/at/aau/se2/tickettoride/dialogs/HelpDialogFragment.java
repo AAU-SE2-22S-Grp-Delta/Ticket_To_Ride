@@ -2,10 +2,8 @@ package at.aau.se2.tickettoride.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +12,6 @@ import androidx.fragment.app.DialogFragment;
 import at.aau.se2.tickettoride.R;
 
 public class HelpDialogFragment extends DialogFragment {
-
-    private AlertDialog dialog; // class variable
-    private Button buttonClose;
-
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -38,13 +32,7 @@ public class HelpDialogFragment extends DialogFragment {
                 "   • 2 open\n" +
                 "   • 1 open + 1 concealed\n"+
                 "\nEnd:\nWhen a player only has one or two wagons left, each player has one more turn.");
-        builder.setNegativeButton("Close",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                HelpDialogFragment.this.getDialog().cancel();
-            }
-        });
+        builder.setNegativeButton("Close", (dialogInterface, i) -> dismiss());
         return builder.create();
     }
-
 }
