@@ -11,6 +11,9 @@ import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class LocalGameHelper {
+    private LocalGameHelper() {
+    }
+
     public static void generateTestGame(GameModel gameModel) {
         List<TrainCard> trainCards = getTrainCards();
         List<TrainCard> playerTrainCards = getPlayerTrainCards(trainCards, 4);
