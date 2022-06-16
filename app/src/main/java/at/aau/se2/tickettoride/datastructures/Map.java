@@ -2,6 +2,8 @@ package at.aau.se2.tickettoride.datastructures;
 
 import android.graphics.Color;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,12 +12,13 @@ public class Map {
     public enum MapColor {
         BLUE("blue"), GREEN("green"), YELLOW("yellow"), RED("red"), WHITE("white"), ORANGE("orange"), GRAY("gray"), BLACK("black"), PINK("pink");
 
-        private String value;
+        private final String value;
 
         MapColor(String value) {
             this.value = value;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return value;
@@ -46,8 +49,8 @@ public class Map {
         }
     }
 
-    private Set<Destination> destinations;
-    private Set<RailroadLine> railroadLines;
+    private final Set<Destination> destinations;
+    private final Set<RailroadLine> railroadLines;
 
     public Map() {
         destinations = new HashSet<>();

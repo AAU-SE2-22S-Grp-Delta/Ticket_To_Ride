@@ -3,17 +3,20 @@ package at.aau.se2.tickettoride;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import android.graphics.Color;
 import android.widget.Button;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import at.aau.se2.tickettoride.datastructures.Destination;
 import at.aau.se2.tickettoride.datastructures.Map;
 import at.aau.se2.tickettoride.datastructures.RailroadLine;
 
-class MapTests
-{
+class MapTests {
     static Destination dest1;
     static Destination dest2;
     static Destination dest3;
@@ -30,8 +33,7 @@ class MapTests
     Set<RailroadLine> testSet = new HashSet<>();
 
     @BeforeAll
-    static void init()
-    {
+    static void init() {
         Button btn1 = new Button(null);
         Button btn2 = new Button(null);
         Button btn3 = new Button(null);
@@ -62,40 +64,56 @@ class MapTests
     }
 
     @Test
-    void testAddDestination()
-    {
+    void testAddDestination() {
         testDestSet.add(dest3);
         testDestSet.add(dest1);
         testDestSet.add(dest2);
         map.addDestination(dest3);
         assertEquals(testDestSet, map.getDestinations());
+        assertThrows(IllegalStateException.class, () -> map.addDestination(null));
     }
 
     @Test
-    void testAddDestTaken()
-    {
+    void testAddDestTaken() {
         map.addDestination(dest4);
         assertThrows(IllegalStateException.class, () -> map.addDestination(dest4));
     }
 
     @Test
-    void testAddRailroad()
-    {
+    void testAddRailroad() {
         testSet.add(r2);
         testSet.add(r6);
         map.addRailroadLine(r2);
         assertEquals(testSet, map.getRailroadLines());
+        assertThrows(IllegalStateException.class, () -> map.addRailroadLine(null));
     }
 
     @Test
-    void testAddRailroadThrows()
-    {
-        assertThrows(IllegalArgumentException.class, ()-> map.addRailroadLine(r3));
-        assertThrows(IllegalArgumentException.class, ()-> map.addRailroadLine(r4));
+    void testAddRailroadThrows() {
+        assertThrows(IllegalArgumentException.class, () -> map.addRailroadLine(r3));
+        assertThrows(IllegalArgumentException.class, () -> map.addRailroadLine(r4));
         map.addDestination(dest5);
         map.addDestination(dest6);
         map.addRailroadLine(r6);
         testSet.add(r6);
         assertThrows(IllegalStateException.class, () -> map.addRailroadLine(r6));
+    }
+
+    @Test
+    void testGetByString() {
+        assertEquals(Color.BLUE, Map.MapColor.getByString("blue"));
+        assertEquals(Color.GREEN, Map.MapColor.getByString("green"));
+        assertEquals(Color.YELLOW, Map.MapColor.getByString("yellow"));
+        assertEquals(Color.RED, Map.MapColor.getByString("red"));
+        assertEquals(Color.WHITE, Map.MapColor.getByString("white"));
+        assertEquals(Color.rgb(255, 69, 80), Map.MapColor.getByString("orange"));
+        assertEquals(Color.GRAY, Map.MapColor.getByString("gray"));
+        assertEquals(Color.BLACK, Map.MapColor.getByString("black"));
+        assertEquals(Color.rgb(199, 21, 133), Map.MapColor.getByString(""));
+    }
+
+    @Test
+    void testToString() {
+        assertEquals("black", Map.MapColor.BLACK.toString());
     }
 }
