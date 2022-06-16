@@ -6,17 +6,17 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 
-import at.aau.se2.tickettoride.datastructures.Player;
 import at.aau.se2.tickettoride.databinding.ActivityEndBinding;
-
+import at.aau.se2.tickettoride.datastructures.Player;
 
 public class EndActivity extends AppCompatActivity {
     private ActivityEndBinding binding;
+    private final SecureRandom random = new SecureRandom();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class EndActivity extends AppCompatActivity {
 
     private void initComponents(){
         ArrayList<Player> players = new ArrayList<>();
-        Random random = new Random();
         for (int i = 0; i < 5; i++) {
             Player player = new Player("test"+(i+1), i );
             player.setPoints(random.nextInt(1000));
