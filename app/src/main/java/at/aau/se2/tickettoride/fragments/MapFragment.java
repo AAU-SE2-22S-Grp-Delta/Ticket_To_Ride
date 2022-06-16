@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -31,8 +32,6 @@ import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.databinding.FragmentMapBinding;
 import at.aau.se2.tickettoride.listeners.MapOnTouchListener;
 import at.aau.se2.tickettoride.models.GameModel;
-
-
 
 public class MapFragment extends Fragment {
     private FragmentMapBinding binding;
@@ -80,7 +79,7 @@ public class MapFragment extends Fragment {
         currentPlayer = player1;
 
         final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> railroads.forEach((railroadLine) ->
+        handler.postDelayed(() -> railroads.forEach(railroadLine ->
         {
             railroadLine.buildRoad(canvas, paint, bm, drawView);
             drawView.setImageBitmap(bm);
@@ -104,7 +103,6 @@ public class MapFragment extends Fragment {
 
     List<Destination> reachable = new ArrayList<>();
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     public void selector(Destination secondDest, Player player) {
         if (firstDest == null)
             firstDestHandler(secondDest);
@@ -112,7 +110,7 @@ public class MapFragment extends Fragment {
             firstDest = null;
             resetButtons();
         } else if (reachable.contains(secondDest)) {
-            secondDest.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+            secondDest.getButton().setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.seldestination2, null));
             secondDest.getButton().setOnClickListener(view -> railBuilder(secondDest, player));
         } else {
             resetButtons();
@@ -131,11 +129,10 @@ public class MapFragment extends Fragment {
         btnHighlighter(firstDest, reachable);
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     public void btnHighlighter(Destination d, List<Destination> reachable) {
-        d.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination2));
+        d.getButton().setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.seldestination2, null));
         for (Destination rd : reachable)
-            rd.getButton().setBackground(getResources().getDrawable(R.drawable.seldestination));
+            rd.getButton().setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.seldestination, null));
     }
 
     public void railBuilder(Destination secondDest, Player player) {
@@ -145,11 +142,10 @@ public class MapFragment extends Fragment {
         firstDest = null;
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     public void resetButtons() {
         reachable.clear();
         for (Destination d : destinations) {
-            d.getButton().setBackground(getResources().getDrawable(R.drawable.destination));
+            d.getButton().setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.destination, null));
             d.getButton().setOnClickListener(view1 -> selector(d, currentPlayer));
         }
     }
