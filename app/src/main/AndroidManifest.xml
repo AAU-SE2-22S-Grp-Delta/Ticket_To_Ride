@@ -24,6 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--To DO Switch Place-->
+        <activity android:name=".activities.EndActivity"
+            android:exported="false"/>
         <activity
             android:name=".activities.GameActivity"
             android:exported="false"
@@ -53,5 +56,6 @@
         <activity
             android:name=".activities.PlayerTrainActivity"
             android:exported="false" />
+
     </application>
 </manifest>
