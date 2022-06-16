@@ -133,7 +133,7 @@ public class DrawDestinationCardsFragment extends DialogFragment implements View
             }
 
             gameModel.setPlayerDestinationCards(selectedMissions);
-            if (discardedMissions.size() > 0) {
+            if (!discardedMissions.isEmpty()) {
                 gameModel.addDiscardedMissionCards(discardedMissions);
             }
 
