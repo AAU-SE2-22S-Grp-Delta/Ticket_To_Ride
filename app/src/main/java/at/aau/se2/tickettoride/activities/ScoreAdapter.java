@@ -30,9 +30,9 @@ public class ScoreAdapter extends ArrayAdapter<Player> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageViewWinner);
         TextView textView = (TextView) rowView.findViewById(R.id.textViewNamePoints);
 
-        //if (i > 0) imageView.setVisibility(View.INVISIBLE);
+        if (i > 0) imageView.setVisibility(View.INVISIBLE);
         Player player = players.get(i);
-        textView.setText(player.getName()+": "+player.getPoints());
+        textView.setText((i+1)+". "+player.getName()+": "+player.getPoints());
         return rowView;
     }
 }

@@ -8,6 +8,9 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 import at.aau.se2.tickettoride.dataStructures.Player;
@@ -32,9 +35,12 @@ public class EndActivity extends AppCompatActivity {
         Random random = new Random();
         for (int i = 0; i < 5; i++) {
             Player player = new Player("test"+(i+1), i );
-            player.setPoints(random.nextInt());
+            player.setPoints(random.nextInt(1000));
             players.add(player);
         }
+
+        players.sort(Comparator.comparing(Player::getPoints));
+        Collections.reverse(players);
 
         ScoreAdapter adapter = new ScoreAdapter(this, players);
         ListView list = binding.listViewScore;
