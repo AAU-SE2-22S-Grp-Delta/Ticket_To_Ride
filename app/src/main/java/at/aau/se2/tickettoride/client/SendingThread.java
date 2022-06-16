@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class SendingThread extends Thread {
+    private static final String TAG = "ClientSend";
     private final DataOutputStream send;
     private final Object lock = new Object();
     private final ArrayList<String> queue = new ArrayList<>();
@@ -24,9 +25,9 @@ public class SendingThread extends Thread {
             try {
                 synchronized (lock) {
                     if (command == null) {
-                        Log.d("ClientSend", "Pause sending thread");
+                        Log.d(TAG, "Pause sending thread");
                         lock.wait();
-                        Log.d("ClientSend", "Continue sending thread");
+                        Log.d(TAG, "Continue sending thread");
                     }
 
                     if (command != null && sendCommand(command) == 0) {
@@ -39,7 +40,7 @@ public class SendingThread extends Thread {
                     }
                 }
             } catch (InterruptedException e) {
-                Log.d("ClientSend", e.toString());
+                Log.d(TAG, e.toString());
                 Thread.currentThread().interrupt();
             }
         }
@@ -60,10 +61,10 @@ public class SendingThread extends Thread {
 
     public int sendCommand(String command) {
         try {
-            Log.d("ClientSend", "sent: " + command);
+            Log.d(TAG, "sent: " + command);
             send.writeBytes(command + "\n");
         } catch (IOException e) {
-            Log.d("ClientSend", e.toString());
+            Log.d(TAG, e.toString());
             return -1;
         }
         return 0;
