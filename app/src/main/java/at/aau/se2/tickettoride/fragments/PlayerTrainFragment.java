@@ -72,11 +72,8 @@ public class PlayerTrainFragment extends Fragment {
         List<TrainCard> heldTrainCards = gameModel.getPlayerTrainCards();
         for(TrainCard card : heldTrainCards)
         {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            layoutParams.setMargins(5,10,5,10);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(5, 10, 5, 10);
 
             ImageView imageView = new ImageView(binding.linearLayoutTrainCards.getContext());
             imageView.setLayoutParams(layoutParams);
