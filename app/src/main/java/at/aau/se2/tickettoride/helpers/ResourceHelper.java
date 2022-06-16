@@ -12,17 +12,23 @@ import at.aau.se2.tickettoride.databinding.CardMissionBinding;
 import at.aau.se2.tickettoride.models.Missions;
 
 public class ResourceHelper {
+    private ResourceHelper() {
+    }
+
     @SuppressLint("SetTextI18n")
     public static View getMissionView(Context context, int card) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        CardMissionBinding binding = CardMissionBinding.inflate(inflater);
-        Mission mission = Missions.getMissionById(card);
-        if (mission != null) {
-            binding.mission.setText(Integer.toString(mission.getId()));
-            binding.destination.setText(String.format("%s\n%s", "From: "+mission.getDestination1(), "To:       "+mission.getDestination2()));
-            binding.points.setText(String.format("%s", "Points: "+mission.getPoints()));
+        if (inflater != null) {
+            CardMissionBinding binding = CardMissionBinding.inflate(inflater);
+            Mission mission = Missions.getMissionById(card);
+            if (mission != null) {
+                binding.mission.setText(Integer.toString(mission.getId()));
+                binding.destination.setText(String.format("%s\n%s", "From: " + mission.getDestination1(), "To:       " + mission.getDestination2()));
+                binding.points.setText(String.format("%s", "Points: " + mission.getPoints()));
+            }
+            return binding.getRoot();
         }
-        return binding.getRoot();
+        return null;
     }
 
     public static int getTrainResource(TrainCard card) {
