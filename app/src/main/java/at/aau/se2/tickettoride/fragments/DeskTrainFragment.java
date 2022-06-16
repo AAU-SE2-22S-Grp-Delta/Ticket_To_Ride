@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
+import at.aau.se2.tickettoride.client.ClientConnection;
 import at.aau.se2.tickettoride.databinding.FragmentDeskTrainBinding;
 import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 

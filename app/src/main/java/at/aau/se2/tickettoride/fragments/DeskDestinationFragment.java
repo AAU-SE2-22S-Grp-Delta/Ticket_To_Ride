@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
+import at.aau.se2.tickettoride.client.ClientConnection;
 import at.aau.se2.tickettoride.databinding.FragmentDeskDestinationBinding;
 
 public class DeskDestinationFragment extends Fragment {

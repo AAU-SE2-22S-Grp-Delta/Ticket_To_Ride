@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import at.aau.se2.tickettoride.R;
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
+import at.aau.se2.tickettoride.client.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityMainBinding;
 import at.aau.se2.tickettoride.dialogs.HelpDialogFragment;
 import at.aau.se2.tickettoride.helpers.LocalGameHelper;

@@ -1,25 +1,18 @@
 package at.aau.se2.tickettoride.models;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
+import at.aau.se2.tickettoride.client.ClientConnection;
 import at.aau.se2.tickettoride.dataStructures.Destination;
 import at.aau.se2.tickettoride.dataStructures.DoubleRailroadLine;
 import at.aau.se2.tickettoride.dataStructures.Map;
 import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.dataStructures.RailroadLine;
 import at.aau.se2.tickettoride.dataStructures.TrainCard;
-import at.aau.se2.tickettoride.dialogs.TrainDialogFragment;
 
 /**
  * GameModel-class represents an active game and stores the current game situation

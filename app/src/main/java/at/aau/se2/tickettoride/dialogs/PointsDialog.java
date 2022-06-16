@@ -2,13 +2,8 @@ package at.aau.se2.tickettoride.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,10 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import java.io.IOException;
-import java.util.HashMap;
-
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
 import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.models.GameModel;
 

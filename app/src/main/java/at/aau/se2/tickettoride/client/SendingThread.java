@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.clientConnection;
+package at.aau.se2.tickettoride.client;
 
 import android.util.Log;
 
