@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.activities;
+package at.aau.se2.tickettoride.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

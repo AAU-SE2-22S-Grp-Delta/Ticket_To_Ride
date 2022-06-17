@@ -92,6 +92,10 @@ public class GameActivity extends AppCompatActivity {
 
                         }
                         break;
+                    case "gameOver":
+                        if(bundle.getString(key).equals("1")){
+                            startEndScreen();
+                        }
                     default:
                         break;
                 }
@@ -202,6 +206,11 @@ public class GameActivity extends AppCompatActivity {
 
         cheatDialog = builder.create();
         cheatDialog.show();
+    }
+
+    private void startEndScreen(){
+        Intent endIntent = new Intent(this, EndActivity.class);
+        startActivity(endIntent);
     }
 
     @Override
