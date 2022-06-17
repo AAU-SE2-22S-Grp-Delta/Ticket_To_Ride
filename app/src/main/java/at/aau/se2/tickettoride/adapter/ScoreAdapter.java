@@ -9,15 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.dataStructures.Player;
 
 public class ScoreAdapter extends ArrayAdapter<Player> {
-    ArrayList<Player> players;
+    List<Player> players;
     Activity context;
 
-    public ScoreAdapter(Activity context, ArrayList<Player> players){
+    public ScoreAdapter(Activity context, List<Player> players){
         super(context, R.layout.list_score, players);
         this.players = players;
         this.context = context;

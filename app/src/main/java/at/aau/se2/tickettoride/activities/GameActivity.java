@@ -94,8 +94,9 @@ public class GameActivity extends AppCompatActivity {
                         break;
                     case "gameOver":
                         if(bundle.getString(key).equals("1")){
-                            startEndScreen();
+                            if(!gameModel.getPlayers().isEmpty()) startEndScreen();
                         }
+                        break;
                     default:
                         break;
                 }
@@ -209,6 +210,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startEndScreen(){
+        client.sendCommand("getPoints");
         Intent endIntent = new Intent(this, EndActivity.class);
         startActivity(endIntent);
     }
@@ -222,8 +224,7 @@ public class GameActivity extends AppCompatActivity {
                 .setPositiveButton("Bestätigen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        List<Player> players = gameModel.getPlayers();
-                        players.removeIf(player -> player.getName().equals(gameModel.getPlayerName()));
+                        gameModel.getPlayers().removeIf(player -> player.getName().equals(gameModel.getPlayerName()));
                         client.sendCommand("exitGame");
                         finish();
                         moveTaskToBack(true);
