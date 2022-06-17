@@ -89,6 +89,8 @@ public class GameActivity extends AppCompatActivity {
 
                         }
                         break;
+                    case "gameOver":
+                        if(bundle.getString(key).equals("1")) if(!gameModel.getPlayers().isEmpty()) startEndScreen();
                     default:
                         break;
                 }
@@ -201,6 +203,12 @@ public class GameActivity extends AppCompatActivity {
         cheatDialog.show();
     }
 
+    private void startEndScreen(){
+        client.sendCommand("getPoints");
+        Intent endIntent = new Intent(this, EndActivity.class);
+        startActivity(endIntent);
+    }
+
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
@@ -210,6 +218,7 @@ public class GameActivity extends AppCompatActivity {
                 .setPositiveButton("Bestätigen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        gameModel.getPlayers().removeIf(player -> player.getName().equals(gameModel.getPlayerName()));
                         client.sendCommand("exitGame");
                         finish();
                         moveTaskToBack(true);

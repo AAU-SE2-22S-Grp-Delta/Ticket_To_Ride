@@ -174,6 +174,8 @@ public class ReceivingThread extends Thread {
 //                    gameModel.updateMap();
                 }
                 break;
+            case "gameOver":
+                broadcastResponse("gameOver", "1");
             default:
                 break;
         }
