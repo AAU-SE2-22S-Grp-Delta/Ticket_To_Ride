@@ -6,8 +6,6 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -19,7 +17,6 @@ import at.aau.se2.tickettoride.models.GameModel;
 
 public class EndActivity extends AppCompatActivity {
     private ActivityEndBinding binding;
-    private final SecureRandom random = new SecureRandom();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

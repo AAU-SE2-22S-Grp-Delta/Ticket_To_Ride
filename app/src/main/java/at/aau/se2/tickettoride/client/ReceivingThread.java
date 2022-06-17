@@ -176,6 +176,7 @@ public class ReceivingThread extends Thread {
                 break;
             case "gameOver":
                 broadcastResponse("gameOver", "1");
+                break;
             default:
                 break;
         }
