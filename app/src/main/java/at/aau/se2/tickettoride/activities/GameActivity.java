@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.Sensor;
@@ -42,7 +41,6 @@ public class GameActivity extends AppCompatActivity {
     private ShakeDetection shakeDetection;
     private int shakeCount;
     private Vibrator vibrator;
-    private VibrationEffect vibrationEffect;
 
     private Dialog playerDialog;
     private Dialog cheatDialog;
@@ -82,7 +80,7 @@ public class GameActivity extends AppCompatActivity {
 
                             // requires Oreo (API 26) or higher
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                vibrationEffect = VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE);
+                                VibrationEffect vibrationEffect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
                                 vibrator.cancel();
                                 vibrator.vibrate(vibrationEffect);
                             }
@@ -215,23 +213,15 @@ public class GameActivity extends AppCompatActivity {
         builder.setTitle("Exit")
                 .setMessage("Willst du wirklich das Spiel verlassen?")
                 .setCancelable(false)
-                .setPositiveButton("Bestätigen", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        gameModel.getPlayers().removeIf(player -> player.getName().equals(gameModel.getPlayerName()));
-                        client.sendCommand("exitGame");
-                        finish();
-                        moveTaskToBack(true);
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        System.exit(0);
-                    }
+                .setPositiveButton("Bestätigen", (dialog, which) -> {
+                    gameModel.getPlayers().removeIf(player -> player.getName().equals(gameModel.getPlayerName()));
+                    client.sendCommand("exitGame");
+                    finish();
+                    moveTaskToBack(true);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(0);
                 })
-                .setNegativeButton("Abbruch", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                .setNegativeButton("Abbruch", (dialog, which) -> dialog.cancel());
 
         AlertDialog dialog = builder.create();
         dialog.show();
