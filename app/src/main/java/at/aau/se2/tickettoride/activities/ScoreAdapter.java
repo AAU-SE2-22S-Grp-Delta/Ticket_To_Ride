@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.adapter;
+package at.aau.se2.tickettoride.activities;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,16 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.datastructures.Player;
 
 public class ScoreAdapter extends ArrayAdapter<Player> {
-    List<Player> players;
+    ArrayList<Player> players;
     Activity context;
 
-    public ScoreAdapter(Activity context, List<Player> players){
+    public ScoreAdapter(Activity context, ArrayList<Player> players){
         super(context, R.layout.list_score, players);
         this.players = players;
         this.context = context;

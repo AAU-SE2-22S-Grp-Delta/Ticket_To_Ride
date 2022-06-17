@@ -23,10 +23,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import java.util.List;
-
-import at.aau.se2.tickettoride.clientConnection.ClientConnection;
-import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.client.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
 import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
@@ -90,11 +87,6 @@ public class GameActivity extends AppCompatActivity {
                                 vibrator.vibrate(vibrationEffect);
                             }
 
-                        }
-                        break;
-                    case "gameOver":
-                        if(bundle.getString(key).equals("1")){
-                            if(!gameModel.getPlayers().isEmpty()) startEndScreen();
                         }
                         break;
                     default:
@@ -170,8 +162,8 @@ public class GameActivity extends AppCompatActivity {
                 Thread.sleep(500);
                 DialogFragment pointsDialog = new PointsDialog();
                 pointsDialog.show(getSupportFragmentManager(), "points");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
+                Thread.currentThread().interrupt();
             }
         });
     }
@@ -209,12 +201,6 @@ public class GameActivity extends AppCompatActivity {
         cheatDialog.show();
     }
 
-    private void startEndScreen(){
-        client.sendCommand("getPoints");
-        Intent endIntent = new Intent(this, EndActivity.class);
-        startActivity(endIntent);
-    }
-
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
@@ -224,7 +210,6 @@ public class GameActivity extends AppCompatActivity {
                 .setPositiveButton("Bestätigen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        gameModel.getPlayers().removeIf(player -> player.getName().equals(gameModel.getPlayerName()));
                         client.sendCommand("exitGame");
                         finish();
                         moveTaskToBack(true);
