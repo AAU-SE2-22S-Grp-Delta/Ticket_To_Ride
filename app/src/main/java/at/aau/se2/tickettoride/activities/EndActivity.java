@@ -6,17 +6,19 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
+import at.aau.se2.tickettoride.adapter.ScoreAdapter;
+import at.aau.se2.tickettoride.dataStructures.Player;
 import at.aau.se2.tickettoride.databinding.ActivityEndBinding;
-import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.models.GameModel;
+
 
 public class EndActivity extends AppCompatActivity {
     private ActivityEndBinding binding;
-    private final SecureRandom random = new SecureRandom();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +31,7 @@ public class EndActivity extends AppCompatActivity {
     }
 
     private void initComponents(){
-        ArrayList<Player> players = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Player player = new Player("test"+(i+1), i );
-            player.setPoints(random.nextInt(1000));
-            players.add(player);
-        }
-
+        List<Player> players = GameModel.getInstance().getPlayers();
         players.sort(Comparator.comparing(Player::getPoints));
         Collections.reverse(players);
 

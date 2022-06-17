@@ -1,4 +1,4 @@
-package at.aau.se2.tickettoride.client;
+package at.aau.se2.tickettoride.clientConnection;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import at.aau.se2.tickettoride.datastructures.Player;
-import at.aau.se2.tickettoride.datastructures.TrainCard;
+import at.aau.se2.tickettoride.dataStructures.Player;
+import at.aau.se2.tickettoride.dataStructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
 public class ReceivingThread extends Thread {
@@ -167,13 +167,8 @@ public class ReceivingThread extends Thread {
                 break;
             case "cheat":
                 broadcastResponse("cheat", "1");
-                break;
-            case "getMap":
-                if (!response.isEmpty()) {
-                    Log.d("update_map", response);
-//                    gameModel.updateMap();
-                }
-                break;
+            case "gameOver":
+                broadcastResponse("gameOver", "1");
             default:
                 break;
         }
@@ -193,7 +188,6 @@ public class ReceivingThread extends Thread {
     private void syncGame() {
         client.sendCommand("getHandCards");
         client.sendCommand("getOpenCards");
-        client.sendCommand("getMap");
     }
 
     private void broadcastResponse(String command, String response) {
