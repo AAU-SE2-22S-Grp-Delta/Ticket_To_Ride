@@ -96,7 +96,8 @@ public class GameActivity extends AppCompatActivity {
                         }
                         break;
                     case "gameOver":
-                        if(bundle.getString(key).equals("1")) if(!gameModel.getPlayers().isEmpty()) startEndScreen();
+                        if(bundle.getString(key).equals("1") && !gameModel.getPlayers().isEmpty()){ startEndScreen();}
+                        break;
                     default:
                         break;
                 }
