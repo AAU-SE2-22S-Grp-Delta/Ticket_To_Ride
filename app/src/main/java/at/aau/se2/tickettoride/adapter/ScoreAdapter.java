@@ -23,6 +23,7 @@ public class ScoreAdapter extends ArrayAdapter<Player> {
         this.context = context;
     }
 
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.list_score, null, true);
