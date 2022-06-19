@@ -61,7 +61,7 @@ public class LobbyFragment extends Fragment {
 
                         break;
                     case "refresh_players":
-                        List<String> players = Arrays.asList(gameModel.playersString);
+                        List<String> players = Arrays.asList(gameModel.getLobbyPlayers());
                         updateList(players);
 
                         if (isGameOwner && players.size() > 1) {
