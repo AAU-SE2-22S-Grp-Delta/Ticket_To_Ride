@@ -18,8 +18,7 @@ import at.aau.se2.tickettoride.datastructures.TrainCard;
  * GameModel-class represents an active game and stores the current game situation
  */
 
-public class GameModel
-{
+public class GameModel {
     private static final String BLACK = "black";
     private static final String BLUE = "blue";
     private static final String GRAY = "gray";
@@ -39,27 +38,22 @@ public class GameModel
     private List<TrainCard> deskOpenTrainCards = new ArrayList<>();
     private List<TrainCard> deskDiscardedTrainCards = new ArrayList<>();
     private List<Integer> deskDestinationCards = new ArrayList<>();
-    private List<TrainCard> playerTrainCards = new ArrayList<>();
-    private List<Integer> playerDestinationCards = new ArrayList<>();
+    private final List<TrainCard> playerTrainCards = new ArrayList<>();
+    private final List<Integer> playerDestinationCards = new ArrayList<>();
     private List<Integer> chooseMissionCards = new ArrayList<>();
     private List<List<Integer>> allMissions = new ArrayList<>(4);
     private List<String> allRival = new ArrayList<>(4);
     private int playerColoredTrainCards = 45;
-    private Map map = buildMap();
+    private final Map map = buildMap();
     public String[] playersString;
     private List<Player> players = new ArrayList<>();
 
-    private GameModel()
-    {
+    private GameModel() {
         this.client = ClientConnection.getInstance();
-        Player test = new Player("test", Color.BLUE);
-        getRailroadLineByName("Raleigh", "Atlanta").setOwner(test);
     }
 
-    public static synchronized GameModel getInstance()
-    {
-        if (instance == null)
-        {
+    public static synchronized GameModel getInstance() {
+        if (instance == null) {
             instance = new GameModel();
         }
         return instance;
@@ -145,7 +139,7 @@ public class GameModel
     {
         cards.stream()
                 .filter(c -> !this.playerDestinationCards.contains(c))
-                .forEach(c -> this.playerDestinationCards.add(c));
+                .forEach(this.playerDestinationCards::add);
 
         String result = cards.stream().map(Object::toString).collect(Collectors.joining(":"));
         client.sendCommand("chooseMission:" + result);
@@ -259,7 +253,7 @@ public class GameModel
 
     private Map buildMap()
     {
-        Map map = new Map();
+        Map m = new Map();
 
         Destination atlanta = new Destination("Atlanta");
         Destination boston = new Destination("Boston");
@@ -299,123 +293,123 @@ public class GameModel
         Destination raleigh = new Destination("Raleigh");
 
 
-        map.addDestination(raleigh);
-        map.addDestination(charleston);
-        map.addDestination(saintlouis);
-        map.addDestination(lasvegas);
-        map.addDestination(washington);
-        map.addDestination(omaha);
-        map.addDestination(atlanta);
-        map.addDestination(boston);
-        map.addDestination(calgary);
-        map.addDestination(chicago);
-        map.addDestination(dallas);
-        map.addDestination(denver);
-        map.addDestination(duluth);
-        map.addDestination(elpaso);
-        map.addDestination(helena);
-        map.addDestination(houston);
-        map.addDestination(kansascity);
-        map.addDestination(littlerock);
-        map.addDestination(losangeles);
-        map.addDestination(miami);
-        map.addDestination(montreal);
-        map.addDestination(nashville);
-        map.addDestination(neworleans);
-        map.addDestination(newyork);
-        map.addDestination(oklahomacity);
-        map.addDestination(phoenix);
-        map.addDestination(pittsburgh);
-        map.addDestination(portland);
-        map.addDestination(saltlakecity);
-        map.addDestination(sanfrancisco);
-        map.addDestination(santafe);
-        map.addDestination(saultstmarie);
-        map.addDestination(seattle);
-        map.addDestination(toronto);
-        map.addDestination(vancouver);
-        map.addDestination(winnipeg);
+        m.addDestination(raleigh);
+        m.addDestination(charleston);
+        m.addDestination(saintlouis);
+        m.addDestination(lasvegas);
+        m.addDestination(washington);
+        m.addDestination(omaha);
+        m.addDestination(atlanta);
+        m.addDestination(boston);
+        m.addDestination(calgary);
+        m.addDestination(chicago);
+        m.addDestination(dallas);
+        m.addDestination(denver);
+        m.addDestination(duluth);
+        m.addDestination(elpaso);
+        m.addDestination(helena);
+        m.addDestination(houston);
+        m.addDestination(kansascity);
+        m.addDestination(littlerock);
+        m.addDestination(losangeles);
+        m.addDestination(miami);
+        m.addDestination(montreal);
+        m.addDestination(nashville);
+        m.addDestination(neworleans);
+        m.addDestination(newyork);
+        m.addDestination(oklahomacity);
+        m.addDestination(phoenix);
+        m.addDestination(pittsburgh);
+        m.addDestination(portland);
+        m.addDestination(saltlakecity);
+        m.addDestination(sanfrancisco);
+        m.addDestination(santafe);
+        m.addDestination(saultstmarie);
+        m.addDestination(seattle);
+        m.addDestination(toronto);
+        m.addDestination(vancouver);
+        m.addDestination(winnipeg);
 
-        map.addRailroadLine(new RailroadLine(vancouver, calgary, GRAY, 3));
-        map.addRailroadLine(new RailroadLine(calgary, winnipeg, WHITE, 6));
-        map.addRailroadLine(new RailroadLine(winnipeg, saultstmarie, GRAY, 6));
-        map.addRailroadLine(new RailroadLine(saultstmarie, montreal, BLACK, 5));
-        map.addRailroadLine(new DoubleRailroadLine(montreal, boston, GRAY, 2, GRAY));
-        map.addRailroadLine(new RailroadLine(montreal, newyork, BLUE, 3));
-        map.addRailroadLine(new RailroadLine(montreal, toronto, GRAY, 3));
-        map.addRailroadLine(new DoubleRailroadLine(newyork, boston, YELLOW, 2, RED));
-        map.addRailroadLine(new DoubleRailroadLine(newyork, pittsburgh, YELLOW, 2, YELLOW));
-        map.addRailroadLine(new RailroadLine(toronto, pittsburgh, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(toronto, saultstmarie, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(toronto, duluth, PINK, 6));
-        map.addRailroadLine(new RailroadLine(saultstmarie, duluth, GRAY, 3));
-        map.addRailroadLine(new RailroadLine(duluth, winnipeg, BLACK, 4));
-        map.addRailroadLine(new RailroadLine(winnipeg, helena, BLUE, 4));
-        map.addRailroadLine(new RailroadLine(helena, calgary, GRAY, 4));
-        map.addRailroadLine(new RailroadLine(helena, duluth, ORANGE, 6));
-        map.addRailroadLine(new RailroadLine(helena, seattle, YELLOW, 6));
-        map.addRailroadLine(new DoubleRailroadLine(seattle, vancouver, GRAY, 1, GRAY));
-        map.addRailroadLine(new RailroadLine(seattle, calgary, GRAY, 4));
-        map.addRailroadLine(new DoubleRailroadLine(seattle, portland, GRAY, 1, GRAY));
-        map.addRailroadLine(new DoubleRailroadLine(portland, sanfrancisco, YELLOW, 5, PINK));
-        map.addRailroadLine(new DoubleRailroadLine(sanfrancisco, saltlakecity, ORANGE, 5, WHITE));
-        map.addRailroadLine(new RailroadLine(saltlakecity, portland, BLUE, 6));
-        map.addRailroadLine(new RailroadLine(saltlakecity, helena, PINK, 3));
-        map.addRailroadLine(new RailroadLine(helena, omaha, RED, 5));
-        map.addRailroadLine(new DoubleRailroadLine(omaha, duluth, GRAY, 2, GRAY));
-        map.addRailroadLine(new RailroadLine(duluth, chicago, RED, 3));
-        map.addRailroadLine(new RailroadLine(chicago, toronto, WHITE, 4));
-        map.addRailroadLine(new DoubleRailroadLine(newyork, washington, ORANGE, 2, BLACK));
-        map.addRailroadLine(new RailroadLine(washington, pittsburgh, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(pittsburgh, chicago, BLACK, 3));
-        map.addRailroadLine(new RailroadLine(chicago, omaha, BLUE, 4));
-        map.addRailroadLine(new RailroadLine(omaha, denver, PINK, 4));
-        map.addRailroadLine(new RailroadLine(denver, helena, YELLOW, 4));
-        map.addRailroadLine(new RailroadLine(denver, saltlakecity, YELLOW, 3));
-        map.addRailroadLine(new RailroadLine(saltlakecity, lasvegas, ORANGE, 3));
-        map.addRailroadLine(new RailroadLine(lasvegas, losangeles, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(losangeles, phoenix, GRAY, 3));
-        map.addRailroadLine(new RailroadLine(phoenix, elpaso, GRAY, 3));
-        map.addRailroadLine(new RailroadLine(elpaso, losangeles, BLACK, 6));
-        map.addRailroadLine(new DoubleRailroadLine(losangeles, sanfrancisco, YELLOW, 3, PINK));
-        map.addRailroadLine(new RailroadLine(santafe, denver, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(santafe, oklahomacity, BLUE, 3));
-        map.addRailroadLine(new RailroadLine(santafe, elpaso, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(santafe, phoenix, GRAY, 3));
-        map.addRailroadLine(new RailroadLine(elpaso, oklahomacity, YELLOW, 5));
-        map.addRailroadLine(new RailroadLine(elpaso, dallas, RED, 4));
-        map.addRailroadLine(new RailroadLine(elpaso, houston, YELLOW, 6));
-        map.addRailroadLine(new RailroadLine(houston, neworleans, RED, 2));
-        map.addRailroadLine(new DoubleRailroadLine(houston, dallas, GRAY, 1, GRAY));
-        map.addRailroadLine(new RailroadLine(dallas, littlerock, GRAY, 2));
-        map.addRailroadLine(new DoubleRailroadLine(dallas, oklahomacity, GRAY, 2, GRAY));
-        map.addRailroadLine(new RailroadLine(oklahomacity, littlerock, GRAY, 2));
-        map.addRailroadLine(new DoubleRailroadLine(oklahomacity, kansascity, GRAY, 2, GRAY));
-        map.addRailroadLine(new RailroadLine(oklahomacity, denver, RED, 4));
-        map.addRailroadLine(new RailroadLine(littlerock, neworleans, YELLOW, 3));
-        map.addRailroadLine(new RailroadLine(littlerock, nashville, WHITE, 3));
-        map.addRailroadLine(new RailroadLine(littlerock, saintlouis, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(neworleans, miami, RED, 6));
-        map.addRailroadLine(new RailroadLine(neworleans, atlanta, ORANGE, 4));
-        map.addRailroadLine(new RailroadLine(atlanta, miami, BLUE, 5));
-        map.addRailroadLine(new RailroadLine(atlanta, charleston, GRAY, 2));
-        map.addRailroadLine(new DoubleRailroadLine(atlanta, raleigh, GRAY, 2, GRAY));
-        map.addRailroadLine(new RailroadLine(atlanta, nashville, GRAY, 1));
-        map.addRailroadLine(new RailroadLine(miami, charleston, PINK, 4));
-        map.addRailroadLine(new RailroadLine(charleston, raleigh, GRAY, 2));
-        map.addRailroadLine(new DoubleRailroadLine(raleigh, washington, GRAY, 2, GRAY));
-        map.addRailroadLine(new RailroadLine(raleigh, pittsburgh, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(raleigh, nashville, BLACK, 3));
-        map.addRailroadLine(new RailroadLine(nashville, pittsburgh, YELLOW, 4));
-        map.addRailroadLine(new RailroadLine(nashville, saintlouis, GRAY, 2));
-        map.addRailroadLine(new RailroadLine(saintlouis, pittsburgh, YELLOW, 5));
-        map.addRailroadLine(new DoubleRailroadLine(saintlouis, chicago, YELLOW, 2, WHITE));
-        map.addRailroadLine(new DoubleRailroadLine(saintlouis, kansascity, BLUE, 2, PINK));
-        map.addRailroadLine(new DoubleRailroadLine(kansascity, omaha, GRAY, 1, GRAY));
-        map.addRailroadLine(new DoubleRailroadLine(kansascity, denver, BLACK, 4, ORANGE));
-        map.addRailroadLine(new RailroadLine(denver, phoenix, WHITE, 5));
+        m.addRailroadLine(new RailroadLine(vancouver, calgary, GRAY, 3));
+        m.addRailroadLine(new RailroadLine(calgary, winnipeg, WHITE, 6));
+        m.addRailroadLine(new RailroadLine(winnipeg, saultstmarie, GRAY, 6));
+        m.addRailroadLine(new RailroadLine(saultstmarie, montreal, BLACK, 5));
+        m.addRailroadLine(new DoubleRailroadLine(montreal, boston, GRAY, 2, GRAY));
+        m.addRailroadLine(new RailroadLine(montreal, newyork, BLUE, 3));
+        m.addRailroadLine(new RailroadLine(montreal, toronto, GRAY, 3));
+        m.addRailroadLine(new DoubleRailroadLine(newyork, boston, YELLOW, 2, RED));
+        m.addRailroadLine(new DoubleRailroadLine(newyork, pittsburgh, YELLOW, 2, YELLOW));
+        m.addRailroadLine(new RailroadLine(toronto, pittsburgh, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(toronto, saultstmarie, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(toronto, duluth, PINK, 6));
+        m.addRailroadLine(new RailroadLine(saultstmarie, duluth, GRAY, 3));
+        m.addRailroadLine(new RailroadLine(duluth, winnipeg, BLACK, 4));
+        m.addRailroadLine(new RailroadLine(winnipeg, helena, BLUE, 4));
+        m.addRailroadLine(new RailroadLine(helena, calgary, GRAY, 4));
+        m.addRailroadLine(new RailroadLine(helena, duluth, ORANGE, 6));
+        m.addRailroadLine(new RailroadLine(helena, seattle, YELLOW, 6));
+        m.addRailroadLine(new DoubleRailroadLine(seattle, vancouver, GRAY, 1, GRAY));
+        m.addRailroadLine(new RailroadLine(seattle, calgary, GRAY, 4));
+        m.addRailroadLine(new DoubleRailroadLine(seattle, portland, GRAY, 1, GRAY));
+        m.addRailroadLine(new DoubleRailroadLine(portland, sanfrancisco, YELLOW, 5, PINK));
+        m.addRailroadLine(new DoubleRailroadLine(sanfrancisco, saltlakecity, ORANGE, 5, WHITE));
+        m.addRailroadLine(new RailroadLine(saltlakecity, portland, BLUE, 6));
+        m.addRailroadLine(new RailroadLine(saltlakecity, helena, PINK, 3));
+        m.addRailroadLine(new RailroadLine(helena, omaha, RED, 5));
+        m.addRailroadLine(new DoubleRailroadLine(omaha, duluth, GRAY, 2, GRAY));
+        m.addRailroadLine(new RailroadLine(duluth, chicago, RED, 3));
+        m.addRailroadLine(new RailroadLine(chicago, toronto, WHITE, 4));
+        m.addRailroadLine(new DoubleRailroadLine(newyork, washington, ORANGE, 2, BLACK));
+        m.addRailroadLine(new RailroadLine(washington, pittsburgh, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(pittsburgh, chicago, BLACK, 3));
+        m.addRailroadLine(new RailroadLine(chicago, omaha, BLUE, 4));
+        m.addRailroadLine(new RailroadLine(omaha, denver, PINK, 4));
+        m.addRailroadLine(new RailroadLine(denver, helena, YELLOW, 4));
+        m.addRailroadLine(new RailroadLine(denver, saltlakecity, YELLOW, 3));
+        m.addRailroadLine(new RailroadLine(saltlakecity, lasvegas, ORANGE, 3));
+        m.addRailroadLine(new RailroadLine(lasvegas, losangeles, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(losangeles, phoenix, GRAY, 3));
+        m.addRailroadLine(new RailroadLine(phoenix, elpaso, GRAY, 3));
+        m.addRailroadLine(new RailroadLine(elpaso, losangeles, BLACK, 6));
+        m.addRailroadLine(new DoubleRailroadLine(losangeles, sanfrancisco, YELLOW, 3, PINK));
+        m.addRailroadLine(new RailroadLine(santafe, denver, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(santafe, oklahomacity, BLUE, 3));
+        m.addRailroadLine(new RailroadLine(santafe, elpaso, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(santafe, phoenix, GRAY, 3));
+        m.addRailroadLine(new RailroadLine(elpaso, oklahomacity, YELLOW, 5));
+        m.addRailroadLine(new RailroadLine(elpaso, dallas, RED, 4));
+        m.addRailroadLine(new RailroadLine(elpaso, houston, YELLOW, 6));
+        m.addRailroadLine(new RailroadLine(houston, neworleans, RED, 2));
+        m.addRailroadLine(new DoubleRailroadLine(houston, dallas, GRAY, 1, GRAY));
+        m.addRailroadLine(new RailroadLine(dallas, littlerock, GRAY, 2));
+        m.addRailroadLine(new DoubleRailroadLine(dallas, oklahomacity, GRAY, 2, GRAY));
+        m.addRailroadLine(new RailroadLine(oklahomacity, littlerock, GRAY, 2));
+        m.addRailroadLine(new DoubleRailroadLine(oklahomacity, kansascity, GRAY, 2, GRAY));
+        m.addRailroadLine(new RailroadLine(oklahomacity, denver, RED, 4));
+        m.addRailroadLine(new RailroadLine(littlerock, neworleans, YELLOW, 3));
+        m.addRailroadLine(new RailroadLine(littlerock, nashville, WHITE, 3));
+        m.addRailroadLine(new RailroadLine(littlerock, saintlouis, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(neworleans, miami, RED, 6));
+        m.addRailroadLine(new RailroadLine(neworleans, atlanta, ORANGE, 4));
+        m.addRailroadLine(new RailroadLine(atlanta, miami, BLUE, 5));
+        m.addRailroadLine(new RailroadLine(atlanta, charleston, GRAY, 2));
+        m.addRailroadLine(new DoubleRailroadLine(atlanta, raleigh, GRAY, 2, GRAY));
+        m.addRailroadLine(new RailroadLine(atlanta, nashville, GRAY, 1));
+        m.addRailroadLine(new RailroadLine(miami, charleston, PINK, 4));
+        m.addRailroadLine(new RailroadLine(charleston, raleigh, GRAY, 2));
+        m.addRailroadLine(new DoubleRailroadLine(raleigh, washington, GRAY, 2, GRAY));
+        m.addRailroadLine(new RailroadLine(raleigh, pittsburgh, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(raleigh, nashville, BLACK, 3));
+        m.addRailroadLine(new RailroadLine(nashville, pittsburgh, YELLOW, 4));
+        m.addRailroadLine(new RailroadLine(nashville, saintlouis, GRAY, 2));
+        m.addRailroadLine(new RailroadLine(saintlouis, pittsburgh, YELLOW, 5));
+        m.addRailroadLine(new DoubleRailroadLine(saintlouis, chicago, YELLOW, 2, WHITE));
+        m.addRailroadLine(new DoubleRailroadLine(saintlouis, kansascity, BLUE, 2, PINK));
+        m.addRailroadLine(new DoubleRailroadLine(kansascity, omaha, GRAY, 1, GRAY));
+        m.addRailroadLine(new DoubleRailroadLine(kansascity, denver, BLACK, 4, ORANGE));
+        m.addRailroadLine(new RailroadLine(denver, phoenix, WHITE, 5));
 
-        return map;
+        return m;
     }
 
     public boolean isPlaying()
