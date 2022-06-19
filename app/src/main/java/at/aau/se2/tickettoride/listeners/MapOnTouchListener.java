@@ -13,13 +13,17 @@ public class MapOnTouchListener extends ScrollView implements View.OnTouchListen
     View target; //fragment which is zoomed
 
     //Attributes for scrolling
-    private float mx, my, curX, curY;
+    private float mx;
+    private float my;
     private boolean scrollingStarted = false;
-    private int scrollBoundX, scrollBoundY;
+    private int scrollBoundX;
+    private int scrollBoundY;
 
     //Attributes for zooming
-    private float zoomLength0, zoomLength;
-    private float scale = 1f, minScale = -1, maxScale = 2; //TODO: what is a good max scale?
+    private float zoomLength0;
+    private float zoomLength;
+    private float scale = 1f;
+    private float minScale = -1;
     private boolean zoomingStarted = false;
 
 
@@ -31,12 +35,10 @@ public class MapOnTouchListener extends ScrollView implements View.OnTouchListen
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-//        Log.d("onTouchEvent", motionEvent.getAction() + ", pointer count" + motionEvent.getPointerCount());
-//        MotionEvent.UP
         switch (motionEvent.getPointerCount()) {
             case 1: { //occurs when there is one finger on the screen
-                curX = motionEvent.getX();
-                curY = motionEvent.getY();
+                float curX = motionEvent.getX();
+                float curY = motionEvent.getY();
                 int dx = (int) (mx - curX);
                 int dy = (int) (my - curY);
 
@@ -119,6 +121,7 @@ public class MapOnTouchListener extends ScrollView implements View.OnTouchListen
     private float calculateScale(float zoomLength, float zoomLength0) {
         float scale = this.scale * zoomLength / zoomLength0;
         if (scale < minScale) scale = minScale;
+        float maxScale = 2;
         if (scale > maxScale) scale = maxScale;
         return scale;
     }
