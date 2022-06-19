@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class EstablishConnectionThread extends Thread {
+    private static final String TAG = "ClientConnection";
     private final Object lock = new Object();
     private Context context;
     private String serverAddress;
@@ -14,15 +15,15 @@ public class EstablishConnectionThread extends Thread {
     @Override
     public void run() {
         try {
-            Log.d("ClientConnection", "EstablishConnectionThread: waiting for ipv4 ...");
+            Log.d(TAG, "EstablishConnectionThread: waiting for ipv4 ...");
             synchronized (lock) {
                 lock.wait();
                 if (!serverAddress.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
                     throw new IllegalArgumentException("illegal ipv4 format for " + serverAddress);
                 } else {
-                    Log.d("ClientConnection", "EstablishConnectionThread: connecting ...");
+                    Log.d(TAG, "EstablishConnectionThread: connecting ...");
                     Socket clientSocket = new Socket(serverAddress, 8001);
-                    Log.d("ClientConnection", "connected");
+                    Log.d(TAG, "connected");
                     SendingThread sendingThread = new SendingThread(clientSocket);
                     sendingThread.start();
 
@@ -33,13 +34,13 @@ public class EstablishConnectionThread extends Thread {
                     ClientConnection client = ClientConnection.getInstance();
                     client.setSendingThread(sendingThread);
                     client.setReceivingThread(receivingTread);
-                    Log.d("ClientConnection", "launched communication threads");
+                    Log.d(TAG, "launched communication threads");
                 }
             }
         } catch (IOException e) {
-            Log.d("ClientConnection", e.toString());
+            Log.d(TAG, e.toString());
         } catch (InterruptedException e) {
-            Log.d("ClientConnection", e.toString());
+            Log.d(TAG, e.toString());
             Thread.currentThread().interrupt();
         }
     }
