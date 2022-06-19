@@ -28,8 +28,12 @@
             android:name=".activities.GameActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
-        <activity android:name=".activities.EndActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".activities.EndActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LobbyActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.SettingsActivity"
             android:exported="false"
@@ -56,4 +60,5 @@
             android:name=".activities.PlayerTrainActivity"
             android:exported="false" />
     </application>
+
 </manifest>

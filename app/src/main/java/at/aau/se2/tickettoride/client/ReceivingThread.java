@@ -27,6 +27,7 @@ public class ReceivingThread extends Thread {
     private Context context;
     private final GameModel gameModel = GameModel.getInstance();
     private final ClientConnection client = ClientConnection.getInstance();
+    private boolean isGameStarted = false;
 
     public ReceivingThread(Socket clientSocket) throws IOException {
         this.receive = new BufferedReader(new InputStreamReader(new DataInputStream(clientSocket.getInputStream())));
@@ -63,7 +64,7 @@ public class ReceivingThread extends Thread {
         String[] split = message.split(":");
         String command = split[0];
         String response = split.length > 1 ? message.substring(command.length() + 1) : "";
-        if (response.endsWith(DELIMITER_VALUE)) {
+        if (response.endsWith(".")) {
             response = response.substring(0, response.length() - 1);
         }
 
@@ -80,9 +81,17 @@ public class ReceivingThread extends Thread {
             case "drawMission":
                 List<Integer> cards = Arrays.stream(response.split(":")).map(Integer::parseInt).collect(Collectors.toList());
                 gameModel.setChooseMissionCards(cards);
+
+                if (!isGameStarted) {
+                    isGameStarted = true;
+
+                    client.sendCommand("getColors");
+                    syncGame();
+
+                    broadcastResponse("game_started", "1");
+                }
                 broadcastResponse("drawMission", "1");
                 broadcastResponse("card_mission", "1");
-                syncGame();
                 break;
             case "cardStack":
                 if (!response.isEmpty() && !response.equals("null")) {

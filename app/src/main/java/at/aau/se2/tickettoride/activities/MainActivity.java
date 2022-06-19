@@ -1,24 +1,15 @@
 package at.aau.se2.tickettoride.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import at.aau.se2.tickettoride.R;
 import at.aau.se2.tickettoride.client.ClientConnection;
@@ -31,22 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private final GameModel gameModel;
     private final ClientConnection client;
-
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle bundle = intent.getExtras();
-            for (String key : bundle.keySet()) {
-                switch (key) {
-                    case "listGames":
-                        Log.v("Broadcast", "Command: " + key + " - Value: " + bundle.getString(key));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    };
 
     public MainActivity() {
         this.gameModel = GameModel.getInstance();
@@ -61,20 +36,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         initComponents();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("server"));
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
     @Override
@@ -95,37 +56,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void initComponents() {
         binding.button.setOnClickListener(v -> {
-            // TODO: Temporary generate player and game with time
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmss", Locale.getDefault());
-            String date = simpleDateFormat.format(new Date());
-
-            String playerName = "Player" + date;
-            gameModel.setPlayerName(playerName);
-
-            // Enter lobby with Player + time
-            client.sendCommand("enterLobby:" + playerName);
-
-            // Create game with Game + time
-            client.sendCommand("createGame:Game" + date);
-
-            // List available games
-            client.sendCommand("listGames");
-
-            // Start game created
-            client.sendCommand("startGame");
-
-            client.sendCommand("listPlayersGame:Game"+date);
-
-            client.sendCommand("getColors");
-            
-            startGame();
+            Intent intent = new Intent(this, LobbyActivity.class);
+            startActivity(intent);
         });
 
         binding.buttonLocal.setOnClickListener(v -> {
             // Generate a new local game
             LocalGameHelper.generateTestGame(gameModel);
 
-            startGame();
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
         });
 
         binding.floatingActionButton.setOnClickListener(v -> {
@@ -140,10 +80,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             client.setup(this, serverAddress);
         }
-    }
-
-    private void startGame() {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
     }
 }
