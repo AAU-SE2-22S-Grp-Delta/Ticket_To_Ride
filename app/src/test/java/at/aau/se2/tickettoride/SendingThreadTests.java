@@ -13,7 +13,7 @@ import java.net.Socket;
 
 import at.aau.se2.tickettoride.client.SendingThread;
 
-public class SendingThreadTests {
+class SendingThreadTests {
     static Socket mockedSocket = Mockito.mock(Socket.class);
 
     static SendingThread sendingThread;

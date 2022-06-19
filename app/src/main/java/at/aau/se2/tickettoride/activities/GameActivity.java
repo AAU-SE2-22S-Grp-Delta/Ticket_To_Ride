@@ -18,12 +18,15 @@ import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import at.aau.se2.tickettoride.client.ClientConnection;
 import at.aau.se2.tickettoride.databinding.ActivityGameBinding;
+import at.aau.se2.tickettoride.dialogs.CheatingFaceDownDialogFragment;
 import at.aau.se2.tickettoride.dialogs.CheatingFunctionDialogFragment;
 import at.aau.se2.tickettoride.dialogs.PointsDialog;
 import at.aau.se2.tickettoride.fragments.DrawDestinationCardsFragment;
@@ -44,6 +47,7 @@ public class GameActivity extends AppCompatActivity {
 
     private Dialog playerDialog;
     private Dialog cheatDialog;
+    private boolean condition = true;
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
@@ -54,6 +58,12 @@ public class GameActivity extends AppCompatActivity {
                 gameModel.cheatMission();
                 DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
                 cheatingDialog.show(getSupportFragmentManager(), "cheating");
+            }
+            float z = sensorEvent.values[2];
+            if (z > -10 && z < -9 && condition) {
+                condition = false;
+                CheatingFaceDownDialogFragment cheatingFaceDownDialogFragment = new CheatingFaceDownDialogFragment();
+                cheatingFaceDownDialogFragment.show(getSupportFragmentManager(),"cheating2");
             }
         }
 
@@ -88,7 +98,8 @@ public class GameActivity extends AppCompatActivity {
                         }
                         break;
                     case "gameOver":
-                        if(bundle.getString(key).equals("1")) if(!gameModel.getPlayers().isEmpty()) startEndScreen();
+                        if(bundle.getString(key).equals("1") && !gameModel.getPlayers().isEmpty()){ startEndScreen();}
+                        break;
                     default:
                         break;
                 }
@@ -109,9 +120,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(view);
 
         // Hide the status and action bar
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+        WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
+        controller.hide(WindowInsetsCompat.Type.systemBars());
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

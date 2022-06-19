@@ -5,8 +5,6 @@ import android.hardware.SensorManager;
 
 public class ShakeDetection {
 
-    private long shakeTimestamp;
-
     private static final float SHAKE_THRESHOLD_GRAVITY = 2.5F;
     private static final int SHAKE_SLOP_TIME_MS = 500;
 
@@ -14,7 +12,7 @@ public class ShakeDetection {
         float x = sensorEvent.values[0];
         float y = sensorEvent.values[1];
         float z = sensorEvent.values[2];
-        shakeTimestamp = sensorEvent.timestamp;
+        long shakeTimestamp = sensorEvent.timestamp;
 
         // calculate the proportion to earth gravity (9.81)
         float gX = x / SensorManager.GRAVITY_EARTH;
