@@ -16,7 +16,7 @@ import java.net.Socket;
 
 import at.aau.se2.tickettoride.client.ReceivingThread;
 
-public class ReceivingThreadTests {
+class ReceivingThreadTests {
     static Socket mockedSocket = Mockito.mock(Socket.class);
     static Context mockedContext = Mockito.mock(Context.class);
 
