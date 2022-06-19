@@ -211,6 +211,7 @@ public class GameModel
     public void updateMap(String serverMap)
     {
         String[] full = serverMap.split(":");
+        if (full.length < 2) return;
         String[] roads = full[1].split("\\.");
         for (String road : roads)
         {
@@ -412,6 +413,7 @@ public class GameModel
 
     public boolean isPlaying()
     {
+        if (activePlayer == null) return false;
         return playerName.equals(activePlayer);
     }
 

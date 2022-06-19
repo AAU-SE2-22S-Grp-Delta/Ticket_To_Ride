@@ -180,7 +180,7 @@ public class ReceivingThread extends Thread {
             case "getMap":
                 if (!response.isEmpty()) {
                     Log.d("update_map", response);
-//                    gameModel.updateMap();
+                    gameModel.updateMap(response);
                 }
                 break;
             case "gameOver":
