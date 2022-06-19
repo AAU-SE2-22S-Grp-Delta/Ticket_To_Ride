@@ -16,7 +16,7 @@ import at.aau.se2.tickettoride.models.GameModel;
 
 public class CheatingFaceDownDialogFragment extends DialogFragment {
     GameModel gameModel = GameModel.getInstance();
-    public Dialog dialog;
+    private Dialog dialog;
     Button action1;
 
 
@@ -31,12 +31,9 @@ public class CheatingFaceDownDialogFragment extends DialogFragment {
         dialog.setCancelable(true);
 
         action1 = view.findViewById(R.id.buttonAction1);
-        action1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gameModel.cheatTrainCard();
-                dialog.dismiss();
-            }
+        action1.setOnClickListener(v -> {
+            gameModel.cheatTrainCard();
+            dialog.dismiss();
         });
         dialog.setContentView(view);
         dialog.create();
