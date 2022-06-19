@@ -145,8 +145,8 @@ public class ReceivingThread extends Thread {
                     String[] points = response.split(DELIMITER_VALUE);
                     for (int i = 0; i < players.size(); i++) {
                         Player player = gameModel.getPlayers().get(i);
-                        String DELIMITER = player.getName();
-                        int point = Integer.parseInt(points[i].split(DELIMITER)[1]);
+                        String playerToSplit = player.getName();
+                        int point = Integer.parseInt(points[i].split(playerToSplit)[1]);
                         player.setPoints(point);
                     }
                 }
