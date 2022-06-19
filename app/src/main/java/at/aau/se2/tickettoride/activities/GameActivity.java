@@ -179,11 +179,17 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if (!gameModel.isPlaying()) {
+            String player = gameModel.getActivePlayer();
+            if (player == null || player.isEmpty()) {
+                player = "Warten auf Spieler";
+            }
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Aktiver Spieler")
-                    .setMessage(gameModel.getActivePlayer());
+                    .setMessage(player);
 
             playerDialog = builder.create();
+            playerDialog.setCancelable(false);
             playerDialog.show();
         }
     }
@@ -201,7 +207,7 @@ public class GameActivity extends AppCompatActivity {
         cheatDialog.show();
     }
 
-    private void startEndScreen(){
+    private void startEndScreen() {
         client.sendCommand("getPoints");
         Intent endIntent = new Intent(this, EndActivity.class);
         startActivity(endIntent);
