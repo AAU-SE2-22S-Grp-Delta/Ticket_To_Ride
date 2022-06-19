@@ -1,6 +1,8 @@
 package at.aau.se2.tickettoride;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import android.graphics.Color;
@@ -8,12 +10,16 @@ import android.graphics.Color;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import at.aau.se2.tickettoride.datastructures.Destination;
 import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -169,5 +175,79 @@ class GameModelTests {
         List<Player> players = new ArrayList<>(Collections.singletonList(new Player("Player1", Color.RED)));
         gm.setPlayers(players);
         assertEquals(players, gm.getPlayers());
+    }
+
+    @Test
+    void testLobbyPlayer() {
+        String[] players = new String[]{"Player1", "Player2"};
+        gm.setLobbyPlayers(players);
+        assertEquals(players, gm.getLobbyPlayers());
+    }
+
+    @Test
+    void testGetPlayerByName1() {
+        String playerName = "Player1";
+        Player player = new Player(playerName, Color.RED);
+        List<Player> players = new ArrayList<>(Collections.singletonList(player));
+        gm.setPlayers(players);
+
+        try {
+            Method method = GameModel.class.getDeclaredMethod("getPlayerByName", String.class);
+            method.setAccessible(true);
+            assertEquals(player, method.invoke(gm, playerName));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
+        }
+    }
+
+    @Test
+    void testGetPlayerByName2() {
+        String playerName = "Player1";
+        Player player = new Player(playerName, Color.RED);
+        List<Player> players = new ArrayList<>(Collections.singletonList(player));
+        gm.setPlayers(players);
+
+        try {
+            Method method = GameModel.class.getDeclaredMethod("getPlayerByName", String.class);
+            method.setAccessible(true);
+            assertNull(method.invoke(gm, "Player2"));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
+        }
+    }
+
+    @Test
+    void testGetRailroadLineByName1() {
+        Destination vancouver = new Destination("Vancouver");
+        Destination calgary = new Destination("Calgary");
+        RailroadLine railroadLine = new RailroadLine(vancouver, calgary, "gray", 3);
+        assertEquals(railroadLine, gm.getRailroadLineByName("Vancouver", "Calgary"));
+    }
+
+    @Test
+    void testGetRailroadLineByName2() {
+        assertNull(gm.getRailroadLineByName("Dest1", "Dest2"));
+    }
+
+    @Test
+    void testAllMissions() {
+        List<List<Integer>> allMissions = new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList(1, 2)), new ArrayList<>(Arrays.asList(3, 4))));
+        gm.setAllMissions(allMissions);
+        assertEquals(allMissions, gm.getAllMissions());
+    }
+
+    @Test
+    void testAllRival() {
+        List<String> rivals = new ArrayList<>(Arrays.asList("Rival1", "Rival2"));
+        gm.setAllRival(rivals);
+        assertEquals(rivals, gm.getAllRival());
+    }
+
+    @Test
+    void testCheatMission() {
+        assertDoesNotThrow(() -> gm.cheatMission());
+    }
+
+    @Test
+    void testCheatTrainCard() {
+        assertDoesNotThrow(() -> gm.cheatTrainCard());
     }
 }
