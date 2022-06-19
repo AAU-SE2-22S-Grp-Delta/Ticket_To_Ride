@@ -33,6 +33,7 @@ public class HelpDialogFragment extends DialogFragment {
                 "   • 1 open + 1 concealed\n"+
                 "\nEnd:\nWhen a player only has one or two wagons left, each player has one more turn.");
         builder.setNegativeButton("Close", (dialogInterface, i) -> dismiss());
+        builder.setCancelable(true);
         return builder.create();
     }
 }

@@ -439,4 +439,6 @@ public class GameModel
     {
         client.sendCommand("cheatMission");
     }
+
+    public void cheatTrainCard() {client.sendCommand("cheatTrainCard");}
 }
