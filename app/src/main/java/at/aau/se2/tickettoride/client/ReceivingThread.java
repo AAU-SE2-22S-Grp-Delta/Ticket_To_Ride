@@ -122,13 +122,13 @@ public class ReceivingThread extends Thread {
                 break;
             case "listPlayersGame":
                 if(!response.isEmpty()){
-                    gameModel.playersString = response.split(DELIMITER_VALUE);
+                    gameModel.setLobbyPlayers(response.split(DELIMITER_VALUE));
                 }
                 broadcastResponse("refresh_players", "1");
                 break;
             case "getColors":
                 if(!response.isEmpty()){
-                    String[] playersToDELIMITER = gameModel.playersString;
+                    String[] playersToDELIMITER = gameModel.getLobbyPlayers();
                     String[] colors = response.split(DELIMITER_VALUE);
                     for (int i = 0; i < playersToDELIMITER.length; i++) {
                         String player = playersToDELIMITER[i];
@@ -146,8 +146,8 @@ public class ReceivingThread extends Thread {
                     String[] points = response.split(DELIMITER_VALUE);
                     for (int i = 0; i < players.size(); i++) {
                         Player player = gameModel.getPlayers().get(i);
-                        String DELIMITER = player.getName();
-                        int point = Integer.parseInt(points[i].split(DELIMITER)[1]);
+                        String playerToSplit = player.getName();
+                        int point = Integer.parseInt(points[i].split(playerToSplit)[1]);
                         player.setPoints(point);
                     }
                 }

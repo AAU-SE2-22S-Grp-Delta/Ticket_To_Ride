@@ -55,6 +55,8 @@ public class MapOnTouchListener extends ScrollView implements View.OnTouchListen
                     case MotionEvent.ACTION_UP:
                         scrollingStarted = false;
                         break;
+                    default:
+                        break;
                 }
 
             }
@@ -83,9 +85,14 @@ public class MapOnTouchListener extends ScrollView implements View.OnTouchListen
                         scale = calculateScale(zoomLength, zoomLength0);
                         scaleTarget(scale, true);
                         break;
+                    default:
+                        break;
                 }
             }
             break;
+
+            default:
+                break;
         }
         return true;
     }

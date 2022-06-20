@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,7 @@ public class LobbyFragment extends Fragment {
 
                         break;
                     case "refresh_players":
-                        List<String> players = Arrays.asList(gameModel.playersString);
+                        List<String> players = Arrays.asList(gameModel.getLobbyPlayers());
                         updateList(players);
 
                         if (isGameOwner && players.size() > 1) {
@@ -73,13 +74,26 @@ public class LobbyFragment extends Fragment {
                 }
             }
         }
+
+        private void startGame() {
+            handler.removeCallbacks(runnable);
+
+            Intent intent = new Intent(getActivity(), GameActivity.class);
+            startActivity(intent);
+        }
+
+        private void updateList(List<String> values) {
+            list.clear();
+            list.addAll(values);
+            adapter.notifyDataSetChanged();
+        }
     };
 
     public LobbyFragment() {
         this.gameModel = GameModel.getInstance();
         this.client = ClientConnection.getInstance();
         this.list = new ArrayList<>();
-        this.handler = new Handler();
+        this.handler = new Handler(Looper.getMainLooper());
     }
 
     public static LobbyFragment newInstance() {
@@ -183,22 +197,10 @@ public class LobbyFragment extends Fragment {
     }
 
     private void refreshPlayers(String game) {
-        handler.postDelayed(runnable = () -> {
+        runnable = () -> {
             handler.postDelayed(runnable, 2000);
             client.sendCommand("listPlayersGame:" + game);
-        }, 2000);
-    }
-
-    private void updateList(List<String> games) {
-        list.clear();
-        list.addAll(games);
-        adapter.notifyDataSetChanged();
-    }
-
-    private void startGame() {
-        handler.removeCallbacks(runnable);
-
-        Intent intent = new Intent(getActivity(), GameActivity.class);
-        startActivity(intent);
+        };
+        handler.postDelayed(runnable, 2000);
     }
 }

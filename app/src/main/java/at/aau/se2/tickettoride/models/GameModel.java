@@ -47,7 +47,7 @@ public class GameModel {
     private List<String> allRival = new ArrayList<>(4);
     private int playerColoredTrainCards = 45;
     private final Map map = buildMap();
-    public String[] playersString;
+    private String[] lobbyPlayers;
     private List<Player> players = new ArrayList<>();
 
     private GameModel() {
@@ -170,6 +170,14 @@ public class GameModel {
     public Map getMap()
     {
         return map;
+    }
+
+    public String[] getLobbyPlayers() {
+        return lobbyPlayers;
+    }
+
+    public void setLobbyPlayers(String[] lobbyPlayers) {
+        this.lobbyPlayers = lobbyPlayers;
     }
 
     public void setPlayers(List<Player> players)
