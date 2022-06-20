@@ -287,7 +287,7 @@ public class GameModel {
         Destination saltlakecity = new Destination("Salt Lake City");
         Destination sanfrancisco = new Destination("San Francisco");
         Destination santafe = new Destination("Santa Fe");
-        Destination saultstmarie = new Destination("Sault St. Marie");
+        Destination saultstmarie = new Destination("Sault St Marie");
         Destination seattle = new Destination("Seattle");
         Destination toronto = new Destination("Toronto");
         Destination vancouver = new Destination("Vancouver");
