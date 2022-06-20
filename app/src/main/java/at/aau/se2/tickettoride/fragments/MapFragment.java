@@ -1,6 +1,10 @@
 package at.aau.se2.tickettoride.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +42,7 @@ public class MapFragment extends Fragment {
     private FragmentMapBinding binding;
     private Destination firstDest = null;
     private final Set<Destination> destinations = GameModel.getInstance().getMap().getDestinations();
-    private final Set<RailroadLine> railroads = GameModel.getInstance().getMap().getRailroadLines();
+    private Set<RailroadLine> railroads = GameModel.getInstance().getMap().getRailroadLines();
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -48,12 +53,23 @@ public class MapFragment extends Fragment {
     Paint paint = new Paint();
     Boolean drawn = false;
 
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            if (bundle.getString("refresh_map", "0").equals("1")) {
+                updateMaps();
+            }
+        }
+    };
+
     Player currentPlayer;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View view = binding.getRoot(); //the root is this view
 
@@ -67,12 +83,13 @@ public class MapFragment extends Fragment {
         ImageView drawView = binding.drawView;
 
         initButtons();
-
-
+        LocalBroadcastManager.getInstance(binding.getRoot().getContext()).registerReceiver(receiver, new IntentFilter("server"));
         canvas.drawColor(Color.TRANSPARENT);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(12);
         paint.setAntiAlias(true);
+
+
 
         Player player1 = new Player("player one", Color.RED);
         //Set currentPlayer to whoevers turn it is
@@ -81,7 +98,7 @@ public class MapFragment extends Fragment {
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> railroads.forEach(railroadLine ->
         {
-            railroadLine.buildRoad(canvas, paint, bm, drawView);
+            railroadLine.updateRoads(canvas, paint, bm, drawView);
             drawView.setImageBitmap(bm);
             drawn = true;
         }), 250);
@@ -93,6 +110,19 @@ public class MapFragment extends Fragment {
     }
 
 
+
+
+    private void updateMaps()
+    {
+        Log.d("IMPORTANT", "updating roads");
+        railroads = GameModel.getInstance().getMap().getRailroadLines();
+        for(RailroadLine r : railroads)
+        {
+            if(r.isBuilt())
+                Log.d("IMPORTANT", "ROAD BUILT FROM " + r.getDestination1().getName() + "TO " + r.getDestination2().getName());
+            r.updateRoads(canvas, paint, bm, binding.drawView);
+        }
+    }
 
 
     @Override
@@ -137,7 +167,7 @@ public class MapFragment extends Fragment {
 
     public void railBuilder(Destination secondDest, Player player) {
         RailroadLine currentRoad = GameModel.getInstance().getRailroadLineByName(firstDest.getName(), secondDest.getName());
-        currentRoad.buildRoad(canvas, paint, bm, binding.drawView, player);
+        currentRoad.checkBuild(canvas, paint, bm, binding.drawView);
         resetButtons();
         firstDest = null;
     }
@@ -149,6 +179,7 @@ public class MapFragment extends Fragment {
             d.getButton().setOnClickListener(view1 -> selector(d, currentPlayer));
         }
     }
+
 
 
     private void initButtons() {
@@ -179,7 +210,7 @@ public class MapFragment extends Fragment {
         destButtons.put("Salt Lake City",binding.saltLakeCity);
         destButtons.put("San Francisco",binding.sanfrancisco);
         destButtons.put("Santa Fe",binding.santaFe);
-        destButtons.put("Sault St. Marie",binding.saultStMarie);
+        destButtons.put("Sault St Marie",binding.saultStMarie);
         destButtons.put("Seattle",binding.seattle);
         destButtons.put("Toronto",binding.toronto);
         destButtons.put("Vancouver",binding.vancouver);

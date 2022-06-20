@@ -39,8 +39,8 @@ class MissionModelTests
         missions.add(new Mission(19, "Portland", "Nashville", 17));
         missions.add(new Mission(20, "Portland", "Phoenix", 11));
         missions.add(new Mission(21, "San Francisco", "Atlanta", 17));
-        missions.add(new Mission(22, "Sault St. Marie", "Nashville", 8));
-        missions.add(new Mission(23, "Sault St. Marie", "Oklahoma City", 9));
+        missions.add(new Mission(22, "Sault St Marie", "Nashville", 8));
+        missions.add(new Mission(23, "Sault St Marie", "Oklahoma City", 9));
         missions.add(new Mission(24, "Seattle", "Los Angeles", 9));
         missions.add(new Mission(25, "Seattle", "New York", 22));
         missions.add(new Mission(26, "Toronto", "Miami", 10));

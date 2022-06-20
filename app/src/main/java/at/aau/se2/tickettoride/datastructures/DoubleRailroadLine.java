@@ -34,4 +34,6 @@ public class DoubleRailroadLine extends RailroadLine{
         if (this.owner2 != null) throw new IllegalStateException("Line already owned by " + owner2.getName());
         this.owner2 = owner2;
     }
+
+
 }

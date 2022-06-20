@@ -2,7 +2,9 @@ package at.aau.se2.tickettoride.datastructures;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.widget.ImageView;
 
 import at.aau.se2.tickettoride.models.GameModel;
@@ -17,6 +19,10 @@ public class RailroadLine
     private String color;
     private int distance;
     private Player owner;
+
+
+
+
 
     /**
      * Creates a single RailroadLine to connect two distinct destinations
@@ -105,17 +111,24 @@ public class RailroadLine
 
     public boolean isBuilt()
     {
-        return this.owner != null;
+        if(this.owner != null)
+        {
+            Log.d("ISBUILT", this.getOwner().getName());
+            return true;
+        }
+        return false;
     }
 
-    public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
+    public void updateRoads(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
     {
-        if (isBuilt())
+        if (this.isBuilt())
         {
-            buildRoad(canvas, paint, bm, imageView, this.owner);
+            Log.d("debug", "drawing player toad");
+            drawPlayerRoad(canvas, paint, bm, imageView, this.owner);
             return;
         }
         paint.setColor(Map.MapColor.getByString(this.color));
+        paint.setStrokeWidth(12);
 
         float xDist = (Math.abs(destination2.getX() - destination1.getX()) / this.distance - 1);
         float yDist = (Math.abs(destination2.getY() - destination1.getY()) / this.distance - 1);
@@ -170,20 +183,48 @@ public class RailroadLine
         imageView.invalidate();
     }
 
-    public void buildRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView, Player player)
+    private void drawPlayerRoad(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView, Player owner)
     {
         paint.setStrokeWidth(24);
-
-        if (!isBuilt())
-        {
-            GameModel.getInstance().buildRoad(destination1.getName(), destination2.getName(), this.color);
-            this.owner = player;
-        }
-
-
-
-        paint.setColor(player.getPlayerColor());
+        paint.setColor(getPlayerColorCodes(owner.getPlayerColor()));
         canvas.drawLine(this.destination1.getX(), this.destination1.getY(), this.destination2.getX(), this.destination2.getY(), paint);
         imageView.setImageBitmap(bm);
     }
+
+    public void checkBuild(Canvas canvas, Paint paint, Bitmap bm, ImageView imageView)
+    {
+            GameModel.getInstance().buildRoad(destination1.getName(), destination2.getName(), this.color);
+
+            updateRoads(canvas, paint, bm, imageView);
+            //somehow delegate method
+            //no green tracks
+            //white tracks not visible
+            //orange/red not different enough
+
+    }
+
+    private int getPlayerColorCodes(int color)
+    {
+        switch (color){
+            //RED
+            case 0:
+                return Color.RED;
+            //BLUE
+            case 1:
+                return Color.BLUE;
+            //GREEN
+            case 2:
+                return Color.GREEN;
+            //YELLOW
+            case 3:
+                return Color.YELLOW;
+            //BLACK
+            case 4:
+                return Color.BLACK;
+            default:
+                return Color.GRAY;
+        }
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package at.aau.se2.tickettoride.models;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import at.aau.se2.tickettoride.datastructures.Map;
 import at.aau.se2.tickettoride.datastructures.Player;
 import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.datastructures.TrainCard;
+import at.aau.se2.tickettoride.fragments.MapFragment;
 
 /**
  * GameModel-class represents an active game and stores the current game situation
@@ -203,7 +205,7 @@ public class GameModel {
 
     public void buildRoad(String dest1, String dest2, String color)
     {
-        client.sendCommand("buildRailroad:"+dest1+","+dest2+","+color+".");
+        client.sendCommand("buildRailroad:"+dest1+":"+dest2+":"+color);
     }
 
 
@@ -212,14 +214,17 @@ public class GameModel {
      */
     public void updateMap(String serverMap)
     {
-        String[] full = serverMap.split(":");
-        if (full.length < 2) return;
-        String[] roads = full[1].split("\\.");
+        String[] roads = serverMap.split("\\.");
         for (String road : roads)
         {
             String[] values = road.split(",");
             if (!values[2].equals("null"))
-                getRailroadLineByName(values[0], values[1]).setOwner(getPlayerByName(values[2]));
+            {
+                RailroadLine r = getRailroadLineByName(values[0], values[1]);
+                map.getRailroadLines().remove(r);
+                r.setOwner(getPlayerByName(values[2]));
+                map.addRailroadLine(r);
+            }
         }
     }
 
@@ -281,7 +286,7 @@ public class GameModel {
         Destination saltlakecity = new Destination("Salt Lake City");
         Destination sanfrancisco = new Destination("San Francisco");
         Destination santafe = new Destination("Santa Fe");
-        Destination saultstmarie = new Destination("Sault St. Marie");
+        Destination saultstmarie = new Destination("Sault St Marie");
         Destination seattle = new Destination("Seattle");
         Destination toronto = new Destination("Toronto");
         Destination vancouver = new Destination("Vancouver");

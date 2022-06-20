@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import at.aau.se2.tickettoride.datastructures.Player;
+import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 
@@ -181,10 +182,23 @@ public class ReceivingThread extends Thread {
                 if (!response.isEmpty()) {
                     Log.d("update_map", response);
                     gameModel.updateMap(response);
+                    broadcastResponse("refresh_map", "1");
                 }
                 break;
             case "gameOver":
                 broadcastResponse("gameOver", "1");
+                break;
+            case "buildRailroad":
+                if (!response.isEmpty())
+                {
+                   if (response.equals("null"))
+                       break;
+                   else
+                   {
+                       broadcastResponse("refresh_map", "1");
+                   }
+
+                }
                 break;
             default:
                 break;

@@ -29,8 +29,8 @@ public class Missions {
         missions.add(new Mission(19, "Portland [3]", "Nashville [17]]", 17));
         missions.add(new Mission(20, "Portland [3]", "Phoenix [6]", 11));
         missions.add(new Mission(21, "San Francisco [4]", "Atlanta [12]", 17));
-        missions.add(new Mission(22, "Sault St. Marie [28]", "Nashville [17]", 8));
-        missions.add(new Mission(23, "Sault St. Marie [28]", "Oklahoma City [19]", 9));
+        missions.add(new Mission(22, "Sault St Marie [28]", "Nashville [17]", 8));
+        missions.add(new Mission(23, "Sault St Marie [28]", "Oklahoma City [19]", 9));
         missions.add(new Mission(24, "Seattle [2]", "Los Angeles [5]", 9));
         missions.add(new Mission(25, "Seattle [2]", "New York [30]", 22));
         missions.add(new Mission(26, "Toronto [31]", "Miami [11]", 10));

@@ -178,19 +178,19 @@ class RailroadLineTest {
 
         //Y1 < Y2
             //X1 < X2
-        r1.buildRoad(canvas, paint, bm, drawView);
+        r1.updateRoads(canvas, paint, bm, drawView);
             //X1 > X2
-        new RailroadLine(dest3, dest1, "green", 2).buildRoad(canvas, paint, bm, drawView);
+        new RailroadLine(dest3, dest1, "green", 2).updateRoads(canvas, paint, bm, drawView);
         //Y1 > Y2
             //X1 < X2
-        new RailroadLine(dest3, dest2, "green", 2).buildRoad(canvas, paint, bm, drawView);
+        new RailroadLine(dest3, dest2, "green", 2).updateRoads(canvas, paint, bm, drawView);
             //X1 > X2
-        new RailroadLine(dest2, dest1, "green", 2).buildRoad(canvas, paint, bm, drawView);
+        new RailroadLine(dest2, dest1, "green", 2).updateRoads(canvas, paint, bm, drawView);
     }
 
     @Test
     void testBuildRoad()
     {
-        r5.buildRoad(canvas, paint, bm, drawView, player1);
+        r5.checkBuild(canvas, paint, bm, drawView);
     }
 }
