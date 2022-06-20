@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.os.VibratorManager;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -46,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
     private Vibrator vibrator;
 
     private Dialog playerDialog;
-    private Dialog cheatDialog;
+    //private Dialog cheatDialog;
     private boolean condition = true;
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
@@ -86,7 +87,7 @@ public class GameActivity extends AppCompatActivity {
                         break;
                     case "cheat":
                         if (bundle.getString(key).equals("1")) {
-                            displayCheatDialog();
+                            //displayCheatDialog();
 
                             // requires Oreo (API 26) or higher
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -94,7 +95,6 @@ public class GameActivity extends AppCompatActivity {
                                 vibrator.cancel();
                                 vibrator.vibrate(vibrationEffect);
                             }
-
                         }
                         break;
                     case "gameOver":
@@ -204,7 +204,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void displayCheatDialog() {
+    /*private void displayCheatDialog() {
         if (cheatDialog != null && cheatDialog.isShowing()) {
             cheatDialog.dismiss();
         }
@@ -215,7 +215,7 @@ public class GameActivity extends AppCompatActivity {
 
         cheatDialog = builder.create();
         cheatDialog.show();
-    }
+    }*/
 
     private void startEndScreen() {
         client.sendCommand("getPoints");
