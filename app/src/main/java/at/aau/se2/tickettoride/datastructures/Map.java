@@ -36,7 +36,7 @@ public class Map {
                 case "red":
                     return Color.RED;
                 case "white":
-                    return Color.WHITE;
+                    return Color.LTGRAY;
                 case "orange":
                     return Color.rgb(255, 165, 0);
                 case "gray":
