@@ -29,6 +29,7 @@ public class GameModel {
     private static final String RED = "red";
     private static final String WHITE = "white";
     private static final String YELLOW = "yellow";
+    private static final String GREEN = "green";
 
     private static GameModel instance = null;
     private final ClientConnection client;
@@ -352,7 +353,7 @@ public class GameModel {
         m.addRailroadLine(new RailroadLine(montreal, newyork, BLUE, 3));
         m.addRailroadLine(new RailroadLine(montreal, toronto, GRAY, 3));
         m.addRailroadLine(new DoubleRailroadLine(newyork, boston, YELLOW, 2, RED));
-        m.addRailroadLine(new DoubleRailroadLine(newyork, pittsburgh, YELLOW, 2, YELLOW));
+        m.addRailroadLine(new DoubleRailroadLine(newyork, pittsburgh, YELLOW, 2, GREEN));
         m.addRailroadLine(new RailroadLine(toronto, pittsburgh, GRAY, 2));
         m.addRailroadLine(new RailroadLine(toronto, saultstmarie, GRAY, 2));
         m.addRailroadLine(new RailroadLine(toronto, duluth, PINK, 6));
@@ -365,7 +366,7 @@ public class GameModel {
         m.addRailroadLine(new DoubleRailroadLine(seattle, vancouver, GRAY, 1, GRAY));
         m.addRailroadLine(new RailroadLine(seattle, calgary, GRAY, 4));
         m.addRailroadLine(new DoubleRailroadLine(seattle, portland, GRAY, 1, GRAY));
-        m.addRailroadLine(new DoubleRailroadLine(portland, sanfrancisco, YELLOW, 5, PINK));
+        m.addRailroadLine(new DoubleRailroadLine(portland, sanfrancisco, GREEN, 5, PINK));
         m.addRailroadLine(new DoubleRailroadLine(sanfrancisco, saltlakecity, ORANGE, 5, WHITE));
         m.addRailroadLine(new RailroadLine(saltlakecity, portland, BLUE, 6));
         m.addRailroadLine(new RailroadLine(saltlakecity, helena, PINK, 3));
@@ -378,7 +379,7 @@ public class GameModel {
         m.addRailroadLine(new RailroadLine(pittsburgh, chicago, BLACK, 3));
         m.addRailroadLine(new RailroadLine(chicago, omaha, BLUE, 4));
         m.addRailroadLine(new RailroadLine(omaha, denver, PINK, 4));
-        m.addRailroadLine(new RailroadLine(denver, helena, YELLOW, 4));
+        m.addRailroadLine(new RailroadLine(denver, helena, GREEN, 4));
         m.addRailroadLine(new RailroadLine(denver, saltlakecity, YELLOW, 3));
         m.addRailroadLine(new RailroadLine(saltlakecity, lasvegas, ORANGE, 3));
         m.addRailroadLine(new RailroadLine(lasvegas, losangeles, GRAY, 2));
@@ -392,7 +393,7 @@ public class GameModel {
         m.addRailroadLine(new RailroadLine(santafe, phoenix, GRAY, 3));
         m.addRailroadLine(new RailroadLine(elpaso, oklahomacity, YELLOW, 5));
         m.addRailroadLine(new RailroadLine(elpaso, dallas, RED, 4));
-        m.addRailroadLine(new RailroadLine(elpaso, houston, YELLOW, 6));
+        m.addRailroadLine(new RailroadLine(elpaso, houston, GREEN, 6));
         m.addRailroadLine(new RailroadLine(houston, neworleans, RED, 2));
         m.addRailroadLine(new DoubleRailroadLine(houston, dallas, GRAY, 1, GRAY));
         m.addRailroadLine(new RailroadLine(dallas, littlerock, GRAY, 2));
@@ -400,7 +401,7 @@ public class GameModel {
         m.addRailroadLine(new RailroadLine(oklahomacity, littlerock, GRAY, 2));
         m.addRailroadLine(new DoubleRailroadLine(oklahomacity, kansascity, GRAY, 2, GRAY));
         m.addRailroadLine(new RailroadLine(oklahomacity, denver, RED, 4));
-        m.addRailroadLine(new RailroadLine(littlerock, neworleans, YELLOW, 3));
+        m.addRailroadLine(new RailroadLine(littlerock, neworleans, GREEN, 3));
         m.addRailroadLine(new RailroadLine(littlerock, nashville, WHITE, 3));
         m.addRailroadLine(new RailroadLine(littlerock, saintlouis, GRAY, 2));
         m.addRailroadLine(new RailroadLine(neworleans, miami, RED, 6));
@@ -416,8 +417,8 @@ public class GameModel {
         m.addRailroadLine(new RailroadLine(raleigh, nashville, BLACK, 3));
         m.addRailroadLine(new RailroadLine(nashville, pittsburgh, YELLOW, 4));
         m.addRailroadLine(new RailroadLine(nashville, saintlouis, GRAY, 2));
-        m.addRailroadLine(new RailroadLine(saintlouis, pittsburgh, YELLOW, 5));
-        m.addRailroadLine(new DoubleRailroadLine(saintlouis, chicago, YELLOW, 2, WHITE));
+        m.addRailroadLine(new RailroadLine(saintlouis, pittsburgh, GREEN, 5));
+        m.addRailroadLine(new DoubleRailroadLine(saintlouis, chicago, GREEN, 2, WHITE));
         m.addRailroadLine(new DoubleRailroadLine(saintlouis, kansascity, BLUE, 2, PINK));
         m.addRailroadLine(new DoubleRailroadLine(kansascity, omaha, GRAY, 1, GRAY));
         m.addRailroadLine(new DoubleRailroadLine(kansascity, denver, BLACK, 4, ORANGE));
