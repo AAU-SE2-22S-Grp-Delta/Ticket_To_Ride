@@ -105,7 +105,7 @@ class MapTests {
         assertEquals(Color.GREEN, Map.MapColor.getByString("green"));
         assertEquals(Color.YELLOW, Map.MapColor.getByString("yellow"));
         assertEquals(Color.RED, Map.MapColor.getByString("red"));
-        assertEquals(Color.WHITE, Map.MapColor.getByString("white"));
+        assertEquals(Color.LTGRAY, Map.MapColor.getByString("white"));
         assertEquals(Color.rgb(255, 69, 80), Map.MapColor.getByString("orange"));
         assertEquals(Color.GRAY, Map.MapColor.getByString("gray"));
         assertEquals(Color.BLACK, Map.MapColor.getByString("black"));

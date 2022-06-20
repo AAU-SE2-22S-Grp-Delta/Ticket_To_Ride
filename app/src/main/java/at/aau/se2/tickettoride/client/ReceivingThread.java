@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import at.aau.se2.tickettoride.datastructures.Player;
-import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.datastructures.TrainCard;
 import at.aau.se2.tickettoride.models.GameModel;
 

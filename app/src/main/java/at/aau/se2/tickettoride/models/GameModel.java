@@ -1,8 +1,5 @@
 package at.aau.se2.tickettoride.models;
 
-import android.graphics.Color;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +11,6 @@ import at.aau.se2.tickettoride.datastructures.Map;
 import at.aau.se2.tickettoride.datastructures.Player;
 import at.aau.se2.tickettoride.datastructures.RailroadLine;
 import at.aau.se2.tickettoride.datastructures.TrainCard;
-import at.aau.se2.tickettoride.fragments.MapFragment;
 
 /**
  * GameModel-class represents an active game and stores the current game situation
