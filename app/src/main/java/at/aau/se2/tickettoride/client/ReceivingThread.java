@@ -172,6 +172,8 @@ public class ReceivingThread extends Thread {
                     }
                     gameModel.setAllMissions(allMissions);
                     gameModel.setAllRival(players);
+
+                    broadcastResponse("cheatMission", "1");
                 }
                 break;
             case "cheat":

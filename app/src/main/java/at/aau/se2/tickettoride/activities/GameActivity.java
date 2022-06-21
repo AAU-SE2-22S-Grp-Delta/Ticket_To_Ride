@@ -57,8 +57,6 @@ public class GameActivity extends AppCompatActivity {
             if (shakeCount == 5) {
                 shakeCount = 0;
                 gameModel.cheatMission();
-                DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
-                cheatingDialog.show(getSupportFragmentManager(), "cheating");
             }
             float z = sensorEvent.values[2];
             if (z > -10 && z < -9 && condition) {
@@ -95,6 +93,11 @@ public class GameActivity extends AppCompatActivity {
                                 vibrator.cancel();
                                 vibrator.vibrate(vibrationEffect);
                             }
+                        }
+                        break;
+                    case "cheatMission":
+                        if (bundle.getString(key).equals("1")) {
+                            displayCheatMissionDialog();
                         }
                         break;
                     case "gameOver":
@@ -202,6 +205,12 @@ public class GameActivity extends AppCompatActivity {
             playerDialog.setCancelable(false);
             playerDialog.show();
         }
+    }
+
+    private void displayCheatMissionDialog()
+    {
+        DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
+        cheatingDialog.show(getSupportFragmentManager(), "cheating");
     }
 
     /*private void displayCheatDialog() {
