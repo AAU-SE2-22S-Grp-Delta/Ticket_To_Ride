@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.os.VibratorManager;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -47,7 +46,6 @@ public class GameActivity extends AppCompatActivity {
     private Vibrator vibrator;
 
     private Dialog playerDialog;
-    //private Dialog cheatDialog;
     private boolean condition = true;
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
@@ -57,6 +55,7 @@ public class GameActivity extends AppCompatActivity {
             if (shakeCount == 5) {
                 shakeCount = 0;
                 gameModel.cheatMission();
+                return;
             }
             float z = sensorEvent.values[2];
             if (z > -10 && z < -9 && condition) {
@@ -85,8 +84,6 @@ public class GameActivity extends AppCompatActivity {
                         break;
                     case "cheat":
                         if (bundle.getString(key).equals("1")) {
-                            //displayCheatDialog();
-
                             // requires Oreo (API 26) or higher
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 VibrationEffect vibrationEffect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
@@ -212,19 +209,6 @@ public class GameActivity extends AppCompatActivity {
         DialogFragment cheatingDialog = new CheatingFunctionDialogFragment();
         cheatingDialog.show(getSupportFragmentManager(), "cheating");
     }
-
-    /*private void displayCheatDialog() {
-        if (cheatDialog != null && cheatDialog.isShowing()) {
-            cheatDialog.dismiss();
-        }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cheat detected!")
-                .setMessage("One player cheated");
-
-        cheatDialog = builder.create();
-        cheatDialog.show();
-    }*/
 
     private void startEndScreen() {
         client.sendCommand("getPoints");
